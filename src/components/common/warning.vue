@@ -6,7 +6,7 @@
   export default {
     name: 'warning',
     props: ['text'],
-    data () {
+    data() {
       return {}
     },
     methods: {}

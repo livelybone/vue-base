@@ -26,27 +26,27 @@
 
   export default {
     name: 'identify-code',
-    mounted () {
+    mounted() {
     },
     props: {
       src: {
-        validator (val) {
+        validator(val) {
           return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
         }
       },
       signature: {
-        validator (val) {
+        validator(val) {
           return !val || typeof val === 'string' || val instanceof FileList
         }
       },
       position: {
-        default () {
+        default() {
           return {page: 1, left: undefined, bottom: undefined}
         },
         type: Object
       }
     },
-    data () {
+    data() {
       return {
         numPages: null,
         page: 1,
@@ -58,18 +58,18 @@
       }
     },
     watch: {
-      position (val) {
+      position(val) {
         this.imgPosition = {left: this.wrapSize.width * val.left, bottom: this.wrapSize.height * val.bottom}
       }
     },
     methods: {
-      dragStart (ev) {
+      dragStart(ev) {
         this.pointerPosition = {left: ev.layerX, bottom: this.imgSize.height - ev.layerY}
       },
-      dragOver (ev) {
+      dragOver(ev) {
         ev.preventDefault()
       },
-      drop (ev) {
+      drop(ev) {
         this.imgPosition = this.getPosition(ev);
         this.$emit('sign', {
           page: this.page,
@@ -77,7 +77,7 @@
           bottom: this.imgPosition.bottom / this.wrapSize.height
         })
       },
-      getWrapSize () {
+      getWrapSize() {
         if (this.wrapSize.width && this.wrapSize.height) return;
         this.wrapSize = {width: this.$refs.wrap.offsetWidth, height: this.$refs.wrap.offsetHeight};
         if (typeof this.position.left === 'number' && typeof this.position.bottom === 'number') {
@@ -87,16 +87,16 @@
           }
         }
       },
-      getImgSize (ev) {
+      getImgSize(ev) {
         this.imgSize = {width: ev.offsetWidth, height: ev.offsetHeight}
       },
-      getPosition (ev) {
+      getPosition(ev) {
         return {
           left: ev.layerX - this.pointerPosition.left,
           bottom: this.wrapSize.height - ev.layerY - this.pointerPosition.bottom
         }
       },
-      toPage (val) {
+      toPage(val) {
         this.page = val
       }
     },
@@ -116,7 +116,7 @@
   }
 
   .pdf-sign-wrap {
-    @include flex-column(center,center);
+    @include flex-column(center, center);
     width: 100%;
 
     & .pdf-wrap {
@@ -156,7 +156,7 @@
       }
 
       & .signature {
-        @include flex(center,center);
+        @include flex(center, center);
         position: absolute;
         right: .5rem;
         top: .8rem;

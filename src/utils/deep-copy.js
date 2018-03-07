@@ -1,8 +1,8 @@
-export function simpleDeepCopy (obj) {
+export function simpleDeepCopy(obj) {
   return JSON.parse(JSON.stringify(obj))
 }
 
-export function deepCopy (obj) {
+export function deepCopy(obj) {
   if (obj === null || typeof obj !== 'object') return obj;
 
   if (obj instanceof Date) {
@@ -17,7 +17,7 @@ export function deepCopy (obj) {
   throw new Error('Unable to copy obj! Its type isn\'t supported.')
 }
 
-export function copyFn (copyObj, obj) {
+export function copyFn(copyObj, obj) {
   for (let i in obj) {
     if (obj.hasOwnProperty(i)) {
       copyObj[i] = obj[i];

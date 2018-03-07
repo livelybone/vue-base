@@ -11,12 +11,12 @@
 <script>
   export default {
     name: 'pagination',
-    beforeMount () {
+    beforeMount() {
       this.num = this.config.page
     },
     props: {
       config: {
-        default () {
+        default() {
           return {
             total: 1,
             pages: 1,
@@ -27,16 +27,16 @@
         type: Object
       }
     },
-    data () {
+    data() {
       return {num: 1}
     },
     watch: {
-      config (val) {
+      config(val) {
         this.num = this.config.page
       }
     },
     methods: {
-      next () {
+      next() {
         this.num++;
         if (this.num <= this.config.pages) {
           this.$emit('to', this.num)
@@ -44,7 +44,7 @@
           this.num = this.config.pages
         }
       },
-      prev () {
+      prev() {
         this.num--;
         if (this.num > 0) {
           this.$emit('to', this.num)
@@ -52,7 +52,7 @@
           this.num = 1
         }
       },
-      to (val) {
+      to(val) {
         let page = Number(val);
         this.$emit('to', page)
       }
@@ -70,7 +70,7 @@
     justify-content: flex-end;
 
     & .page-btn {
-      @include flex(center,center);
+      @include flex(center, center);
       width: .28rem;
       height: .28rem;
       margin: 0 0 0 .10rem;

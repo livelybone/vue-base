@@ -1,7 +1,7 @@
 /**
  * dataURL to blob
  **/
-export function dataURLtoBlob (dataUrl) {
+export function dataURLtoBlob(dataUrl) {
   let arr = dataUrl.split(',');
   let mime = arr[0].match(/:(.*?);/)[1];
   let blobStr = atob(arr[1]);
@@ -16,7 +16,7 @@ export function dataURLtoBlob (dataUrl) {
 /**
  * blob to dataURL
  **/
-export function blobToDataURL (blob, callback) {
+export function blobToDataURL(blob, callback) {
   let a = new FileReader();
   a.onload = e => {
     callback(e.target.result)

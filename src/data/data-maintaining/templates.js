@@ -1,8 +1,7 @@
 import { deepCopy } from "utils/deep-copy";
 
 export default class Templates {
-  static templates = {
-  };
+  static templates = {};
 
   static copy(key) {
     return deepCopy(Templates.templates[key])

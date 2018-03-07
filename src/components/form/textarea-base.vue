@@ -63,7 +63,7 @@
   @import '../../css/common-variable.scss';
 
   .textarea-wrap {
-    @include flex(flex-start,flex-start,column);
+    @include flex(flex-start, flex-start, column);
     position: relative;
     width: 100%;
 

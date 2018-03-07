@@ -1,4 +1,4 @@
-export function dateFormat (time, format) {
+export function dateFormat(time, format) {
   if (!time) return '';
   let date = new Date(time);
   const fmt = [
@@ -18,7 +18,7 @@ export function dateFormat (time, format) {
   return str
 }
 
-export function timeConversion (time) {
+export function timeConversion(time) {
   // time 毫秒数
   const day = parseInt(time / (24 * 60 * 60 * 1000));
   const daySurplus = time % (24 * 60 * 60 * 1000);

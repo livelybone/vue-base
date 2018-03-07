@@ -1,11 +1,11 @@
-export function getUrl (url, params) {
+export function getUrl(url, params) {
   if (!params || Object.keys(params).length <= 0) return url;
   let key = url.indexOf('?') >= 0 ? url + '&' : url + '?';
   if (params) key += queryString(params, true);
   return key
 }
 
-export function queryString (params, encode) {
+export function queryString(params, encode) {
   let str = '';
   for (let i in params) {
     if (params.hasOwnProperty(i)) {
@@ -15,7 +15,7 @@ export function queryString (params, encode) {
   return str.slice(1)
 }
 
-export function convertToFormData (obj) {
+export function convertToFormData(obj) {
   const data = new FormData();
   for (let i in obj) {
     if (obj.hasOwnProperty(i)) {

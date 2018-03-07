@@ -54,7 +54,7 @@
   @import '../../css/common-variable.scss';
 
   .file-input {
-    @include flex(center,center,column);
+    @include flex(center, center, column);
     position: relative;
     width: 100%;
     height: 50vw;

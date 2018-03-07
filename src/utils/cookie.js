@@ -1,5 +1,5 @@
 export default class Cookie {
-  static set (key, val) {
+  static set(key, val) {
     let Days = 30;
     let exp = new Date();
     exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
@@ -7,7 +7,7 @@ export default class Cookie {
     document.cookie = key + '=' + encodeURIComponent(val) + ';expires=' + exp.toGMTString()
   }
 
-  static get (key) {
+  static get(key) {
     let arr;
     let reg = new RegExp('(^| )' + key + '=([^;]*)(;|$)');
 
@@ -16,7 +16,7 @@ export default class Cookie {
     } else return null
   }
 
-  static del (key) {
+  static del(key) {
     let exp = new Date();
     exp.setTime(exp.getTime() - 1);
     let val = Cookie.get(key);

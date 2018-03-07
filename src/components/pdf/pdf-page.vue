@@ -21,18 +21,18 @@
 
   export default {
     name: 'identify-code',
-    beforeMount () {
+    beforeMount() {
       this.convertSrc(this.src)
     },
     props: {
       src: {
-        validator (val) {
+        validator(val) {
           return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
         }
       },
       page: Number
     },
-    data () {
+    data() {
       return {
         numPages: null,
         pdfSrc: '',
@@ -41,12 +41,12 @@
     },
     computed: {},
     watch: {
-      src (val) {
+      src(val) {
         this.convertSrc(val)
       }
     },
     methods: {
-      convertSrc (val) {
+      convertSrc(val) {
         let src = val;
         if (src instanceof FileList) {
           if (src[0]) {
@@ -60,12 +60,12 @@
           this.pdfSrc = src
         }
       },
-      toPrev () {
+      toPrev() {
         let page = this.page - 1;
         if (page < 1) page = 1;
         this.$emit('toPage', page)
       },
-      toNext () {
+      toNext() {
         let page = this.page + 1;
         if (page > this.totalPage) page = this.totalPage;
         this.$emit('toPage', page)
@@ -95,7 +95,7 @@
     }
 
     & .btn-group {
-      @include flex(center,center);
+      @include flex(center, center);
       justify-content: flex-end;
       position: absolute;
       left: 0;

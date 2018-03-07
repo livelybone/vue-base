@@ -1,4 +1,4 @@
-export default class DataDeal{
+export default class DataDeal {
 
   static dataDeal(dataArr) {
     const data = {};

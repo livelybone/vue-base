@@ -9,24 +9,24 @@
 
   export default {
     name: 'identify-code',
-    mounted () {
+    mounted() {
       this.getTotalPages()
     },
     props: {
       src: [String, Object]
     },
-    data () {
+    data() {
       return {
         numPages: null
       }
     },
     computed: {
-      pdfSrc () {
+      pdfSrc() {
         return pdf.createLoadingTask(this.src)
       }
     },
     methods: {
-      getTotalPages () {
+      getTotalPages() {
         this.pdfSrc.then(pdf => {
           this.numPages = pdf.numPages
         })

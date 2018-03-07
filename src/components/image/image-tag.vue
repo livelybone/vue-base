@@ -12,30 +12,30 @@
 
   export default {
     name: 'image-tag',
-    beforeMount () {
+    beforeMount() {
       this.convert(this.src)
     },
     props: {
       defaultImg: String,
       src: {
-        validator (val) {
+        validator(val) {
           return !val || typeof val === 'string' || val instanceof FileList
         }
       },
       alt: String
     },
-    data () {
+    data() {
       return {
         img: ''
       }
     },
     watch: {
-      src (val) {
+      src(val) {
         this.convert(val)
       }
     },
     methods: {
-      convert (val) {
+      convert(val) {
         this.img = this.defaultImg;
         if (!val || typeof val === 'string') {
           this.img = val
@@ -60,7 +60,7 @@
   }
 
   .prev, .next {
-    @include flex(center,center);
+    @include flex(center, center);
     position: fixed;
     left: 0;
     top: 50%;

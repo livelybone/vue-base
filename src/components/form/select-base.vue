@@ -154,23 +154,23 @@
           border-radius: .03rem;
           margin: 0 0 0 $margin;
           color: #fff;
-          background: rgba(#000,.10) url('../../assets/icon-search.png') no-repeat left .07rem center;
+          background: rgba(#000, .10) url('../../assets/icon-search.png') no-repeat left .07rem center;
           background-size: .14rem;
 
           &::-webkit-input-placeholder { /* WebKit browsers */
-            color: rgba(#fff,.57);
+            color: rgba(#fff, .57);
           }
 
           &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-            color: rgba(#fff,.57);
+            color: rgba(#fff, .57);
           }
 
           &::-moz-placeholder { /* Mozilla Firefox 19+ */
-            color: rgba(#fff,.57);
+            color: rgba(#fff, .57);
           }
 
           &:-ms-input-placeholder { /* Internet Explorer 10+ */
-            color: rgba(#fff,.57);
+            color: rgba(#fff, .57);
           }
         }
       }
