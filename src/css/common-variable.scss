@@ -1,0 +1,22 @@
+@import './color-variable.scss';
+@import './font-variable.scss';
+@import './size-variable.scss';
+@import './flex-variable.scss';
+
+@mixin ellipsis($max-width) {
+  max-width: $max-width;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin btn($color) {
+  border-color: $color;
+  color: $color;
+}
+
+@mixin btn-fill($color) {
+  border: none;
+  color: #fff !important;
+  background-color: $color;
+}
