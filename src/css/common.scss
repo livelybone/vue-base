@@ -51,36 +51,14 @@ button, .btn {
   }
 }
 
-.btn-gray {
-  @include btn($black-light)
-}
+@each $name, $color in (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
+  .btn-#{$name} {
+    @include btn($color)
+  }
 
-.btn-gray-fill {
-  @include btn-fill($black-light)
-}
-
-.btn-green {
-  @include btn($green)
-}
-
-.btn-green-fill {
-  @include btn-fill($green)
-}
-
-.btn-red {
-  @include btn($red)
-}
-
-.btn-red-fill {
-  @include btn-fill($red)
-}
-
-.btn-blue {
-  @include btn($blue)
-}
-
-.btn-blue-fill {
-  @include btn-fill($blue)
+  .btn-#{$name}-fill {
+    @include btn-fill($color);
+  }
 }
 
 /* ==========================================================================
@@ -182,20 +160,10 @@ input, textarea, select {
    定义通用的字体颜色类
  ====== ====================================================================== */
 
-.font-blue {
-  color: $blue;
-}
-
-.font-light-blue {
-  color: $blue-light;
-}
-
-.font-red {
-  color: $red;
-}
-
-.font-green {
-  color: $green;
+@each $name, $color in (blue:$blue, light-blue:$blue-light, red:$red, green:$green) {
+  .font-#{$name} {
+    color: $color;
+  }
 }
 
 /* ==========================================================================

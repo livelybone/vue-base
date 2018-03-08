@@ -3,36 +3,19 @@ import Router from 'vue-router'
 import AuthToken from 'extensions/auth-token'
 import HelloWorld from 'pages/HelloWorld'
 
+import NotFound from 'pages/NotFound'
+
 Vue.use(Router);
 
 const router = new Router({
   mode: 'history',
   routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: '/sign-in',
-      name: 'SignIn',
-      component: HelloWorld
-    },
-    {
-      path: '/admin-sign-in',
-      name: 'AdminSignIn',
-      component: HelloWorld
-    },
-    {
-      path: '/client',
-      meta: {requireAuth: true},
-      children: []
-    },
-    {
-      path: '/admin',
-      meta: {requireAdminAuth: true},
-      children: []
-    }
+    {path: '/', name: 'HelloWorld', component: HelloWorld},
+    {path: '/sign-in', name: 'SignIn', component: HelloWorld},
+    {path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld},
+    {path: '/client', meta: {requireAuth: true}, children: []},
+    {path: '/admin', meta: {requireAdminAuth: true}, children: []},
+    {path: '*', component: NotFound},
   ]
 });
 

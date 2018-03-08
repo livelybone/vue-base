@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <img src="../assets/logo.png">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -81,6 +82,7 @@
       </li>
     </ul>
     <div class="item">{{'2015-02-05' | moment({format:'YYYY-MM-DD HH:mm:SS'})}}</div>
+    <div class="btn btn-blue">aa</div>
   </div>
 </template>
 
@@ -101,6 +103,10 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   @import '../css/common-variable.scss';
+
+  img {
+    margin: .6rem 0 .4rem;
+  }
 
   h1, h2 {
     margin: .1rem 0;

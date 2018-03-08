@@ -2,7 +2,6 @@
   <div id="app">
     <snack-bar ref="snackBar"/>
     <image-full-screen ref="imgFull"/>
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -31,6 +30,5 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
 </style>
