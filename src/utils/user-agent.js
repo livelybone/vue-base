@@ -1,3 +1,9 @@
+export function isMobile() {
+  let ua = typeof window !== 'undefined' ? navigator.userAgent : '';
+  let reg = /Android|webOS|iPhone|iPod|iPad|BlackBerry|Windows Phone/i;
+  return reg.test(ua);
+}
+
 export function isWeiXin() {
   let ua = typeof window !== 'undefined' ? navigator.userAgent : '';
   let reg = /MicroMessenger/i;
