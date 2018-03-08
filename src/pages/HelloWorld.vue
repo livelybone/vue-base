@@ -80,7 +80,7 @@
         </a>
       </li>
     </ul>
-    <div class="item">{{'2015-02-05' | moment({format:'YYYY-MM-DD HH:mm'})}}</div>
+    <div class="item">{{'2015-02-05' | moment({format:'YYYY-MM-DD HH:mm:SS'})}}</div>
   </div>
 </template>
 

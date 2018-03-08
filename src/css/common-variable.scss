@@ -1,7 +1,20 @@
 @import './color-variable.scss';
 @import './font-variable.scss';
 @import './size-variable.scss';
-@import './flex-variable.scss';
+
+@mixin flex($h:flex-start,$v:center,$wrap:nowrap) {
+  display: flex;
+  justify-content: $h;
+  align-items: $v;
+  flex-wrap: $wrap;
+}
+
+@mixin flex-column($h:flex-start,$v:flex-start) {
+  display: flex;
+  flex-direction: column;
+  justify-content: $h;
+  align-items: $v;
+}
 
 @mixin ellipsis($max-width) {
   max-width: $max-width;
@@ -20,3 +33,9 @@
   color: #fff !important;
   background-color: $color;
 }
+
+@mixin total-width($width:1170px) {
+  width: $width;
+  margin: 0 auto;
+}
+

@@ -26,5 +26,5 @@ export default function () {
   Vue.component('overlay', Overlay);
   Vue.component('overlay-confirm', OverlayConfirm);
 
-  Vue.filter('moment', (time, {parse, format}) => moment(time, parse).format(format))
+  Vue.filter('moment', (time, {parse, format}) => moment(time, parse).format(format || 'YYYY-MM-DD HH:mm:ss'))
 }
