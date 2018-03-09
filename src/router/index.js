@@ -15,6 +15,7 @@ const router = new Router({
     {path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld},
     {path: '/client', meta: {requireAuth: true}, children: []},
     {path: '/admin', meta: {requireAdminAuth: true}, children: []},
+    {path: '/not-found', component: NotFound},
     {path: '*', component: NotFound},
   ]
 });

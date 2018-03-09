@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const PrerenderSpaPlugin = require('prerender-spa-plugin');
 
 const env = require('../config/prod.env');
 
@@ -63,10 +64,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.html',
-      inject: true,
+      inject: 'head',
       minify: {
         removeComments: true,
-        collapseWhitespace: true,
+        collapseWhitespace: false,
+        collapseInlineTagWhitespace: false,
         removeAttributeQuotes: true
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
@@ -115,7 +117,35 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new PrerenderSpaPlugin({
+      // For more: https://github.com/chrisvfritz/prerender-spa-plugin/tree/v3
+      // Required - The path to the webpack-outputted app to prerender.
+      staticDir: path.join(__dirname, '../dist'),
+      // Required - Routes to render.
+      routes: ['/', '/not-found'],
+      postProcess(renderedRoute) {
+        // Ignore any redirects.
+        renderedRoute.route = renderedRoute.originalRoute;
+        const titles = {
+          '/': 'Home',
+          '/not-found': 'NotFound',
+        };
+        console.log(renderedRoute.html);
+        renderedRoute.html = renderedRoute.html.replace(/<title>[^<]*<\/title>/i, '<title>' + titles[renderedRoute.route] + '</title>');
+        return renderedRoute
+      },
+      minify: {
+        collapseBooleanAttributes: true,
+        collapseWhitespace: false,
+        decodeEntities: true,
+        keepClosingSlash: true,
+        sortAttributes: true,
+        trimCustomFragments: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+      },
+    })
   ]
 });
 

@@ -14,6 +14,8 @@
 
 > js：工具类写在utils文件夹，插件写在extensions文件夹，ajax相关的写在data/api文件夹，组件共用变量或者模板写在data/data-maintaining文件夹
 
+> SEO优化使用 PrerenderSpaPlugin 代替 服务端渲染（SSR），生成静态 html 文件，再用 Nginx 配置路由即可
+
 ## Build Setup
 
 ``` bash
