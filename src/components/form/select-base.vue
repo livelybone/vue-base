@@ -2,14 +2,14 @@
   <div class="select-wrap">
     <span class="value" :class="convertValue||(!canEdit&&myValue)?'':'no-value'" @click="open=true">{{convertValue||(!canEdit?myValue||'':'请选择')}}
       <span v-if="canEdit" class="icon-go"></span></span>
-    <div v-if="open&&canEdit" class="select" @touchmove="stopDefault($event)">
+    <div v-if="open&&canEdit" class="select" @touchmove.stop.prevent="">
       <header>
         <div class="back"><span class="icon-back" @click="open=false"></span></div>
         <h2>{{name}}</h2>
         <!--<input-base v-model="keyword.value" :config="keyword"/>-->
       </header>
       <tree-menu :options="options" :checkedObj="checkedObj"
-                 @input="open=falsemyValue=$event.value$emit('input',$event.value)"/>
+                 @input="input"/>
       <span v-if="options.length<=0" class="tips">没有选项！</span>
     </div>
   </div>
@@ -18,7 +18,6 @@
 <script>
   import TreeMenu from 'components/common/tree-menu'
   import { deepCopy } from "utils/deep-copy";
-  import { stopDefault } from "utils/broswer-default";
 
   export default {
     name: 'SelectBase',
@@ -82,7 +81,11 @@
         }
         return name
       },
-      stopDefault
+      input(val) {
+        this.open = false;
+        this.myValue = val.value;
+        this.$emit('input', val.value)
+      }
     },
     components: {'tree-menu': TreeMenu}
   }

@@ -83,6 +83,9 @@
     </ul>
     <div class="item">{{'2015-02-05' | moment({format:'YYYY-MM-DD HH:mm:SS'})}}</div>
     <div class="btn btn-blue">aa</div>
+    <div @click="log($event.target)">
+      <img-tag :src="require('assets/icon-search.png')"/>
+    </div>
   </div>
 </template>
 
@@ -95,6 +98,11 @@
     data() {
       return {
         msg: 'Welcome to Your Vue.js App'
+      }
+    },
+    methods: {
+      log(val) {
+        console.log(val);
       }
     }
   }

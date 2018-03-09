@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App'
+import router from './router'
 import initialExtensions from 'extensions/extensions'
 import register from './global-register'
-import router from './router'
 
 Vue.config.productionTip = false;
 

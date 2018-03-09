@@ -1,7 +1,7 @@
 <template>
   <div class="tree-menu">
     <div v-for="(option,i) in options" class="branch">
-      <div class="name" @click="stopDefault($event);choose(option,i)">
+      <div class="name" @click.stop.prevent="choose(option,i)">
         <span class="icon-checkbox" :class="checked===option.name?'checked':''"></span>
         <div class="text-wrap" :style="noBorder?{border:'none'}:{paddingBottom:'1rem'}">
           <span class="text">{{option.name}}</span>
@@ -15,8 +15,6 @@
 </template>
 
 <script>
-  import { stopDefault } from "utils/broswer-default";
-
   export default {
     name: 'tree-menu',
     mounted() {
@@ -86,7 +84,6 @@
         this.unfold = [this.unfold[0]].concat(val);
         this.$emit('unfold', this.unfold);
       },
-      stopDefault
     }
   }
 </script>

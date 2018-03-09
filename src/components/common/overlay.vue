@@ -1,22 +1,19 @@
 <template>
-  <div class="overlay-wrap" @click="$emit('click',$event)" @touchmove="stopDefault">
-    <div class="overlay" @click="stopDefault">
+  <div class="overlay-wrap" @click="$emit('click',$event)" @touchmove.stop.prevent="">
+    <div class="overlay" @click.stop.prevent="">
       <slot/>
     </div>
   </div>
 </template>
 
 <script>
-  import { stopDefault } from 'utils/broswer-default'
 
   export default {
     name: 'overlay',
     data() {
       return {}
     },
-    methods: {
-      stopDefault
-    }
+    methods: {}
   }
 </script>
 

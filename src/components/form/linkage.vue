@@ -3,7 +3,7 @@
     <span class="value" :class="convertValue?'':'no-value'" @click="open=true">
       <span class="value" :class="convertValue?'':'no-value'" v-html="convertValue||(!canEdit?'':'请选择')"></span>
       <span v-if="canEdit" class="icon-go"></span></span>
-    <div v-if="open&&canEdit" class="select" @touchmove="stopDefault($event)">
+    <div v-if="open&&canEdit" class="select" @touchmove.stop.prevent="">
       <header>
         <div class="back"><span class="icon-back" @click="open=false"></span></div>
         <h2>{{name}}</h2>
@@ -17,7 +17,6 @@
 
 <script>
   import TreeMenu from 'components/common/tree-menu'
-  import { stopDefault } from "utils/broswer-default";
   import { deepCopy } from "utils/deep-copy";
 
   export default {
@@ -104,7 +103,6 @@
         this.myValue = val.path;
         this.$emit('input', val)
       },
-      stopDefault
     },
     components: {'tree-menu': TreeMenu}
   }

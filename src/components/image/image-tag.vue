@@ -2,7 +2,7 @@
   <img :src="img"
        :alt="alt"
        @load="$emit('load',$event.target)"
-       @click="$emit('click',$event)"
+       @click.stop.prevent="$emit('click',$event)"
        @dragstart="$emit('dragStart',$event)"
        @dragend="$emit('dragEnd',$event)">
 </template>
