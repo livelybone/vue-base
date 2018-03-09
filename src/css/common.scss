@@ -53,11 +53,21 @@ button, .btn {
 
 @each $name, $color in (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
   .btn-#{$name} {
-    @include btn($color)
+    @include btn($color);
+    opacity: .8;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .btn-#{$name}-fill {
     @include btn-fill($color);
+    opacity: .8;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
