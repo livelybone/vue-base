@@ -1,8 +1,8 @@
 <template>
   <div class="pagination">
     <div class="page-btn" @click="prev"><</div>
-    <div v-for="(i,k) in new Array(config.pages)" :class="config.page===k+1?'page-btn active':'page-btn'"
-         @click="to($event.target.innerHTML)">{{k + 1}}
+    <div v-for="val in pagesArr" :class="[config.page===val?'active':'','page-btn',Number(val)?'':'disabled']"
+         @click="to(val)">{{val}}
     </div>
     <div class="page-btn" @click="next">></div>
   </div>
@@ -10,9 +10,9 @@
 
 <script>
   export default {
-    name: 'pagination',
+    name: 'Pagination',
     beforeMount() {
-      this.num = this.config.page
+      this.initConfig();
     },
     props: {
       config: {
@@ -21,21 +21,35 @@
             total: 1,
             pages: 1,
             page: 1,
-            pageSize: 10
+            pageSize: 10,
+            maxPageBtn: 7,
           }
         },
         type: Object
       }
     },
     data() {
-      return {num: 1}
+      return {num: 1, maxPageBtn: 7, pagesArr: []}
     },
     watch: {
       config(val) {
-        this.num = this.config.page
+        this.initConfig();
       }
     },
     methods: {
+      initConfig() {
+        this.num = this.config.page;
+        this.maxPageBtn = this.config.maxPageBtn || this.maxPageBtn;
+        if (this.config.pages <= this.maxPageBtn) {
+          this.pagesArr = new Int8Array(this.config.pages).map((val, i) => i + 1);
+        } else if (this.num <= (this.maxPageBtn + 1) / 2) {
+          this.pagesArr = Array.from(new Int8Array(this.maxPageBtn - 1)).map((val, i) => i === this.maxPageBtn - 2 ? '...' : i + 1).concat([this.config.pages]);
+        } else if (this.num >= this.config.pages - (this.maxPageBtn - 1) / 2) {
+          this.pagesArr = [1, '...'].concat(Array.from(new Int8Array(this.maxPageBtn - 2).map((val, i) => this.config.pages - i)).reverse())
+        } else {
+          this.pagesArr = [1, '...'].concat(Array.from(new Int8Array(this.maxPageBtn - 4).map((val, i) => this.num - Math.floor((this.maxPageBtn - 3) / 2) + i + 1))).concat(['...', this.config.pages])
+        }
+      },
       next() {
         this.num++;
         if (this.num <= this.config.pages) {
@@ -54,7 +68,7 @@
       },
       to(val) {
         let page = Number(val);
-        this.$emit('to', page)
+        if (page) this.$emit('to', page)
       }
     }
   }
@@ -83,6 +97,7 @@
 
       &.disabled {
         cursor: default;
+        background: #eee;
       }
 
       &.active {

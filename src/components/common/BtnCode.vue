@@ -6,7 +6,7 @@
   import User from "data/api/user";
 
   export default {
-    name: 'btn-code',
+    name: 'BtnCode',
     props: {
       type: {
         default: 'REGISTER', // 'REGISTER','FORGOT_PASSWORD'

@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name: 'tree-menu',
+    name: 'TreeMenu',
     mounted() {
       if (this.checkedObj) this.checked = this.checkedObj.name;
       this.initUnfold();

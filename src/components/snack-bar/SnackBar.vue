@@ -17,7 +17,7 @@
     warn: '#FF6600'
   };
   export default {
-    name: 'snack-bar',
+    name: 'SnackBar',
     mounted() {
     },
     props: {

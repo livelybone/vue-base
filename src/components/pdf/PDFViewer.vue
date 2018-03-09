@@ -8,7 +8,7 @@
   import pdf from 'vue-pdf'
 
   export default {
-    name: 'identify-code',
+    name: 'PDFViewer',
     mounted() {
       this.getTotalPages()
     },

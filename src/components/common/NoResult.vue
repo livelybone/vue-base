@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'no-result',
+    name: 'NoResult',
     props: {
       tipText: String
     },

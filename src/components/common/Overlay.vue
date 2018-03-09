@@ -9,7 +9,7 @@
 <script>
 
   export default {
-    name: 'overlay',
+    name: 'Overlay',
     data() {
       return {}
     },

@@ -20,7 +20,7 @@
   import { blobToDataURL } from 'utils/blob-base64'
 
   export default {
-    name: 'identify-code',
+    name: 'PDFPage',
     beforeMount() {
       this.convertSrc(this.src)
     },

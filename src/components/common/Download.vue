@@ -10,7 +10,7 @@
   import { blobToURL } from 'utils/blob-url'
 
   export default {
-    name: 'download',
+    name: 'Download',
     beforeMount() {
       this.convert(this.src)
     },

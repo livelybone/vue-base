@@ -44,7 +44,7 @@ export default function initialBus() {
       bus.$emit('img-full-screen-close')
     },
     listen(vm) {
-      // vm: snackBar实例
+      // vm: imgFullScreen实例
       bus.$on('img-full-screen-open', ({imgs, index}) => {
         vm.open({imgs, index})
       });

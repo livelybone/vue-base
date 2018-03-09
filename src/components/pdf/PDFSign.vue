@@ -21,11 +21,11 @@
 </template>
 
 <script>
-  import pdfPage from 'components/pdf/pdf-page.vue'
-  import imgTag from 'components/image/image-tag.vue'
+  import pdfPage from 'components/pdf/PDFPage.vue'
+  import imgTag from 'components/image/ImgTag.vue'
 
   export default {
-    name: 'identify-code',
+    name: 'PDFSign',
     mounted() {
     },
     props: {

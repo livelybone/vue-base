@@ -77,9 +77,10 @@ button, .btn {
 
 a, .a {
   cursor: pointer;
+  opacity: .8;
 
   &:hover {
-    color: $green !important;
+    opacity: 1 !important;
   }
 }
 

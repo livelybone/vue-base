@@ -16,7 +16,7 @@
 
 <script>
   export default {
-    name: 'overlay-confirm',
+    name: 'OverlayConfirm',
     props: {
       head: String,
       tipText: String,

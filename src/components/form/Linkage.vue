@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import TreeMenu from 'components/common/tree-menu'
+  import TreeMenu from 'components/common/TreeMenu'
   import { deepCopy } from "utils/deep-copy";
 
   export default {

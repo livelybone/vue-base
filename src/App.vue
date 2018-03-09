@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import SnackBar from 'components/snack-bar/snack-bar.vue'
-  import ImageFullScreen from 'components/image/image-full-screen.vue'
+  import SnackBar from 'components/snack-bar/SnackBar.vue'
+  import ImageFullScreen from 'components/image/ImageFullScreen.vue'
 
   export default {
     name: 'app',

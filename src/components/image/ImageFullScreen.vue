@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    name: 'image-full-screen',
+    name: 'ImageFullScreen',
     data() {
       return {
         imgs: [],

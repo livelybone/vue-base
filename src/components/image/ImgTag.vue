@@ -11,7 +11,7 @@
   import { blobToDataURL } from 'utils/blob-base64'
 
   export default {
-    name: 'image-tag',
+    name: 'img-tag',
     beforeMount() {
       this.convert(this.src)
     },

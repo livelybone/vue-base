@@ -1,12 +1,12 @@
 <template>
-  <div class="back-wrap" @click="back">
+  <div class="back-wrap" @click="Back">
     <slot/>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'back',
+    name: 'Back',
     data() {
       return {}
     },

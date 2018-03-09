@@ -88,6 +88,8 @@
     </div>
     <div>还剩 {{time('2018-06-04')}}</div>
     <input type="file" @change="input($event.target.files[0])">
+    <no-result/>
+    <pagination :config="pageConfig" @to="log"/>
   </div>
 </template>
 
@@ -97,17 +99,16 @@
   export default {
     name: 'HelloWorld',
     mounted() {
-      setImmediate(() => this.snackBar.error('Hello World!'))
+      setImmediate(() => this.snackBar.error('Hello World!'));
+      console.log(this.$isServer);
     },
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        pageConfig: {total: 1, pages: 10, page: 5, pageSize: 10},
       }
     },
     methods: {
-      log(val) {
-        console.log(val);
-      },
       time(val) {
         const obj = timeConversion(new Date(val).getTime() - new Date().getTime());
         return obj.day + '天' + obj.hour + '时' + obj.minute + '分' + obj.second + '秒'
