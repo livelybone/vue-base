@@ -61,7 +61,7 @@
     },
     methods: {
       input(val) {
-        this.myValue = dateFormat(new Date(new Date(val).getTime() - 8 * 60 * 60 * 1000).toString(), this.dateObj.format);
+        this.myValue = dateFormat(val, this.dateObj.format);
         this.$emit('input', this.myValue);
       },
       dateFormat,

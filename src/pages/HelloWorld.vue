@@ -81,15 +81,19 @@
         </a>
       </li>
     </ul>
-    <div class="item">{{'2015-02-05' | moment({format:'YYYY-MM-DD HH:mm:SS'})}}</div>
+    <div class="item">{{'2015-02-05T15:30:30' | moment({format:'YYYY-MM-DD HH:mm:ss'})}}</div>
     <div class="btn btn-blue">aa</div>
     <div @click="log($event.target)">
       <img-tag :src="require('assets/icon-search.png')"/>
     </div>
+    <div>还剩 {{time('2018-06-04')}}</div>
+    <input type="file" @change="input($event.target.files[0])">
   </div>
 </template>
 
 <script>
+  import { timeConversion } from "@/utils/date-deal";
+
   export default {
     name: 'HelloWorld',
     mounted() {
@@ -103,6 +107,13 @@
     methods: {
       log(val) {
         console.log(val);
+      },
+      time(val) {
+        const obj = timeConversion(new Date(val).getTime() - new Date().getTime());
+        return obj.day + '天' + obj.hour + '时' + obj.minute + '分' + obj.second + '秒'
+      },
+      input(file) {
+        console.log(file, typeof file);
       }
     }
   }

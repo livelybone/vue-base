@@ -7,26 +7,25 @@ export function getUrl(url, params) {
 
 export function queryString(params, encode) {
   let str = '';
-  for (let i in params) {
-    if (params.hasOwnProperty(i)) {
-      str += '&' + i + '=' + (encode ? encodeURIComponent(params[i]) : params[i])
-    }
-  }
+  Object.keys(params).map(key => str += '&' + i + '=' + (encode ? encodeURIComponent(params[key]) : params[key]));
   return str.slice(1)
 }
 
 export function convertToFormData(obj) {
   const data = new FormData();
-  for (let i in obj) {
-    if (obj.hasOwnProperty(i)) {
-      if (obj[i] instanceof FileList) {
-        data.append(i, obj[i][0])
-      } else if ((typeof obj[i]).indexOf('object') >= 0) {
-        data.append(i, JSON.stringify(obj[i]))
-      } else {
-        data.append(i, obj[i])
-      }
+  Object.keys(obj).map(key => {
+    if (obj[key] instanceof FileList) { // 多张图片
+      [].map.call(obj[key], file => data.append(key, file))
+    } else if (obj[key] instanceof Array && (obj[key][0] instanceof File || obj[key][0] instanceof FileList)) { // 多张图片
+      obj[key].map(item => {
+        if (item instanceof FileList) [].map.call(item, file => data.append(key, file));
+        else data.append(key, item);
+      })
+    } else if ((typeof obj[key]).indexOf('object') >= 0) {
+      data.append(key, JSON.stringify(obj[key]))
+    } else {
+      data.append(key, obj[key])
     }
-  }
+  });
   return data
 }

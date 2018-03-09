@@ -1,15 +1,18 @@
 export default class Cookie {
-  static set(key, val) {
-    let Days = 30;
-    let exp = new Date();
-    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-    // 一天之后过时，失效
-    document.cookie = key + '=' + encodeURIComponent(val) + ';expires=' + exp.toGMTString()
+  static set(key, val, isSessionLevel) {
+    const exp = new Date();
+    let cookie = key + '=' + encodeURIComponent(val);
+    if (!isSessionLevel) { // 如果不是会话级（会话级的cookie，关闭浏览器则过期），则设置过期时间
+      const Days = 1;
+      exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);       // 一天之后过时，失效
+      cookie += ';expires=' + exp.toUTCString();
+    }
+    document.cookie = cookie
   }
 
   static get(key) {
     let arr;
-    let reg = new RegExp('(^| )' + key + '=([^;]*)(;|$)');
+    const reg = new RegExp('(^| )' + key + '=([^;]*)(;|$)');
 
     if ((arr = document.cookie.match(reg))) {
       return decodeURIComponent(arr[2])
@@ -17,11 +20,11 @@ export default class Cookie {
   }
 
   static del(key) {
-    let exp = new Date();
+    const exp = new Date();
     exp.setTime(exp.getTime() - 1);
-    let val = Cookie.get(key);
+    const val = Cookie.get(key);
     if (val !== null) {
-      document.cookie = key + '=' + val + ';expires=' + exp.toGMTString()
+      document.cookie = key + '=' + val + ';expires=' + exp.toUTCString()
     }
   }
 }

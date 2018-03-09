@@ -3,7 +3,7 @@ export function simpleDeepCopy(obj) {
 }
 
 export function deepCopy(obj) {
-  if (obj === null || typeof obj !== 'object') return obj;
+  if (obj === null || typeof obj !== 'object' || obj instanceof FileList || obj instanceof File || obj instanceof Date) return obj;
 
   if (obj instanceof Date) {
     return new Date(obj.getTime())
@@ -21,7 +21,7 @@ export function copyFn(copyObj, obj) {
   for (let i in obj) {
     if (obj.hasOwnProperty(i)) {
       copyObj[i] = obj[i];
-      if (typeof obj[i] === 'object') {
+      if (typeof obj[i] === 'object' && !(obj[i] instanceof FileList || obj[i] instanceof File || obj instanceof Date)) {
         copyObj[i] = new obj[i].constructor();
         copyFn(copyObj[i], obj[i])
       }
