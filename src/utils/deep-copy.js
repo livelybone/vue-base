@@ -18,13 +18,11 @@ export function deepCopy(obj) {
 }
 
 export function copyFn(copyObj, obj) {
-  for (let i in obj) {
-    if (obj.hasOwnProperty(i)) {
-      copyObj[i] = obj[i];
-      if (typeof obj[i] === 'object' && !(obj[i] instanceof FileList || obj[i] instanceof File || obj instanceof Date)) {
-        copyObj[i] = new obj[i].constructor();
-        copyFn(copyObj[i], obj[i])
-      }
+  Object.keys(obj).map(key => {
+    copyObj[key] = obj[key];
+    if (typeof obj[key] === 'object' && !(obj[key] instanceof FileList || obj[key] instanceof File || obj instanceof Date)) {
+      copyObj[key] = new obj[key].constructor();
+      copyFn(copyObj[key], obj[key])
     }
-  }
+  })
 }
