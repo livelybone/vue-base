@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AuthToken from 'extensions/auth-token'
-import HelloWorld from 'pages/HelloWorld'
+import AuthToken from 'extensions/auth-token';
 
-import NotFound from 'pages/NotFound'
+const NotFound = resolve => require.ensure([], require => require('pages/NotFound'), 'NotFound');
+const HelloWorld = resolve => require.ensure([], require => require('pages/HelloWorld'), 'HelloWorld');
 
 Vue.use(Router);
 

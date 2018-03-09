@@ -26,7 +26,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/[name]-[chunkhash].chunk.js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -131,7 +131,6 @@ const webpackConfig = merge(baseWebpackConfig, {
           '/': 'Home',
           '/not-found': 'NotFound',
         };
-        console.log(renderedRoute.html);
         renderedRoute.html = renderedRoute.html.replace(/<title>[^<]*<\/title>/i, '<title>' + titles[renderedRoute.route] + '</title>');
         return renderedRoute
       },
