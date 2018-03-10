@@ -2,8 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AuthToken from 'extensions/auth-token';
 
-const NotFound = resolve => require.ensure([], require => require('pages/NotFound'), 'NotFound');
-const HelloWorld = resolve => require.ensure([], require => require('pages/HelloWorld'), 'HelloWorld');
+// 另一种方式：
+// const NotFound = resolve => require.ensure([], require => require('pages/NotFound'), 'NotFound'); // commonjs
+// const NotFound = resolve => require.ensure([], require => resolve(require('pages/NotFound')), 'NotFound'); // commonjs
+// const NotFound = resolve => require(['pages/NotFound'], resolve); // AMD， 缺点：无法指定 chunkName
+const NotFound = resolve => import('pages/NotFound' /* webpackChunkName:"NotFound" */);
+const HelloWorld = resolve => import('pages/HelloWorld' /* webpackChunkName:"HelloWorld" */);
 
 Vue.use(Router);
 
