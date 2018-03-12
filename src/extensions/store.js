@@ -1,10 +1,4 @@
 // 全局状态管理 store
-import Vue from 'vue'
-
-export default function initialStore(state) {
-  Vue.prototype.$store = new Store(state)
-}
-
 class Store {
   state = {};
 
@@ -19,3 +13,12 @@ class Store {
     this.state = {...this.state};
   }
 }
+
+export const store = new Store();
+
+const StorePlugin = {};
+StorePlugin.install = (Vue, options) => {
+  Vue.prototype.$store = store;
+};
+
+export default StorePlugin;

@@ -1,24 +1,17 @@
 // http: axios
-import Vue from 'vue'
 import axios from 'axios'
 import config from 'config/config.js'
-import initialCache from 'extensions/cache'
 import AuthToken from 'extensions/auth-token'
 import { convertToFormData, getUrl } from 'utils/request-deal'
 
-export default function initialHttp() {
-  axios.defaults.baseURL = config.backendUrl;
+(function initialAxios() {
+  axios.defaults.baseURL = config.backendUrl.startsWith(':') ? window.location.origin.replace(/:[0-9]+$/g, config.backendUrl) : config.backendUrl;
+  console.log(window.location.origin, axios.defaults.baseURL);
   axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8';
   axios.defaults.validateStatus = function (status) {
     return (status >= 200 && status < 300) || (status >= 400) // 处理服务器返回的错误信息
-  };
-  // axios.defaults.timeout = 2500
-  const http = new Http();
-
-  Vue.prototype.$http = http;
-
-  initialCache(http)
-}
+  }
+})();
 
 class Http {
   get(url, data) {
@@ -97,8 +90,17 @@ class Http {
   }
 }
 
+export const http = new Http();
+
+const HttpPlugin = {};
+
+HttpPlugin.install = (Vue, options) => {
+  Vue.prototype.$http = http;
+};
+
+export default HttpPlugin;
+
 function setAuth(url) {
   axios.defaults.headers['x-auth-token'] = AuthToken.getToken();
-  const bdcId = Vue.prototype.$store.state.field.selected.id;
-  return !bdcId ? url : getUrl(url, {bdcId})
+  return url
 }

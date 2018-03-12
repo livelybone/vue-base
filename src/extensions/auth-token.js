@@ -1,5 +1,6 @@
 // auth_token
-import Vue from 'vue'
+import { http } from 'extensions/http'
+import { store } from 'extensions/store'
 import Cookie from 'utils/cookie'
 
 class AuthToken {
@@ -17,8 +18,8 @@ class AuthToken {
 
   getUser() {
     // 获取用户信息
-    return Vue.prototype.$http.get(`/user/myUserInfo`).then(user => {
-      Vue.prototype.$store.commit('user', user);
+    return http.get(`/user/myUserInfo`).then(user => {
+      store.commit('user', user);
       return user
     }, e => {
       this.setToken('');
@@ -28,8 +29,8 @@ class AuthToken {
 
   getAdminUser() {
     // 获取用户信息
-    return Vue.prototype.$http.get(`/user/myUserInfo`).then(user => {
-      Vue.prototype.$store.commit('admin', user);
+    return http.get(`/user/myUserInfo`).then(user => {
+      store.commit('admin', user);
       return user
     }, e => {
       this.setToken('');
@@ -38,14 +39,14 @@ class AuthToken {
   }
 
   signIn({phoneNumber, password}) {
-    return Vue.prototype.$http.post(`/login?phoneNumber=${phoneNumber}&password=${password}`).then(res => {
+    return http.post(`/login?phoneNumber=${phoneNumber}&password=${password}`).then(res => {
       this.setToken(res);
       return res
     })
   }
 
   signInAdmin({phoneNumber, password}) {
-    return Vue.prototype.$http.post(`/manager/login?phoneNumber=${phoneNumber}&password=${password}`).then(res => {
+    return http.post(`/manager/login?phoneNumber=${phoneNumber}&password=${password}`).then(res => {
       this.setToken(res);
       return res
     })
@@ -53,8 +54,8 @@ class AuthToken {
 
   signOut() {
     return new Promise(resolve => {
-      Vue.prototype.$store.state.user = {};
-      Vue.prototype.$store.state.admin = {};
+      store.state.user = {};
+      store.state.admin = {};
       this.setToken('');
       resolve()
     })

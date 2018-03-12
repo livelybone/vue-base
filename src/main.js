@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import initialExtensions from 'extensions/extensions'
 import register from './global-register'
+import { initialExtentions } from "@/extensions/extensions";
 
 Vue.config.productionTip = false;
 
-initialExtensions();
+initialExtentions();
 register();
 
 /* eslint-disable no-new */

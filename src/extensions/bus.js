@@ -1,7 +1,7 @@
 // 事件总线
-import Vue from 'vue'
 
-export default function initialBus() {
+const BusPlugin = {};
+BusPlugin.install = (Vue, options) => {
   const bus = new Vue();
 
   Vue.prototype.bus = bus;
@@ -53,4 +53,6 @@ export default function initialBus() {
       })
     }
   }
-}
+};
+
+export default BusPlugin

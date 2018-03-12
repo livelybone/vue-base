@@ -95,11 +95,18 @@
 
 <script>
   import { timeConversion } from "utils/date-deal";
+  import { MY_URL } from "@/utils/request-deal";
 
   export default {
     name: 'HelloWorld',
     mounted() {
       setImmediate(() => this.snackBar.error('Hello World!'));
+      this.$http.get('/sign-in').then(res => console.log(res)).catch(e => {
+        console.log(e);
+        this.snackBar.error(e)
+      });
+      const url = new MY_URL(window.location.href + '?username=aa&password=11#aa');
+      console.log(new URL(window.location.href + '?username=aa&password=11'), window.location, url);
     },
     data() {
       return {

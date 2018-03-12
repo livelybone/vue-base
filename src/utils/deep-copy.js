@@ -10,6 +10,7 @@ export function deepCopy(obj) {
   }
 
   if (typeof obj === 'object') {
+    console.log(obj);
     let copy = new obj.constructor();
     copyFn(copy, obj);
     return copy

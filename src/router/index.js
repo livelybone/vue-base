@@ -15,6 +15,7 @@ const router = new Router({
   mode: 'history',
   routes: [
     {path: '/', name: 'HelloWorld', component: HelloWorld},
+    {path: '/home', name: 'HelloWorld', component: HelloWorld},
     {path: '/sign-in', name: 'SignIn', component: HelloWorld},
     {path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld},
     {path: '/client', meta: {requireAuth: true}, children: []},

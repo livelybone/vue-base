@@ -1,17 +1,11 @@
 // 全局状态管理 store
-import Vue from 'vue'
+import { http } from 'extensions/http';
 import { getUrl } from 'utils/request-deal'
-
-export default function initialCache(http) {
-  Vue.prototype.$cache = new Cache(http)
-}
 
 class Cache {
   cache = new Map();
-  http = null;
 
-  constructor(http) {
-    this.http = http
+  constructor() {
   }
 
   get(url, params) {
@@ -22,7 +16,7 @@ class Cache {
       })
     } else {
       this.set(key, 'placeholder'); // 防止多次请求
-      return this.http.get(url, params).then(res => {
+      return http.get(url, params).then(res => {
         this.set(key, res);
         return res
       }, e => {
@@ -40,7 +34,7 @@ class Cache {
       })
     } else {
       this.set(key, 'placeholder'); // 防止多次请求
-      return this.http.getFile(key).then(res => {
+      return http.getFile(key).then(res => {
         this.set(key, res);
         return res
       }, e => {
@@ -58,3 +52,12 @@ class Cache {
     this.cache.set(key, val);
   }
 }
+
+export const cache = new Cache();
+
+const CachePlugin = {};
+CachePlugin.install = (Vue, options) => {
+  Vue.prototype.$cache = cache;
+};
+
+export default CachePlugin;

@@ -29,3 +29,31 @@ export function convertToFormData(obj) {
   });
   return data
 }
+
+export class MY_URL {
+  constructor(url) {
+    this.href = url;
+  }
+
+  toString() {
+    return this.href;
+  }
+
+  get href() {
+    return this.origin + this.pathname + this.search + '#' + this.hash
+  }
+
+  set href(val) {
+    this.hash = (val.match(/#(\S+)/) || [])[1] || "";
+    this.host = (val.match(/:\/\/(\S+(:\d+))\//) || [])[1] || "127.0.0.1";
+    this.hostname = (val.match(/:\/\/(\S+):/) || [])[1] || "127.0.0.1";
+    this.origin = (val.match(/(https?:\/\/\S+)\//) || [])[1] || "http://127.0.0.1";
+    this.pathname = (val.match(/https?:\/\/\S+(\/[^?#]+)(\?|#|$)/) || [])[1] || "/";
+    this.port = (val.match(/:(\d+)\//) || [])[1] || "";
+    this.protocol = (val.match(/(https?:)/) || [])[1] || "http:";
+    this.search = (val.match(/(\?[^#]+)(#?\S*)$/) || [])[1] || "";
+    this.password = "";
+    this.username = "";
+  }
+}
+
