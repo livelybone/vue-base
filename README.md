@@ -22,6 +22,9 @@
 # install dependencies
 npm install
 
+# build config
+cp config/config.js.sample config/config.js
+
 # serve with hot reload at localhost:8080
 npm run dev
 
