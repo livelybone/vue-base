@@ -81,7 +81,7 @@
         </a>
       </li>
     </ul>
-    <div class="item">{{'2015-02-05T15:30:30' | moment({format:'YYYY-MM-DD HH:mm:ss'})}}</div>
+    <div class="item">{{'2015-02-05T15:30:30' | datePipe({fmt:'YYYY-MM-DD HH:mm:ss.SSS'})}}</div>
     <div class="btn btn-blue">aa</div>
     <div @click="log($event.target)">
       <img-tag :src="require('assets/icon-search.png')"/>

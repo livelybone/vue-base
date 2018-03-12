@@ -37,7 +37,7 @@ export default function () {
   Vue.component('overlay', Overlay);
   Vue.component('overlay-confirm', OverlayConfirm);
 
-  Vue.filter('moment', (time, {fmt}) => format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'));
+  Vue.filter('datePipe', (time, {fmt}) => format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'));
 
   Vue.mixin({
     methods: {
