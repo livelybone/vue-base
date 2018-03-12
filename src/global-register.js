@@ -38,6 +38,7 @@ export default function () {
   Vue.component('overlay-confirm', OverlayConfirm);
 
   Vue.filter('datePipe', (time, {fmt}) => format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'));
+  Vue.filter('amountPipe', (amount, {symbol, unit}) => (symbol || '') + amount + (unit || ''));
 
   Vue.mixin({
     methods: {
