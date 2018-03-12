@@ -1,22 +1,23 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import moment from 'moment'
-import Back from 'components/common/Back'
-import ImgTag from 'components/image/ImgTag'
+import { format, parse } from 'date-fns'
 
-import Pagination from 'components/table/Pagination'
-import NoResult from 'components/common/NoResult'
+const Back = resolve => import('components/common/Back' /* webpackChunkName: "Back"*/);
+const ImgTag = resolve => import('components/image/ImgTag' /* webpackChunkName: "ImgTag"*/);
 
-import InputBase from 'components/form/InputBase'
-import FileInput from 'components/form/FileInput'
-import TextareaBase from 'components/form/TextareaBase'
-import SelectBase from 'components/form/SelectBase'
-import Datepicker from 'components/form/Datepicker'
-import Linkage from 'components/form/Linkage'
+const Pagination = resolve => import('components/table/Pagination' /* webpackChunkName: "Pagination"*/);
+const NoResult = resolve => import('components/common/NoResult' /* webpackChunkName: "NoResult"*/);
 
-import Overlay from 'components/common/Overlay'
-import OverlayConfirm from 'components/common/OverlayConfirm'
+const InputBase = resolve => import('components/form/InputBase' /* webpackChunkName: "InputBase"*/);
+const FileInput = resolve => import('components/form/FileInput' /* webpackChunkName: "FileInput"*/);
+const TextareaBase = resolve => import('components/form/TextareaBase' /* webpackChunkName: "TextareaBase"*/);
+const SelectBase = resolve => import('components/form/SelectBase' /* webpackChunkName: "SelectBase"*/);
+const Datepicker = resolve => import('components/form/Datepicker' /* webpackChunkName: "Datepicker"*/);
+const Linkage = resolve => import('components/form/Linkage' /* webpackChunkName: "Linkage"*/);
+
+const Overlay = resolve => import('components/common/Overlay' /* webpackChunkName: "Overlay"*/);
+const OverlayConfirm = resolve => import('components/common/OverlayConfirm' /* webpackChunkName: "OverlayConfirm"*/);
 
 export default function () {
   // 注册全局组件
@@ -36,7 +37,7 @@ export default function () {
   Vue.component('overlay', Overlay);
   Vue.component('overlay-confirm', OverlayConfirm);
 
-  Vue.filter('moment', (time, {parse, format}) => moment(time, parse).format(format || 'YYYY-MM-DD HH:mm:ss'))
+  Vue.filter('moment', (time, {fmt}) => format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'));
 
   Vue.mixin({
     methods: {

@@ -119,7 +119,11 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
-    new PrerenderSpaPlugin(prerenderConfig)
+    new PrerenderSpaPlugin(prerenderConfig),
+    new webpack.ContextReplacementPlugin( // 如果使用moment.js，需要用到这个减小大小，不推荐使用moment.js
+      /moment[\/\\]locale$/,
+      /zh-cn-sdfsf/
+    )
   ]
 });
 

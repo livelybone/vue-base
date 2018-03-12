@@ -94,13 +94,12 @@
 </template>
 
 <script>
-  import { timeConversion } from "@/utils/date-deal";
+  import { timeConversion } from "utils/date-deal";
 
   export default {
     name: 'HelloWorld',
     mounted() {
       setImmediate(() => this.snackBar.error('Hello World!'));
-      console.log(this.$isServer);
     },
     data() {
       return {
@@ -110,7 +109,7 @@
     },
     methods: {
       time(val) {
-        const obj = timeConversion(new Date(val).getTime() - new Date().getTime());
+        const obj = timeConversion(new Date(val).getTime());
         return obj.day + '天' + obj.hour + '时' + obj.minute + '分' + obj.second + '秒'
       },
       input(file) {

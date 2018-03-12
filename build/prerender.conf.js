@@ -8,7 +8,7 @@ const routes = [ // 在这里编辑需要预渲染的页面的路由
 
 const titles = {};
 
-routes.map(route => titles[path] = route.title);
+routes.map(route => titles[route.path] = route.title);
 
 module.exports = {
   // For more: https://github.com/chrisvfritz/prerender-spa-plugin/tree/v3
@@ -19,6 +19,7 @@ module.exports = {
   postProcess(renderedRoute) {
     // Ignore any redirects.
     renderedRoute.route = renderedRoute.originalRoute;
+    console.log(titles);
     renderedRoute.html = renderedRoute.html.replace(/<title>[^<]*<\/title>/i, '<title>' + titles[renderedRoute.route] + '</title>');
     return renderedRoute
   },

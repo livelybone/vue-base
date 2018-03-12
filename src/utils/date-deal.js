@@ -1,16 +1,18 @@
-import moment from 'moment'
+import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds, format, parse } from 'date-fns'
 
-export function dateFormat(time, format) {
-  return moment(time).format(format)
+export function dateFormat(time, fmt) {
+  return format(parse(time), fmt)
 }
 
 export function timeConversion(time) {
   // time 毫秒数
-  const duration = moment.duration(time);
+  const d = parse(time);
+  const now = new Date();
+  console.log(time, d);
   return {
-    day: Math.floor(duration.asDays()),
-    hour: duration.hours(),
-    minute: duration.minutes(),
-    second: duration.seconds()
+    day: Math.floor(differenceInDays(d, now)),
+    hour: differenceInHours(d, now) % 24,
+    minute: differenceInMinutes(d, now) % 60,
+    second: differenceInSeconds(d, now) % 60
   }
 }
