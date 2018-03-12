@@ -11,6 +11,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const PrerenderSpaPlugin = require('prerender-spa-plugin');
+const prerenderConfig = require('./prerender.conf');
 
 const env = require('../config/prod.env');
 
@@ -118,33 +119,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
-    new PrerenderSpaPlugin({
-      // For more: https://github.com/chrisvfritz/prerender-spa-plugin/tree/v3
-      // Required - The path to the webpack-outputted app to prerender.
-      staticDir: path.join(__dirname, '../dist'),
-      // Required - Routes to render.
-      routes: ['/', '/not-found'],
-      postProcess(renderedRoute) {
-        // Ignore any redirects.
-        renderedRoute.route = renderedRoute.originalRoute;
-        const titles = {
-          '/': 'Home',
-          '/not-found': 'NotFound',
-        };
-        renderedRoute.html = renderedRoute.html.replace(/<title>[^<]*<\/title>/i, '<title>' + titles[renderedRoute.route] + '</title>');
-        return renderedRoute
-      },
-      minify: {
-        collapseBooleanAttributes: true,
-        collapseWhitespace: false,
-        decodeEntities: true,
-        keepClosingSlash: true,
-        sortAttributes: true,
-        trimCustomFragments: true,
-        removeComments: true,
-        removeEmptyAttributes: true,
-      },
-    })
+    new PrerenderSpaPlugin(prerenderConfig)
   ]
 });
 
