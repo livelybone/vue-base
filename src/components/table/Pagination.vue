@@ -43,11 +43,11 @@
         if (this.config.pages <= this.maxPageBtn) {
           this.pagesArr = new Int8Array(this.config.pages).map((val, i) => i + 1);
         } else if (this.num <= (this.maxPageBtn + 1) / 2) {
-          this.pagesArr = Array.from(new Int8Array(this.maxPageBtn - 1)).map((val, i) => i === this.maxPageBtn - 2 ? '...' : i + 1).concat([this.config.pages]);
+          this.pagesArr = [...Array(this.maxPageBtn - 1)].map((val, i) => i === this.maxPageBtn - 2 ? '...' : i + 1).concat([this.config.pages]);
         } else if (this.num >= this.config.pages - (this.maxPageBtn - 1) / 2) {
-          this.pagesArr = [1, '...'].concat(Array.from(new Int8Array(this.maxPageBtn - 2).map((val, i) => this.config.pages - i)).reverse())
+          this.pagesArr = [1, '...'].concat([...Array(this.maxPageBtn - 2)].map((val, i) => this.config.pages - i)).reverse()
         } else {
-          this.pagesArr = [1, '...'].concat(Array.from(new Int8Array(this.maxPageBtn - 4).map((val, i) => this.num - Math.floor((this.maxPageBtn - 3) / 2) + i + 1))).concat(['...', this.config.pages])
+          this.pagesArr = [1, '...'].concat([...Array(this.maxPageBtn - 4)].map((val, i) => this.num - Math.floor((this.maxPageBtn - 3) / 2) + i + 1)).concat(['...', this.config.pages])
         }
       },
       next() {
