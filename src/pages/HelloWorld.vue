@@ -95,7 +95,8 @@
 
 <script>
   import { timeConversion } from "utils/date-deal";
-  import { MY_URL } from "@/utils/request-deal";
+  import MY_URL from "utils/MY_URL";
+  import { getUrl } from "utils/request-deal";
 
   export default {
     name: 'HelloWorld',
@@ -105,8 +106,10 @@
         console.log(e);
         this.snackBar.error(e)
       });
-      const url = new MY_URL(window.location.href + '?username=aa&password=11#aa');
-      console.log(new URL(window.location.href + '?username=aa&password=11'), window.location, url);
+      const url = new MY_URL('https://user:111@www.baidu.com:81/haha?username=me?&password=1#1', true);
+      url.setQuery('password', 1);
+      console.log(url, new URL('https://user:111@www.baidu.com:81/haha?username=me?&password=1#1'));
+      console.log(getUrl('/user?user?', {p: 1, a: 11}))
     },
     data() {
       return {
