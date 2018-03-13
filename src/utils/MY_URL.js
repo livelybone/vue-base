@@ -13,7 +13,7 @@ export default class MY_URL {
 
   constructor(url, queryString, encode) {
     this.href = url;
-    if (queryString) this.queryString()
+    if (queryString) this.queryString();
     this.encode = encode;
   }
 
