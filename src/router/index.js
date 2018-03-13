@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AuthToken from 'extensions/auth-token';
+import { AuthToken } from 'data/api/auth-token';
 
 // 另一种方式：
 // const NotFound = resolve => require.ensure([], require => require('pages/NotFound'), 'NotFound'); // commonjs

@@ -83,13 +83,13 @@
     </ul>
     <div class="item">{{'2015-02-05T15:30:30' | datePipe({fmt:'YYYY-MM-DD HH:mm:ss.SSS'})}}</div>
     <div class="btn btn-blue">aa</div>
-    <div @click="log($event.target)">
+    <div @click="log('Div Click： ',$event.target)">
       <img-tag :src="require('assets/icon-search.png')"/>
     </div>
     <div>还剩 {{time('2018-06-04')}}</div>
     <input type="file" @change="input($event.target.files[0])">
     <no-result/>
-    <pagination :config="pageConfig" @to="log"/>
+    <pagination :config="pageConfig" @to="log('Pagination page： ',$event)"/>
   </div>
 </template>
 
@@ -97,19 +97,18 @@
   import { timeConversion } from "utils/date-deal";
   import MY_URL from "utils/MY_URL";
   import { getUrl } from "utils/request-deal";
+  import { mapActions } from 'vuex';
 
   export default {
     name: 'HelloWorld',
     mounted() {
       setImmediate(() => this.snackBar.error('Hello World!'));
-      this.$http.get('/sign-in').then(res => console.log(res)).catch(e => {
-        console.log(e);
-        this.snackBar.error(e)
-      });
       const url = new MY_URL('https://user:111@www.baidu.com:81/haha?username=me?&password=1#1', true);
       url.setQuery('password', 1);
-      console.log(url, new URL('https://user:111@www.baidu.com:81/haha?username=me?&password=1#1'));
-      console.log(getUrl('/user?user?', {p: 1, a: 11}))
+      console.log('MY_URL 对象： ', url, new URL('https://user:111@www.baidu.com:81/haha?username=me?&password=1#1'));
+      console.log('getUrl 工具： ', getUrl('/user?user?', {p: 1, a: 11}));
+      this.getUserInfo({}).then(res => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
+      console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)));
     },
     data() {
       return {
@@ -118,13 +117,14 @@
       }
     },
     methods: {
+      ...mapActions('user', ['getUserInfo']),
       time(val) {
         const obj = timeConversion(new Date(val).getTime());
         return obj.day + '天' + obj.hour + '时' + obj.minute + '分' + obj.second + '秒'
       },
       input(file) {
-        console.log(file, typeof file);
-      }
+        console.log('input File 值： ', file, typeof file);
+      },
     }
   }
 </script>

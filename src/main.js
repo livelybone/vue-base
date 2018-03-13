@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import App from './App'
+import store from 'data/store'
 import router from './router'
 import register from './global-register'
-import { initialExtentions } from "@/extensions/extensions";
+import { initialExtensions } from "@/extensions/extensions";
 
 Vue.config.productionTip = false;
 
-initialExtentions();
+initialExtensions();
 register();
 
 /* eslint-disable no-new */
 const root = new Vue({
   router,
+  store,
   render: h => h(App)
 });
 

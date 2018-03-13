@@ -1,7 +1,7 @@
 // http: axios
 import axios from 'axios'
 import config from 'config/config.js'
-import AuthToken from 'extensions/auth-token'
+import { AuthToken } from 'data/api/auth-token'
 import { convertToFormData, getUrl } from 'utils/request-deal'
 
 (function initialAxios() {

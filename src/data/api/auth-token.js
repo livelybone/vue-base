@@ -1,9 +1,8 @@
 // auth_token
 import { http } from 'extensions/http'
-import { store } from 'extensions/store'
 import Cookie from 'utils/cookie'
 
-class AuthToken {
+class AuthTokenClass {
   key = 'AUTH_TOKEN';
   localStorageSupport = false;
 
@@ -19,7 +18,6 @@ class AuthToken {
   getUser() {
     // 获取用户信息
     return http.get(`/user/myUserInfo`).then(user => {
-      store.commit('user', user);
       return user
     }, e => {
       this.setToken('');
@@ -30,7 +28,6 @@ class AuthToken {
   getAdminUser() {
     // 获取用户信息
     return http.get(`/user/myUserInfo`).then(user => {
-      store.commit('admin', user);
       return user
     }, e => {
       this.setToken('');
@@ -54,8 +51,6 @@ class AuthToken {
 
   signOut() {
     return new Promise(resolve => {
-      store.state.user = {};
-      store.state.admin = {};
       this.setToken('');
       resolve()
     })
@@ -82,4 +77,4 @@ class AuthToken {
   }
 }
 
-export default new AuthToken()
+export const AuthToken = new AuthTokenClass();

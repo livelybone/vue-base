@@ -1,10 +1,7 @@
-import Vue from 'vue'
+import { http } from 'extensions/http'
 
 export default class User {
-  constructor() {
-  }
-
   static register({phoneNumber, password, verifyCode}) {
-    return Vue.prototype.$http.postForm('/user/register', {phoneNumber, password, verifyCode})
+    return http.postForm('/user/register', {phoneNumber, password, verifyCode})
   }
-}
+};

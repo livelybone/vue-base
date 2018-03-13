@@ -42,8 +42,8 @@ export default function () {
 
   Vue.mixin({
     methods: {
-      log(val) {
-        console.log(val)
+      log(...args) {
+        console.log(...args)
       }
     }
   })
