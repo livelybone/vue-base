@@ -88,7 +88,7 @@
     }
 
     .transition {
-      transition: all .5s ease-in-out;
+      transition: all .5s cubic-bezier(0, 1, 1, 1); // 请看贝塞尔曲线 https://www.jianshu.com/p/d999f090d333
     }
   }
 </style>
