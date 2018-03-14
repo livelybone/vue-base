@@ -16,7 +16,7 @@
 
 > js：工具类写在 utils 文件夹，插件写在 extensions 文件夹，组件共用变量或者模板写在 data/immutable-data 文件夹，ajax 相关的写在 data/api 文件夹，全局状态管理文件写在 data/store/modules 文件夹
 
-> js: ajax 表单渲染数据格式推荐 const items = [{name:'姓名', alias:'realName', value:'XXX'}]，表单提交时可以使用 DataDeal.dataDeal(items) 处理（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
+> js: ajax 表单渲染数据格式推荐 const items = [{name:'姓名', alias:'realName', value:'XXX'}]，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
 
 > SEO 优化使用 PrerenderSpaPlugin 代替 服务端渲染（SSR），生成静态 html 文件，再用 Nginx 配置路由即可
 
