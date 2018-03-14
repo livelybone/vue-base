@@ -71,7 +71,7 @@
         if (msg.message) return msg.name + ': ' + msg.message
       },
       redirect(msg) {
-        let m = msg.message || msg;
+        let m = typeof msg === 'string' ? msg : msg.message;
         if (m.indexOf('未登录') >= 0 && this.$route.path.indexOf('sign-in') < 0) {
           const isAdmin = this.$route.path.indexOf('admin') >= 0;
           this.$router.push(`${isAdmin ? '/admin' : ''}/sign-in?redirect=${encodeURIComponent(this.$route.fullPath)}`);

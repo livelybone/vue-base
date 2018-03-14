@@ -1,12 +1,12 @@
 // http: axios
 import axios from 'axios'
-import config from 'config/config.js'
 import { AuthToken } from 'data/api/auth-token'
 import { convertToFormData, getUrl } from 'utils/request-deal'
+import My_URL from 'utils/MY_URL'
+import config from "config/config";
 
 (function initialAxios() {
-  axios.defaults.baseURL = config.backendUrl.startsWith(':') ? window.location.origin.replace(/:[0-9]+$/g, config.backendUrl) : config.backendUrl;
-  console.log(window.location.origin, axios.defaults.baseURL);
+  axios.defaults.baseURL = new My_URL(config.backendUrl).toString();
   axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8';
   axios.defaults.validateStatus = function (status) {
     return (status >= 200 && status < 300) || (status >= 400) // 处理服务器返回的错误信息

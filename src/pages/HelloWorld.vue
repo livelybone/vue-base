@@ -108,9 +108,9 @@
     name: 'HelloWorld',
     mounted() {
       setImmediate(() => this.snackBar.error('Hello World!'));
-      const url = new MY_URL('https://user:111@www.baidu.com:81/haha?username=me?&password=1#1', true);
+      const url = new MY_URL('http://@www.baidu.com:81/sdfs#1', true);
       url.setQuery('password', 1);
-      console.log('MY_URL 对象： ', url, new URL('https://user:111@www.baidu.com:81/haha?username=me?&password=1#1'));
+      console.log('MY_URL 对象： ', url, new URL('http://127.0.0.1:81/www.baidu.com:81?password=1'));
       console.log('getUrl 工具： ', getUrl('/user?user?', {p: 1, a: 11}));
       this.getUserInfo({}).then(res => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
       console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)));
