@@ -18,7 +18,7 @@
 
 > js: ajax 表单渲染数据格式推荐 const items = [{name:'姓名', alias:'realName', value:'XXX'}]，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
 
-> SEO 优化使用 PrerenderSpaPlugin 代替 服务端渲染（SSR），生成静态 html 文件，再用 Nginx 配置路由即可
+> SEO 优化使用预渲染 PrerenderSpaPlugin 代替 服务端渲染（SSR），生成静态 html 文件，再用 Nginx 配置路由即可，如果是构建社交类网站，有很多类似博客的页面（公开的，每个用户都有的，都能被搜索到的），还请使用 SSR，预渲染不适合做如此庞大的操作
 
 ## Build Setup
 
