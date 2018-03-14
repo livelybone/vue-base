@@ -86,10 +86,13 @@
     <div @click="log('Div Click： ',$event.target)">
       <img-tag :src="require('assets/icon-search.png')"/>
     </div>
-    <div>还剩 {{time('2018-06-04')}}</div>
+    <div>还剩 {{time}}</div>
     <input type="file" @change="input($event.target.files[0])">
     <no-result/>
-    <pagination :config="pageConfig" @to="log('Pagination page： ',$event)"/>
+    <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
+    <slide-for-more class="slide-for-more" v-else="" :searching="isSearching" @slideUp="search">
+      <div class="element">Element</div>
+    </slide-for-more>
   </div>
 </template>
 
@@ -98,6 +101,8 @@
   import MY_URL from "utils/MY_URL";
   import { getUrl } from "utils/request-deal";
   import { mapActions } from 'vuex';
+  import SlideForMore from 'components/table/SlideForMore'
+  import { isMobile } from "utils/user-agent";
 
   export default {
     name: 'HelloWorld',
@@ -114,18 +119,29 @@
       return {
         msg: 'Welcome to Your Vue.js App',
         pageConfig: {total: 1, pages: 10, page: 5, pageSize: 10},
+        isSearching: false,
+        convertTime: '2020-04-03'
       }
+    },
+    computed: {
+      time() {
+        const obj = timeConversion(new Date(this.convertTime).getTime());
+        return obj.day + '天' + obj.hour + '时' + obj.minute + '分' + obj.second + '秒'
+      },
     },
     methods: {
       ...mapActions('user', ['getUserInfo']),
-      time(val) {
-        const obj = timeConversion(new Date(val).getTime());
-        return obj.day + '天' + obj.hour + '时' + obj.minute + '分' + obj.second + '秒'
-      },
       input(file) {
         console.log('input File 值： ', file, typeof file);
       },
-    }
+      isMobile,
+      search() {
+        this.log('slide up');
+        this.isSearching = true;
+        setTimeout(() => this.isSearching = false, 1000);
+      }
+    },
+    components: {SlideForMore}
   }
 </script>
 
@@ -159,5 +175,11 @@
 
   .item {
     margin: 20px 0;
+  }
+
+  .element {
+    @include flex(center);
+    width: 100%;
+    height: 3rem;
   }
 </style>

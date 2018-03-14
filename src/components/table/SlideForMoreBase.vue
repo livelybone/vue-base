@@ -1,0 +1,94 @@
+<template>
+  <div class="slide-for-more-base-wrap" @touchstart="start" @touchend="end" @touchmove="move">
+    <div class="content" :class="searching?'transition':''"
+         :style="searching?{top:'-'+tipHeight}:{top:-height+'px'}">
+      <slot/>
+    </div>
+    <div class="tip-wrap" :class="searching?'transition':''"
+         :style="searching?{height:tipHeight}:{height:height+'px'}">
+      <slot name="tip"/>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'SlideForMoreBase',
+    props: {
+      slideHeight: {
+        default: 100,
+        type: Number,
+      },
+      searching: Boolean,
+      tipHeight: {
+        type: String,
+        default: '.4rem',
+      }
+    },
+    data() {
+      return {
+        isBottom: false,
+        startPointer: null,
+        height: 0,
+        dpr: typeof window !== 'undefined' ? window.devicePixelRatio : 1
+      }
+    },
+    computed: {
+      distance() {
+        return this.slideHeight * this.dpr
+      }
+    },
+    watch: {},
+    methods: {
+      start(ev) {
+        this.isBottom = document.body.scrollTop >= document.body.offsetHeight - screen.availHeight * this.dpr;
+        this.startPointer = this.isBottom ? ev.changedTouches[0] : null;
+      },
+      move(ev) {
+        if (!this.isBottom || this.searching) return;
+        const height = this.startPointer.pageY - ev.changedTouches[0].pageY;
+        if (height > 0) this.height = height;
+      },
+      end(ev) {
+        if (!this.isBottom) return;
+        const canEmit = this.distance <= this.startPointer.pageY - ev.changedTouches[0].pageY;
+        if (canEmit) {
+          this.$emit('slideUp');
+        }
+        this.height = 0;
+      },
+    }
+  }
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+  @import '../../css/common-variable.scss';
+
+  .slide-for-more-base-wrap {
+    position: relative;
+    background: $background-1;
+
+    .content {
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 .02rem .05rem rgba(#000, .05);
+      background: #fff;
+    }
+
+    .tip-wrap {
+      @include flex(center);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      line-height: .4rem;
+      color: $black-lighter;
+      overflow: hidden;
+    }
+
+    .transition {
+      transition: all .5s ease-in-out;
+    }
+  }
+</style>
