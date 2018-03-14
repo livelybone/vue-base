@@ -19,7 +19,6 @@ module.exports = {
   postProcess(renderedRoute) {
     // Ignore any redirects.
     renderedRoute.route = renderedRoute.originalRoute;
-    console.log(titles);
     renderedRoute.html = renderedRoute.html.replace(/<title>[^<]*<\/title>/i, '<title>' + titles[renderedRoute.route] + '</title>');
     return renderedRoute
   },
