@@ -12,6 +12,8 @@
 </template>
 
 <script>
+  import { browserAvailSize, getScroll } from "utils/browser-default";
+
   export default {
     name: 'SlideForMoreBase',
     props: {
@@ -41,7 +43,7 @@
     watch: {},
     methods: {
       start(ev) {
-        this.isBottom = document.body.scrollTop >= document.body.offsetHeight - screen.availHeight * this.dpr;
+        this.isBottom = getScroll().top >= document.body.offsetHeight - browserAvailSize().height - 10;
         this.startPointer = this.isBottom ? ev.changedTouches[0] : null;
       },
       move(ev) {
