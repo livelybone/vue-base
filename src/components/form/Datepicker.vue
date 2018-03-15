@@ -1,6 +1,6 @@
 <template>
   <div v-else="" class="date-wrap">
-    <label :for="id" :style="{textAlign}"
+    <label :for="id" :style="labelStyle"
            :class="myValue?'name':''">{{myValue||'请选择时间'}}</label>
     <input v-if='canEdit'
            class="date"
@@ -44,7 +44,7 @@
         default: true,
         type: Boolean
       },
-      textAlign: String
+      labelStyle: Object
     },
     data() {
       return {myValue: ''}

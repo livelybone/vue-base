@@ -79,9 +79,7 @@
   @import '../../css/common-variable.scss';
 
   .pagination {
-    @include flex();
-    align-items: center;
-    justify-content: flex-end;
+    @include flex(flex-end, center);
 
     & .page-btn {
       @include flex(center, center);

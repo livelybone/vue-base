@@ -89,6 +89,8 @@
     <div>还剩 {{time}}</div>
     <input type="file" @change="input($event.target.files[0])">
     <no-result/>
+    <select-base class="select-base" name="多选框" :value="1" :options="[{name:'1',value:1}]"/>
+    <my-file-input :id="1" :value="require('assets/icon-search.png')"/>
     <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
     <slide-for-more class="slide-for-more" v-else="" :searching="isSearching" contentMinHeight="100vh"
                     @slideUp="search">
@@ -102,8 +104,8 @@
   import MY_URL from "utils/MY_URL";
   import { getUrl } from "utils/request-deal";
   import { mapActions } from 'vuex';
-  import SlideForMore from 'components/table/SlideForMore'
   import { isMobile } from "utils/user-agent";
+  import MyFileInput from "components/form/MyFileInput";
 
   export default {
     name: 'HelloWorld',
@@ -146,7 +148,7 @@
         }, 1000);
       }
     },
-    components: {SlideForMore}
+    components: {MyFileInput}
   }
 </script>
 
@@ -192,5 +194,11 @@
       color: #fff;
       background: $green;
     }
+  }
+
+  .select-base {
+    background: #fff;
+    margin: .1rem 0;
+    padding: .1rem 0;
   }
 </style>

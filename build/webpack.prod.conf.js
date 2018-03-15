@@ -18,7 +18,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: true,
-      usePostCSS: true
+      usePostCSS: false
     })
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
@@ -117,9 +117,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
-    new webpack.ContextReplacementPlugin( // 如果使用moment.js，需要用到这个减小大小，不推荐使用moment.js
+    new webpack.ContextReplacementPlugin( // 如果使用moment.js，需要用到这个减小大小。不推荐使用moment.js
       /moment[\/\\]locale$/,
-      /zh-cn-sdfsf/
+      /^zh-cn/
     )
   ]
 });

@@ -10,11 +10,13 @@
 
 > style: 同类型的属性值，最好抽出形成公共变量或者函数
 
+> style: 如果所有 css 被 ExtractTextWebpackPlugin 抽取成一个 css 文件, 那么 css 文件最好不要有图片（比如 background: url('/assets/logo.png')）
+
 > js：es6 规范
 
 > js: 全局状态管理使用 vuex，如果项目简单，可选择使用 extensions/store.js
 
-> js：工具类写在 utils 文件夹，插件写在 extensions 文件夹，组件共用变量或者模板写在 data/immutable-data 文件夹，ajax 相关的写在 data/api 文件夹，全局状态管理文件写在 data/store/modules 文件夹
+> js: 工具类写在 utils 文件夹，插件写在 extensions 文件夹，组件共用变量或者模板写在 data/immutable-data 文件夹，ajax 相关的写在 data/api 文件夹，全局状态管理文件写在 data/store/modules 文件夹
 
 > js: ajax 表单渲染数据格式推荐 const items = [{name:'姓名', alias:'realName', value:'XXX'}]，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
 

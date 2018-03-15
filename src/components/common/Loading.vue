@@ -1,6 +1,6 @@
 <template>
   <div class="loading-wrap" :style="myStyle">
-    <span v-for="(val,i) in [...Array(10)]" :class="'icon-circle-'+i"></span>
+    <span v-for="(val,i) in [...Array(10)]" :class="['circle','circle-'+i]"></span>
   </div>
 </template>
 
@@ -33,26 +33,33 @@
     width: 1rem;
     height: 1rem;
 
-    @for $i from 0 through 9 {
-      .icon-circle-#{$i} {
+    .circle {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      &:before {
+        content: '';
         position: absolute;
         left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
+        top: 50%;
+        width: 15%;
+        height: 15%;
+        margin: -7.5% 0 0;
+        border-radius: 50%;
+        background: $black-lighter;
+        animation: sk-circleFadeDelay 1s infinite ease-in-out both;
+      }
+    }
+
+    @for $i from 0 through 9 {
+      .circle-#{$i} {
         transform: rotate(calc((#{$i} + 1) * 360deg / 9));
 
         &:before {
           content: '';
-          position: absolute;
-          left: 0;
-          top: 50%;
-          width: 15%;
-          height: 15%;
-          margin: -7.5% 0 0;
-          border-radius: 50%;
-          background: $black-lighter;
-          animation: sk-circleFadeDelay 1s infinite ease-in-out both;
           animation-delay: #{-1+($i + 1)* .1}s;
         }
       }
