@@ -3,7 +3,7 @@
     <div v-for="(option,i) in options" class="branch">
       <div class="name" @click.stop.prevent="choose(option,i)">
         <span class="icon-checkbox" :class="checked===option.name?'checked':''"></span>
-        <div class="text-wrap" :style="noBorder?{border:'none'}:{paddingBottom:'1rem'}">
+        <div class="text-wrap" :style="noBorder?{border:'none'}:{paddingBottom:'.1rem'}">
           <span class="text">{{option.name}}</span>
           <tree-menu class="tree-menu-sub" v-if="option.children&&option.children.length>0&&checked===option.name"
                      :options="option.children" :checkedObj="checkedObj&&checkedObj.children" :noBorder="true"
@@ -116,16 +116,17 @@
         }
 
         & .text-wrap {
-          @include flex(flex-start, flex-start, column);
+          @include flex-column(flex-start, flex-start);
           flex: 1;
           width: 100%;
           min-height: .3rem;
-          padding: 1rem 0 0;
+          padding: .1rem 0 0;
           border-bottom: 1px solid $border;
 
           & .text {
             width: 100%;
             line-height: .2rem;
+            text-align: left;
           }
         }
       }

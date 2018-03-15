@@ -87,8 +87,7 @@
   @import '../../css/common-variable.scss';
 
   .snack-bar-wrap {
-    @include flex(center, center);
-    flex-wrap: wrap;
+    @include flex(center, center, wrap);
     position: fixed;
     left: 50%;
     top: .05rem;

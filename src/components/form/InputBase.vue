@@ -2,7 +2,7 @@
   <input :type="config.inputType"
          :id="id"
          :value="value"
-         :style="{textAlign}"
+         :style="styles"
          :placeholder="config.placeholder"
          @input="input($event.target.value)">
 </template>
@@ -27,7 +27,7 @@
         },
         type: Object
       },
-      textAlign: String
+      styles: Object
     },
     data() {
       return {

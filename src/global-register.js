@@ -8,6 +8,7 @@ const Back = resolve => import('components/common/Back' /* webpackChunkName: "Ba
 const ImgTag = resolve => import('components/image/ImgTag' /* webpackChunkName: "ImgTag"*/);
 
 const Pagination = resolve => import('components/table/Pagination' /* webpackChunkName: "Pagination"*/);
+const SlideForMore = resolve => import('components/table/SlideForMore' /* webpackChunkName: "SlideForMore"*/);
 const NoResult = resolve => import('components/common/NoResult' /* webpackChunkName: "NoResult"*/);
 
 const InputBase = resolve => import('components/form/InputBase' /* webpackChunkName: "InputBase"*/);
@@ -43,6 +44,7 @@ export default function () {
     Vue.component('pagination', Pagination);
   } else {
     Vue.component('loading', Loading);
+    Vue.component('slide-for-more', SlideForMore);
   }
 
   Vue.filter('datePipe', (time, {fmt}) => format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'));

@@ -7,7 +7,6 @@
       <header>
         <div class="back"><span class="icon-back" @click="open=false"></span></div>
         <h2>{{name}}</h2>
-        <!--<input-base v-model="keyword.value" :config="keyword"/>-->
       </header>
       <tree-menu :options="options" :checkedObj="checkedObj" @input="input"/>
       <span v-if="options.length<=0" class="tips">没有选项！</span>
@@ -164,34 +163,6 @@
           margin: 0 .22rem 0 0;
           @extend .content-4;
           color: #fff;
-        }
-
-        & input {
-          flex: 1;
-          width: 100%;
-          height: .28rem;
-          padding-left: .28rem;
-          border-radius: .03rem;
-          margin: 0 0 0 $margin;
-          color: #fff;
-          background: rgba(#000, .10) url('../../assets/icon-search.png') no-repeat left .07rem center;
-          background-size: .14rem;
-
-          &::-webkit-input-placeholder { /* WebKit browsers */
-            color: rgba(#fff, .57);
-          }
-
-          &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-            color: rgba(#fff, .57);
-          }
-
-          &::-moz-placeholder { /* Mozilla Firefox 19+ */
-            color: rgba(#fff, .57);
-          }
-
-          &:-ms-input-placeholder { /* Internet Explorer 10+ */
-            color: rgba(#fff, .57);
-          }
         }
       }
     }

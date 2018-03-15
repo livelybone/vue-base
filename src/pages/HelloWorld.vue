@@ -102,7 +102,6 @@
   import MY_URL from "utils/MY_URL";
   import { getUrl } from "utils/request-deal";
   import { mapActions } from 'vuex';
-  import SlideForMore from 'components/table/SlideForMore'
   import { isMobile } from "utils/user-agent";
 
   export default {
@@ -146,7 +145,7 @@
         }, 1000);
       }
     },
-    components: {SlideForMore}
+    components: {}
   }
 </script>
 
