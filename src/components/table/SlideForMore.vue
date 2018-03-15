@@ -3,6 +3,7 @@
     class="slide-for-more-wrap"
     :slideHeight="slideHeight"
     :searching="searching"
+    :contentMinHeight="contentMinHeight"
     tipHeight=".4rem"
     @slideUp="slideUp">
     <slot/>
@@ -24,6 +25,7 @@
     props: {
       slideHeight: Number,
       searching: Boolean,
+      contentMinHeight: String,
     },
     data() {
       return {}

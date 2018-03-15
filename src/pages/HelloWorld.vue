@@ -90,8 +90,9 @@
     <input type="file" @change="input($event.target.files[0])">
     <no-result/>
     <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
-    <slide-for-more class="slide-for-more" v-else="" :searching="isSearching" @slideUp="search">
-      <div class="element">Element</div>
+    <slide-for-more class="slide-for-more" v-else="" :searching="isSearching" contentMinHeight="100vh"
+                    @slideUp="search">
+      <div v-for="val in elements" class="element">Element</div>
     </slide-for-more>
   </div>
 </template>
@@ -120,7 +121,8 @@
         msg: 'Welcome to Your Vue.js App',
         pageConfig: {total: 1, pages: 10, page: 5, pageSize: 10},
         isSearching: false,
-        convertTime: '2020-04-03'
+        convertTime: '2020-04-03',
+        elements: [1, 1, 1,],
       }
     },
     computed: {
@@ -138,7 +140,10 @@
       search() {
         this.log('slide up');
         this.isSearching = true;
-        setTimeout(() => this.isSearching = false, 1000);
+        setTimeout(() => {
+          this.elements.push(1);
+          this.isSearching = false;
+        }, 1000);
       }
     },
     components: {SlideForMore}
@@ -180,6 +185,12 @@
   .element {
     @include flex(center);
     width: 100%;
-    height: 3rem;
+    height: 1rem;
+    background: #fff;
+
+    &:nth-child(2n) {
+      color: #fff;
+      background: $green;
+    }
   }
 </style>
