@@ -31,14 +31,23 @@ npm install
 # build config
 cp config/config.js.sample config/config.js
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:8080 (with no ssr)
 npm run dev
 
-# build for production with minification
-npm run build
+# build static file for production with minification (with no ssr)
+npm run build:static
 
 # build for production and view the bundle analyzer report
-npm run build --report
+npm run build:static --report
+
+# build for production width minification (with ssr)
+npm run build:ssr
+
+# start in production environment (with ssr)
+npm start
+
+# build and start in production environment (with ssr)
+npm run server
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

@@ -6,10 +6,10 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --config build/webpack.dev.conf.js",
-    "start": "npm run server",
-    "server": "node build/ssr/server-ssr.js",
-    "build": "node build/ssr/build-server.js",
-    "build:static": "node build/build.js"
+    "start": "node build/ssr/server-ssr.js",
+    "build:ssr": "node build/ssr/build-server.js",
+    "build:static": "node build/build.js",
+    "server": "npm run build:ssr && npm start"
   },
   "dependencies": {
     "axios": "^0.18.0",
