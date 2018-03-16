@@ -89,6 +89,7 @@
     <div>还剩 {{time}}</div>
     <input type="file" @change="input($event.target.files[0])">
     <no-result/>
+    <router-link :to="'/a'">to</router-link>
     <select-base class="select-base" name="多选框" :value="1" :options="[{name:'1',value:1}]"/>
     <my-file-input :id="1" :value="require('assets/icon-search.png')"/>
     <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>

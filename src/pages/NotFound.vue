@@ -10,7 +10,7 @@
   export default {
     name: 'NotFound',
     beforeMount() {
-      document.title = '404'
+      document.title = '404';
     },
     data() {
       return {

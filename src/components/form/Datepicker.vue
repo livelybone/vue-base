@@ -26,7 +26,7 @@
   export default {
     name: 'Datepicker',
     beforeMount() {
-      this.myValue = this.value
+      this.myValue = this.value;
     },
     props: {
       id: [String, Number],

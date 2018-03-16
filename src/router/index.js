@@ -19,7 +19,7 @@ export const routes = [
   {path: '/client', meta: {requireAuth: true}, children: []},
   {path: '/admin', meta: {requireAdminAuth: true}, children: []},
   {path: '/not-found', component: NotFound},
-  // {path: '*', component: NotFound},
+  {path: '*', component: NotFound},
 ];
 
 export function createRouter() {
