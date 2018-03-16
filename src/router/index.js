@@ -11,21 +11,24 @@ const HelloWorld = resolve => import('pages/HelloWorld' /* webpackChunkName:"Hel
 
 Vue.use(Router);
 
-const router = new Router({
-  mode: 'history',
-  routes: [
-    {path: '/', name: 'HelloWorld', component: HelloWorld},
-    {path: '/home', name: 'HelloWorld', component: HelloWorld},
-    {path: '/sign-in', name: 'SignIn', component: HelloWorld},
-    {path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld},
-    {path: '/client', meta: {requireAuth: true}, children: []},
-    {path: '/admin', meta: {requireAdminAuth: true}, children: []},
-    {path: '/not-found', component: NotFound},
-    {path: '*', component: NotFound},
-  ]
-});
+export const routes = [
+  {path: '/', component: HelloWorld},
+  {path: '/home', name: 'HelloWorld', component: HelloWorld},
+  {path: '/sign-in', name: 'SignIn', component: HelloWorld},
+  {path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld},
+  {path: '/client', meta: {requireAuth: true}, children: []},
+  {path: '/admin', meta: {requireAdminAuth: true}, children: []},
+  {path: '/not-found', component: NotFound},
+  // {path: '*', component: NotFound},
+];
 
-router.beforeEach((to, fr, next) => {
+export function createRouter() {
+  const router = new Router({mode: 'history', routes});
+  router.beforeEach(routeGuard);
+  return router;
+}
+
+function routeGuard(to, fr, next) {
   if (to.matched.some(route => route.meta.requireAuth) && !Vue.prototype.$store.state.user.id) {
     AuthToken.getUser().then(() => {
       next()
@@ -41,6 +44,4 @@ router.beforeEach((to, fr, next) => {
       Vue.prototype.snackBar.error('请先登录管理端！');
     })
   } else next();
-});
-
-export default router
+}

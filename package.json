@@ -6,9 +6,10 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "build": "node build/build.js",
-    "server": "node build/server-ssr.js"
+    "start": "npm run server",
+    "server": "node build/ssr/server-ssr.js",
+    "build": "node build/ssr/build-server.js",
+    "build:static": "node build/build.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -51,10 +52,12 @@
     "vue-pdf": "^3.2.2",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.16",
+    "vuex-router-sync": "^5.0.0",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "webpack-node-externals": "^1.6.0"
   },
   "engines": {
     "node": ">= 6.0.0",

@@ -1,26 +1,25 @@
 'use strict';
 const path = require('path');
-const utils = require('./utils');
-const config = require('../config');
-const vueLoaderConfig = require('./vue-loader.conf');
+const webpack = require('webpack');
+const utils = require('../utils');
+const config = require('../../config/index');
+const vueLoaderConfig = require('../vue-loader.conf');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const env = require('../../config/prod.env');
 
 function resolve(dir) {
-  return path.join(__dirname, '..', dir)
+  return path.join(__dirname, '../../', dir)
 }
 
-
 module.exports = {
-  context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './src/entry-client.js'
-  },
+  context: path.resolve(__dirname, '../../'),
+  devtool: false,
   output: {
     path: config.build.assetsRoot,
-    filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath,
-    chunkFilename: '[name].chunk.js',
+    filename: '[name].[chunkhash].js',
+    publicPath: config.build.assetsPublicPath,
+    chunkFilename: '[name]-[chunkhash].chunk.js',
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -46,7 +45,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -74,6 +73,33 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': env
+    }),
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: {
+          warnings: false
+        }
+      },
+      sourceMap: config.build.productionSourceMap,
+      parallel: true
+    }),
+    new ExtractTextPlugin({
+      filename: utils.assetsPath('css/[name].[contenthash].css'),
+      // Setting the following option to `false` will not extract CSS from codesplit chunks.
+      // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
+      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
+      // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
+      // allChunks: true,
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {warnings: false}
+    }),
+    new webpack.HashedModuleIdsPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
