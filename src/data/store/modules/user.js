@@ -1,3 +1,4 @@
+import Vue from "vue";
 import { USER } from "data/store/mutations-types";
 import { AuthToken } from "data/api/auth-token";
 
@@ -13,7 +14,7 @@ const getters = {
 
 const mutations = {
   [USER.GET_USER_INFO](state, info) {
-    state.info = info
+    Vue.set(state, 'info', info);
   }
 };
 
