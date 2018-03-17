@@ -107,9 +107,15 @@
   import { mapActions } from 'vuex';
   import { isMobile } from "utils/user-agent";
   import MyFileInput from "components/form/MyFileInput";
+  import { titleMixin } from "extensions/title-mixin";
 
   export default {
     name: 'HelloWorld',
+    mixins: [titleMixin],
+    title: 'Hello world',
+    asyncData ({store, route}) {
+      return store.dispatch('user/getUserInfo').catch(e => console.error('getUserInfoError', e));
+    },
     mounted() {
       setImmediate(() => this.snackBar.error('Hello World!'));
       const url = new MY_URL('http://@www.baidu.com:81/sdfs#1', true);

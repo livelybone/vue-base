@@ -7,15 +7,17 @@
 </template>
 
 <script>
+  import { titleMixin } from "extensions/title-mixin";
+
   export default {
     name: 'NotFound',
-    beforeMount() {
-      document.title = '404';
+    mixins: [titleMixin],
+    title: '404',
+    asyncData ({store, route}) {
+      return store.dispatch('user/getUserInfo').catch(e => console.log('not-found', e));
     },
     data() {
-      return {
-        msg: 'Welcome to Your Vue.js App'
-      }
+      return {}
     }
   }
 </script>

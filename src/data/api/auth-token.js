@@ -3,6 +3,7 @@ import { http } from 'extensions/http'
 import Cookie from 'utils/cookie'
 
 class AuthTokenClass {
+  token = new Map();
   key = 'AUTH_TOKEN';
   localStorageSupport = false;
 
@@ -57,6 +58,7 @@ class AuthTokenClass {
   }
 
   setToken(val) {
+    if (typeof window === 'undefined') return this.token.set(this.key, val || 'token'); // ssr dealing
     try {
       if (this.localStorageSupport) {
         localStorage.setItem(this.key, val)
@@ -69,6 +71,7 @@ class AuthTokenClass {
   }
 
   getToken() {
+    if (typeof window === 'undefined') return this.token.get(this.key) || '';
     if (this.localStorageSupport) {
       return localStorage.getItem(this.key)
     } else {

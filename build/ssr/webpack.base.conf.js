@@ -75,7 +75,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env': env,
     }),
     new UglifyJsPlugin({
       uglifyOptions: {

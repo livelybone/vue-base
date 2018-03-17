@@ -2,6 +2,7 @@
 require('../check-versions')();
 
 process.env.NODE_ENV = 'production';
+process.env.VUE_ENV = 'server';
 
 const ora = require('ora');
 const rm = require('rimraf');

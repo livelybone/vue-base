@@ -14,6 +14,7 @@ const getters = {
 
 const mutations = {
   [USER.GET_USER_INFO](state, info) {
+    console.log(2, info);
     Vue.set(state, 'info', info)
   }
 };
@@ -21,6 +22,7 @@ const mutations = {
 const actions = {
   getUserInfo({commit, state}) {
     commit(USER.GET_USER_INFO, {});
+    console.log(1);
     return AuthToken.getUser().then(res => commit(USER.GET_USER_INFO, res))
   }
 };
