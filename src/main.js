@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import store from 'data/store'
-import router from './router'
+import { createRouter } from './router'
 import register from './global-register'
 import { initialExtensions } from "@/extensions/extensions";
 
@@ -11,6 +11,7 @@ initialExtensions();
 register();
 
 /* eslint-disable no-new */
+const router = createRouter(store);
 const root = new Vue({
   router,
   store,

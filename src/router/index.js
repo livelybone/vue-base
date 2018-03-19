@@ -11,36 +11,40 @@ const HelloWorld = resolve => import('pages/HelloWorld' /* webpackChunkName:"Hel
 
 Vue.use(Router);
 
-const router = new Router({
-  mode: 'history',
-  routes: [
-    {path: '/', name: 'HelloWorld', component: HelloWorld},
-    {path: '/home', name: 'HelloWorld', component: HelloWorld},
-    {path: '/sign-in', name: 'SignIn', component: HelloWorld},
-    {path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld},
-    {path: '/client', meta: {requireAuth: true}, children: []},
-    {path: '/admin', meta: {requireAdminAuth: true}, children: []},
-    {path: '/not-found', component: NotFound},
-    {path: '*', component: NotFound},
-  ]
-});
+const routes = [
+  {path: '/', name: 'HelloWorld', component: HelloWorld},
+  {path: '/home', name: 'HelloWorld', component: HelloWorld},
+  {path: '/sign-in', name: 'SignIn', component: HelloWorld},
+  {path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld},
+  {path: '/client', meta: {requireAuth: true}, children: []},
+  {path: '/admin', meta: {requireAdminAuth: true}, children: []},
+  {path: '/not-found', component: NotFound},
+  {path: '*', component: NotFound},
+];
 
-router.beforeEach((to, fr, next) => {
-  if (to.matched.some(route => route.meta.requireAuth) && !Vue.prototype.$store.state.user.id) {
-    AuthToken.getUser().then(() => {
-      next()
-    }).catch(e => {
-      next({name: 'SignIn', redirect: to.fullPath});
-      Vue.prototype.snackBar.error('请先登录！');
-    })
-  } else if (to.matched.some(route => route.meta.requireAdminAuth) && !Vue.prototype.$store.state.admin.id) {
-    AuthToken.getAdminUser().then(() => {
-      next()
-    }).catch(e => {
-      next({name: 'AdminSignIn', redirect: to.fullPath});
-      Vue.prototype.snackBar.error('请先登录管理端！');
-    })
-  } else next();
-});
+export function createRouter(store) {
+  const router = new Router({
+    mode: 'history',
+    routes,
+  });
 
-export default router
+  router.beforeEach((to, fr, next) => {
+    if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
+      AuthToken.getUser().then(() => {
+        next()
+      }).catch(e => {
+        next({name: 'SignIn', redirect: to.fullPath});
+        Vue.prototype.snackBar.error('请先登录！');
+      })
+    } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
+      AuthToken.getAdminUser().then(() => {
+        next()
+      }).catch(e => {
+        next({name: 'AdminSignIn', redirect: to.fullPath});
+        Vue.prototype.snackBar.error('请先登录管理端！');
+      })
+    } else next();
+  });
+
+  return router
+}
