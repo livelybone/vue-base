@@ -113,16 +113,18 @@
     name: 'HelloWorld',
     mixins: [titleMixin],
     title: 'Hello world',
-    asyncData ({store, route}) {
-      return store.dispatch('user/getUserInfo').catch(e => console.error('getUserInfoError', e));
+    asyncData({store, route}) {
+      store.commit('setToken', 'sdfsdf');
+      return store.dispatch('user/getUserInfo').catch(e => console.error('getUserInfoError', e.message));
     },
     mounted() {
       setImmediate(() => this.snackBar.error('Hello World!'));
       const url = new MY_URL('http://@www.baidu.com:81/sdfs#1', true);
+      console.log(this.$store.state);
       url.setQuery('password', 1);
       console.log('MY_URL 对象： ', url, new URL('http://127.0.0.1:81/www.baidu.com:81?password=1'));
       console.log('getUrl 工具： ', getUrl('/user?user?', {p: 1, a: 11}));
-      this.getUserInfo({}).then(res => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
+      if (this.$store.state.user.info.id) this.getUserInfo({}).then(res => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
       console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)));
     },
     data() {

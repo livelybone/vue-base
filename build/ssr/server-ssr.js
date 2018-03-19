@@ -5,10 +5,15 @@ const path = require('path');
 const resolve = file => path.resolve(__dirname, file);
 const serverBundle = require('../../dist/vue-ssr-server-bundle.json');
 const clientManifest = require('../../dist/vue-ssr-client-manifest.json');
+const LRU = require('lru-cache');
 const renderer = require('vue-server-renderer').createBundleRenderer(serverBundle, {
   runInNewContext: 'once',
   template: require('fs').readFileSync('./index.html', 'utf-8'),
   clientManifest,
+  cache: LRU({
+    max: 1000,
+    maxAge: 1000, // 1s
+  })
 });
 const port = process.env.PORT || 3000;
 

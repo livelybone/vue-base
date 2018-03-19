@@ -3,7 +3,7 @@ import { USER } from "data/store/mutations-types";
 import { AuthToken } from "data/api/auth-token";
 
 const state = {
-  info: {}
+  info: {},
 };
 
 const getters = {
@@ -14,7 +14,6 @@ const getters = {
 
 const mutations = {
   [USER.GET_USER_INFO](state, info) {
-    console.log(2, info);
     Vue.set(state, 'info', info)
   }
 };
@@ -22,8 +21,11 @@ const mutations = {
 const actions = {
   getUserInfo({commit, state}) {
     commit(USER.GET_USER_INFO, {});
-    console.log(1);
-    return AuthToken.getUser().then(res => commit(USER.GET_USER_INFO, res))
+    return AuthToken.getUser().then(res => commit(USER.GET_USER_INFO, {role: 'client', ...res}))
+  },
+  getAdminUserInfo({commit, state}) {
+    commit(USER.GET_USER_INFO, {});
+    return AuthToken.getAdminUser().then(res => commit(USER.GET_USER_INFO, {role: 'admin', ...res}))
   }
 };
 

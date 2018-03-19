@@ -17,6 +17,7 @@
     props: {
       id: [String, Number],
     },
+    serverCacheKey: ({id}) => id,
     data() {
       const needCapture = isWeiXin() && isAndroid();
       return {

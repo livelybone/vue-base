@@ -58,7 +58,7 @@ class AuthTokenClass {
   }
 
   setToken(val) {
-    if (typeof window === 'undefined') return this.token.set(this.key, val || 'token'); // ssr dealing
+    if (typeof window === 'undefined') return this.token.set(this.key, val); // ssr dealing
     try {
       if (this.localStorageSupport) {
         localStorage.setItem(this.key, val)

@@ -6,9 +6,15 @@ Vue.use(Vuex);
 
 export function createStore() {
   return new Vuex.Store({
-    state: {},
+    state: {
+      token: ''
+    },
     getters: {},
-    mutations: {},
+    mutations: {
+      setToken(state, token) {
+        Vue.set(state, 'token', token);
+      }
+    },
     actions: {},
     modules: {user}
   });

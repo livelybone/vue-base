@@ -10,6 +10,7 @@
 
   export default {
     name: 'Overlay',
+    serverCacheKey: () => 'overlay',
     data() {
       return {}
     },

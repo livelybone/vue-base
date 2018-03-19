@@ -10,6 +10,7 @@
     props: {
       size: [Number, String],
     },
+    serverCacheKey: ({size}) => size,
     data() {
       return {}
     },

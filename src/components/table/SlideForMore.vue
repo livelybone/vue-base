@@ -27,6 +27,7 @@
       searching: Boolean,
       contentMinHeight: String,
     },
+    serverCacheKey: ({slideHeight, searching, contentMinHeight}) => `${slideHeight}::${searching}::${contentMinHeight}`,
     data() {
       return {}
     },

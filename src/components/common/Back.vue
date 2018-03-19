@@ -7,6 +7,7 @@
 <script>
   export default {
     name: 'Back',
+    serverCacheKey: () => 'back',
     data() {
       return {}
     },

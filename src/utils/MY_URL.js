@@ -22,7 +22,7 @@ export default class MY_URL {
   _username = '';
   encode = false;
 
-  defaultURL = typeof window !== 'undefined' && window.location.href || 'http://0.0.0.0';
+  defaultURL = typeof window !== 'undefined' && window.location.href || 'http://localhost';
 
   constructor(url, queryString, encode) {
     this.href = url;

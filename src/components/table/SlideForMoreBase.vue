@@ -28,6 +28,7 @@
       },
       contentMinHeight: String
     },
+
     data() {
       return {
         isBottom: false,

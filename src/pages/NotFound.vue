@@ -13,9 +13,6 @@
     name: 'NotFound',
     mixins: [titleMixin],
     title: '404',
-    asyncData ({store, route}) {
-      return store.dispatch('user/getUserInfo').catch(e => console.log('not-found', e));
-    },
     data() {
       return {}
     }

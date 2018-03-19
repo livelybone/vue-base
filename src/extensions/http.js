@@ -71,7 +71,7 @@ class Http {
       let data = res.data;
       if (data) {
         if (this.errorValidate(data)) {
-          throw new Error(data.msg)
+          throw new Error(data.msg || data)
         } else {
           return data.data
         }

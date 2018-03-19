@@ -6,6 +6,7 @@
   export default {
     name: 'Warning',
     props: ['text'],
+    serverCacheKey: ({text}) => text,
     data() {
       return {}
     },
