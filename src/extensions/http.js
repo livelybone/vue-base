@@ -8,7 +8,7 @@ import config from "config/config";
 (function initialAxios() {
   axios.defaults.baseURL = new My_URL(config.backendUrl).toString();
   axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8';
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true; // 允许 AJAX 跨域请求带 Cookie 设置
   axios.defaults.validateStatus = function (status) {
     return (status >= 200 && status < 300) || (status >= 400) // 处理服务器返回的错误信息
   }
