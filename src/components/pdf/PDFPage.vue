@@ -17,7 +17,7 @@
 
 <script>
   import pdf from 'vue-pdf'
-  import { blobToDataURL } from 'utils/blob-base64'
+  import { blobToURL } from 'utils/blob-url'
 
   export default {
     name: 'PDFPage',
@@ -50,9 +50,7 @@
         let src = val;
         if (src instanceof FileList) {
           if (src[0]) {
-            src = blobToDataURL(src[0], file => {
-              this.pdfSrc = file
-            })
+            this.setImg(blobToURL(src[0]));
           } else {
             this.pdfSrc = ''
           }
@@ -69,6 +67,9 @@
         let page = this.page + 1;
         if (page > this.totalPage) page = this.totalPage;
         this.$emit('toPage', page)
+      },
+      setImg(blobUrl) {
+        this.pdfSrc = blobUrl.url;
       }
     },
     components: {pdf}

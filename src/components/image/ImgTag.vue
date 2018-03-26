@@ -1,25 +1,27 @@
 <template>
   <img :src="img"
        :alt="alt"
+       ref="image"
        @load="$emit('load',$event.target)"
-       @click.stop.prevent="$emit('click',$event)"
+       @click="stopDefault($event);$emit('click',$event)"
        @dragstart="$emit('dragStart',$event)"
        @dragend="$emit('dragEnd',$event)">
 </template>
 
 <script>
-  import { blobToDataURL } from 'utils/blob-base64'
+  import { blobToURL } from 'utils/blob-url'
+  import { stopDefault } from "utils/browser-default";
 
   export default {
-    name: 'img-tag',
-    beforeMount() {
+    name: 'ImgTag',
+    mounted() {
       this.convert(this.src)
     },
     props: {
       defaultImg: String,
       src: {
         validator(val) {
-          return !val || typeof val === 'string' || val instanceof FileList
+          return !val || typeof val === 'string' || val instanceof FileList || val instanceof File || (val.url && val.needLogin)
         }
       },
       alt: String
@@ -40,10 +42,20 @@
         if (!val || typeof val === 'string') {
           this.img = val
         } else if (val instanceof FileList && val[0]) {
-          blobToDataURL(val[0], file => {
-            this.img = file
-          })
+          this.setImg(blobToURL(val[0]));
+        } else if (val instanceof File) {
+          this.setImg(blobToURL(val));
+        } else if (val.url && val.needLogin) {
+          // 适用于获取的图片需要验证登录的情况
+          this.$cache.getFile(val.url).then(blob => {
+            this.setImg(blobToURL(blob));
+          });
         }
+      },
+      stopDefault,
+      setImg(blobUrl) {
+        this.img = blobUrl.url;
+        this.$refs.image.onload = blobUrl.revokeFn;
       }
     },
     components: {}
