@@ -8,7 +8,12 @@ export function getUrl(url, params) {
 
 export function queryString(params, encode) {
   let str = '';
-  Object.keys(params).map(key => str += '&' + key + '=' + (encode ? encodeURIComponent(params[key]) : params[key]));
+  Object.keys(params).map(key => {
+    if (params[key] instanceof Array) {
+      params[key].map(val => str += '&' + key + '=' + (encode ? encodeURIComponent(val) : val))
+    } else
+      str += '&' + key + '=' + (encode ? encodeURIComponent(params[key]) : params[key])
+  });
   return str.slice(1)
 }
 
