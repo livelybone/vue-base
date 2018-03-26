@@ -23,3 +23,10 @@ export function blobToDataURL(blob, callback) {
   };
   a.readAsDataURL(blob)
 }
+
+/**
+ * blob to url
+ **/
+export function blobToURL(blob) {
+  return {url: window.URL.createObjectURL(blob), revokeFn: () => window.URL.revokeObjectURL(blob)}
+}
