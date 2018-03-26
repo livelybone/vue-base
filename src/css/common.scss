@@ -52,6 +52,10 @@ button, .btn {
   }
 }
 
+button {
+  display: inline-block !important;
+}
+
 @each $name, $color in (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
   .btn-#{$name} {
     @include btn($color);
