@@ -1,4 +1,3 @@
-// auth_token
 import Cookie from 'utils/cookie'
 
 export default class LocalStorage {
