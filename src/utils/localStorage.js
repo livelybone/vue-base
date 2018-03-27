@@ -3,12 +3,15 @@ import Cookie from 'utils/cookie'
 
 export default class LocalStorage {
   localStorageSupport = false;
+  listener = null;
 
   constructor(handleStorage) {
     if (typeof window !== 'undefined') {
       this.localStorageSupport = !!window.localStorage;
-      if (handleStorage)
-        window.addEventListener('storage', handleStorage)
+      if (handleStorage) {
+        this.listener = e => handleStorage(e);
+        window.addEventListener('storage', this.listener)
+      }
     }
   }
 
@@ -32,7 +35,7 @@ export default class LocalStorage {
     }
   }
 
-  removeListenner() {
-    window.removeEventListener('storage', handleStorage);
+  removeListener() {
+    if (this.listener) window.removeEventListener('storage', this.listener);
   }
 }
