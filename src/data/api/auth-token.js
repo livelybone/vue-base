@@ -1,19 +1,13 @@
 // auth_token
 import { http } from 'extensions/http'
-import Cookie from 'utils/cookie'
+import LocalStorage from "utils/localStorage";
 
 class AuthTokenClass {
   token = new Map();
   key = 'AUTH_TOKEN';
-  localStorageSupport = false;
+  localStorage = new LocalStorage();
 
   constructor() {
-    if (typeof window !== 'undefined') {
-      this.localStorageSupport = !!window.localStorage;
-      window.addEventListener('storage', e => {
-        console.log(e)
-      })
-    }
   }
 
   getUser() {
@@ -59,24 +53,12 @@ class AuthTokenClass {
 
   setToken(val) {
     if (typeof window === 'undefined') return this.token.set(this.key, val); // ssr dealing
-    try {
-      if (this.localStorageSupport) {
-        localStorage.setItem(this.key, val)
-      }
-    } catch (e) {
-      console.error(e);
-      this.localStorageSupport = false;
-      Cookie.set(this.key, val)
-    }
+    this.localStorage.set(this.key, val);
   }
 
   getToken() {
     if (typeof window === 'undefined') return this.token.get(this.key) || '';
-    if (this.localStorageSupport) {
-      return localStorage.getItem(this.key)
-    } else {
-      return Cookie.get(this.key)
-    }
+    return this.localStorage.get(this.key);
   }
 }
 
