@@ -15,6 +15,7 @@ export default class LocalStorage {
   }
 
   set(key, val) {
+    if (!val) this.del(key);
     try {
       if (this.localStorageSupport) {
         localStorage.setItem(key, val)
@@ -24,8 +25,7 @@ export default class LocalStorage {
     } catch (e) {
       console.error(e);
       this.localStorageSupport = false;
-      if (val) Cookie.set(key, val);
-      else Cookie.del(key);
+      Cookie.set(key, val);
     }
   }
 
