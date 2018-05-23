@@ -32,7 +32,11 @@
 </script>
 
 <style lang="scss" scoped>
+<<<<<<< HEAD
   @import '../../css/common-variable';
+=======
+  @import '../../css/common-variable.scss';
+>>>>>>> master
 
   .check-box {
     @include flex(center);
