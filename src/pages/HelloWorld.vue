@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <div @click="switchLang()">{{$t("chinese-traditional")}}</div>
     <img src="../assets/logo.png">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
@@ -155,6 +156,9 @@
           this.elements.push(1);
           this.isSearching = false;
         }, 1000);
+      },
+      switchLang() {
+        this.$i18n.locale = this.$i18n.locale === 'CN' ? 'CNT' : 'CN'
       }
     },
     components: {MyFileInput}

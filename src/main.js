@@ -8,7 +8,7 @@ import { initialExtensions } from "@/extensions/extensions";
 
 Vue.config.productionTip = false;
 
-initialExtensions();
+const {i18n} = initialExtensions();
 register();
 
 /* eslint-disable no-new */
@@ -22,6 +22,7 @@ export function createApp() {
   const app = new Vue({
     router,
     store,
+    i18n,
     render: h => h(App)
   });
   return {app, router, store}
