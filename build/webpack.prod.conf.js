@@ -10,8 +10,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const PrerenderSpaPlugin = require('prerender-spa-plugin');
-const prerenderConfig = require('./prerender.conf');
 
 const env = require('../config/prod.env');
 
@@ -119,7 +117,6 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
-    new PrerenderSpaPlugin(prerenderConfig),
     new webpack.ContextReplacementPlugin( // 如果使用moment.js，需要用到这个减小大小，不推荐使用moment.js
       /moment[\/\\]locale$/,
       /zh-cn-sdfsf/
