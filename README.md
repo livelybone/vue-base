@@ -20,6 +20,8 @@
 
 > js: ajax 表单渲染数据格式推荐 `const items = [{name:'姓名', alias:'realName', value:'XXX'}]`，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（`DataDeal.dateDeal(items)`）（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
 
+> 国际化: 使用i18n
+
 > SEO 优化使用 SSR，生产环境使用 Node，需要登录验证的页面请避免做 ssr (这些页面本身就不允许被抓取)，只做需要被搜索引擎抓取的页面，如果这种页面数量很少，可以转用 prerender 预渲染
 
 > ssr组件缓存: 使用 lru-cache，在需要使用缓存的的组件中使用 serverCacheKey 和 name(必须是唯一的) 定义组件的 id
