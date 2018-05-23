@@ -12,7 +12,7 @@ const HelloWorld = resolve => import('pages/HelloWorld' /* webpackChunkName:"Hel
 Vue.use(Router);
 
 const routes = [
-  {path: '/', name: 'HelloWorld', component: HelloWorld},
+  {path: '/', name: '', component: HelloWorld},
   {path: '/home', name: 'HelloWorld', component: HelloWorld},
   {path: '/sign-in', name: 'SignIn', component: HelloWorld},
   {path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld},
