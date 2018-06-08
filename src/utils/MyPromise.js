@@ -1,4 +1,5 @@
 function MyPromise(fn) {
+  var errObj = null;
   var timer = null;
 
   return new MyPromise(fn);
@@ -26,6 +27,7 @@ function MyPromise(fn) {
       if (!that.status) {
         that.status = _status.reject
         _result = err
+        errObj = err
         if (_failedFn) _failedFn(err)
       }
     }
@@ -40,7 +42,6 @@ function MyPromise(fn) {
           flat(fnObj[0], _result, res, rej)
         } else if (that.status === _status.reject) {
           flat(fnObj[1], _result, res, rej)
-          uncaught(fnObj[1])
         } else {
           _successFn = function (result) {
             flat(fnObj[0], result, res, rej)
@@ -48,7 +49,6 @@ function MyPromise(fn) {
           _failedFn = function (result) {
             flat(fnObj[1], result, res, rej)
           }
-          uncaught(fnObj[1])
         }
       })
     }
@@ -57,11 +57,15 @@ function MyPromise(fn) {
       return that.then('', failedFn);
     }
 
-    if (typeof fn !== 'function') throw new Error('MyPromise 的参数 fn 不是一个函数！')
-    try {
-      fn(that.resolve, that.reject)
-    } catch (e) {
-      that.reject(e);
+    execute();
+
+    function execute() {
+      if (typeof fn !== 'function') throw new Error('Parameter fn of MyPromise is not a function！')
+      try {
+        fn(that.resolve, that.reject)
+      } catch (e) {
+        that.reject(e);
+      }
     }
 
 
@@ -89,6 +93,7 @@ function MyPromise(fn) {
           deal(fnObj, result, res, rej);
         }
       } else {
+        uncaught(fnObj);
         deal(fnObj, result, res, rej);
       }
     }
@@ -96,7 +101,7 @@ function MyPromise(fn) {
     function uncaught(fnObj) {
       if (typeof fnObj.fn !== 'function') {
         timer = setTimeout(function () {
-          throw new Error('Uncaught error, since there have no function to catch error...')
+          throw new Error('Uncaught reject value(' + errObj + '), since there have no function to catch error...')
         })
       } else {
         if (timer) clearTimeout(timer)
