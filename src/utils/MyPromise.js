@@ -13,7 +13,7 @@ function MyPromise(fn) {
 
     var _result = ''
 
-    that.status = ''
+    that.status = 'pending'
 
     that.resolve = function (val) {
       if (!that.status) {
