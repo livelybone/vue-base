@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <snack-bar ref="snackBar"/>
+    <snack-bar ref="snackBar" baseSize="1rem"/>
     <image-full-screen ref="imgFull"/>
     <router-view/>
   </div>

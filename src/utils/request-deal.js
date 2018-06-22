@@ -1,6 +1,6 @@
 export function queryString(params, encode) {
   let str = '';
-  Object.keys().forEach((i) => {
+  Object.keys(params).forEach((i) => {
     str += `&${i}=${encode ? encodeURIComponent(params[i]) : params[i]}`;
   });
   return str.slice(1);
@@ -15,7 +15,7 @@ export function getUrl(url, params) {
 
 export function convertToFormData(obj) {
   const data = new FormData();
-  Object.keys().forEach((i) => {
+  Object.keys(obj).forEach((i) => {
     if (obj[i] instanceof FileList) {
       [].map.call(obj[i], file => data.append(i, file));
     } else if (obj[i] instanceof Array && (obj[i][0] instanceof File || (typeof obj[i][0] === 'string' && obj[i][0].indexOf('data') === 0) || obj[i][0] instanceof FileList)) { // 多张图片

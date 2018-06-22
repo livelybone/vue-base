@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <div @click="switchLang()">{{$t('chinese-traditional')}}</div>
+    <!--<div @click="switchLang()">{{$t('chinese-traditional')}}</div>
     <img src="../assets/logo.png">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
@@ -89,13 +89,15 @@
     </div>
     <div>还剩 {{time}}</div>
     <input type="file" @change="input($event.target.files[0])">
-    <no-result/>
+    <no-result/>-->
     <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
     <slide-for-more v-else=""
                     class="slide-for-more"
-                    :searching="isSearching"
+                    :isSearching="isSearching"
                     contentMinHeight="100vh"
-                    @slideUp="search">
+                    tipHeight=".4rem"
+                    @slideUp="search"
+                    @slideDown="search">
       <div v-for="(val,i) in elements" :key="i" class="element">Element{{val}}</div>
     </slide-for-more>
   </div>
