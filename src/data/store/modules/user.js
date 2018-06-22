@@ -1,32 +1,34 @@
-import Vue from "vue";
-import { USER } from "data/store/mutations-types";
-import { AuthToken } from "data/api/auth-token";
+import { AuthToken } from 'data/api/auth-token';
+import { USER } from 'data/store/mutations-types';
+import Vue from 'vue';
 
 const state = {
   info: {},
 };
 
 const getters = {
-  id(state) {
-    return state.info.id
-  }
+  id(_state) {
+    return _state.info.id;
+  },
 };
 
 const mutations = {
-  [USER.GET_USER_INFO](state, info) {
-    Vue.set(state, 'info', info)
-  }
+  [USER.GET_USER_INFO](_state, info) {
+    Vue.set(_state, 'info', info);
+  },
 };
 
 const actions = {
-  getUserInfo({commit, state}) {
+  getUserInfo({ commit, _state }) {
     commit(USER.GET_USER_INFO, {});
-    return AuthToken.getUser().then(res => commit(USER.GET_USER_INFO, {role: 'client', ...res}))
+    return AuthToken.getUser().then(res => commit(USER.GET_USER_INFO,
+      { ..._state.info, role: 'client', ...res }));
   },
-  getAdminUserInfo({commit, state}) {
+  getAdminUserInfo({ commit, _state }) {
     commit(USER.GET_USER_INFO, {});
-    return AuthToken.getAdminUser().then(res => commit(USER.GET_USER_INFO, {role: 'admin', ...res}))
-  }
+    return AuthToken.getAdminUser().then(res => commit(USER.GET_USER_INFO,
+      { ..._state.info, role: 'admin', ...res }));
+  },
 };
 
 export const user = {
@@ -36,4 +38,3 @@ export const user = {
   mutations,
   actions,
 };
-

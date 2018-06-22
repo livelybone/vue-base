@@ -1,32 +1,36 @@
 /**
  * dataURL to blob
- **/
+ * */
 export function dataURLtoBlob(dataUrl) {
-  let arr = dataUrl.split(',');
-  let mime = arr[0].match(/:(.*?);/)[1];
-  let blobStr = atob(arr[1]);
+  const arr = dataUrl.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const blobStr = atob(arr[1]);
   let n = blobStr.length;
-  let uArr = new Uint8Array(n);
-  while (n--) {
-    uArr[n] = blobStr.charCodeAt(n)
+  const uArr = new Uint8Array(n);
+  while (n) {
+    uArr[n] = blobStr.charCodeAt(n);
+    n -= 1;
   }
-  return new Blob([uArr], {type: mime})
+  return new Blob([uArr], { type: mime });
 }
 
 /**
  * blob to dataURL
- **/
+ * */
 export function blobToDataURL(blob, callback) {
-  let a = new FileReader();
-  a.onload = e => {
-    callback(e.target.result)
+  const a = new FileReader();
+  a.onload = (e) => {
+    callback(e.target.result);
   };
-  a.readAsDataURL(blob)
+  a.readAsDataURL(blob);
 }
 
 /**
  * blob to url
- **/
+ * */
 export function blobToURL(blob) {
-  return {url: window.URL.createObjectURL(blob), revokeFn: () => window.URL.revokeObjectURL(blob)}
+  return {
+    url: window.URL.createObjectURL(blob),
+    revokeFn: () => window.URL.revokeObjectURL(blob),
+  };
 }

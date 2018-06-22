@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <div @click="switchLang()">{{$t("chinese-traditional")}}</div>
+    <!--<div @click="switchLang()">{{$t('chinese-traditional')}}</div>
     <img src="../assets/logo.png">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
@@ -92,126 +92,135 @@
     <no-result/>
     <router-link :to="'/a'">to</router-link>
     <select-base class="select-base" name="多选框" :value="1" :options="[{name:'1',value:1}]"/>
-    <my-file-input :id="1" :value="require('assets/icon-search.png')"/>
+    <my-file-input :id="1" :value="require('assets/icon-search.png')"/>-->
     <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
-    <slide-for-more class="slide-for-more" v-else="" :searching="isSearching" contentMinHeight="100vh"
-                    @slideUp="search">
-      <div v-for="val in elements" class="element">Element</div>
+    <slide-for-more v-else=""
+                    class="slide-for-more"
+                    :isSearching="isSearching"
+                    contentMinHeight="100vh"
+                    tipHeight=".4rem"
+                    @slideUp="search"
+                    @slideDown="search">
+      <div v-for="(val,i) in elements" :key="i" class="element">Element{{val}}</div>
     </slide-for-more>
   </div>
 </template>
 
 <script>
-  import { timeConversion } from "utils/date-deal";
-  import MY_URL from "utils/MY_URL";
-  import { getUrl } from "utils/request-deal";
-  import { mapActions } from 'vuex';
-  import { isMobile } from "utils/user-agent";
-  import MyFileInput from "components/form/MyFileInput";
-  import { titleMixin } from "extensions/title-mixin";
+import { titleMixin } from 'extensions/title-mixin';
+import { timeConversion } from 'utils/date-deal';
+import { getUrl } from 'utils/request-deal';
+import { isMobile } from 'utils/user-agent';
+import { mapActions } from 'vuex';
 
-  export default {
-    name: 'HelloWorld',
-    mixins: [titleMixin],
-    title: 'Hello world',
-    asyncData({store, route}) {
-      store.commit('setToken', 'sdfsdf');
-      return store.dispatch('user/getUserInfo').catch(e => console.error('getUserInfoError', e.message));
-    },
-    mounted() {
-      setImmediate(() => this.snackBar.error('Hello World!'));
-      const url = new MY_URL('http://@www.baidu.com:81/sdfs#1', true);
-      console.log(this.$store.state);
-      url.setQuery('password', 1);
-      console.log('MY_URL 对象： ', url, new URL('http://127.0.0.1:81/www.baidu.com:81?password=1'));
-      console.log('getUrl 工具： ', getUrl('/user?user?', {p: 1, a: 11}));
-      if (this.$store.state.user.info.id) this.getUserInfo({}).then(res => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
-      console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)));
-    },
-    data() {
-      return {
-        msg: 'Welcome to Your Vue.js App',
-        pageConfig: {total: 1, pages: 10, page: 5, pageSize: 10},
-        isSearching: false,
-        convertTime: '2020-04-03',
-        elements: [1, 1, 1,],
-      }
-    },
-    computed: {
-      time() {
-        const obj = timeConversion(new Date(this.convertTime).getTime());
-        return obj.day + '天' + obj.hour + '时' + obj.minute + '分' + obj.second + '秒'
+export default {
+  name: 'HelloWorld',
+  title: 'My Project',
+  mixins: [titleMixin],
+  asyncData({ store }) {
+    store.commit('setToken', 'sdfsdf');
+    return Promise.resolve({});
+  },
+  mounted() {
+    setImmediate(() => this.snackBar.error('Hello World!'));
+    console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }));
+    if (this.$store.state.user.info.id) this.getUserInfo({}).then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
+    console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)));
+  },
+  data() {
+    return {
+      msg: 'Welcome to Your Vue.js App',
+      pageConfig: {
+        total: 1,
+        pages: 10,
+        page: 5,
+        pageSize: 10,
       },
+      isSearching: false,
+      convertTime: '2020-04-03',
+      elements: [1, 1, 1],
+    };
+  },
+  computed: {
+    time() {
+      const {
+        day,
+        hour,
+        minute,
+        second,
+      } = timeConversion(new Date(this.convertTime).getTime());
+      return `${day}天${hour}时${minute}分${second}秒`;
     },
-    methods: {
-      ...mapActions('user', ['getUserInfo']),
-      input(file) {
-        console.log('input File 值： ', file, typeof file);
-      },
-      isMobile,
-      search() {
-        this.log('slide up');
-        this.isSearching = true;
-        setTimeout(() => {
-          this.elements.push(1);
-          this.isSearching = false;
-        }, 1000);
-      },
-      switchLang() {
-        this.$i18n.locale = this.$i18n.locale === 'CN' ? 'CNT' : 'CN'
-      }
+  },
+  methods: {
+    ...mapActions('user', ['getUserInfo']),
+    input(file) {
+      console.log('input File 值： ', file, typeof file);
     },
-    components: {MyFileInput}
-  }
+    isMobile,
+    search() {
+      this.log('slide up');
+      this.isSearching = true;
+      setTimeout(() => {
+        this.elements.push(1);
+        this.isSearching = false;
+      }, 1000);
+    },
+    switchLang() {
+      this.$i18n.locale = this.$i18n.locale === 'CN' ? 'CNT' : 'CN';
+    },
+  },
+  components: {},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../css/common-variable.scss';
+@import '../css/common-variable.scss';
 
-  img {
-    margin: .6rem 0 .4rem;
+img {
+  margin: .6rem 0 .4rem;
+}
+
+h1, h2 {
+  margin: .1rem 0;
+  @extend .title;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 .1rem;
+}
+
+a {
+  @extend .content-4;
+  color: #42b983;
+}
+
+.item {
+  margin: 20px 0;
+}
+
+.element {
+  @include flex(center);
+  width: 100%;
+  height: 1rem;
+  background: #fff;
+
+  &:nth-child(2n) {
+    color: #fff;
+    background: $green;
   }
+}
 
-  h1, h2 {
-    margin: .1rem 0;
-    @extend .title;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 .1rem;
-  }
-
-  a {
-    @extend .content-4;
-    color: #42b983;
-  }
-
-  .item {
-    margin: 20px 0;
-  }
-
-  .element {
-    @include flex(center);
-    width: 100%;
-    height: 1rem;
-    background: #fff;
-
-    &:nth-child(2n) {
-      color: #fff;
-      background: $green;
-    }
-  }
-
-  .select-base {
-    background: #fff;
-    margin: .1rem 0;
-    padding: .1rem 0;
-  }
+.select-base {
+  background: #fff;
+  margin: .1rem 0;
+  padding: .1rem 0;
+}
 </style>

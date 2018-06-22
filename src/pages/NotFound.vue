@@ -7,40 +7,40 @@
 </template>
 
 <script>
-  import { titleMixin } from "extensions/title-mixin";
+import { titleMixin } from 'extensions/title-mixin';
 
-  export default {
-    name: 'NotFound',
-    mixins: [titleMixin],
-    title: '404',
-    data() {
-      return {}
-    }
-  }
+export default {
+  name: 'NotFound',
+  mixins: [titleMixin],
+  title: '404',
+  data() {
+    return {};
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  * {
-    color: #666;
-  }
+* {
+  color: #666;
+}
 
-  h1, p {
-    text-align: center;
-  }
+h1, p {
+  text-align: center;
+}
 
-  h1 {
-    margin: 1.25rem 0 .1rem;
-    font-size: .48rem;
-    font-weight: 400;
-    letter-spacing: .001rem;
-  }
+h1 {
+  margin: 1.25rem 0 .1rem;
+  font-size: .48rem;
+  font-weight: 400;
+  letter-spacing: .001rem;
+}
 
-  .back {
-    width: 2rem;
-    height: .3rem;
+.back {
+  width: 2rem;
+  height: .3rem;
 
-    margin: .5rem auto 0;
-    text-align: center;
-  }
+  margin: .5rem auto 0;
+  text-align: center;
+}
 </style>

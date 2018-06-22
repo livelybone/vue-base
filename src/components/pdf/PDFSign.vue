@@ -21,169 +21,172 @@
 </template>
 
 <script>
-  import pdfPage from 'components/pdf/PDFPage.vue'
-  import imgTag from 'components/image/ImgTag.vue'
+import pdfPage from 'components/pdf/PDFPage.vue';
+import imgTag from 'components/image/ImgTag.vue';
 
-  export default {
-    name: 'PDFSign',
-    mounted() {
+export default {
+  name: 'PDFSign',
+  mounted() {
+  },
+  props: {
+    src: {
+      validator(val) {
+        return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList;
+      },
     },
-    props: {
-      src: {
-        validator(val) {
-          return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
-        }
+    signature: {
+      validator(val) {
+        return !val || typeof val === 'string' || val instanceof FileList;
       },
-      signature: {
-        validator(val) {
-          return !val || typeof val === 'string' || val instanceof FileList
-        }
+    },
+    position: {
+      default() {
+        return { page: 1, left: undefined, bottom: undefined };
       },
-      position: {
-        default() {
-          return {page: 1, left: undefined, bottom: undefined}
-        },
-        type: Object
+      type: Object,
+    },
+  },
+  data() {
+    return {
+      numPages: null,
+      page: 1,
+      isNew: false,
+      wrapSize: { width: 0, height: 0 },
+      imgPosition: '',
+      pointerPosition: { left: 0, bottom: 0 },
+      imgSize: { width: 0, height: 0 },
+    };
+  },
+  watch: {
+    position(val) {
+      this.imgPosition = {
+        left: this.wrapSize.width * val.left,
+        bottom: this.wrapSize.height * val.bottom,
+      };
+    },
+  },
+  methods: {
+    dragStart(ev) {
+      this.pointerPosition = { left: ev.layerX, bottom: this.imgSize.height - ev.layerY };
+    },
+    dragOver(ev) {
+      ev.preventDefault();
+    },
+    drop(ev) {
+      this.imgPosition = this.getPosition(ev);
+      this.$emit('sign', {
+        page: this.page,
+        left: this.imgPosition.left / this.wrapSize.width,
+        bottom: this.imgPosition.bottom / this.wrapSize.height,
+      });
+    },
+    getWrapSize() {
+      if (this.wrapSize.width && this.wrapSize.height) return;
+      this.wrapSize = { width: this.$refs.wrap.offsetWidth, height: this.$refs.wrap.offsetHeight };
+      if (typeof this.position.left === 'number' && typeof this.position.bottom === 'number') {
+        this.imgPosition = {
+          left: this.wrapSize.width * this.position.left,
+          bottom: this.wrapSize.height * this.position.bottom,
+        };
       }
     },
-    data() {
+    getImgSize(ev) {
+      this.imgSize = { width: ev.offsetWidth, height: ev.offsetHeight };
+    },
+    getPosition(ev) {
       return {
-        numPages: null,
-        page: 1,
-        isNew: false,
-        wrapSize: {width: 0, height: 0},
-        imgPosition: '',
-        pointerPosition: {left: 0, bottom: 0},
-        imgSize: {width: 0, height: 0}
-      }
+        left: ev.layerX - this.pointerPosition.left,
+        bottom: this.wrapSize.height - ev.layerY - this.pointerPosition.bottom,
+      };
     },
-    watch: {
-      position(val) {
-        this.imgPosition = {left: this.wrapSize.width * val.left, bottom: this.wrapSize.height * val.bottom}
-      }
+    toPage(val) {
+      this.page = val;
     },
-    methods: {
-      dragStart(ev) {
-        this.pointerPosition = {left: ev.layerX, bottom: this.imgSize.height - ev.layerY}
-      },
-      dragOver(ev) {
-        ev.preventDefault()
-      },
-      drop(ev) {
-        this.imgPosition = this.getPosition(ev);
-        this.$emit('sign', {
-          page: this.page,
-          left: this.imgPosition.left / this.wrapSize.width,
-          bottom: this.imgPosition.bottom / this.wrapSize.height
-        })
-      },
-      getWrapSize() {
-        if (this.wrapSize.width && this.wrapSize.height) return;
-        this.wrapSize = {width: this.$refs.wrap.offsetWidth, height: this.$refs.wrap.offsetHeight};
-        if (typeof this.position.left === 'number' && typeof this.position.bottom === 'number') {
-          this.imgPosition = {
-            left: this.wrapSize.width * this.position.left,
-            bottom: this.wrapSize.height * this.position.bottom
-          }
-        }
-      },
-      getImgSize(ev) {
-        this.imgSize = {width: ev.offsetWidth, height: ev.offsetHeight}
-      },
-      getPosition(ev) {
-        return {
-          left: ev.layerX - this.pointerPosition.left,
-          bottom: this.wrapSize.height - ev.layerY - this.pointerPosition.bottom
-        }
-      },
-      toPage(val) {
-        this.page = val
-      }
-    },
-    components: {'pdf-page': pdfPage, 'img-tag': imgTag}
-  }
+  },
+  components: { 'pdf-page': pdfPage, 'img-tag': imgTag },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../../css/common-variable.scss';
+@import '../../css/common-variable.scss';
 
-  .tip {
-    display: block;
-    width: 100%;
-    line-height: .4rem;
-    text-align: center;
-  }
+.tip {
+  display: block;
+  width: 100%;
+  line-height: .4rem;
+  text-align: center;
+}
 
-  .pdf-sign-wrap {
-    @include flex-column(center, center);
-    width: 100%;
+.pdf-sign-wrap {
+  @include flex-column(center, center);
+  width: 100%;
 
-    & .pdf-wrap {
-      position: relative;
+  & .pdf-wrap {
+    position: relative;
+    z-index: 1;
+
+    & .pdf {
+      width: .78rem;
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+
+    & .dot {
+      position: absolute;
+      left: .3rem;
+      bottom: .3rem;
       z-index: 1;
+      width: .1rem;
+      height: .1rem;
+    }
 
-      & .pdf {
-        width: .78rem;
+    & .sign-wrap {
+      position: absolute;
+      left: .3rem;
+      right: .3rem;
+      top: .6rem;
+      bottom: .3rem;
 
-        &:last-of-type {
-          margin: 0;
-        }
+      & img {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: .8rem;
+      }
+    }
+
+    & .signature {
+      @include flex(center, center);
+      position: absolute;
+      right: .5rem;
+      top: .8rem;
+      z-index: 2;
+      width: 1rem;
+      height: 1rem;
+      background: rgba(#000, .2);
+
+      & h2 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 0 .1rem;
+        line-height: .24rem;
+        @extend .content-2;
+        color: #fff;
+        background: rgba(#000, .3);
+        pointer-events: none;
       }
 
-      & .dot {
-        position: absolute;
-        left: .3rem;
-        bottom: .3rem;
-        z-index: 1;
-        width: .1rem;
-        height: .1rem;
-      }
-
-      & .sign-wrap {
-        position: absolute;
-        left: .3rem;
-        right: .3rem;
-        top: .6rem;
-        bottom: .3rem;
-
-        & img {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: .8rem;
-        }
-      }
-
-      & .signature {
-        @include flex(center, center);
-        position: absolute;
-        right: .5rem;
-        top: .8rem;
-        z-index: 2;
-        width: 1rem;
-        height: 1rem;
-        background: rgba(#000, .2);
-
-        & h2 {
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          padding: 0 .1rem;
-          line-height: .24rem;
-          @extend .content-2;
-          color: #fff;
-          background: rgba(#000, .3);
-          pointer-events: none;
-        }
-
-        & img {
-          position: relative;
-          width: .8rem;
-          cursor: pointer;
-        }
+      & img {
+        position: relative;
+        width: .8rem;
+        cursor: pointer;
       }
     }
   }
+}
 </style>

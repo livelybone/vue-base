@@ -5,53 +5,53 @@
 </template>
 
 <script>
-  import pdf from 'vue-pdf'
+import pdf from 'vue-pdf';
 
-  export default {
-    name: 'PDFViewer',
-    mounted() {
-      this.getTotalPages()
+export default {
+  name: 'PDFViewer',
+  mounted() {
+    this.getTotalPages();
+  },
+  props: {
+    src: [String, Object],
+  },
+  data() {
+    return {
+      numPages: null,
+    };
+  },
+  computed: {
+    pdfSrc() {
+      return pdf.createLoadingTask(this.src);
     },
-    props: {
-      src: [String, Object]
+  },
+  methods: {
+    getTotalPages() {
+      this.pdfSrc.then((pdfObj) => {
+        this.numPages = pdfObj.numPages;
+      });
     },
-    data() {
-      return {
-        numPages: null
-      }
-    },
-    computed: {
-      pdfSrc() {
-        return pdf.createLoadingTask(this.src)
-      }
-    },
-    methods: {
-      getTotalPages() {
-        this.pdfSrc.then(pdf => {
-          this.numPages = pdf.numPages
-        })
-      }
-    },
-    components: {pdf}
-  }
+  },
+  components: { pdf },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../../css/common-variable.scss';
+@import '../../css/common-variable.scss';
 
-  .pdf-viewer-wrap {
-    width: 100%;
-    padding: .3rem;
-    background: #666;
+.pdf-viewer-wrap {
+  width: 100%;
+  padding: .3rem;
+  background: #666;
 
-    & .pdf {
-      margin: 0 0 $margin;
-      box-shadow: 0 .05rem .1rem rgba(#000, .25);
+  & .pdf {
+    margin: 0 0 $margin;
+    box-shadow: 0 .05rem .1rem rgba(#000, .25);
 
-      &:last-of-type {
-        margin: 0;
-      }
+    &:last-of-type {
+      margin: 0;
     }
   }
+}
 </style>

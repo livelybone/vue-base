@@ -1,17 +1,18 @@
-import Vue from 'vue'
-import App from '@/App'
-import { createStore } from 'data/store'
-import { createRouter } from '@/router'
-import { sync } from 'vuex-router-sync'
-import register from '@/global-register'
-import { initialExtensions } from "@/extensions/extensions";
+import App from '@/App';
+import { initialExtensions } from '@/extensions/extensions';
+import register from '@/global-register';
+import { createRouter } from '@/router';
+import { createStore } from 'data/store';
+import Vue from 'vue';
+import { sync } from 'vuex-router-sync';
 
 Vue.config.productionTip = false;
 
-const {i18n} = initialExtensions();
+const { i18n } = initialExtensions();
 register();
 
 /* eslint-disable no-new */
+
 export function createApp() {
   // 创建 router 和 store 实例
   const store = createStore();
@@ -23,7 +24,7 @@ export function createApp() {
     router,
     store,
     i18n,
-    render: h => h(App)
+    render: h => h(App),
   });
-  return {app, router, store}
+  return { app, router, store };
 }

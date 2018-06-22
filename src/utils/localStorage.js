@@ -1,7 +1,8 @@
-import Cookie from 'utils/cookie'
+import Cookie from 'utils/cookie';
 
 export default class LocalStorage {
   localStorageSupport = false;
+
   listener = null;
 
   constructor(handleStorage) {
@@ -9,7 +10,7 @@ export default class LocalStorage {
       this.localStorageSupport = !!window.localStorage;
       if (handleStorage) {
         this.listener = e => handleStorage(e);
-        window.addEventListener('storage', this.listener)
+        window.addEventListener('storage', this.listener);
       }
     }
   }
@@ -18,9 +19,9 @@ export default class LocalStorage {
     if (!val) this.del(key);
     try {
       if (this.localStorageSupport) {
-        localStorage.setItem(key, val)
+        localStorage.setItem(key, val);
       } else {
-        Cookie.set(key, val)
+        Cookie.set(key, val);
       }
     } catch (e) {
       console.error(e);
@@ -32,23 +33,22 @@ export default class LocalStorage {
   get(key) {
     try {
       if (this.localStorageSupport) {
-        return localStorage.getItem(key)
-      } else {
-        return Cookie.get(key)
+        return localStorage.getItem(key);
       }
+      return Cookie.get(key);
     } catch (e) {
       console.error(e);
       this.localStorageSupport = false;
-      Cookie.get(key)
+      return Cookie.get(key);
     }
   }
 
   del(key) {
     try {
       if (this.localStorageSupport) {
-        localStorage.removeItem(key)
+        localStorage.removeItem(key);
       } else {
-        Cookie.del(key)
+        Cookie.del(key);
       }
     } catch (e) {
       console.error(e);
