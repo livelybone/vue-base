@@ -6,38 +6,37 @@
 </template>
 
 <script>
-  export default {
-    name: 'CheckBox',
-    props: {
-      value: {
-        default: '',
-        validator(val) {
-          const values = ['', 'checked', 'parts'];
-          return values.includes(val)
-        }
+export default {
+  name: 'CheckBox',
+  props: {
+    value: {
+      default: '',
+      validator(val) {
+        const values = ['', 'checked', 'parts'];
+        return values.includes(val);
       },
-      name: String,
-      checkboxSize: {type: String, default: '14px'},
-      styles: Object
     },
-    data() {
-      return {}
+    name: String,
+    checkboxSize: { type: String, default: '14px' },
+    styles: Object,
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    input(val) {
+      this.$emit('input', val);
     },
-    methods: {
-      input(val) {
-        this.$emit('input', val);
-      }
-    }
-  }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-  @import '../../css/common-variable.scss';
+@import '../../css/common-variable.scss';
 
-  .check-box {
-    @include flex(center);
-    justify-content: flex-start;
-    cursor: pointer;
-  }
+.check-box {
+  @include flex(center);
+  justify-content: flex-start;
+  cursor: pointer;
+}
 </style>
-

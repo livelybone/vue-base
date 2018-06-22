@@ -8,21 +8,21 @@ class Store {
   state = {};
 
   constructor(state) {
-    this.state = state
+    this.state = state;
   }
 
   commit(key, val) {
     const value = this.state[key];
     if (value instanceof Array) this.state[key] = [...value, ...val];
-    else this.state[key] = {...value, ...val};
-    this.state = {...this.state};
+    else this.state[key] = { ...value, ...val };
+    this.state = { ...this.state };
   }
 }
 
 export const store = new Store(data);
 
 const StorePlugin = {};
-StorePlugin.install = (Vue, options) => {
+StorePlugin.install = (Vue) => {
   Vue.prototype.$store = store;
 };
 

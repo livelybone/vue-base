@@ -18,42 +18,42 @@
 </template>
 
 <script>
-  import SlideForMoreBase from 'components/table/SlideForMoreBase'
+import SlideForMoreBase from 'components/table/SlideForMoreBase';
 
-  export default {
-    name: 'SlideForMore',
-    props: {
-      slideHeight: Number,
-      searching: Boolean,
-      contentMinHeight: String,
+export default {
+  name: 'SlideForMore',
+  props: {
+    slideHeight: Number,
+    searching: Boolean,
+    contentMinHeight: String,
+  },
+  data() {
+    return {};
+  },
+  computed: {},
+  watch: {},
+  methods: {
+    slideUp() {
+      this.$emit('slideUp');
     },
-    data() {
-      return {}
-    },
-    computed: {},
-    watch: {},
-    methods: {
-      slideUp() {
-        this.$emit('slideUp');
-      }
-    },
-    components: {SlideForMoreBase}
-  }
+  },
+  components: { SlideForMoreBase },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../../css/common-variable.scss';
+@import '../../css/common-variable.scss';
 
-  .slide-for-more-wrap {
-    .tip {
-      @include flex(center);
-      height: 100%;
-      color: $black-lighter;
+.slide-for-more-wrap {
+  .tip {
+    @include flex(center);
+    height: 100%;
+    color: $black-lighter;
 
-      .loading {
-        margin: 0 .1rem 0 0;
-      }
+    .loading {
+      margin: 0 .1rem 0 0;
     }
   }
+}
 </style>

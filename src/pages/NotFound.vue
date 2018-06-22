@@ -7,41 +7,41 @@
 </template>
 
 <script>
-  export default {
-    name: 'NotFound',
-    beforeMount() {
-      document.title = '404'
-    },
-    data() {
-      return {
-        msg: 'Welcome to Your Vue.js App'
-      }
-    }
-  }
+export default {
+  name: 'NotFound',
+  beforeMount() {
+    document.title = '404';
+  },
+  data() {
+    return {
+      msg: 'Welcome to Your Vue.js App',
+    };
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  * {
-    color: #666;
-  }
+* {
+  color: #666;
+}
 
-  h1, p {
-    text-align: center;
-  }
+h1, p {
+  text-align: center;
+}
 
-  h1 {
-    margin: 1.25rem 0 .1rem;
-    font-size: .48rem;
-    font-weight: 400;
-    letter-spacing: .001rem;
-  }
+h1 {
+  margin: 1.25rem 0 .1rem;
+  font-size: .48rem;
+  font-weight: 400;
+  letter-spacing: .001rem;
+}
 
-  .back {
-    width: 2rem;
-    height: .3rem;
+.back {
+  width: 2rem;
+  height: .3rem;
 
-    margin: .5rem auto 0;
-    text-align: center;
-  }
+  margin: .5rem auto 0;
+  text-align: center;
+}
 </style>
