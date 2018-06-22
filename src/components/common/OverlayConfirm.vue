@@ -15,73 +15,73 @@
 </template>
 
 <script>
-  export default {
-    name: 'OverlayConfirm',
-    props: {
-      head: String,
-      tipText: String,
-      confirmText: String,
-      cancelText: String,
-      winWidth: Number,
-      hideTip: Boolean
-    },
-    data() {
-      return {}
-    },
-    methods: {},
-    components: {}
-  }
+export default {
+  name: 'OverlayConfirm',
+  props: {
+    head: String,
+    tipText: String,
+    confirmText: String,
+    cancelText: String,
+    winWidth: Number,
+    hideTip: Boolean,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+  components: {},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
-  @import '../../css/common-variable.scss';
+@import '../../css/common-variable.scss';
 
-  .float-win {
-    width: 20rem;
-    border-radius: .03rem;
-    box-shadow: 0 .025rem .1rem rgba(#000, .5);
-    background: #fff;
-    overflow: hidden;
+.float-win {
+  width: 20rem;
+  border-radius: .03rem;
+  box-shadow: 0 .025rem .1rem rgba(#000, .5);
+  background: #fff;
+  overflow: hidden;
 
-    & h2 {
-      width: 100%;
-      line-height: .25rem;
-      padding: 0 $margin;
+  & h2 {
+    width: 100%;
+    line-height: .25rem;
+    padding: 0 $margin;
+    @extend .content-4;
+    background: $background;
+  }
+
+  & .overlay-content {
+    padding: .02rem $margin;
+
+    & p {
+      line-height: normal;
       @extend .content-4;
-      background: $background;
     }
+  }
 
-    & .overlay-content {
-      padding: .02rem $margin;
+  & .btn-group {
+    @include flex(center, center);
 
-      & p {
-        line-height: normal;
-        @extend .content-4;
-      }
-    }
-
-    & .btn-group {
+    & .btn {
       @include flex(center, center);
+      flex: 1;
+      width: 100%;
+      height: .25rem;
+      border-radius: 0;
+      border: none;
+      border-top: 1px solid $border;
 
-      & .btn {
-        @include flex(center, center);
-        flex: 1;
-        width: 100%;
-        height: .25rem;
-        border-radius: 0;
-        border: none;
-        border-top: 1px solid $border;
+      &:first-child {
+        border-right: 1px solid $border;
+      }
 
-        &:first-child {
-          border-right: 1px solid $border;
-        }
-
-        &:hover {
-          color: $blue !important;
-          background: $background !important;
-        }
+      &:hover {
+        color: $blue !important;
+        background: $background !important;
       }
     }
   }
+}
 </style>

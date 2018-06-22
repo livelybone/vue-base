@@ -12,91 +12,91 @@
 </template>
 
 <script>
-  export default {
-    name: 'ImageFullScreen',
-    data() {
-      return {
-        imgs: [],
-        index: 0,
-        closed: true
-      }
+export default {
+  name: 'ImageFullScreen',
+  data() {
+    return {
+      imgs: [],
+      index: 0,
+      closed: true,
+    };
+  },
+  computed: {
+    img() {
+      return this.imgs[this.index];
     },
-    computed: {
-      img() {
-        return this.imgs[this.index]
-      }
+  },
+  methods: {
+    toPrev() {
+      this.index -= 1;
+      if (this.index < 0) this.index = 0;
     },
-    methods: {
-      toPrev() {
-        this.index--;
-        if (this.index < 0) this.index = 0
-      },
-      toNext() {
-        this.index++;
-        if (this.index >= this.imgs.length) this.index = this.imgs.length - 1
-      },
-      open({imgs, index}) {
-        this.closed = false;
-        this.imgs = imgs;
-        this.index = index
-      },
-      close() {
-        this.closed = true
-      }
+    toNext() {
+      this.index += 1;
+      if (this.index >= this.imgs.length) this.index = this.imgs.length - 1;
     },
-    components: {}
-  }
+    open({ imgs, index }) {
+      this.closed = false;
+      this.imgs = imgs;
+      this.index = index;
+    },
+    close() {
+      this.closed = true;
+    },
+  },
+  components: {},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../../css/common-variable.scss';
+@import '../../css/common-variable.scss';
 
-  .hide {
-    display: none
+.hide {
+  display: none
+}
+
+.btn-close {
+  @include flex(center, center);
+  position: fixed;
+  right: .4rem;
+  top: .4rem;
+  width: .6rem;
+  height: .6rem;
+  border-radius: .04rem;
+  @extend .content-5;
+  background: rgba(#fff, .75);;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(#fff, .85);
+    color: $black-dark;
   }
+}
 
-  .btn-close {
-    @include flex(center, center);
-    position: fixed;
-    right: .4rem;
-    top: .4rem;
-    width: .6rem;
-    height: .6rem;
-    border-radius: .04rem;
-    @extend .content-5;
-    background: rgba(#fff, .75);;
-    cursor: pointer;
+img {
+  max-width: 90% !important;
+  max-height: 90% !important;
+}
 
-    &:hover {
-      background: rgba(#fff, .85);
-      color: $black-dark;
-    }
+.prev, .next {
+  @include flex(center, center);
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: .6rem;
+  height: .8rem;
+  background: rgba(#fff, .75);;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(#fff, .85);
+    color: $black-dark;
   }
+}
 
-  img {
-    max-width: 90% !important;
-    max-height: 90% !important;
-  }
-
-  .prev, .next {
-    @include flex(center, center);
-    position: fixed;
-    left: 0;
-    top: 50%;
-    width: .6rem;
-    height: .8rem;
-    background: rgba(#fff, .75);;
-    cursor: pointer;
-
-    &:hover {
-      background: rgba(#fff, .85);
-      color: $black-dark;
-    }
-  }
-
-  .next {
-    left: auto;
-    right: 0;
-  }
+.next {
+  left: auto;
+  right: 0;
+}
 </style>

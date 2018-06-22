@@ -1,37 +1,39 @@
-export function getUrl(url, params) {
-  if (!params || Object.keys(params).length <= 0) return url;
-  const _url = url.split('#');
-  _url[0] = _url[0].indexOf('?') >= 0 ? (_url[0].endsWith('?') && !/\?\S*\?/.test(_url[0])) || _url[0].endsWith('&') ? _url[0] : _url[0] + '&' : _url[0] + '?';
-  if (params) _url[0] += queryString(params, true);
-  return _url.join('#')
-}
-
 export function queryString(params, encode) {
   let str = '';
-  Object.keys(params).map(key => {
-    if (params[key] instanceof Array) {
-      params[key].map(val => str += '&' + key + '=' + (encode ? encodeURIComponent(val) : val))
-    } else
-      str += '&' + key + '=' + (encode ? encodeURIComponent(params[key]) : params[key])
+  Object.keys(params).forEach((i) => {
+    str += `&${i}=${encode ? encodeURIComponent(params[i]) : params[i]}`;
   });
-  return str.slice(1)
+  return str.slice(1);
+}
+
+export function getUrl(url, params) {
+  if (!params || Object.keys(params).length <= 0) return url;
+  let key = url + (url.indexOf('?') >= 0 ? '&' : '?');
+  if (params) key += queryString(params, true);
+  return key;
 }
 
 export function convertToFormData(obj) {
   const data = new FormData();
-  Object.keys(obj).map(key => {
-    if (obj[key] instanceof FileList) { // 多张图片
-      [].map.call(obj[key], file => data.append(key, file))
-    } else if (obj[key] instanceof Array && (obj[key][0] instanceof File || obj[key][0] instanceof FileList)) { // 多张图片
-      obj[key].map(item => {
-        if (item instanceof FileList) [].map.call(item, file => data.append(key, file));
-        else data.append(key, item);
-      })
-    } else if ((typeof obj[key]).indexOf('object') >= 0) {
-      data.append(key, JSON.stringify(obj[key]))
+  Object.keys(obj).forEach((i) => {
+    if (obj[i] instanceof FileList) {
+      [].map.call(obj[i], file => data.append(i, file));
+    } else if (obj[i] instanceof Array && (obj[i][0] instanceof File || (typeof obj[i][0] === 'string' && obj[i][0].indexOf('data') === 0) || obj[i][0] instanceof FileList)) { // 多张图片
+      obj[i].forEach((item) => {
+        if (item instanceof FileList) [].map.call(item, file => data.append(i, file));
+        else data.append(i, item);
+      });
+    } else if ((typeof obj[i]).indexOf('object') >= 0) {
+      if (obj[i] instanceof Array && (obj[i][0] instanceof File || obj[i][0] instanceof FileList)) {
+        // 上传多张图片
+        obj[i].forEach((item) => {
+          if (item instanceof File) data.append(i, item);
+          else [].map.call(item, file => data.append(i, file));
+        });
+      } else data.append(i, JSON.stringify(obj[i]));
     } else {
-      data.append(key, obj[key])
+      data.append(i, obj[i]);
     }
   });
-  return data
+  return data;
 }

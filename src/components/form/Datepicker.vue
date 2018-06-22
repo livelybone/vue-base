@@ -1,5 +1,5 @@
 <template>
-  <div v-else="" class="date-wrap">
+  <div class="date-wrap">
     <label :for="id" :style="labelStyle"
            :class="myValue?'name':''">{{myValue||'请选择时间'}}</label>
     <input v-if='canEdit'
@@ -12,92 +12,92 @@
 </template>
 
 <script>
-  import { dateFormat } from "utils/date-deal";
+import { dateFormat } from 'utils/date-deal';
 
-  const datesType = [
-    {name: 'date', format: 'y-m-d'},
-    {name: 'datetime', format: 'y-m-d h:M'},
-    {name: 'datetime-local', format: 'y-m-d h:M'},
-    {name: 'month', format: 'y-m'},
-    {name: 'week', format: 'y-m-d h:M'},
-    {name: 'time', format: 'y-m-d h:M'}
-  ];
+const datesType = [
+  { name: 'date', format: 'y-m-d' },
+  { name: 'datetime', format: 'y-m-d h:M' },
+  { name: 'datetime-local', format: 'y-m-d h:M' },
+  { name: 'month', format: 'y-m' },
+  { name: 'week', format: 'y-m-d h:M' },
+  { name: 'time', format: 'y-m-d h:M' },
+];
 
-  export default {
-    name: 'Datepicker',
-    beforeMount() {
-      this.myValue = this.value
-    },
-    props: {
-      id: [String, Number],
-      value: [String, Number],
-      config: {
-        default() {
-          return {
-            inputType: '',
-            required: true,
-          }
-        },
-        type: Object
+export default {
+  name: 'Datepicker',
+  beforeMount() {
+    this.myValue = this.value;
+  },
+  props: {
+    id: [String, Number],
+    value: [String, Number],
+    config: {
+      default() {
+        return {
+          inputType: '',
+          required: true,
+        };
       },
-      canEdit: {
-        default: true,
-        type: Boolean
-      },
-      labelStyle: Object
+      type: Object,
     },
-    data() {
-      return {myValue: ''}
+    canEdit: {
+      default: true,
+      type: Boolean,
     },
-    computed: {
-      dateObj() {
-        return datesType.find(type => type.name === this.config.inputType)
-      }
+    labelStyle: Object,
+  },
+  data() {
+    return { myValue: '' };
+  },
+  computed: {
+    dateObj() {
+      return datesType.find(type => type.name === this.config.inputType);
     },
-    watch: {
-      value(val) {
-        if (val) this.myValue = val;
-      }
+  },
+  watch: {
+    value(val) {
+      if (val) this.myValue = val;
     },
-    methods: {
-      input(val) {
-        this.myValue = dateFormat(val, this.dateObj.format);
-        this.$emit('input', this.myValue);
-      },
-      dateFormat,
+  },
+  methods: {
+    input(val) {
+      this.myValue = dateFormat(val, this.dateObj.format);
+      this.$emit('input', this.myValue);
     },
-    components: {}
-  }
+    dateFormat,
+  },
+  components: {},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../../css/common-variable.scss';
+@import '../../css/common-variable.scss';
 
-  .date-wrap {
-    @include flex();
-    flex: 1;
-    position: relative;
+.date-wrap {
+  @include flex();
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: .4rem;
+
+  & label {
+    display: block;
     width: 100%;
-    height: .4rem;
+    color: $black-lighter;
 
-    & label {
-      display: block;
-      width: 100%;
-      color: $black-lighter;
-
-      &.name {
-        color: $black;
-      }
-    }
-
-    & .date {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      /*opacity: 0;*/
+    &.name {
+      color: $black;
     }
   }
+
+  & .date {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    /*opacity: 0;*/
+  }
+}
 </style>

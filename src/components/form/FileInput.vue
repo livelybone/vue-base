@@ -8,28 +8,28 @@
 </template>
 
 <script>
-  import { isAndroid, isWeiXin } from "utils/user-agent";
+import { isAndroid, isWeiXin } from 'utils/user-agent';
 
-  export default {
-    name: 'FileInput',
-    mounted() {
-    },
-    props: {
-      id: [String, Number],
-    },
-    data() {
-      const needCapture = isWeiXin() && isAndroid();
-      return {
-        needCapture,
-      }
-    },
-    computed: {},
-    methods: {}
-  }
+export default {
+  name: 'FileInput',
+  mounted() {
+  },
+  props: {
+    id: [String, Number],
+  },
+  data() {
+    const needCapture = isWeiXin() && isAndroid();
+    return {
+      needCapture,
+    };
+  },
+  computed: {},
+  methods: {},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-  @import '../../css/common-variable.scss';
+@import '../../css/common-variable.scss';
 
 </style>
