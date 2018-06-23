@@ -48,5 +48,6 @@ module.exports = {
     'import/prefer-default-export': [0],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-alert': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'linebreak-style': 'off',
   },
 };
