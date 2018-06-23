@@ -112,7 +112,7 @@ import { mapActions } from 'vuex';
 export default {
   name: 'HelloWorld',
   mounted() {
-    setImmediate(() => this.snackBar.error('Hello World!'));
+    setTimeout(() => this.snackBar.error('Hello World!'), 1000);
     console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }));
     this.getUserInfo({}).then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
     console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)));
