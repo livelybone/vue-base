@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <!--<div @click="switchLang()">{{$t('chinese-traditional')}}</div>
-    <img src="../assets/logo.png">
+    <div @click="switchLang()">{{$t('chinese-traditional')}}</div>
+    <img-tag :src="require('assets/logo.png')"/>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -89,7 +89,7 @@
     </div>
     <div>还剩 {{time}}</div>
     <input type="file" @change="input($event.target.files[0])">
-    <no-result/>-->
+    <no-result/>
     <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
     <slide-for-more v-else=""
                     class="slide-for-more"

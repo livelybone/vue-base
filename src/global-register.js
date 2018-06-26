@@ -5,7 +5,7 @@ import { isMobile } from 'utils/user-agent';
 import Vue from 'vue';
 
 const Back = () => import('components/common/Back' /* webpackChunkName: "Back" */);
-const ImgTag = () => import('components/image/ImgTag' /* webpackChunkName: "ImgTag" */);
+const ImgTag = () => import('vue-img-tag' /* webpackChunkName: "ImgTag" */);
 
 const Pagination = () => import('components/table/Pagination' /* webpackChunkName: "Pagination" */);
 const SlideForMore = () => import('vue-slide-for-more/lib/SlideForMore' /* webpackChunkName: "SlideForMore" */);
