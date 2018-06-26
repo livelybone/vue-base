@@ -21,8 +21,7 @@
 </template>
 
 <script>
-import pdfPage from 'components/pdf/PDFPage.vue';
-import imgTag from 'components/image/ImgTag.vue';
+import pdfPage from 'components/pdf/PDFPage';
 
 export default {
   name: 'PDFSign',
@@ -103,7 +102,7 @@ export default {
       this.page = val;
     },
   },
-  components: { 'pdf-page': pdfPage, 'img-tag': imgTag },
+  components: { 'pdf-page': pdfPage },
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
-    <!--<div @click="switchLang()">{{$t('chinese-traditional')}}</div>
-    <img src="../assets/logo.png">
+    <div @click="switchLang()">{{$t('chinese-traditional')}}</div>
+    <img-tag :src="require('assets/logo.png')"/>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -92,7 +92,6 @@
     <no-result/>
     <router-link :to="'/a'">to</router-link>
     <select-base class="select-base" name="多选框" :value="1" :options="[{name:'1',value:1}]"/>
-    <my-file-input :id="1" :value="require('assets/icon-search.png')"/>-->
     <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
     <slide-for-more v-else=""
                     class="slide-for-more"
