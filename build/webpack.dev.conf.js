@@ -8,13 +8,30 @@ const portfinder = require('portfinder');
 const utils = require('./utils');
 const config = require('../config');
 const baseWebpackConfig = require('./webpack.base.conf');
+const EslintFormatter = require('eslint-friendly-formatter');
 
 const { HOST } = process.env;
 const PORT = process.env.PORT && Number(process.env.PORT);
 
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
+}
+
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: false }),
+    rules: [
+      {
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        enforce: 'pre',
+        include: [resolve('src')],
+        options: {
+          formatter: EslintFormatter,
+          emitWarning: true,
+        },
+      },
+      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: false }),
+    ],
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,

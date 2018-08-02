@@ -1,71 +1,74 @@
 <template>
-  <div class="pagination">
-    <div class="page-btn" @click="prev">&lt;</div>
+  <div v-if="myConfig.pages>1" class="pagination">
+    <div class="page-btn" :class="{disabled: myConfig.page<=1}" @click="prev">&lt;</div>
     <div v-for="(val,i) in pagesArr"
          :key="i"
-         :class="[config.page===val?'active':'','page-btn',Number(val)?'':'disabled']"
+         :class="[myConfig.page===val?'active':'','page-btn',Number(val)?'':'disabled']"
          @click="to(val)">{{val}}
     </div>
-    <div class="page-btn" @click="next">&gt;</div>
+    <div class="page-btn" :class="{disabled: myConfig.page>=myConfig.pages}" @click="next">&gt;
+    </div>
   </div>
 </template>
 
 <script>
+const defaultFn = () => ({
+  total: 1,
+  pages: 1,
+  page: 1,
+  pageSize: 10,
+  maxPageBtn: 7,
+});
+
 export default {
   name: 'Pagination',
-  beforeMount() {
-    this.initConfig();
-  },
   props: {
     config: {
       default() {
-        return {
-          total: 1,
-          pages: 1,
-          page: 1,
-          pageSize: 10,
-          maxPageBtn: 7,
-        };
+        return defaultFn();
       },
       type: Object,
     },
   },
   data() {
-    return { num: 1, maxPageBtn: 7, pagesArr: [] };
+    return {};
   },
-  watch: {
-    config() {
-      this.initConfig();
+  computed: {
+    myConfig() {
+      return { ...defaultFn(), ...this.config };
+    },
+    pagesArr() {
+      const { page, maxPageBtn, pages } = this.myConfig;
+      if (pages <= maxPageBtn) {
+        return new Int8Array(pages).map((val, i) => i + 1);
+      }
+      if (page <= (maxPageBtn + 1) / 2) {
+        return [...Array(maxPageBtn - 1)].map((val, i) => (i === maxPageBtn - 2 ? '...' : i + 1)).concat([pages]);
+      }
+      if (page >= pages - (maxPageBtn - 1) / 2) {
+        return [1, '...'].concat([...Array(maxPageBtn - 2)].map((val, i) => pages - i).reverse());
+      }
+      return [1, '...'].concat([...Array(maxPageBtn - 4)].map((val, i) => page - Math.floor((maxPageBtn - 3) / 2) + i + 1)).concat(['...', pages]);
     },
   },
   methods: {
-    initConfig() {
-      this.num = this.config.page;
-      this.maxPageBtn = this.config.maxPageBtn || this.maxPageBtn;
-      if (this.config.pages <= this.maxPageBtn) {
-        this.pagesArr = new Int8Array(this.config.pages).map((val, i) => i + 1);
-      } else if (this.num <= (this.maxPageBtn + 1) / 2) {
-        this.pagesArr = [...Array(this.maxPageBtn - 1)].map((val, i) => (i === this.maxPageBtn - 2 ? '...' : i + 1)).concat([this.config.pages]);
-      } else if (this.num >= this.config.pages - (this.maxPageBtn - 1) / 2) {
-        this.pagesArr = [1, '...'].concat([...Array(this.maxPageBtn - 2)].map((val, i) => this.config.pages - i)).reverse();
-      } else {
-        this.pagesArr = [1, '...'].concat([...Array(this.maxPageBtn - 4)].map((val, i) => this.num - Math.floor((this.maxPageBtn - 3) / 2) + i + 1)).concat(['...', this.config.pages]);
-      }
-    },
     next() {
-      this.num += 1;
-      if (this.num <= this.config.pages) {
-        this.$emit('to', this.num);
+      let { page } = this.myConfig;
+      const { pages } = this.myConfig;
+      page += 1;
+      if (page <= pages) {
+        this.$emit('to', page);
       } else {
-        this.num = this.config.pages;
+        page = pages;
       }
     },
     prev() {
-      this.num -= 1;
-      if (this.num > 0) {
-        this.$emit('to', this.num);
+      let { page } = this.myConfig;
+      page -= 1;
+      if (page > 0) {
+        this.$emit('to', page);
       } else {
-        this.num = 1;
+        page = 1;
       }
     },
     to(val) {
@@ -92,18 +95,19 @@ export default {
     cursor: pointer;
 
     &:hover {
-      background: #eee;
+      background: rgba($green, .3);
     }
 
     &.disabled {
       cursor: default;
-      background: #eee;
+      background: rgba(#000, .1);
+      border-color: rgba($border, .1);
     }
 
     &.active {
       border: none;
       color: #fff;
-      background: $blue;
+      background: $green;
     }
   }
 }
