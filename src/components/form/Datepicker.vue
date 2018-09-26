@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { dateFormat } from 'utils/date-deal';
+import { dateFormat } from 'utils/date-deal'
 
 const datesType = [
   { name: 'date', format: 'y-m-d' },
@@ -21,12 +21,12 @@ const datesType = [
   { name: 'month', format: 'y-m' },
   { name: 'week', format: 'y-m-d h:M' },
   { name: 'time', format: 'y-m-d h:M' },
-];
+]
 
 export default {
   name: 'Datepicker',
   beforeMount() {
-    this.myValue = this.value;
+    this.myValue = this.value
   },
   props: {
     id: [String, Number],
@@ -36,7 +36,7 @@ export default {
         return {
           inputType: '',
           required: true,
-        };
+        }
       },
       type: Object,
     },
@@ -47,27 +47,27 @@ export default {
     labelStyle: Object,
   },
   data() {
-    return { myValue: '' };
+    return { myValue: '' }
   },
   computed: {
     dateObj() {
-      return datesType.find(type => type.name === this.config.inputType);
+      return datesType.find(type => type.name === this.config.inputType)
     },
   },
   watch: {
     value(val) {
-      if (val) this.myValue = val;
+      if (val) this.myValue = val
     },
   },
   methods: {
     input(val) {
-      this.myValue = dateFormat(val, this.dateObj.format);
-      this.$emit('input', this.myValue);
+      this.myValue = dateFormat(val, this.dateObj.format)
+      this.$emit('input', this.myValue)
     },
     dateFormat,
   },
   components: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -17,19 +17,19 @@
 </template>
 
 <script>
-import TreeMenu from 'components/common/TreeMenu';
-import { deepCopy } from 'utils/deep-copy';
+import TreeMenu from 'components/common/TreeMenu'
+import { deepCopy } from 'utils/deep-copy'
 
 export default {
   name: 'Linkage',
   mounted() {
-    if (this.value) this.myValue = this.value;
+    if (this.value) this.myValue = this.value
   },
   props: {
     name: String,
     value: {
       default() {
-        return [];
+        return []
       },
       type: Array,
     }, // Array of index
@@ -50,7 +50,7 @@ export default {
               }],
             }],
           }],
-        }];
+        }]
       },
       type: Array,
     },
@@ -64,47 +64,47 @@ export default {
       myValue: [],
       open: false,
       keyword: { value: '', placeholder: '请输入查询关键词', required: false },
-    };
+    }
   },
   computed: {
     checkedObj() {
-      if (!this.myValue || this.myValue.length < 1) return {};
-      return this.find(this.options, 0);
+      if (!this.myValue || this.myValue.length < 1) return {}
+      return this.find(this.options, 0)
     },
     convertValue() {
-      const checkObj = this.checkedObj;
-      return checkObj && this.getName(checkObj);
+      const checkObj = this.checkedObj
+      return checkObj && this.getName(checkObj)
     },
   },
   watch: {
     value(val) {
-      this.myValue = val;
+      this.myValue = val
     },
   },
   methods: {
     find(arr, index) {
-      const obj = deepCopy(arr || [])[this.myValue[index]] || {};
-      if (obj.children && index >= this.myValue.length) return console.error('value数组的长度太短！') || {};
+      const obj = deepCopy(arr || [])[this.myValue[index]] || {}
+      if (obj.children && index >= this.myValue.length) return console.error('value数组的长度太短！') || {}
       if (obj.children && this.myValue[index + 1] !== undefined) {
-        obj.children = this.find(obj.children, index + 1);
+        obj.children = this.find(obj.children, index + 1)
       }
-      return obj;
+      return obj
     },
     getName(obj) {
-      let { name } = obj;
+      let { name } = obj
       if (typeof obj.children === 'object') {
-        name += ` <span style="color:#ccc">-></span> ${this.getName(obj.children) || ''}`;
+        name += ` <span style="color:#ccc">-></span> ${this.getName(obj.children) || ''}`
       }
-      return name;
+      return name
     },
     input(val) {
-      this.open = false;
-      this.myValue = val.path;
-      this.$emit('input', val);
+      this.open = false
+      this.myValue = val.path
+      this.$emit('input', val)
     },
   },
   components: { 'tree-menu': TreeMenu },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

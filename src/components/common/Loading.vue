@@ -11,17 +11,17 @@ export default {
     size: [Number, String],
   },
   data() {
-    return {};
+    return {}
   },
   computed: {
     myStyle() {
-      if (!this.size) return {};
-      const size = typeof this.size === 'number' ? `${this.size}px` : this.size;
-      return { width: size, height: size };
+      if (!this.size) return {}
+      const size = typeof this.size === 'number' ? `${this.size}px` : this.size
+      return { width: size, height: size }
     },
   },
   methods: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -1,5 +1,6 @@
 <template>
-  <div class="check-box user-select-none" @click="input(value!=='checked'?'checked':'')" :style="styles">
+  <div class="check-box user-select-none" @click="input(value!=='checked'?'checked':'')"
+       :style="styles">
     <span class="icon-checkbox-1" :class="value"
           :style="{width:checkboxSize,height:checkboxSize,margin:'0 .5rem 0 0'}"></span>{{name}}
   </div>
@@ -12,8 +13,8 @@ export default {
     value: {
       default: '',
       validator(val) {
-        const values = ['', 'checked', 'parts'];
-        return values.includes(val);
+        const values = ['', 'checked', 'parts']
+        return values.includes(val)
       },
     },
     name: String,
@@ -21,14 +22,14 @@ export default {
     styles: Object,
   },
   data() {
-    return {};
+    return {}
   },
   methods: {
     input(val) {
-      this.$emit('input', val);
+      this.$emit('input', val)
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

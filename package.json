@@ -17,6 +17,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@livelybone/vue-button": "^1.1.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.3",

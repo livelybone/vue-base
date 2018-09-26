@@ -16,20 +16,20 @@
 </template>
 
 <script>
-import TreeMenu from 'components/common/TreeMenu';
-import { deepCopy } from 'utils/deep-copy';
+import TreeMenu from 'components/common/TreeMenu'
+import { deepCopy } from 'utils/deep-copy'
 
 export default {
   name: 'SelectBase',
   mounted() {
-    if (this.value) this.myValue = this.value;
+    if (this.value) this.myValue = this.value
   },
   props: {
     name: String,
     value: [String, Number],
     options: {
       default() {
-        return [];
+        return []
       },
       type: Array,
     },
@@ -43,52 +43,52 @@ export default {
       myValue: '',
       open: false,
       keyword: { value: '', placeholder: '请输入查询关键词', required: false },
-    };
+    }
   },
   computed: {
     checkedObj() {
-      if (!this.myValue) return {};
-      return this.find(this.options, this.myValue);
+      if (!this.myValue) return {}
+      return this.find(this.options, this.myValue)
     },
     convertValue() {
-      const checkObj = this.checkedObj;
-      return checkObj && this.getName(checkObj);
+      const checkObj = this.checkedObj
+      return checkObj && this.getName(checkObj)
     },
   },
   watch: {
     value(val) {
-      this.myValue = val;
+      this.myValue = val
     },
   },
   methods: {
     find(arr, value) {
       return deepCopy(arr || []).find((item) => {
         if (item.children instanceof Array) {
-          const sub = this.find(item.children, value);
+          const sub = this.find(item.children, value)
           if (sub) {
-            item.children = sub;
-            return true;
+            item.children = sub
+            return true
           }
-          return false;
+          return false
         }
-        return item.value === value;
-      });
+        return item.value === value
+      })
     },
     getName(obj) {
-      let { name } = obj;
+      let { name } = obj
       if (typeof obj.children === 'object') {
-        name += `-${this.getName(obj.children) || ''}`;
+        name += `-${this.getName(obj.children) || ''}`
       }
-      return name;
+      return name
     },
     input(val) {
-      this.open = false;
-      this.myValue = val.value;
-      this.$emit('input', val.value);
+      this.open = false
+      this.myValue = val.value
+      this.$emit('input', val.value)
     },
   },
   components: { 'tree-menu': TreeMenu },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

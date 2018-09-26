@@ -1,9 +1,9 @@
 export default class DataDeal {
   static dataDeal(dataArr) {
-    const data = {};
+    const data = {}
     dataArr.forEach((item) => {
-      if (item.alias) data[item.alias] = item.value;
-    });
-    return data;
+      if (item.alias) data[item.alias] = item.value
+    })
+    return data
   }
 }

@@ -18,65 +18,65 @@ const defaultFn = () => ({
   page: 1,
   pageSize: 10,
   maxPageBtn: 7,
-});
+})
 
 export default {
   name: 'Pagination',
   props: {
     config: {
       default() {
-        return defaultFn();
+        return defaultFn()
       },
       type: Object,
     },
   },
   data() {
-    return {};
+    return {}
   },
   computed: {
     myConfig() {
-      return { ...defaultFn(), ...this.config };
+      return { ...defaultFn(), ...this.config }
     },
     pagesArr() {
-      const { page, maxPageBtn, pages } = this.myConfig;
+      const { page, maxPageBtn, pages } = this.myConfig
       if (pages <= maxPageBtn) {
-        return new Int8Array(pages).map((val, i) => i + 1);
+        return new Int8Array(pages).map((val, i) => i + 1)
       }
       if (page <= (maxPageBtn + 1) / 2) {
-        return [...Array(maxPageBtn - 1)].map((val, i) => (i === maxPageBtn - 2 ? '...' : i + 1)).concat([pages]);
+        return [...Array(maxPageBtn - 1)].map((val, i) => (i === maxPageBtn - 2 ? '...' : i + 1)).concat([pages])
       }
       if (page >= pages - (maxPageBtn - 1) / 2) {
-        return [1, '...'].concat([...Array(maxPageBtn - 2)].map((val, i) => pages - i).reverse());
+        return [1, '...'].concat([...Array(maxPageBtn - 2)].map((val, i) => pages - i).reverse())
       }
-      return [1, '...'].concat([...Array(maxPageBtn - 4)].map((val, i) => page - Math.floor((maxPageBtn - 3) / 2) + i + 1)).concat(['...', pages]);
+      return [1, '...'].concat([...Array(maxPageBtn - 4)].map((val, i) => page - Math.floor((maxPageBtn - 3) / 2) + i + 1)).concat(['...', pages])
     },
   },
   methods: {
     next() {
-      let { page } = this.myConfig;
-      const { pages } = this.myConfig;
-      page += 1;
+      let { page } = this.myConfig
+      const { pages } = this.myConfig
+      page += 1
       if (page <= pages) {
-        this.$emit('to', page);
+        this.$emit('to', page)
       } else {
-        page = pages;
+        page = pages
       }
     },
     prev() {
-      let { page } = this.myConfig;
-      page -= 1;
+      let { page } = this.myConfig
+      page -= 1
       if (page > 0) {
-        this.$emit('to', page);
+        this.$emit('to', page)
       } else {
-        page = 1;
+        page = 1
       }
     },
     to(val) {
-      const page = Number(val);
-      if (page) this.$emit('to', page);
+      const page = Number(val)
+      if (page) this.$emit('to', page)
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

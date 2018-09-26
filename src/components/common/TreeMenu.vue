@@ -21,8 +21,8 @@
 export default {
   name: 'TreeMenu',
   mounted() {
-    if (this.checkedObj) this.checked = this.checkedObj.name;
-    this.initUnfold();
+    if (this.checkedObj) this.checked = this.checkedObj.name
+    this.initUnfold()
   },
   props: {
     checkedObj: Object,
@@ -33,19 +33,19 @@ export default {
     return {
       checked: '',
       unfold: [{ index: 0, value: '' }],
-    };
+    }
   },
   computed: {},
   watch: {
     value(val) {
-      this.myValue = val;
+      this.myValue = val
     },
     checkedObj(val) {
-      this.checked = val.name;
-      this.initUnfold();
+      this.checked = val.name
+      this.initUnfold()
     },
     options() {
-      this.initUnfold();
+      this.initUnfold()
     },
   },
   methods: {
@@ -53,43 +53,43 @@ export default {
       if (this.checkedObj && this.options) {
         (this.options || []).find((option, i) => {
           if (option.value && option.value === this.checkedObj.value) {
-            this.unfold[0].index = i;
-            this.unfold[0].value = this.checkedObj.value;
-            return true;
+            this.unfold[0].index = i
+            this.unfold[0].value = this.checkedObj.value
+            return true
           }
-          return false;
-        });
+          return false
+        })
       }
     },
     input(val) {
-      this.pristine = false;
-      this.valid = (val && this.config.validateFn(val)) || (!this.config.required && !val);
-      this.$emit('input', this.config.needTrim ? val.trim() : val);
-      this.$emit('check', { pristine: this.pristine, valid: this.valid });
+      this.pristine = false
+      this.valid = (val && this.config.validateFn(val)) || (!this.config.required && !val)
+      this.$emit('input', this.config.needTrim ? val.trim() : val)
+      this.$emit('check', { pristine: this.pristine, valid: this.valid })
     },
     choose(option, index) {
-      this.unfold[0] = { index, value: option.value };
-      this.$emit('unfold', this.unfold);
+      this.unfold[0] = { index, value: option.value }
+      this.$emit('unfold', this.unfold)
       if (option.children) {
-        this.checked = this.checked === option.name ? '' : option.name;
+        this.checked = this.checked === option.name ? '' : option.name
       } else {
-        this.emit(option, option.value);
+        this.emit(option, option.value)
       }
     },
     emit(option, value) {
-      this.checked = option.name;
+      this.checked = option.name
       this.$emit('input', {
         value,
         path: this.unfold.map(item => item.index),
         values: this.unfold.map(item => item.value),
-      });
+      })
     },
     unfoldFn(val) {
-      this.unfold = [this.unfold[0]].concat(val);
-      this.$emit('unfold', this.unfold);
+      this.unfold = [this.unfold[0]].concat(val)
+      this.$emit('unfold', this.unfold)
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

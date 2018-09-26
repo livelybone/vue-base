@@ -16,18 +16,18 @@
 </template>
 
 <script>
-import pdf from 'vue-pdf';
-import { blobToURL } from 'utils/blob-url';
+import { blobToURL } from 'utils/blob-url'
+import pdf from 'vue-pdf'
 
 export default {
   name: 'PDFPage',
   beforeMount() {
-    this.convertSrc(this.src);
+    this.convertSrc(this.src)
   },
   props: {
     src: {
       validator(val) {
-        return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList;
+        return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
       },
     },
     page: Number,
@@ -37,43 +37,43 @@ export default {
       numPages: null,
       pdfSrc: '',
       totalPage: 0,
-    };
+    }
   },
   computed: {},
   watch: {
     src(val) {
-      this.convertSrc(val);
+      this.convertSrc(val)
     },
   },
   methods: {
     convertSrc(val) {
-      const src = val;
+      const src = val
       if (src instanceof FileList) {
         if (src[0]) {
-          this.setImg(blobToURL(src[0]));
+          this.setImg(blobToURL(src[0]))
         } else {
-          this.pdfSrc = '';
+          this.pdfSrc = ''
         }
       } else {
-        this.pdfSrc = src;
+        this.pdfSrc = src
       }
     },
     toPrev() {
-      let page = this.page - 1;
-      if (page < 1) page = 1;
-      this.$emit('toPage', page);
+      let page = this.page - 1
+      if (page < 1) page = 1
+      this.$emit('toPage', page)
     },
     toNext() {
-      let page = this.page + 1;
-      if (page > this.totalPage) page = this.totalPage;
-      this.$emit('toPage', page);
+      let page = this.page + 1
+      if (page > this.totalPage) page = this.totalPage
+      this.$emit('toPage', page)
     },
     setImg(blobUrl) {
-      this.pdfSrc = blobUrl.url;
+      this.pdfSrc = blobUrl.url
     },
   },
   components: { pdf },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

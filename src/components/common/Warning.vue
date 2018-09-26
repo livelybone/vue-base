@@ -7,10 +7,10 @@ export default {
   name: 'Warning',
   props: ['text'],
   data() {
-    return {};
+    return {}
   },
   methods: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -26,11 +26,11 @@ export default {
     hideTip: Boolean,
   },
   data() {
-    return {};
+    return {}
   },
   methods: {},
   components: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

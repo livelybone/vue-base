@@ -17,7 +17,7 @@
 export default {
   name: 'TextareaBase',
   mounted() {
-    this.myValue = this.value;
+    this.myValue = this.value
   },
   props: {
     id: [String, Number],
@@ -30,7 +30,7 @@ export default {
           validateFn: () => true,
           required: true,
           needTrim: true,
-        };
+        }
       },
       type: Object,
     },
@@ -41,24 +41,24 @@ export default {
       myValue: '',
       pristine: true,
       valid: true,
-    };
+    }
   },
   watch: {
     value(val) {
-      this.myValue = val;
+      this.myValue = val
     },
   },
   methods: {
     input(val) {
-      this.myValue = val;
-      this.pristine = false;
+      this.myValue = val
+      this.pristine = false
       this.valid = (val && this.config.validateFn && this.config.validateFn(val))
-        || (this.config.required === false && !val);
-      this.$emit('input', this.config.needTrim ? val.trim() : val);
-      this.$emit('check', { pristine: this.pristine, valid: this.valid });
+        || (this.config.required === false && !val)
+      this.$emit('input', this.config.needTrim ? val.trim() : val)
+      this.$emit('check', { pristine: this.pristine, valid: this.valid })
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
