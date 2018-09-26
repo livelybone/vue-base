@@ -1,13 +1,13 @@
+import { Storage } from '@livelybone/storage'
+import axios from 'axios'
+import config from 'config/config'
+import { convertToFormData, getUrl } from 'utils/request-deal'
+
 /**
  * http: axios
  */
-import axios from 'axios'
-import config from 'config/config'
-import LocalStorage from 'utils/localStorage'
-import { convertToFormData, getUrl } from 'utils/request-deal'
-
 function setAuth(url) {
-  axios.defaults.headers['x-auth-token'] = new LocalStorage().get('AUTH_TOKEN')
+  axios.defaults.headers['x-auth-token'] = new Storage().get('AUTH_TOKEN')
   return url
 }
 
@@ -21,11 +21,9 @@ function initialAxios() {
   axios.defaults.validateStatus = status => (status >= 200 && status < 300) || (status >= 400)
 }
 
-class Http {
-  constructor() {
-    initialAxios()
-  }
+initialAxios()
 
+export class Http {
   static getFile(url) {
     // 适用于需要登录的情况
     return axios.get(setAuth(url), { responseType: 'blob' }).then(res => res.data)
@@ -37,35 +35,35 @@ class Http {
     return data.code !== 0
   }
 
-  get(url, data) {
+  static get(url, data) {
     const uri = getUrl(url, data)
     return this.responseDeal(axios.get(setAuth(uri)))
   }
 
-  post(url, data) {
+  static post(url, data) {
     // backend 代码统一使用urlParams/FormData对象的处理方式，因此这个API不用，put方法同理
     return this.responseDeal(axios.post(setAuth(url), data))
   }
 
-  postForm(url, data) {
+  static postForm(url, data) {
     const formData = convertToFormData(data)
     return this.responseDeal(axios.post(setAuth(url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }))
   }
 
-  del(url) {
+  static del(url) {
     return this.responseDeal(axios.delete(setAuth(url)))
   }
 
-  put(url, data) {
+  static put(url, data) {
     return this.responseDeal(axios.put(setAuth(url), data))
   }
 
-  putForm(url, data) {
+  static putForm(url, data) {
     const formData = convertToFormData(data)
     return this.responseDeal(axios.put(setAuth(url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }))
   }
 
-  all(callback, ...reqs) {
+  static all(callback, ...reqs) {
     const queue = reqs.map((req) => {
       if (req.method === 'GET') {
         return this.get(req.url, req.data)
@@ -81,7 +79,7 @@ class Http {
     }))
   }
 
-  responseDeal(promise) {
+  static responseDeal(promise) {
     return promise.then((res) => {
       // 去除config, request, status, statusText...等一些其他字段，关注data
       const { data } = res
@@ -100,12 +98,10 @@ class Http {
   }
 }
 
-export const http = new Http()
-
 const HttpPlugin = {}
 
 HttpPlugin.install = (Vue) => {
-  Vue.prototype.$http = http
+  Vue.prototype.$http = Http
 }
 
 export default HttpPlugin

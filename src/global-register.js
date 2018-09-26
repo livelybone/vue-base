@@ -11,17 +11,14 @@ const Pagination = () => import('components/table/Pagination' /* webpackChunkNam
 const SlideForMore = () => import('vue-slide-for-more/lib/SlideForMore' /* webpackChunkName: "SlideForMore" */)
 const NoResult = () => import('components/common/NoResult' /* webpackChunkName: "NoResult" */)
 
-const InputBase = () => import('components/form/InputBase' /* webpackChunkName: "InputBase" */)
+const VueBtn = () => import('@livelybone/vue-button' /* webpackChunkName: "VueBtn" */)
+const InputBase = () => import('@livelybone/vue-input' /* webpackChunkName: "InputBase" */)
 const FileInput = () => import('components/form/FileInput' /* webpackChunkName: "FileInput" */)
-const TextareaBase = () => import('components/form/TextareaBase' /* webpackChunkName: "TextareaBase" */)
-const SelectBase = () => import('components/form/SelectBase' /* webpackChunkName: "SelectBase" */)
-const Datepicker = () => import('components/form/Datepicker' /* webpackChunkName: "Datepicker" */)
-const Linkage = () => import('components/form/Linkage' /* webpackChunkName: "Linkage" */)
 
 const Overlay = () => import('components/common/Overlay' /* webpackChunkName: "Overlay" */)
 const OverlayConfirm = () => import('components/common/OverlayConfirm' /* webpackChunkName: "OverlayConfirm" */)
 
-const Loading = () => import('components/common/Loading' /* webpackChunkName: "Loading" */)
+const Loading = () => import('@livelybone/vue-loading' /* webpackChunkName: "Loading" */)
 
 export default function () {
   // 注册全局组件
@@ -30,12 +27,9 @@ export default function () {
 
   Vue.component('no-result', NoResult)
 
+  Vue.component('btn', VueBtn)
   Vue.component('input-base', InputBase)
   Vue.component('file-input', FileInput)
-  Vue.component('textarea-base', TextareaBase)
-  Vue.component('select-base', SelectBase)
-  Vue.component('datepicker', Datepicker)
-  Vue.component('linkage', Linkage)
 
   Vue.component('overlay', Overlay)
   Vue.component('overlay-confirm', OverlayConfirm)

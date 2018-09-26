@@ -23,14 +23,16 @@ const actions = {
     commit(USER.GET_USER_INFO, {})
     return AuthToken.getUser().then(res => commit(USER.GET_USER_INFO, {
       ..._state.info,
-      role: 'client', ...res
+      role: 'client',
+      ...res,
     }))
   },
   getAdminUserInfo({ commit, _state }) {
     commit(USER.GET_USER_INFO, {})
     return AuthToken.getAdminUser().then(res => commit(USER.GET_USER_INFO, {
       ..._state.info,
-      role: 'admin', ...res
+      role: 'admin',
+      ...res,
     }))
   },
 }

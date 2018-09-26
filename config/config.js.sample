@@ -1,4 +1,4 @@
 'use strict'
 module.exports = {
   backendUrl: 'url [eg. http://127.0.0.1:8080]',
-};
+}

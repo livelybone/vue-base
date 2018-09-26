@@ -1,8 +1,8 @@
 /**
  * 语言国际化
  * */
-import { CN } from 'assets/lang/CN'
-import { CNT } from 'assets/lang/CN-T'
+import { CN } from 'assets/lang/CN/index'
+import { CNT } from 'assets/lang/CNT/index'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 

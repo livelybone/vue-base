@@ -1,5 +1,5 @@
 // 全局状态管理 store
-import { http } from 'extensions/http'
+import { Http } from 'extensions/http'
 import { getUrl } from 'utils/request-deal'
 
 class Cache {
@@ -12,7 +12,7 @@ class Cache {
       return Promise.resolve(val)
     }
     this.set(key, 'placeholder') // 防止多次请求
-    return http.get(url, params).then((res) => {
+    return Http.get(url, params).then((res) => {
       this.set(key, res)
       return res
     }, (e) => {
@@ -28,7 +28,7 @@ class Cache {
       return Promise.resolve(val)
     }
     this.set(key, 'placeholder') // 防止多次请求
-    return http.getFile(key).then((res) => {
+    return Http.getFile(key).then((res) => {
       this.set(key, res)
       return res
     }, (e) => {

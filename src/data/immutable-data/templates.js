@@ -1,10 +1,8 @@
-import { deepCopy } from 'utils/deep-copy'
-
 export default class Templates {
   static templates = {}
 
   static copy(key) {
-    return deepCopy(Templates.templates[key])
+    return JSON.parse(JSON.stringify(Templates.templates[key]))
   }
 
   static cannotEdit(key) {

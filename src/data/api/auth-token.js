@@ -1,17 +1,17 @@
+import { Storage } from '@livelybone/storage'
+import { Http } from 'extensions/http'
+
 /**
  * auth_token
  */
-import { http } from 'extensions/http'
-import LocalStorage from 'utils/localStorage'
-
 class AuthTokenClass {
   key = 'AUTH_TOKEN'
 
-  localStorage = new LocalStorage()
+  localStorage = new Storage()
 
   getUser() {
     // 获取用户信息
-    return http.get('/user/myUserInfo').then(user => user, (e) => {
+    return Http.get('/user/myUserInfo').then(user => user, (e) => {
       this.setToken('')
       throw e
     })
@@ -19,21 +19,21 @@ class AuthTokenClass {
 
   getAdminUser() {
     // 获取用户信息
-    return http.get('/user/myUserInfo').then(user => user, (e) => {
+    return Http.get('/user/myUserInfo').then(user => user, (e) => {
       this.setToken('')
       throw e
     })
   }
 
   signIn({ phoneNumber, password }) {
-    return http.post(`/login?phoneNumber=${phoneNumber}&password=${password}`).then((res) => {
+    return Http.post(`/login?phoneNumber=${phoneNumber}&password=${password}`).then((res) => {
       this.setToken(res)
       return res
     })
   }
 
   signInAdmin({ phoneNumber, password }) {
-    return http.post(`/manager/login?phoneNumber=${phoneNumber}&password=${password}`).then((res) => {
+    return Http.post(`/manager/login?phoneNumber=${phoneNumber}&password=${password}`).then((res) => {
       this.setToken(res)
       return res
     })
