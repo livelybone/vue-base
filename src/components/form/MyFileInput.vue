@@ -17,7 +17,7 @@
 export default {
   name: 'MyFileInput',
   beforeMount() {
-    this.myValue = this.value;
+    this.myValue = this.value
   },
   props: {
     id: [String, Number],
@@ -30,23 +30,23 @@ export default {
   data() {
     return {
       myValue: null,
-    };
+    }
   },
   computed: {},
   watch: {
     value(val) {
-      this.myValue = val;
+      this.myValue = val
     },
   },
   methods: {
     input(val) {
       if (val.length > 0) {
-        this.myValue = val;
-        this.$emit('input', val);
+        this.myValue = val
+        this.$emit('input', val)
       }
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

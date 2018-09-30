@@ -10,14 +10,14 @@
 export default {
   name: 'NotFound',
   beforeMount() {
-    document.title = '404';
+    document.title = '404'
   },
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
-    };
+    }
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

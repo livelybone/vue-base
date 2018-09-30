@@ -2,28 +2,28 @@
 const data = {
   user: {},
   admin: {},
-};
+}
 
 class Store {
-  state = {};
+  state = {}
 
   constructor(state) {
-    this.state = state;
+    this.state = state
   }
 
   commit(key, val) {
-    const value = this.state[key];
-    if (value instanceof Array) this.state[key] = [...value, ...val];
-    else this.state[key] = { ...value, ...val };
-    this.state = { ...this.state };
+    const value = this.state[key]
+    if (value instanceof Array) this.state[key] = [...value, ...val]
+    else this.state[key] = { ...value, ...val }
+    this.state = { ...this.state }
   }
 }
 
-export const store = new Store(data);
+export const store = new Store(data)
 
-const StorePlugin = {};
+const StorePlugin = {}
 StorePlugin.install = (Vue) => {
-  Vue.prototype.$store = store;
-};
+  Vue.prototype.$store = store
+}
 
-export default StorePlugin;
+export default StorePlugin

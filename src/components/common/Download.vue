@@ -7,21 +7,21 @@
 </template>
 
 <script>
-import { blobToURL } from 'utils/blob-url';
+import { blobToURL } from 'utils/blob-url'
 
 export default {
   name: 'Download',
   beforeMount() {
-    this.convert(this.src);
+    this.convert(this.src)
   },
   destroyed() {
-    if (this.revokeFn) this.revokeFn();
+    if (this.revokeFn) this.revokeFn()
   },
   props: {
     showName: Boolean,
     src: {
       validator(val) {
-        return !val || typeof val === 'string' || val instanceof FileList;
+        return !val || typeof val === 'string' || val instanceof FileList
       },
     },
   },
@@ -30,27 +30,27 @@ export default {
       fileSrc: '',
       filename: '',
       revokeFn: null,
-    };
+    }
   },
   watch: {
     src(val) {
-      this.convert(val);
+      this.convert(val)
     },
   },
   methods: {
     convert(val) {
-      this.fileSrc = '';
+      this.fileSrc = ''
       if (!val || typeof val === 'string') {
-        this.fileSrc = val;
+        this.fileSrc = val
       } else if (val instanceof FileList && val[0]) {
-        this.filename = val[0].name;
-        const blobUrl = blobToURL(val[0]);
-        this.fileSrc = blobUrl.url;
-        this.revokeFn = blobUrl.revokeFn();
+        this.filename = val[0].name
+        const blobUrl = blobToURL(val[0])
+        this.fileSrc = blobUrl.url
+        this.revokeFn = blobUrl.revokeFn()
       }
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import { user } from 'data/store/modules/user';
+import { user } from 'data/store/modules/user'
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {},
@@ -10,6 +10,6 @@ const store = new Vuex.Store({
   mutations: {},
   actions: {},
   modules: { user },
-});
+})
 
-export default store;
+export default store

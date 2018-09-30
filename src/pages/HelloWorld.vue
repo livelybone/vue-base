@@ -104,18 +104,18 @@
 </template>
 
 <script>
-import { timeConversion } from 'utils/date-deal';
-import { getUrl } from 'utils/request-deal';
-import { isMobile } from 'utils/user-agent';
-import { mapActions } from 'vuex';
+import { timeConversion } from 'utils/date-deal'
+import { getUrl } from 'utils/request-deal'
+import { isMobile } from 'utils/user-agent'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'HelloWorld',
   mounted() {
-    setTimeout(() => this.snackBar.error('Hello World!'), 1000);
-    console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }));
-    this.getUserInfo({}).then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
-    console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)));
+    setTimeout(() => this.snackBar.error('Hello World!'), 1000)
+    console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }))
+    this.getUserInfo({}).then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e))
+    console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))
   },
   data() {
     return {
@@ -129,7 +129,7 @@ export default {
       isSearching: false,
       convertTime: '2020-04-03',
       elements: [1, 1, 1],
-    };
+    }
   },
   computed: {
     time() {
@@ -138,30 +138,30 @@ export default {
         hour,
         minute,
         second,
-      } = timeConversion(new Date(this.convertTime).getTime());
-      return `${day}天${hour}时${minute}分${second}秒`;
+      } = timeConversion(new Date(this.convertTime).getTime())
+      return `${day}天${hour}时${minute}分${second}秒`
     },
   },
   methods: {
     ...mapActions('user', ['getUserInfo']),
     input(file) {
-      console.log('input File 值： ', file, typeof file);
+      console.log('input File 值： ', file, typeof file)
     },
     isMobile,
     search() {
-      this.log('slide up');
-      this.isSearching = true;
+      this.log('slide up')
+      this.isSearching = true
       setTimeout(() => {
-        this.elements.push(1);
-        this.isSearching = false;
-      }, 1000);
+        this.elements.push(1)
+        this.isSearching = false
+      }, 1000)
     },
     switchLang() {
-      this.$i18n.locale = this.$i18n.locale === 'CN' ? 'CNT' : 'CN';
+      this.$i18n.locale = this.$i18n.locale === 'CN' ? 'CNT' : 'CN'
     },
   },
   components: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

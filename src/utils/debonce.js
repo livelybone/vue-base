@@ -1,16 +1,16 @@
 export default class debonceTime {
-  timer = null;
+  timer = null
 
-  time = 500;
+  time = 500
 
   constructor(time) {
-    this.time = time || 500;
+    this.time = time || 500
   }
 
   handle(callback) {
-    if (this.timer) clearTimeout(this.timer);
+    if (this.timer) clearTimeout(this.timer)
     this.timer = setTimeout(() => {
-      callback();
-    }, this.time);
+      callback()
+    }, this.time)
   }
 }

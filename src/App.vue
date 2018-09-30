@@ -7,18 +7,18 @@
 </template>
 
 <script>
-import ImageFullScreen from 'components/image/ImageFullScreen';
-import SnackBar from 'vuejs-snackbar';
+import ImageFullScreen from 'components/image/ImageFullScreen'
+import SnackBar from 'vuejs-snackbar'
 
 export default {
   name: 'app',
   mounted() {
-    this.snackBar.listen(this.$refs.snackBar); // 监听bus=>snackBar事件
-    this.imgFullScreen.listen(this.$refs.imgFull); // 监听bus=>imgFullScreen事件
-    document.title = 'Project';
+    this.snackBar.listen(this.$refs.snackBar) // 监听bus=>snackBar事件
+    this.imgFullScreen.listen(this.$refs.imgFull) // 监听bus=>imgFullScreen事件
+    document.title = 'Project'
   },
   components: { SnackBar, ImageFullScreen },
-};
+}
 </script>
 
 <style lang="scss">
