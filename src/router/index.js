@@ -1,4 +1,4 @@
-import { AuthToken } from 'data/api/auth-token'
+import User from 'data/api/user'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -32,14 +32,14 @@ export function createRouter(store) {
 
   router.beforeEach((to, fr, next) => {
     if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
-      AuthToken.getUser().then(() => {
+      User.getUser().then(() => {
         next()
       }).catch(() => {
         next({ name: 'SignIn', redirect: to.fullPath })
         Vue.prototype.snackBar.error('请先登录！')
       })
     } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
-      AuthToken.getAdminUser().then(() => {
+      User.getAdminUser().then(() => {
         next()
       }).catch(() => {
         next({ name: 'AdminSignIn', redirect: to.fullPath })
