@@ -19,33 +19,33 @@ export default {
       imgs: [],
       index: 0,
       closed: true,
-    };
+    }
   },
   computed: {
     img() {
-      return this.imgs[this.index];
+      return this.imgs[this.index]
     },
   },
   methods: {
     toPrev() {
-      this.index -= 1;
-      if (this.index < 0) this.index = 0;
+      this.index -= 1
+      if (this.index < 0) this.index = 0
     },
     toNext() {
-      this.index += 1;
-      if (this.index >= this.imgs.length) this.index = this.imgs.length - 1;
+      this.index += 1
+      if (this.index >= this.imgs.length) this.index = this.imgs.length - 1
     },
     open({ imgs, index }) {
-      this.closed = false;
-      this.imgs = imgs;
-      this.index = index;
+      this.closed = false
+      this.imgs = imgs
+      this.index = index
     },
     close() {
-      this.closed = true;
+      this.closed = true
     },
   },
   components: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

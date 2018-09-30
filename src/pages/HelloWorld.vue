@@ -138,7 +138,7 @@ export default {
       isSearching: false,
       convertTime: '2020-04-03',
       elements: [1, 1, 1],
-    };
+    }
   },
   computed: {
     time() {
@@ -147,30 +147,30 @@ export default {
         hour,
         minute,
         second,
-      } = timeConversion(new Date(this.convertTime).getTime());
-      return `${day}天${hour}时${minute}分${second}秒`;
+      } = timeConversion(new Date(this.convertTime).getTime())
+      return `${day}天${hour}时${minute}分${second}秒`
     },
   },
   methods: {
     ...mapActions('user', ['getUserInfo']),
     input(file) {
-      console.log('input File 值： ', file, typeof file);
+      console.log('input File 值： ', file, typeof file)
     },
     isMobile,
     search() {
-      this.log('slide up');
-      this.isSearching = true;
+      this.log('slide up')
+      this.isSearching = true
       setTimeout(() => {
-        this.elements.push(1);
-        this.isSearching = false;
-      }, 1000);
+        this.elements.push(1)
+        this.isSearching = false
+      }, 1000)
     },
     switchLang() {
-      this.$i18n.locale = this.$i18n.locale === 'CN' ? 'CNT' : 'CN';
+      this.$i18n.locale = this.$i18n.locale === 'CN' ? 'CNT' : 'CN'
     },
   },
   components: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

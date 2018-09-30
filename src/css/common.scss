@@ -14,19 +14,17 @@ html {
   max-height: 100000rem; /* font boosting */
   margin: 0;
   padding: 0;
-  border: none;
   outline: none;
-  text-decoration: none;
   list-style: none;
   font-family: 'Microsoft YaHei', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @extend .content-3;
-  font-style: normal;
-  color: $black;
+  text-decoration: none;
 }
 
 body {
+  @extend .content-3;
+  color: $black;
   background: $background;
   overflow-x: hidden;
 }
@@ -50,10 +48,6 @@ button, .btn {
     color: $black-light !important;
     cursor: default !important;
   }
-}
-
-button {
-  display: inline-block !important;
 }
 
 @each $name, $color in (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
@@ -277,3 +271,5 @@ input, textarea, select {
     }
   }
 }
+
+@import "./pagination";

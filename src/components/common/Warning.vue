@@ -8,10 +8,10 @@ export default {
   props: ['text'],
   serverCacheKey: ({text}) => text,
   data() {
-    return {};
+    return {}
   },
   methods: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

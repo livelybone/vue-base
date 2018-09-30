@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import { titleMixin } from 'extensions/title-mixin';
+import { titleMixin } from 'extensions/title-mixin'
 
 export default {
   name: 'NotFound',
   mixins: [titleMixin],
   title: '404',
   data() {
-    return {};
+    return {}
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

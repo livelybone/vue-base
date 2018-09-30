@@ -13,8 +13,8 @@ export default {
     value: {
       default: '',
       validator(val) {
-        const values = ['', 'checked', 'parts'];
-        return values.includes(val);
+        const values = ['', 'checked', 'parts']
+        return values.includes(val)
       },
     },
     name: String,
@@ -22,14 +22,14 @@ export default {
     styles: Object,
   },
   data() {
-    return {};
+    return {}
   },
   methods: {
     input(val) {
-      this.$emit('input', val);
+      this.$emit('input', val)
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

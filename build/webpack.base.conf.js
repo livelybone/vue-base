@@ -1,13 +1,11 @@
-const path = require('path');
-const EslintFormatter = require('eslint-friendly-formatter');
-const utils = require('./utils');
-const config = require('../config');
-const vueLoaderConfig = require('./vue-loader.conf');
+const path = require('path')
+const utils = require('./utils')
+const config = require('../config')
+const vueLoaderConfig = require('./vue-loader.conf')
 
 function resolve(dir) {
-  return path.join(__dirname, '..', dir);
+  return path.join(__dirname, '..', dir)
 }
-
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -38,16 +36,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src')],
-        options: {
-          formatter: EslintFormatter,
-          emitWarning: true,
-        },
-      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -96,4 +84,4 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty',
   },
-};
+}

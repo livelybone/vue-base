@@ -6,10 +6,10 @@ import { createStore } from 'data/store';
 import Vue from 'vue';
 import { sync } from 'vuex-router-sync';
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
-const { i18n } = initialExtensions();
-register();
+const { i18n } = initialExtensions()
+register()
 
 /* eslint-disable no-new */
 

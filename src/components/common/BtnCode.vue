@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import User from 'data/api/user';
+import User from 'data/api/user'
 
 export default {
   name: 'BtnCode',
@@ -26,28 +26,28 @@ export default {
     return {
       second: 0,
       timer: null,
-    };
+    }
   },
   beforeDestroy() {
-    if (this.timer) clearInterval(this.timer);
+    if (this.timer) clearInterval(this.timer)
   },
   methods: {
     getCode() {
-      if (this.disabled) this.$emit('disabled');
+      if (this.disabled) this.$emit('disabled')
       else {
         User.getCode({ phoneNumber: this.getFrom, type: this.type })
           .then(() => {
-            this.second = 60;
+            this.second = 60
             this.timer = setInterval(() => {
-              this.second -= 1;
+              this.second -= 1
               if (this.second <= 0 && this.timer) clearInterval(this.timer)
-            }, 1000);
+            }, 1000)
           })
-          .catch(e => this.snackBar.error(e));
+          .catch(e => this.snackBar.error(e))
       }
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

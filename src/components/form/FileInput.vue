@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { isAndroid, isWeiXin } from 'utils/user-agent';
+import { isAndroid, isWeiXin } from 'utils/user-agent'
 
 export default {
   name: 'FileInput',
@@ -18,14 +18,14 @@ export default {
     id: [String, Number],
   },
   data() {
-    const needCapture = isWeiXin() && isAndroid();
+    const needCapture = isWeiXin() && isAndroid()
     return {
       needCapture,
-    };
+    }
   },
   computed: {},
   methods: {},
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

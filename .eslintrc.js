@@ -49,5 +49,12 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-alert': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'linebreak-style': 'off',
+    'global-require': 'off',
+    'object-shorthand': [2, 'always', { avoidQuotes: false }],
+    'object-curly-newline': 'off',
+    'camelcase': 'off',
+    'no-unresolved': 'off',
+    'no-script-url': 'off',
+    'semi': 'off',
   },
-};
+}

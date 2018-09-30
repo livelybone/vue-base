@@ -9,16 +9,16 @@ export default {
   name: 'Back',
   serverCacheKey: () => 'back',
   data() {
-    return {};
+    return {}
   },
   beforeDestroy() {
   },
   methods: {
     back() {
-      this.$router.back();
+      this.$router.back()
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

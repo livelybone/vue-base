@@ -1,62 +1,30 @@
+import { Observer } from '@livelybone/simple-observer'
+import { Storage } from '@livelybone/storage'
+
 /**
  * auth_token
  */
-import { http } from 'extensions/http';
-import LocalStorage from 'utils/localStorage';
 
-class AuthTokenClass {
-  token = new Map();
-
-  key = 'AUTH_TOKEN';
-
-  localStorage = new LocalStorage();
-
-  getUser() {
-    // 获取用户信息
-    return http.get('/user/myUserInfo').then(user => user, (e) => {
-      this.setToken('');
-      throw e;
-    });
+class AuthToken {
+  static setToken(val) {
+    this.storage.set(this.key, val)
   }
 
-  getAdminUser() {
-    // 获取用户信息
-    return http.get('/user/myUserInfo').then(user => user, (e) => {
-      this.setToken('');
-      throw e;
-    });
-  }
-
-  signIn({ phoneNumber, password }) {
-    return http.post(`/login?phoneNumber=${phoneNumber}&password=${password}`).then((res) => {
-      this.setToken(res);
-      return res;
-    });
-  }
-
-  signInAdmin({ phoneNumber, password }) {
-    return http.post(`/manager/login?phoneNumber=${phoneNumber}&password=${password}`).then((res) => {
-      this.setToken(res);
-      return res;
-    });
-  }
-
-  signOut() {
-    return new Promise((resolve) => {
-      this.setToken('');
-      resolve();
-    });
-  }
-
-  setToken(val) {
-    if (typeof window === 'undefined') this.token.set(this.key, val); // ssr dealing
-    else this.localStorage.set(this.key, val);
-  }
-
-  getToken() {
-    if (typeof window === 'undefined') return this.token.get(this.key) || '';
-    return this.localStorage.get(this.key);
+  static getToken() {
+    return this.storage.get(this.key)
   }
 }
 
-export const AuthToken = new AuthTokenClass();
+AuthToken.key = 'AUTH_TOKEN'
+
+let next = null
+
+AuthToken.tokenChange = new Observer((n) => {
+  next = n
+})
+
+AuthToken.storage = typeof window !== 'undefined' ? new Storage(true) : { addHandler: () => '' }
+
+AuthToken.storage.addHandler(next)
+
+export default AuthToken
