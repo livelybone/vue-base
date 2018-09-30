@@ -1,14 +1,14 @@
-'use strict';
-const path = require('path');
+'use strict'
+const path = require('path')
 
 const routes = [ // 在这里编辑需要预渲染的页面的路由
-  {path: '/', title: 'Home'},
-  {path: '/not-found', title: 'NotFound'},
-];
+  { path: '/', title: 'Home' },
+  { path: '/not-found', title: 'NotFound' },
+]
 
-const titles = {};
+const titles = {}
 
-routes.map(route => titles[route.path] = route.title);
+routes.map(route => titles[route.path] = route.title)
 
 module.exports = {
   // For more: https://github.com/chrisvfritz/prerender-spa-plugin/tree/v3
@@ -18,8 +18,8 @@ module.exports = {
   routes: routes.map(route => route.path),
   postProcess(renderedRoute) {
     // Ignore any redirects.
-    renderedRoute.route = renderedRoute.originalRoute;
-    renderedRoute.html = renderedRoute.html.replace(/<title>[^<]*<\/title>/i, '<title>' + titles[renderedRoute.route] + '</title>');
+    renderedRoute.route = renderedRoute.originalRoute
+    renderedRoute.html = renderedRoute.html.replace(/<title>[^<]*<\/title>/i, '<title>' + titles[renderedRoute.route] + '</title>')
     return renderedRoute
   },
   minify: {

@@ -1,17 +1,17 @@
-'use strict';
-const path = require('path');
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const PrerenderSpaPlugin = require('prerender-spa-plugin');
-const prerenderConfig = require('./prerender.conf');
-const utils = require('./utils');
-const config = require('../config');
-const baseWebpackConfig = require('./webpack.base.conf');
+'use strict'
+const path = require('path')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const PrerenderSpaPlugin = require('prerender-spa-plugin')
+const prerenderConfig = require('./prerender.conf')
+const utils = require('./utils')
+const config = require('../config')
+const baseWebpackConfig = require('./webpack.base.conf')
 
 const env = require('../config/prod.env')
 
