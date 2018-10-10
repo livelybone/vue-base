@@ -12,7 +12,7 @@
 
 > js：es6 规范
 
-> js: 全局状态管理使用 vuex，如果项目简单，可选择使用 extensions/store.js
+> js: 全局状态管理使用 vuex，如果项目简单，可选择使用 extensions/StorePlugin.js
 
 > js：工具类写在 utils 文件夹，插件写在 extensions 文件夹，组件共用变量或者模板写在 data/immutable-data 文件夹，ajax 相关的写在 data/api 文件夹，全局状态管理文件写在 data/store/modules 文件夹
 

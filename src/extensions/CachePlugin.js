@@ -1,11 +1,9 @@
 // 全局状态管理 store
-import { Http } from 'extensions/http'
+import { Http } from 'extensions/HttpPlugin'
 import { getUrl } from 'utils/RequestInterceptor'
 
-class Cache {
-  cache = new Map()
-
-  get(url, params) {
+export class Cache {
+  static get(url, params) {
     const key = getUrl(url, params)
     const val = this.getByKey(key)
     if (val) {
@@ -21,7 +19,7 @@ class Cache {
     })
   }
 
-  getFile(url, params) {
+  static getFile(url, params) {
     const key = getUrl(url, params)
     const val = this.getByKey(key)
     if (val) {
@@ -37,20 +35,20 @@ class Cache {
     })
   }
 
-  getByKey(key) {
+  static getByKey(key) {
     return this.cache.get(key)
   }
 
-  set(key, val) {
+  static set(key, val) {
     this.cache.set(key, val)
   }
 }
 
-export const cache = new Cache()
+Cache.cache = new Map()
 
 const CachePlugin = {}
 CachePlugin.install = (Vue) => {
-  Vue.prototype.$cache = cache
+  Vue.prototype.$cache = Cache
 }
 
 export default CachePlugin

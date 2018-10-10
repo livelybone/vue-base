@@ -1,5 +1,5 @@
 import AuthToken from 'data/api/AuthToken'
-import { Http } from 'extensions/http'
+import { Http } from 'extensions/HttpPlugin'
 
 export default class User {
   static register({ phoneNumber, password, verifyCode }) {
