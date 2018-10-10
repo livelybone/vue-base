@@ -1,4 +1,4 @@
-export default class debonceTime {
+export default class Debonce {
   timer = null
 
   time = 500

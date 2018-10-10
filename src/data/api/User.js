@@ -1,4 +1,4 @@
-import AuthToken from 'data/api/auth-token'
+import AuthToken from 'data/api/AuthToken'
 import { Http } from 'extensions/http'
 
 export default class User {

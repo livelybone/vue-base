@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { blobToURL } from 'utils/blob-url'
+import { blobToURL } from 'utils/BlobUrl'
 
 export default {
   name: 'Download',

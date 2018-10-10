@@ -104,9 +104,8 @@
 </template>
 
 <script>
-import { timeConversion } from 'utils/date-deal'
-import { getUrl } from 'utils/request-deal'
-import { isMobile } from 'utils/user-agent'
+import { getUrl } from 'utils/RequestInterceptor'
+import { isMobile } from 'utils/UserAgent'
 import { mapActions } from 'vuex'
 
 export default {
@@ -138,7 +137,7 @@ export default {
         hour,
         minute,
         second,
-      } = timeConversion(new Date(this.convertTime).getTime())
+      } = this.timeConversion(new Date(this.convertTime).getTime())
       return `${day}天${hour}时${minute}分${second}秒`
     },
   },

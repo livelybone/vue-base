@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import User from 'data/api/user'
+import User from 'data/api/User'
 
 export default {
   name: 'BtnCode',

@@ -1,4 +1,4 @@
-import User from 'data/api/user'
+import User from 'data/api/User'
 import Vue from 'vue'
 import Router from 'vue-router'
 
