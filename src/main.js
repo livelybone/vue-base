@@ -1,4 +1,4 @@
-import { initialExtensions } from '@/extensions/extensions'
+import { initialExtensions } from '@/extensions/Extensions'
 import store from 'data/store'
 import Vue from 'vue'
 import App from './App'
