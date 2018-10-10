@@ -1,4 +1,4 @@
-import User from 'data/api/user'
+import User from 'data/api/User'
 import { USER } from 'data/store/mutations-types'
 import Vue from 'vue'
 

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { isAndroid, isWeiXin } from 'utils/user-agent'
+import { isAndroid, isWeiXin } from 'utils/UserAgent'
 
 export default {
   name: 'FileInput',
