@@ -1,5 +1,12 @@
-import { format, parse } from 'date-fns'
-import { isMobile } from 'utils/user-agent'
+import {
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+  differenceInSeconds,
+  format,
+  parse,
+} from 'date-fns'
+import { isMobile } from 'utils/UserAgent'
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
@@ -51,6 +58,21 @@ export default function () {
       },
       alert(val) {
         alert(val)
+      },
+      dateFormatter(time, fmt) {
+        return format(parse(time), fmt)
+      },
+      timeConversion(time) {
+        // time 毫秒数
+        const d = parse(time)
+        const now = new Date()
+        console.log(time, d)
+        return {
+          day: Math.floor(differenceInDays(d, now)),
+          hour: differenceInHours(d, now) % 24,
+          minute: differenceInMinutes(d, now) % 60,
+          second: differenceInSeconds(d, now) % 60,
+        }
       },
     },
   })

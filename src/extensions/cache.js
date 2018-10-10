@@ -1,6 +1,6 @@
 // 全局状态管理 store
 import { Http } from 'extensions/http'
-import { getUrl } from 'utils/request-deal'
+import { getUrl } from 'utils/RequestInterceptor'
 
 class Cache {
   cache = new Map()

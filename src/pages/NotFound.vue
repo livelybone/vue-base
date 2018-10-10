@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { titleMixin } from 'extensions/title-mixin'
+import { titleMixin } from 'extensions/TitleMixin'
 
 export default {
   name: 'NotFound',

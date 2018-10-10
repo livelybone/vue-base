@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { blobToURL } from 'utils/blob-url'
+import { blobToURL } from 'utils/BlobUrl'
 import pdf from 'vue-pdf'
 
 export default {
