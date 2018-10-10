@@ -106,24 +106,24 @@
 </template>
 
 <script>
-import { titleMixin } from 'extensions/TitleMixin';
-import { getUrl } from 'utils/RequestInterceptor';
-import { isMobile } from 'utils/UserAgent';
-import { mapActions } from 'vuex';
+import { titleMixin } from 'extensions/TitleMixin'
+import { getUrl } from 'utils/RequestInterceptor'
+import { isMobile } from 'utils/UserAgent'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'HelloWorld',
   title: 'My Project',
   mixins: [titleMixin],
   asyncData({ store }) {
-    store.commit('setToken', 'sdfsdf');
-    return Promise.resolve({});
+    store.commit('setToken', 'sdfsdf')
+    return Promise.resolve({})
   },
   mounted() {
-    setTimeout(() => this.snackBar.error('Hello World!'), 1000);
-    console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }));
-    if (this.$store.state.user.info.id) this.getUserInfo({}).then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e));
-    console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)));
+    setTimeout(() => this.snackBar.error('Hello World!'), 1000)
+    console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }))
+    if (this.$store.state.user.info.id) this.getUserInfo({}).then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e))
+    console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))
   },
   data() {
     return {
