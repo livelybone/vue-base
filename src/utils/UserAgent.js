@@ -1,9 +1,5 @@
 import isAndroid from 'is-android'
-import mobile from 'is-mobile'
-
-export function isMobile() {
-  return mobile()
-}
+import isMobile from 'is-mobile'
 
 export function isWeiXin() {
   const ua = typeof window !== 'undefined' ? navigator.userAgent : ''
@@ -11,4 +7,4 @@ export function isWeiXin() {
   return reg.test(ua)
 }
 
-export { isAndroid }
+export { isAndroid, isMobile }

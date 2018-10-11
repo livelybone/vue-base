@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { blobToURL } from 'utils/BlobUrl'
+import { blobToBase64 } from 'base64-blob'
 import pdf from 'vue-pdf'
 
 export default {
@@ -50,7 +50,7 @@ export default {
       const src = val
       if (src instanceof FileList) {
         if (src[0]) {
-          this.setImg(blobToURL(src[0]))
+          this.setImg(blobToBase64(src[0]))
         } else {
           this.pdfSrc = ''
         }

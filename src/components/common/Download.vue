@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { blobToURL } from 'utils/BlobUrl'
+import { blobToBase64 } from 'base64-blob'
 
 export default {
   name: 'Download',
@@ -44,7 +44,7 @@ export default {
         this.fileSrc = val
       } else if (val instanceof FileList && val[0]) {
         this.filename = val[0].name
-        const blobUrl = blobToURL(val[0])
+        const blobUrl = blobToBase64(val[0])
         this.fileSrc = blobUrl.url
         this.revokeFn = blobUrl.revokeFn()
       }
