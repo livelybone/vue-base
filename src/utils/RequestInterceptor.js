@@ -16,21 +16,11 @@ export function getUrl(url, params) {
 export function convertToFormData(obj) {
   const data = new FormData()
   Object.keys(obj).forEach((i) => {
-    if (obj[i] instanceof FileList) {
-      [].map.call(obj[i], file => data.append(i, file))
-    } else if (obj[i] instanceof Array && (obj[i][0] instanceof File || (typeof obj[i][0] === 'string' && obj[i][0].indexOf('data') === 0) || obj[i][0] instanceof FileList)) { // 多张图片
-      obj[i].forEach((item) => {
-        if (item instanceof FileList) [].map.call(item, file => data.append(i, file))
-        else data.append(i, item)
-      })
-    } else if ((typeof obj[i]).indexOf('object') >= 0) {
-      if (obj[i] instanceof Array && (obj[i][0] instanceof File || obj[i][0] instanceof FileList)) {
-        // 上传多张图片
-        obj[i].forEach((item) => {
-          if (item instanceof File) data.append(i, item);
-          else [].map.call(item, file => data.append(i, file))
-        })
-      } else data.append(i, JSON.stringify(obj[i]))
+    if (obj[i] instanceof FileList
+      || (obj[i] instanceof Array && obj[i].some(f => f instanceof File))) { // 多张图片
+      [].forEach.call(obj[i], file => data.append(i, file))
+    } else if (typeof obj[i] === 'object' && !(obj[i] instanceof File)) {
+      data.append(i, JSON.stringify(obj[i]))
     } else {
       data.append(i, obj[i])
     }
