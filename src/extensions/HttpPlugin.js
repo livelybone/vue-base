@@ -31,7 +31,7 @@ export class Http {
 
   static errorValidate(data) {
     // 与后台约定的错误验证方式
-    // 现约定， 对于返回的数据的字段code，0表示成功，1表示出错
+    // 现假设约定， 对于返回的数据的字段code，0表示成功，1表示出错
     return data.code !== 0
   }
 
@@ -41,7 +41,6 @@ export class Http {
   }
 
   static post(url, data) {
-    // backend 代码统一使用urlParams/FormData对象的处理方式，因此这个API不用，put方法同理
     return this.responseDeal(axios.post(setAuth(url), data))
   }
 
@@ -82,12 +81,16 @@ export class Http {
   static responseDeal(promise) {
     return promise.then((res) => {
       // 去除config, request, status, statusText...等一些其他字段，关注data
-      const { data } = res
+      const { data, status } = res
+      const { message, msg, code, result } = data || {}
       if (data) {
-        if (this.errorValidate(data)) {
-          throw new Error(data.msg)
+        if (Http.errorValidate(data)) {
+          const error = new Error(message || msg)
+          error.statusCode = status
+          error.resCode = code
+          throw error
         } else {
-          return data.data
+          return result
         }
       }
       return res
