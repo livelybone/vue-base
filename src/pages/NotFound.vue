@@ -9,11 +9,6 @@
 <script>
 export default {
   name: 'NotFound',
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-    }
-  },
 }
 </script>
 
