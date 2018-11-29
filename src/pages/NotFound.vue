@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <page-container class="container" :title="404">
     <h1>404</h1>
     <p>找不到网页了！</p>
     <div class="back btn btn-blue" @click="$router.back()">返回</div>
-  </div>
+  </page-container>
 </template>
 
 <script>
