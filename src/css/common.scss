@@ -4,29 +4,28 @@
    定义整站的样式
  ====== ====================================================================== */
 
-html {
-  font-size: 625%; // 解决PC端最小字体大小为12px的问题
-}
-
 * {
-  box-sizing: border-box;
   flex: none;
   max-height: 100000rem; /* font boosting */
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   outline: none;
-  list-style: none;
-  font-family: 'Microsoft YaHei', 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-decoration: none;
 }
 
+html {
+  font-size: 625%; // 解决PC端最小字体大小为12px的问题
+}
+
 body {
+  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
   @extend .content-3;
   color: $black;
   background: $background;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ==========================================================================
