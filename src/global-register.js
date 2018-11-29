@@ -1,11 +1,4 @@
-import {
-  differenceInDays,
-  differenceInHours,
-  differenceInMinutes,
-  differenceInSeconds,
-  format,
-  parse,
-} from 'date-fns'
+import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds, format, parse, } from 'date-fns'
 import { isMobile } from 'utils/UserAgent'
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -25,6 +18,8 @@ const FileInput = () => import('components/form/FileInput' /* webpackChunkName: 
 const Overlay = () => import('components/common/Overlay' /* webpackChunkName: "Overlay" */)
 const OverlayConfirm = () => import('components/common/OverlayConfirm' /* webpackChunkName: "OverlayConfirm" */)
 
+const PageContainer = () => import('components/common/PageContainer' /* webpackChunkName: "PageContainer" */)
+
 const Loading = () => import('@livelybone/vue-loading' /* webpackChunkName: "Loading" */)
 
 export default function () {
@@ -40,6 +35,8 @@ export default function () {
 
   Vue.component('overlay', Overlay)
   Vue.component('overlay-confirm', OverlayConfirm)
+  
+  Vue.component('page-container', PageContainer)
 
   if (!isMobile()) {
     Vue.component('pagination', Pagination)

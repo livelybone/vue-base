@@ -1,9 +1,9 @@
 // title 管理
 
 function getTitle(vm) {
-  const { title } = vm.$options
-  if (title) return (typeof title === 'function' ? title.call(vm) : title) || 'project'
-  return ''
+  const { title } = vm
+  if (title) return (typeof title === 'function' ? title.call(vm) : title) || vm.$t('title')
+  return vm.$t('title')
 }
 
 const serverTitleMixin = {
@@ -20,4 +20,4 @@ const clientTitleMixin = {
   },
 }
 
-export const titleMixin = process && process.env.VUE_ENV === 'server' ? serverTitleMixin : clientTitleMixin
+export const TitleMixin = process && process.env.VUE_ENV === 'server' ? serverTitleMixin : clientTitleMixin

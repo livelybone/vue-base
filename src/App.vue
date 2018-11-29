@@ -15,7 +15,6 @@ export default {
   mounted() {
     this.snackBar.listen(this.$refs.snackBar) // 监听bus=>snackBar事件
     this.imgFullScreen.listen(this.$refs.imgFull) // 监听bus=>imgFullScreen事件
-    document.title = 'Project'
   },
   components: { SnackBar, ImageFullScreen },
 }
