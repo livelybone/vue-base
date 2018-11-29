@@ -9,9 +9,6 @@
 <script>
 export default {
   name: 'NotFound',
-  beforeMount() {
-    document.title = '404'
-  },
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
