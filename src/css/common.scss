@@ -17,7 +17,7 @@
 body {
   font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
   @extend .content-3;
-  color: $black;
+  color: $font;
   background: $background;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -78,6 +78,7 @@ button, .btn {
 
 a, .a {
   opacity: .8;
+  color: $black;
   cursor: pointer;
 
   &:hover {
