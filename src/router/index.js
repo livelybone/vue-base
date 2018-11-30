@@ -1,4 +1,5 @@
 import User from 'data/api/User'
+import { loadLanguageAsync } from 'extensions/Langs'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -24,28 +25,29 @@ const routes = [
   { path: '*', component: NotFound },
 ]
 
-export function createRouter(store) {
+export function createRouter(i18n, store) {
   const router = new Router({
     mode: 'history',
     routes,
   })
 
   router.beforeEach((to, fr, next) => {
+    const pro = loadLanguageAsync(i18n, i18n.locale)
     if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
       User.getUser().then(() => {
-        next()
+        pro.then(() => next())
       }).catch(() => {
-        next({ name: 'SignIn', redirect: to.fullPath })
+        pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
         Vue.prototype.snackBar.error('请先登录！')
       })
     } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
       User.getAdminUser().then(() => {
-        next()
+        pro.then(() => next())
       }).catch(() => {
-        next({ name: 'AdminSignIn', redirect: to.fullPath })
+        pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
         Vue.prototype.snackBar.error('请先登录管理端！')
       })
-    } else next()
+    } else pro.then(() => next())
   })
 
   return router

@@ -1,3 +1,4 @@
+/* Base */
 $black-darker: #222;
 $black-dark: #333;
 $black: #666;
@@ -34,3 +35,7 @@ $green-darker: #013640;
 $disabled: #ddd;
 
 $gradient: linear-gradient(to right, #074284, #3FB6F6);
+
+/* custom */
+$main: $green;
+$main-darker: $green-dark;

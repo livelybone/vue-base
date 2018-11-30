@@ -11,7 +11,7 @@ const { i18n } = initialExtensions()
 register()
 
 /* eslint-disable no-new */
-const router = createRouter(store)
+const router = createRouter(i18n, store)
 const root = new Vue({
   router,
   store,
