@@ -25,16 +25,43 @@ body {
 }
 
 /* ==========================================================================
-   定义button的样式
+   定义一些容器的样式，规范布局
  ====== ====================================================================== */
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.content-card {
+  width: 100%;
+  margin: 0 0 .1rem;
+  background: #fff;
+}
+
+/* ==========================================================================
+   定义表单元素的样式
+ ====== ====================================================================== */
+
+input, textarea, select, button, .btn {
+  height: .34rem;
+  padding: 0 .1rem;
+  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+
+  &:focus {
+    border-color: $blue;
+  }
+
+  &::placeholder {
+    color: $black-lighter;
+  }
+}
 
 button, .btn {
   @include flex(center, center);
-  height: .3rem;
-  padding: 0 .05rem;
   border-radius: .03rem;
   border: 1px solid $border;
-  background: #fff;
   cursor: pointer;
 
   &[disabled], &.disabled {
@@ -45,7 +72,45 @@ button, .btn {
   }
 }
 
-@each $name, $color in (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
+/* ==========================================================================
+   定义a的样式
+ ====== ====================================================================== */
+
+a, .a {
+  opacity: .8;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   定义表格元素的样式
+ ====== ====================================================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ==========================================================================
+   定义通用类的样式
+ ====== ====================================================================== */
+
+.transparent {
+  opacity: 0;
+}
+
+.transition {
+  transition: all .5s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ==========================================================================
+   定义通用的字体/按钮颜色类
+ ====== ====================================================================== */
+
+@each $name, $color in (main, $main), (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
   .btn-#{$name} {
     @include btn($color);
     opacity: .8;
@@ -65,100 +130,7 @@ button, .btn {
   }
 }
 
-/* ==========================================================================
-   定义a的样式
- ====== ====================================================================== */
-
-a, .a {
-  cursor: pointer;
-  opacity: .8;
-
-  &:hover {
-    opacity: 1 !important;
-  }
-}
-
-/* ==========================================================================
-   定义表格元素的样式
- ====== ====================================================================== */
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  //border: 1px solid $border;
-
-  & thead tr {
-    border-bottom-width: 2px;
-  }
-
-  & tr {
-    border-bottom: 1px solid $border;
-
-    & th {
-      font-weight: 600;
-    }
-
-    & td, & th {
-      height: .48rem;
-      padding: 0 .1rem;
-      //border-right: 1px solid $border;
-      @extend .content-7;
-      text-align: center;
-    }
-  }
-}
-
-/* ==========================================================================
-   定义表单元素的样式
- ====== ====================================================================== */
-
-input, textarea, select, button {
-  padding: 0 .1rem;
-  height: .34rem;
-  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
-
-  &:focus {
-    border-color: $blue;
-  }
-
-  &::placeholder {
-    color: $black-lighter;
-  }
-}
-
-/* ==========================================================================
-   定义一些容器的样式，规范布局
- ====== ====================================================================== */
-
-.container {
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.content-card {
-  width: 100%;
-  margin: 0 0 .1rem;
-  background: #fff;
-}
-
-/* ==========================================================================
-   定义通用类的样式
- ====== ====================================================================== */
-
-.transparent {
-  opacity: 0;
-}
-
-.transition {
-  transition: all .5s cubic-bezier(.4, 0, .2, 1);
-}
-
-/* ==========================================================================
-   定义通用的字体颜色类
- ====== ====================================================================== */
-
-@each $name, $color in (blue:$blue, light-blue:$blue-light, red:$red, green:$green) {
+@each $name, $color in (main:$main, blue:$blue, light-blue:$blue-light, red:$red, green:$green) {
   .font-#{$name} {
     color: $color;
   }
