@@ -1,4 +1,5 @@
-import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds, format, parse, } from 'date-fns'
+import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds, format, parse } from 'date-fns'
+import { Langs, loadLanguageAsync } from 'extensions/Langs'
 import { isMobile } from 'utils/UserAgent'
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -35,7 +36,7 @@ export default function () {
 
   Vue.component('overlay', Overlay)
   Vue.component('overlay-confirm', OverlayConfirm)
-  
+
   Vue.component('page-container', PageContainer)
 
   if (!isMobile()) {
@@ -49,6 +50,11 @@ export default function () {
   Vue.filter('amountPipe', (amount, { symbol, unit }) => (symbol || '') + amount + (unit || ''))
 
   Vue.mixin({
+    data() {
+      return {
+        Langs,
+      }
+    },
     methods: {
       log(...args) {
         console.log(...args)
@@ -63,13 +69,15 @@ export default function () {
         // time 毫秒数
         const d = parse(time)
         const now = new Date()
-        console.log(time, d)
         return {
           day: Math.floor(differenceInDays(d, now)),
           hour: differenceInHours(d, now) % 24,
           minute: differenceInMinutes(d, now) % 60,
           second: differenceInSeconds(d, now) % 60,
         }
+      },
+      switchLang(lang) {
+        return loadLanguageAsync(this.$i18n, lang)
       },
     },
   })

@@ -1,4 +1,5 @@
 import User from 'data/api/User'
+import { loadLanguageAsync } from 'extensions/Langs'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -10,28 +11,6 @@ import Router from 'vue-router'
 // const NotFound = resolve => require(['pages/NotFound'], resolve); // AMD， 缺点：无法指定 chunkName
 const NotFound = () => import('pages/NotFound' /* webpackChunkName:"NotFound" */)
 const HelloWorld = () => import('pages/HelloWorld' /* webpackChunkName:"HelloWorld" */)
-
-function routeGuard(store) {
-  return (to, fr, next) => {
-    if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
-      User.getUser().then(() => {
-        next()
-      }).catch(() => {
-        next({ name: 'SignIn', redirect: to.fullPath })
-        Vue.prototype.snackBar.error('请先登录！')
-      })
-    } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
-      User.getAdminUser().then(() => {
-        next()
-      }).catch(() => {
-        next({ name: 'AdminSignIn', redirect: to.fullPath })
-        Vue.prototype.snackBar.error('请先登录管理端！')
-      })
-    } else {
-      next()
-    }
-  }
-}
 
 Vue.use(Router)
 
@@ -46,8 +25,27 @@ const routes = [
   { path: '*', component: NotFound },
 ]
 
-export function createRouter(store) {
+export function createRouter(i18n, store) {
   const router = new Router({ mode: 'history', routes })
-  if (typeof window !== 'undefined') router.beforeEach(routeGuard(store)) // ssr 取消守卫
+  if (typeof window !== 'undefined') { // ssr 取消守卫
+    router.beforeEach((to, fr, next) => {
+      const pro = loadLanguageAsync(i18n, i18n.locale)
+      if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
+        User.getUser().then(() => {
+          pro.then(() => next())
+        }).catch(() => {
+          pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
+          Vue.prototype.snackBar.error('请先登录！')
+        })
+      } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
+        User.getAdminUser().then(() => {
+          pro.then(() => next())
+        }).catch(() => {
+          pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
+          Vue.prototype.snackBar.error('请先登录管理端！')
+        })
+      } else pro.then(() => next())
+    })
+  }
   return router
 }

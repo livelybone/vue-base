@@ -25,16 +25,43 @@ body {
 }
 
 /* ==========================================================================
-   定义button的样式
+   定义一些容器的样式，规范布局
  ====== ====================================================================== */
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.content-card {
+  width: 100%;
+  margin: 0 0 .1rem;
+  background: #fff;
+}
+
+/* ==========================================================================
+   定义表单元素的样式
+ ====== ====================================================================== */
+
+input, textarea, select, button, .btn {
+  height: .34rem;
+  padding: 0 .1rem;
+  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
+
+  &:focus {
+    border-color: $blue;
+  }
+
+  &::placeholder {
+    color: $black-lighter;
+  }
+}
 
 button, .btn {
   @include flex(center, center);
-  height: .3rem;
-  padding: 0 .05rem;
   border-radius: .03rem;
   border: 1px solid $border;
-  background: #fff;
   cursor: pointer;
 
   &[disabled], &.disabled {
@@ -45,7 +72,45 @@ button, .btn {
   }
 }
 
-@each $name, $color in (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
+/* ==========================================================================
+   定义a的样式
+ ====== ====================================================================== */
+
+a, .a {
+  opacity: .8;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   定义表格元素的样式
+ ====== ====================================================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ==========================================================================
+   定义通用类的样式
+ ====== ====================================================================== */
+
+.transparent {
+  opacity: 0;
+}
+
+.transition {
+  transition: all .5s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ==========================================================================
+   定义通用的字体/按钮颜色类
+ ====== ====================================================================== */
+
+@each $name, $color in (main, $main), (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
   .btn-#{$name} {
     @include btn($color);
     opacity: .8;
@@ -65,205 +130,9 @@ button, .btn {
   }
 }
 
-/* ==========================================================================
-   定义a的样式
- ====== ====================================================================== */
-
-a, .a {
-  cursor: pointer;
-  opacity: .8;
-
-  &:hover {
-    opacity: 1 !important;
-  }
-}
-
-/* ==========================================================================
-   定义表格元素的样式
- ====== ====================================================================== */
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  //border: 1px solid $border;
-
-  & thead tr {
-    border-bottom-width: 2px;
-  }
-
-  & tr {
-    border-bottom: 1px solid $border;
-
-    & th {
-      font-weight: 600;
-    }
-
-    & td, & th {
-      height: .48rem;
-      padding: 0 .1rem;
-      //border-right: 1px solid $border;
-      @extend .content-7;
-      text-align: center;
-    }
-  }
-}
-
-/* ==========================================================================
-   定义表单元素的样式
- ====== ====================================================================== */
-
-input, textarea, select {
-  padding: 0 .1rem;
-  height: .48rem;
-
-  &:focus {
-    border-color: $blue;
-  }
-
-  &::-webkit-input-placeholder { /* WebKit browsers */
-    color: $black-lighter;
-  }
-
-  &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: $black-lighter;
-  }
-
-  &::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: $black-lighter;
-  }
-
-  &:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: $black-lighter;
-  }
-}
-
-/* ==========================================================================
-   定义一些容器的样式，规范布局
- ====== ====================================================================== */
-
-.container {
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-}
-
-.content-card {
-  width: 100%;
-  margin: 0 0 .1rem;
-  background: #fff;
-}
-
-/* ==========================================================================
-   定义通用类的样式
- ====== ====================================================================== */
-
-.transparent {
-  opacity: 0;
-}
-
-/* ==========================================================================
-   定义通用的字体颜色类
- ====== ====================================================================== */
-
-@each $name, $color in (blue:$blue, light-blue:$blue-light, red:$red, green:$green) {
+@each $name, $color in (main:$main, blue:$blue, light-blue:$blue-light, red:$red, green:$green) {
   .font-#{$name} {
     color: $color;
-  }
-}
-
-/* ==========================================================================
-   定义css图标
- ====== ====================================================================== */
-.icon-fold {
-  display: block;
-  width: 0;
-  border: .05rem solid;
-  border-left-color: $black-lighter;
-  border-top-color: transparent !important;
-  border-right-color: transparent !important;
-  border-bottom-color: transparent !important;
-}
-
-.icon-unfold {
-  display: block;
-  position: relative;
-  top: .025rem;
-  left: -.05rem;
-  width: 0;
-  border: .05rem solid;
-  border-left-color: transparent !important;
-  border-top-color: $black-lighter;
-  border-right-color: transparent !important;
-  border-bottom-color: transparent !important;
-}
-
-.icon-back {
-  display: block;
-  width: .14rem;
-  height: .14rem;
-  border-left: .01rem solid #fff;
-  border-top: .01rem solid #fff;
-  transform: rotate(-45deg);
-}
-
-.icon-go {
-  display: block;
-  width: .14rem;
-  height: .14rem;
-  border-left: .01rem solid #fff;
-  border-top: .01rem solid #fff;
-  transform: rotate(135deg);
-}
-
-.icon-checkbox {
-  display: inline-block;
-  position: relative;
-  width: .14rem;
-  height: .14rem;
-  border-radius: 50%;
-  border: 1px solid $background-dark;
-  cursor: pointer;
-
-  &.checked {
-    border-color: $blue-light;
-
-    &:before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 50%;
-      height: 50%;
-      margin: -25% 0 0 -25%;
-      border-radius: 50%;
-      background: $blue-light;
-    }
-  }
-}
-
-.icon-checkbox-1 {
-  display: inline-block;
-  position: relative;
-  width: .14rem;
-  height: .14rem;
-  border: 1px solid $background-dark;
-  cursor: pointer;
-
-  &.checked {
-    border-color: $green;
-
-    &:before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 60%;
-      height: 25%;
-      margin: -25% 0 0 -32%;
-      border-bottom: 1px solid $green;
-      border-left: 1px solid $green;
-      transform: rotate(-45deg);
-    }
   }
 }
 

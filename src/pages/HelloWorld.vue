@@ -1,6 +1,8 @@
 <template>
   <page-container class="hello">
-    <div @click="switchLang()">{{$t('chinese-traditional')}}</div>
+    <select :value="$i18n.locale" @change="switchLang($event.target.value)">
+      <option v-for="op in Langs" :value="op.value" :key="op.value">{{op.name}}</option>
+    </select>
     <img-tag :src="require('assets/logo.png')"/>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
@@ -98,9 +100,6 @@ export default {
         this.isSearching = false
       }, 1000)
     },
-    switchLang() {
-      this.$i18n.locale = this.$i18n.locale === 'CN' ? 'CNT' : 'CN'
-    },
   },
   components: {},
 }
@@ -109,6 +108,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '../css/common-variable.scss';
+
+select {
+  display: block;
+  margin: 0 auto;
+}
 
 img {
   margin: .6rem 0 .4rem;
