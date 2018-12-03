@@ -7,15 +7,14 @@
   function setViewport(noScale) {
     window.isMobile = /Android|webOS|iPhone|iPod|iPad|BlackBerry|Windows Phone/i.test(navigator.userAgent)
     // canScale用来应付特殊情况
-    var scale = window.isMobile || !noScale ? window.devicePixelRatio || 1 : 1
+    var scale = window.isMobile && !noScale ? window.devicePixelRatio || 1 : 1
     var content = 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no'
-    if (scale !== 1) { // 判断访问环境是 Android|webOS|iPhone|iPod|BlackBerry(移动端)
-      document.documentElement.style.fontSize = 625 * scale + '%'
-      window.rootFootSize = { value: 100 * scale, unit: 'px/rem' }
+
+    document.documentElement.style.fontSize = 625 * scale + '%'
+    window.rootFootSize = { value: 100 * scale, unit: 'px/rem' }
+    if (scale !== 1) {
       var s = 1 / scale
       content = 'width=device-width, initial-scale=' + s + ', minimum-scale=' + s + ', maximum-scale=' + s + ', user-scalable=no'
-    } else {
-      window.rootFootSize = { value: window.isMobile ? 32 : 16, unit: 'px/rem' }
     }
     var meta = document.createElement('meta')
     meta.setAttribute('name', 'viewport')
