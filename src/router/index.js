@@ -1,5 +1,5 @@
 import User from 'data/api/User'
-import { loadLanguageAsync } from 'extensions/Langs'
+import { LangStore } from 'extensions/Langs'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -32,7 +32,7 @@ export function createRouter(i18n, store) {
   })
 
   router.beforeEach((to, fr, next) => {
-    const pro = loadLanguageAsync(i18n, i18n.locale)
+    const pro = LangStore.setLang(i18n.locale, { $i18n: i18n })
     if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
       User.getUser().then(() => {
         pro.then(() => next())
