@@ -47,6 +47,7 @@ body {
 input, textarea, select, button, .btn {
   height: .34rem;
   padding: 0 .1rem;
+  color: $font;
   font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
 
   &:focus {
@@ -54,7 +55,7 @@ input, textarea, select, button, .btn {
   }
 
   &::placeholder {
-    color: $black-lighter;
+    color: $font-lighter;
   }
 }
 
@@ -67,7 +68,7 @@ button, .btn {
   &[disabled], &.disabled {
     border-color: $disabled !important;
     background: $disabled !important;
-    color: $black-light !important;
+    color: $font-light !important;
     cursor: default !important;
   }
 }
@@ -78,7 +79,7 @@ button, .btn {
 
 a, .a {
   opacity: .8;
-  color: $black;
+  color: $font;
   cursor: pointer;
 
   &:hover {
