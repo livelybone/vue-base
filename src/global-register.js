@@ -1,5 +1,5 @@
 import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds, format, parse } from 'date-fns'
-import { Langs, loadLanguageAsync } from 'extensions/Langs'
+import { Langs } from 'extensions/Langs'
 import { isMobile } from 'utils/UserAgent'
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -77,7 +77,7 @@ export default function () {
         }
       },
       switchLang(lang) {
-        return loadLanguageAsync(this.$i18n, lang)
+        return this.$lang.setLang(lang, this)
       },
     },
   })
