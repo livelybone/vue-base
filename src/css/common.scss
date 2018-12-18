@@ -138,4 +138,22 @@ table {
   }
 }
 
+/* ==========================================================================
+   英文首字母大写类
+ ====== ====================================================================== */
+// 单词首字母大写
+.capitalize {
+  text-transform: capitalize
+}
+
+// 段落第一个单词首字母大写
+// 注意：:first-letter 仅作用于块元素
+// 内联元素要使用该伪对象，必须先设定元素的 height 或 width 属性，或者设定 position 属性为 absolute，或者设定 display 属性为 block。
+.p-capitalize {
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
+
 @import "./pagination";
