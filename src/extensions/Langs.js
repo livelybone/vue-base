@@ -19,10 +19,7 @@ function setI18nLanguage(i18n, lang) {
 
 function getBrowserLang() {
   if (typeof window === 'undefined') return 'en-US'
-  if (window.INIT_STATE && window.INIT_STATE.siteInfo && window.INIT_STATE.siteInfo.language) {
-    return window.INIT_STATE.siteInfo.language
-  }
-  return navigator.language.toLowerCase() === 'zh-cn' ? 'zh-HANS' : 'en-US'
+  return (navigator.language || navigator.userLanguage).toLowerCase() === 'zh-cn' ? 'zh-HANS' : 'en-US'
 }
 
 const browserLang = getBrowserLang()
@@ -55,6 +52,15 @@ export class LangStore {
     return vm ? loadLanguageAsync(vm.$i18n, val).then((lang) => {
       this.localStorage.set(this.key, lang)
     }) : Promise.reject(new Error('Param vm is null'))
+  }
+
+  static setLangAndRefresh(val) {
+    if (LangMap[val]) {
+      this.localStorage.set(this.key, val)
+      window.location.reload()
+    } else {
+      console.warn(`The lang \`${val}\` you set is not exist !`)
+    }
   }
 }
 
