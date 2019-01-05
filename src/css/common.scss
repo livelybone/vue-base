@@ -6,7 +6,6 @@
 
 * {
   flex: none;
-  max-height: 100000rem; /* font boosting */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -20,8 +19,6 @@ body {
   color: $font;
   background: $background;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ==========================================================================
@@ -48,6 +45,7 @@ input, textarea, select, button, .btn {
   height: .34rem;
   padding: 0 .1rem;
   color: $font;
+  font-size: inherit;
   font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
 
   &:focus {

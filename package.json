@@ -18,6 +18,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@livelybone/rem-init": "^3.0.0",
     "@livelybone/simple-observer": "^2.0.2",
     "@livelybone/storage": "^1.0.0",
     "@livelybone/vue-button": "^1.1.0",
