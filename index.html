@@ -3,27 +3,6 @@
 <head>
   <meta charset="utf-8">
   <link rel="shortcut icon" href="">
-  <script type="text/javascript">
-  function setViewport(noScale) {
-    window.isMobile = /Android|webOS|iPhone|iPod|iPad|BlackBerry|Windows Phone/i.test(navigator.userAgent)
-    // canScale用来应付特殊情况
-    var scale = window.isMobile && !noScale ? window.devicePixelRatio || 1 : 1
-    var content = 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no'
-
-    document.documentElement.style.fontSize = 625 * scale + '%'
-    window.rootFootSize = { value: 100 * scale, unit: 'px/rem' }
-    if (scale !== 1) {
-      var s = 1 / scale
-      content = 'width=device-width, initial-scale=' + s + ', minimum-scale=' + s + ', maximum-scale=' + s + ', user-scalable=no'
-    }
-    var meta = document.createElement('meta')
-    meta.setAttribute('name', 'viewport')
-    meta.setAttribute('content', content)
-    document.head.appendChild(meta)
-  }
-
-  setViewport(/noScale/i.test(location.href))
-  </script>
 </head>
 <body>
 <div id="app"><!--vue-ssr-outlet--></div>

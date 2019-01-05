@@ -2,9 +2,14 @@ import App from '@/App'
 import { initialExtensions } from '@/extensions/Extensions'
 import register from '@/global-register'
 import { createRouter } from '@/router'
+import RemInit from '@livelybone/rem-init'
 import { createStore } from 'data/store'
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
+
+RemInit({
+  pageNoScale: /noScale/i.test(window.location.search),
+})
 
 Vue.config.productionTip = false
 
