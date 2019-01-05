@@ -12,7 +12,8 @@
       <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
       <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
       <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
+      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This
+        Template</a></li>
     </ul>
     <h2>Ecosystem</h2>
     <ul>
@@ -31,7 +32,7 @@
     <no-result/>
     <router-link :to="'/a'">to</router-link>
     <select-base class="select-base" name="多选框" :value="1" :options="[{name:'1',value:1}]"/>
-    <pagination v-if="!isMobile()" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
+    <pagination v-if="!isMobile" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
     <slide-for-more v-else=""
                     class="slide-for-more"
                     :isSearching="isSearching"
@@ -46,7 +47,6 @@
 
 <script>
 import { getUrl } from 'utils/RequestInterceptor'
-import { isMobile } from 'utils/UserAgent'
 import { mapActions } from 'vuex'
 
 export default {
@@ -91,7 +91,6 @@ export default {
     input(file) {
       console.log('input File 值： ', file, typeof file)
     },
-    isMobile,
     search() {
       this.log('slide up')
       this.isSearching = true
