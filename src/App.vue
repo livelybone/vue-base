@@ -22,6 +22,7 @@ export default {
 
 <style lang="scss">
 @import "./css/common.scss";
+@import '../node_modules/vue-slide-for-more/lib/css/index';
 
 #app {
   text-align: center;

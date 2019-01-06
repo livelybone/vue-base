@@ -1,6 +1,12 @@
-import { differenceInDays, differenceInHours, differenceInMinutes, differenceInSeconds, format, parse } from 'date-fns'
+import {
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+  differenceInSeconds,
+  format,
+  parse,
+} from 'date-fns'
 import { Langs } from 'extensions/Langs'
-import { isMobile } from 'utils/UserAgent'
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
@@ -9,7 +15,7 @@ const Back = () => import('components/common/Back' /* webpackChunkName: "Back" *
 const ImgTag = () => import('vue-img-tag' /* webpackChunkName: "ImgTag" */)
 
 const Pagination = () => import('@livelybone/vue-pagination' /* webpackChunkName: "Pagination" */)
-const SlideForMore = () => import('vue-slide-for-more/lib/SlideForMore' /* webpackChunkName: "SlideForMore" */)
+const SlideForMore = () => import('vue-slide-for-more' /* webpackChunkName: "SlideForMore" */).then(module => module.SlideForMore)
 const NoResult = () => import('components/common/NoResult' /* webpackChunkName: "NoResult" */)
 
 const VueBtn = () => import('@livelybone/vue-button' /* webpackChunkName: "VueBtn" */)
@@ -39,7 +45,7 @@ export default function () {
 
   Vue.component('page-container', PageContainer)
 
-  if (!isMobile()) {
+  if (!window.isMobile) {
     Vue.component('pagination', Pagination)
   } else {
     Vue.component('loading', Loading)
@@ -53,6 +59,7 @@ export default function () {
     data() {
       return {
         Langs,
+        isMobile: window.isMobile,
       }
     },
     methods: {
