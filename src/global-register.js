@@ -30,6 +30,8 @@ const PageContainer = () => import('components/common/PageContainer' /* webpackC
 
 const Loading = () => import('@livelybone/vue-loading' /* webpackChunkName: "Loading" */)
 
+const isMobile = isBrowser && window.isMobile
+
 export default function () {
   // 注册全局组件
   Vue.component('back', Back)
@@ -47,7 +49,7 @@ export default function () {
   Vue.component('page-container', PageContainer)
   Vue.component('loading', Loading)
 
-  if (isBrowser && window.isMobile) {
+  if (isMobile) {
     Vue.component('slide-for-more', SlideForMore)
   } else {
     Vue.component('pagination', Pagination)
@@ -60,7 +62,7 @@ export default function () {
     data() {
       return {
         Langs,
-        isMobile: isBrowser && window.isMobile,
+        isMobile,
       }
     },
     methods: {
