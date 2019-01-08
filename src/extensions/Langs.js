@@ -19,8 +19,8 @@ function setI18nLanguage(i18n, lang) {
 }
 
 function getBrowserLang() {
-  if (!isBrowser) return 'en-US'
-  return (navigator.language || navigator.userLanguage).toLowerCase() === 'zh-cn' ? 'zh-HANS' : 'en-US'
+  if (!isBrowser) return 'en'
+  return (navigator.language || navigator.userLanguage).toLowerCase() === 'zh-cn' ? 'zh-hans' : 'en'
 }
 
 const browserLang = getBrowserLang()
