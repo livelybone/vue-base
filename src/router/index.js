@@ -53,14 +53,14 @@ export function createRouter(i18n, store) {
           pro.then(() => next())
         }).catch(() => {
           pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
-          Vue.prototype.snackBar.error('请先登录！')
+          Vue.prototype.snackBar.error('Please sign in!')
         })
       } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
         User.getAdminUser().then(() => {
           pro.then(() => next())
         }).catch(() => {
           pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
-          Vue.prototype.snackBar.error('请先登录管理端！')
+          Vue.prototype.snackBar.error('Please sign in the admin terminal!')
         })
       } else pro.then(() => next())
     }

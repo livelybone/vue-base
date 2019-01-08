@@ -13,6 +13,13 @@ export default {
   'cancel': '取消',
   '404': '404',
   '404.tip': '找不到網頁了！',
+
+  'login': {
+    'up': '註冊',
+    'in': '登錄',
+    'need.sign-in': '請先登錄！',
+    'need.sign-in.admin': '请先登录管理端！',
+  },
   'verify-code': {
     'name': '驗證碼',
     'get': '獲取驗證碼',
