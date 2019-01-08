@@ -4,6 +4,7 @@
 /* eslint-disable no-param-reassign */
 import { Storage } from '@livelybone/storage'
 import LangMap from 'assets/lang/LangMap'
+import { isBrowser } from 'utils/Utils'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
@@ -18,7 +19,7 @@ function setI18nLanguage(i18n, lang) {
 }
 
 function getBrowserLang() {
-  if (typeof window === 'undefined') return 'en-US'
+  if (!isBrowser) return 'en-US'
   return (navigator.language || navigator.userLanguage).toLowerCase() === 'zh-cn' ? 'zh-HANS' : 'en-US'
 }
 
