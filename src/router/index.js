@@ -40,30 +40,29 @@ export function createRouter(i18n, store) {
 
   router.beforeEach((to, fr, next) => {
     const { params: { lang } } = to
-    if (!lang || !langKeys.includes(lang)) {
+    const language = lang || ''
+    if (!langKeys.includes(language)) {
       next({
-        path: `/${i18n.locale}${to.path}`,
+        path: language ? to.path.replace(language, language.toLowerCase()) : `/${i18n.locale}${to.path}`,
         replace: true,
       })
-    }
-    const pro = LangStore.setLang(to.params.lang, { $i18n: i18n })
-    if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
-      User.getUser().then(() => {
-        pro.then(() => next())
-      }).catch(() => {
-        pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
-        Vue.prototype.snackBar.error('请先登录！')
-      })
-    } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
-      User.getAdminUser().then(() => {
-        pro.then(() => next())
-      }).catch(() => {
-        pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
-        Vue.prototype.snackBar.error('请先登录管理端！')
-      })
     } else {
-      pro.then(() => next())
-      console.log(next())
+      const pro = LangStore.setLang(to.params.lang, { $i18n: i18n })
+      if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
+        User.getUser().then(() => {
+          pro.then(() => next())
+        }).catch(() => {
+          pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
+          Vue.prototype.snackBar.error('请先登录！')
+        })
+      } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
+        User.getAdminUser().then(() => {
+          pro.then(() => next())
+        }).catch(() => {
+          pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
+          Vue.prototype.snackBar.error('请先登录管理端！')
+        })
+      } else pro.then(() => next())
     }
   })
 
