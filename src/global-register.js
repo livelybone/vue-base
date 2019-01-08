@@ -45,12 +45,12 @@ export default function () {
   Vue.component('overlay-confirm', OverlayConfirm)
 
   Vue.component('page-container', PageContainer)
+  Vue.component('loading', Loading)
 
-  if (isBrowser && !window.isMobile) {
-    Vue.component('pagination', Pagination)
-  } else {
-    Vue.component('loading', Loading)
+  if (isBrowser && window.isMobile) {
     Vue.component('slide-for-more', SlideForMore)
+  } else {
+    Vue.component('pagination', Pagination)
   }
 
   Vue.filter('datePipe', (time, { fmt }) => format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'))

@@ -1,14 +1,17 @@
 import { initialExtensions } from '@/extensions/Extensions'
 import RemInit from '@livelybone/rem-init'
 import store from 'data/store'
+import { isBrowser } from 'utils/Utils'
 import Vue from 'vue'
 import App from './App'
 import register from './global-register'
 import { createRouter } from './router'
 
-RemInit({
-  pageNoScale: /noScale/i.test(window.location.search),
-})
+if (isBrowser) {
+  RemInit({
+    pageNoScale: /noScale/i.test(window.location.search),
+  })
+}
 
 Vue.config.productionTip = false
 
