@@ -1,6 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { createApp } from '@/main'
 
+function redirect(url) {
+  if (url) {
+    return url
+  }
+  return '/en'
+}
+
 /**
  * 因为有可能会是异步路由钩子函数或组件，所以我们将返回一个 Promise，
  * 以便服务器能够等待所有的内容在渲染前，
@@ -17,7 +24,7 @@ export default context => new Promise((resolve, reject) => {
     // 如果页面需要管理员权限，则直接返回管理员登录页面
     router.push('/admin-sign-in')
   } else {
-    router.push(context.url)
+    router.push(redirect(context.url))
   }
   // 等到 router 将可能的异步组件和钩子函数解析完
   router.onReady(() => {
@@ -39,11 +46,9 @@ export default context => new Promise((resolve, reject) => {
       // 当我们将状态附加到上下文，
       // 并且 `template` 选项用于 renderer 时，
       // 状态将自动序列化为 `window.__INITIAL_STATE__`，并注入 HTML。
-      console.log(context.state, store.state)
       context.state = store.state
       // Promise 应该 resolve 应用程序实例，以便它可以渲染
       resolve(app)
     }).catch(reject)
   }, reject)
 })
-

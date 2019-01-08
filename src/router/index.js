@@ -1,6 +1,7 @@
 import User from 'data/api/User'
 import { langKeys, LangStore } from 'extensions/Langs'
 import BaseRoot from 'pages/BaseRoot'
+import { isBrowser } from 'utils/Utils'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -37,8 +38,8 @@ export function createRouter(i18n, store) {
     mode: 'history',
     routes,
   })
-  // ssr 取消守卫
-  if (typeof window !== 'undefined') {
+
+  if (isBrowser) {
     router.beforeEach((to, fr, next) => {
       const { params: { lang } } = to
       const language = lang || ''
@@ -65,6 +66,11 @@ export function createRouter(i18n, store) {
           })
         } else pro.then(() => next())
       }
+    })
+  } else {
+    router.beforeEach((to, fr, next) => {
+      const pro = LangStore.setLang(to.params.lang, { $i18n: i18n })
+      pro.then(() => next())
     })
   }
   return router

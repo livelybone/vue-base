@@ -14,7 +14,7 @@ export const Langs = langKeys
 
 function setI18nLanguage(i18n, lang) {
   i18n.locale = lang
-  document.querySelector('html').setAttribute('lang', lang)
+  if (isBrowser) document.querySelector('html').setAttribute('lang', lang)
   return lang
 }
 
