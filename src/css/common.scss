@@ -57,7 +57,7 @@ input, textarea, select, button, .btn {
   }
 }
 
-a, .a, button, .btn {
+button, .btn {
   @include flex(center, center);
   border-radius: .03rem;
   border: 1px solid $border;
