@@ -8,10 +8,8 @@ export default {
   'take-photo': '拍照',
   'ok': '確定',
   'cancel': '取消',
-  '404': {
-    'name': '404',
-    'tip': '找不到網頁了！',
-  },
+  '404': '404',
+  '404.tip': '找不到網頁了！',
   'verify-code': {
     'name': '驗證碼',
     'get': '獲取驗證碼',
