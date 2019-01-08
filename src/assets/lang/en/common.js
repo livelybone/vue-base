@@ -13,6 +13,13 @@ export default {
   'cancel': 'cancel',
   '404': '404',
   '404.tip': 'Page not found!',
+
+  'login': {
+    'up': 'sign in',
+    'in': 'sign up',
+    'need.sign-in': 'Please sign in!',
+    'need.sign-in.admin': 'Please sign in the admin terminal!',
+  },
   'verify-code': {
     'name': 'verify code',
     'get': 'get code',

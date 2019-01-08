@@ -13,6 +13,13 @@ export default {
   'cancel': '取消',
   '404': '404',
   '404.tip': '找不到网页了！',
+
+  'login': {
+    'up': '注册',
+    'in': '登录',
+    'need.sign-in': '请先登录！',
+    'need.sign-in.admin': '请先登录管理端！',
+  },
   'verify-code': {
     'name': '验证码',
     'get': '获取验证码',
