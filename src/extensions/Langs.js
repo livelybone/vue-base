@@ -53,15 +53,6 @@ export class LangStore {
       this.localStorage.set(this.key, lang)
     }) : Promise.reject(new Error('Param vm is null'))
   }
-
-  static setLangAndRefresh(val) {
-    if (LangMap[val]) {
-      this.localStorage.set(this.key, val)
-      window.location.reload()
-    } else {
-      console.warn(`The lang \`${val}\` you set is not exist !`)
-    }
-  }
 }
 
 LangStore.localStorage = new Storage()
