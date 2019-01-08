@@ -1,5 +1,6 @@
 import User from 'data/api/User'
-import { LangStore } from 'extensions/Langs'
+import { langKeys, LangStore } from 'extensions/Langs'
+import BaseRoot from 'pages/BaseRoot'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -15,14 +16,20 @@ const HelloWorld = () => import('pages/HelloWorld' /* webpackChunkName:"HelloWor
 Vue.use(Router)
 
 const routes = [
-  { path: '/', name: '', component: HelloWorld },
-  { path: '/home', name: 'HelloWorld', component: HelloWorld },
-  { path: '/sign-in', name: 'SignIn', component: HelloWorld },
-  { path: '/admin-sign-in', name: 'AdminSignIn', component: HelloWorld },
-  { path: '/client', meta: { requireAuth: true }, children: [] },
-  { path: '/admin', meta: { requireAdminAuth: true }, children: [] },
-  { path: '/not-found', component: NotFound },
-  { path: '*', component: NotFound },
+  {
+    path: '/:lang',
+    component: BaseRoot,
+    children: [
+      { path: '', name: '', component: HelloWorld },
+      { path: 'home', name: 'HelloWorld', component: HelloWorld },
+      { path: 'sign-in', name: 'SignIn', component: HelloWorld },
+      { path: 'admin-sign-in', name: 'AdminSignIn', component: HelloWorld },
+      { path: 'client', meta: { requireAuth: true }, children: [] },
+      { path: 'admin', meta: { requireAdminAuth: true }, children: [] },
+      { path: 'not-found', component: NotFound },
+      { path: '*', component: NotFound },
+    ],
+  },
 ]
 
 export function createRouter(i18n, store) {
@@ -32,7 +39,14 @@ export function createRouter(i18n, store) {
   })
 
   router.beforeEach((to, fr, next) => {
-    const pro = LangStore.setLang(i18n.locale, { $i18n: i18n })
+    const { params: { lang } } = to
+    if (!lang || !langKeys.includes(lang)) {
+      next({
+        path: `/${i18n.locale}${to.path}`,
+        replace: true,
+      })
+    }
+    const pro = LangStore.setLang(to.params.lang, { $i18n: i18n })
     if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
       User.getUser().then(() => {
         pro.then(() => next())
@@ -47,7 +61,10 @@ export function createRouter(i18n, store) {
         pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
         Vue.prototype.snackBar.error('请先登录管理端！')
       })
-    } else pro.then(() => next())
+    } else {
+      pro.then(() => next())
+      console.log(next())
+    }
   })
 
   return router
