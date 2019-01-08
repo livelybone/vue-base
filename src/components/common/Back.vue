@@ -1,7 +1,7 @@
 <template>
-  <div class="back-wrap" @click="Back">
+  <button class="back-wrap" @click="Back">
     <slot/>
-  </div>
+  </button>
 </template>
 
 <script>

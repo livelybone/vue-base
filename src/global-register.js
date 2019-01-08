@@ -7,6 +7,7 @@ import {
   parse,
 } from 'date-fns'
 import { Langs } from 'extensions/Langs'
+import { isBrowser } from 'utils/Utils'
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
@@ -45,7 +46,7 @@ export default function () {
 
   Vue.component('page-container', PageContainer)
 
-  if (!window.isMobile) {
+  if (isBrowser && !window.isMobile) {
     Vue.component('pagination', Pagination)
   } else {
     Vue.component('loading', Loading)
@@ -59,7 +60,7 @@ export default function () {
     data() {
       return {
         Langs,
-        isMobile: window.isMobile,
+        isMobile: isBrowser && window.isMobile,
       }
     },
     methods: {
@@ -84,7 +85,11 @@ export default function () {
         }
       },
       switchLang(lang) {
-        return this.$lang.setLang(lang, this)
+        const l = lang && lang.toLowerCase()
+        const { path, params: { lang: language } } = this.$route
+        if (l !== language) {
+          this.$router.push({ ...this.$route, path: path.replace(language, lang) })
+        }
       },
     },
   })

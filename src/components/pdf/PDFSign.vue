@@ -1,6 +1,6 @@
 <template>
   <div class="pdf-sign-wrap">
-    <span class="tip">拖动签章到裁决书相应位置，再点击确认盖章按钮，即完成签章！</span>
+    <span class="tip">{{$t('signature.how-to-sign')}}</span>
     <div class="pdf-wrap">
       <pdf-page class="pdf" :src="src" :page="page" @page-loaded="getWrapSize()" @toPage="toPage"/>
       <div class="sign-wrap" ref="wrap" @dragover="dragOver($event)" @drop="drop($event)">
@@ -10,7 +10,7 @@
                  @dragStart="dragStart($event)"/>
       </div>
       <div class="signature">
-        <h2>签章</h2>
+        <h2>{{$t('signature.all')}}</h2>
         <img-tag :src="signature"
                  @load="getImgSize($event)"
                  @dragStart="isNew = truedragStart($event)"
@@ -25,8 +25,7 @@ import pdfPage from 'components/pdf/PDFPage'
 
 export default {
   name: 'PDFSign',
-  mounted() {
-  },
+  components: { 'pdf-page': pdfPage },
   props: {
     src: {
       validator(val) {
@@ -102,7 +101,6 @@ export default {
       this.page = val
     },
   },
-  components: { 'pdf-page': pdfPage },
 }
 </script>
 

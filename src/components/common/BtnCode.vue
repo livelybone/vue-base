@@ -1,6 +1,6 @@
 <template>
   <div class="btn" @click="getCode" :disabled="!!second||disabled">
-    {{second ? second + '秒' : text||'获取验证码'}}
+    {{second ? second + $t('second') : text||$t('verify-code.get')}}
   </div>
 </template>
 

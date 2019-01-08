@@ -4,10 +4,11 @@
 /* eslint-disable no-param-reassign */
 import { Storage } from '@livelybone/storage'
 import LangMap from 'assets/lang/LangMap'
+import { isBrowser } from 'utils/Utils'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
-const langKeys = Object.keys(LangMap)
+export const langKeys = Object.keys(LangMap)
 export const Langs = langKeys
   .map(key => ({ name: LangMap[key].name, value: key }))
 
@@ -18,8 +19,8 @@ function setI18nLanguage(i18n, lang) {
 }
 
 function getBrowserLang() {
-  if (typeof window === 'undefined') return 'en-US'
-  return (navigator.language || navigator.userLanguage).toLowerCase() === 'zh-cn' ? 'zh-HANS' : 'en-US'
+  if (!isBrowser) return 'en'
+  return (navigator.language || navigator.userLanguage).toLowerCase() === 'zh-cn' ? 'zh-hans' : 'en'
 }
 
 const browserLang = getBrowserLang()
@@ -44,23 +45,13 @@ export function loadLanguageAsync(i18n, lang) {
 
 export class LangStore {
   static getLang() {
-    const lang = this.localStorage.get(this.key)
-    return LangMap[lang] ? lang : langKeys[0]
+    return this.localStorage.get(this.key)
   }
 
   static setLang(val, vm = null) {
     return vm ? loadLanguageAsync(vm.$i18n, val).then((lang) => {
       this.localStorage.set(this.key, lang)
     }) : Promise.reject(new Error('Param vm is null'))
-  }
-
-  static setLangAndRefresh(val) {
-    if (LangMap[val]) {
-      this.localStorage.set(this.key, val)
-      window.location.reload()
-    } else {
-      console.warn(`The lang \`${val}\` you set is not exist !`)
-    }
   }
 }
 

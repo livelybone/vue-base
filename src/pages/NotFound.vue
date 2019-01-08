@@ -1,8 +1,8 @@
 <template>
   <page-container class="container" :title="404">
     <h1>404</h1>
-    <p>找不到网页了！</p>
-    <div class="back btn btn-blue" @click="$router.back()">返回</div>
+    <p>{{$t('404.tip')}}</p>
+    <div class="back btn btn-blue" @click="$router.back()">{{$t('back')}}</div>
   </page-container>
 </template>
 

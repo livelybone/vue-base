@@ -2,8 +2,8 @@
   <div class="pdf-page-wrap">
     <div class="btn-group">
       <span class="page">{{page}}/{{totalPage}}</span>
-      <button @click="toPrev()">上一页</button>
-      <button @click="toNext()">下一页</button>
+      <button @click="toPrev()">{{$t('page.pre')}}</button>
+      <button @click="toNext()">{{$t('page.next')}}</button>
     </div>
     <pdf class="pdf"
          :src="pdfSrc"
@@ -21,9 +21,7 @@ import pdf from 'vue-pdf'
 
 export default {
   name: 'PDFPage',
-  beforeMount() {
-    this.convertSrc(this.src)
-  },
+  components: { pdf },
   props: {
     src: {
       validator(val) {
@@ -39,7 +37,6 @@ export default {
       totalPage: 0,
     }
   },
-  computed: {},
   watch: {
     src(val) {
       this.convertSrc(val)
@@ -72,7 +69,9 @@ export default {
       this.pdfSrc = blobUrl.url
     },
   },
-  components: { pdf },
+  beforeMount() {
+    this.convertSrc(this.src)
+  },
 }
 </script>
 

@@ -27,7 +27,7 @@
     <div @click="log('Div Click： ',$event.target)">
       <img-tag :src="require('assets/icon-search.png')"/>
     </div>
-    <div>还剩 {{time}}</div>
+    <div>{{$t('remain')}} {{time}}</div>
     <input type="file" @change="input($event.target.files[0])">
     <no-result/>
     <router-link :to="'/a'">to</router-link>
@@ -58,7 +58,11 @@ export default {
   mounted() {
     setTimeout(() => this.snackBar.error('Hello World!'), 1000)
     console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }))
-    if (this.$store.state.user.info.id) this.getUserInfo({}).then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))).catch(e => this.snackBar.error(e))
+    if (this.$store.state.user.info.id) {
+      this.getUserInfo({})
+        .then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info))))
+        .catch(e => this.snackBar.error(e))
+    }
     console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))
   },
   data() {
@@ -83,7 +87,7 @@ export default {
         minute,
         second,
       } = this.timeConversion(new Date(this.convertTime).getTime())
-      return `${day}天${hour}时${minute}分${second}秒`
+      return `${day} ${this.$t('day')} ${hour} ${this.$t('hour')} ${minute} ${this.$t('minute')} ${second} ${this.$t('second')}`
     },
   },
   methods: {

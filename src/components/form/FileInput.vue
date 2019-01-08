@@ -12,8 +12,6 @@ import { isAndroid, isWeiXin } from 'utils/UserAgent'
 
 export default {
   name: 'FileInput',
-  mounted() {
-  },
   props: {
     id: [String, Number],
   },
@@ -23,8 +21,6 @@ export default {
       needCapture,
     }
   },
-  computed: {},
-  methods: {},
 }
 </script>
 
