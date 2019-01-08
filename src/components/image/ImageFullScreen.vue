@@ -4,8 +4,8 @@
       <span class="btn-close" @click="close">X</span>
       <img-tag :src="img.value" alt=""/>
       <div v-if="imgs.length>1" class="operator">
-        <div class="prev" @click="toPrev">上一张</div>
-        <div class="next" @click="toNext">下一张</div>
+        <div class="prev" @click="toPrev">{{$t('image.pre')}}</div>
+        <div class="next" @click="toNext">{{$t('image.next')}}</div>
       </div>
     </overlay>
   </div>
@@ -44,7 +44,6 @@ export default {
       this.closed = true
     },
   },
-  components: {},
 }
 </script>
 

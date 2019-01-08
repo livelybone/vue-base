@@ -9,9 +9,7 @@ import pdf from 'vue-pdf'
 
 export default {
   name: 'PDFViewer',
-  mounted() {
-    this.getTotalPages()
-  },
+  components: { pdf },
   props: {
     src: [String, Object],
   },
@@ -32,7 +30,9 @@ export default {
       })
     },
   },
-  components: { pdf },
+  mounted() {
+    this.getTotalPages()
+  },
 }
 </script>
 

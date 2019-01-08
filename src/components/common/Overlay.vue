@@ -10,10 +10,6 @@
 
 export default {
   name: 'Overlay',
-  data() {
-    return {}
-  },
-  methods: {},
 }
 </script>
 

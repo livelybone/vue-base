@@ -11,12 +11,6 @@ import { blobToBase64 } from 'base64-blob'
 
 export default {
   name: 'Download',
-  beforeMount() {
-    this.convert(this.src)
-  },
-  destroyed() {
-    if (this.revokeFn) this.revokeFn()
-  },
   props: {
     showName: Boolean,
     src: {
@@ -49,6 +43,12 @@ export default {
         this.revokeFn = blobUrl.revokeFn()
       }
     },
+  },
+  beforeMount() {
+    this.convert(this.src)
+  },
+  destroyed() {
+    if (this.revokeFn) this.revokeFn()
   },
 }
 </script>

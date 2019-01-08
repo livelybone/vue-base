@@ -21,9 +21,6 @@ export default {
     checkboxSize: { type: String, default: '14px' },
     styles: Object,
   },
-  data() {
-    return {}
-  },
   methods: {
     input(val) {
       this.$emit('input', val)

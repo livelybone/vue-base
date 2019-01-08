@@ -2,7 +2,7 @@
   <label v-if="canEdit" class="file-input" :for="id">
     <template v-if="!myValue">
       <img class="icon" :src="require('assets/icon-upload.png')" alt="">
-      <span>点击拍照</span>
+      <span>{{$t('take-photo')}}</span>
     </template>
     <template v-else="">
       <img-tag :src="myValue" alt="" @click="$emit('imgClick',myValue)"/>
@@ -16,9 +16,6 @@
 <script>
 export default {
   name: 'MyFileInput',
-  beforeMount() {
-    this.myValue = this.value
-  },
   props: {
     id: [String, Number],
     value: [String, Number],
@@ -32,7 +29,6 @@ export default {
       myValue: null,
     }
   },
-  computed: {},
   watch: {
     value(val) {
       this.myValue = val
@@ -45,6 +41,9 @@ export default {
         this.$emit('input', val)
       }
     },
+  },
+  beforeMount() {
+    this.myValue = this.value
   },
 }
 </script>

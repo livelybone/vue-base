@@ -1,5 +1,5 @@
 <template>
-  <div class="no-result" @click="$emit('click',$event)">{{tipText || '没有查询到内容！'}}</div>
+  <div class="no-result" @click="$emit('click',$event)">{{tipText || $t('result.no')}}</div>
 </template>
 
 <script>
@@ -8,10 +8,6 @@ export default {
   props: {
     tipText: String,
   },
-  data() {
-    return {}
-  },
-  methods: {},
 }
 </script>
 
