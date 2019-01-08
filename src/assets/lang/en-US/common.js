@@ -8,10 +8,8 @@ export default {
   'take-photo': 'Take photo',
   'ok': 'OK',
   'cancel': 'cancel',
-  '404': {
-    'name': '404',
-    'tip': 'Page not found!',
-  },
+  '404': '404',
+  '404.tip': 'Page not found!',
   'verify-code': {
     'name': 'verify code',
     'get': 'get code',
