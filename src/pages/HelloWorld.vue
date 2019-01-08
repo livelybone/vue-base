@@ -27,7 +27,7 @@
     <div @click="log('Div Click： ',$event.target)">
       <img-tag :src="require('assets/icon-search.png')"/>
     </div>
-    <div>还剩 {{time}}</div>
+    <div>{{$t('remain')}} {{time}}</div>
     <input type="file" @change="input($event.target.files[0])">
     <no-result/>
     <pagination v-if="!isMobile" :config="pageConfig" @to="log('Pagination page： ',$event)"/>

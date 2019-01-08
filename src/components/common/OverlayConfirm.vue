@@ -3,12 +3,12 @@
     <div class="float-win" :style="{width:winWidth+'px'}">
       <h2 v-if="head">{{head}}</h2>
       <div class="overlay-content">
-        <p v-if="!hideTip">{{tipText || '确定删除吗'}}</p>
+        <p v-if="!hideTip">{{tipText || $t('operate.sure')}}</p>
         <slot/>
       </div>
       <div class="btn-group">
-        <div class="btn" @click="$emit('confirm')">{{confirmText || '确定'}}</div>
-        <div class="btn" @click="$emit('cancel')">{{cancelText || '取消'}}</div>
+        <div class="btn" @click="$emit('confirm')">{{confirmText || $t('ok')}}</div>
+        <div class="btn" @click="$emit('cancel')">{{cancelText || $t('cancel')}}</div>
       </div>
     </div>
   </overlay>
@@ -25,11 +25,6 @@ export default {
     winWidth: Number,
     hideTip: Boolean,
   },
-  data() {
-    return {}
-  },
-  methods: {},
-  components: {},
 }
 </script>
 
