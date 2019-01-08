@@ -8,7 +8,7 @@ import { isBrowser } from 'utils/Utils'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
-const langKeys = Object.keys(LangMap)
+export const langKeys = Object.keys(LangMap)
 export const Langs = langKeys
   .map(key => ({ name: LangMap[key].name, value: key }))
 
@@ -45,8 +45,7 @@ export function loadLanguageAsync(i18n, lang) {
 
 export class LangStore {
   static getLang() {
-    const lang = this.localStorage.get(this.key)
-    return LangMap[lang] ? lang : langKeys[0]
+    return this.localStorage.get(this.key)
   }
 
   static setLang(val, vm = null) {

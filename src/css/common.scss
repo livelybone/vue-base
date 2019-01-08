@@ -57,7 +57,7 @@ input, textarea, select, button, .btn {
   }
 }
 
-button, .btn {
+a, .a, button, .btn {
   @include flex(center, center);
   border-radius: .03rem;
   border: 1px solid $border;
@@ -142,6 +142,11 @@ table {
 // 单词首字母大写
 .capitalize {
   text-transform: capitalize
+}
+
+// 字母大写
+.uppercase {
+  text-transform: uppercase
 }
 
 // 段落第一个单词首字母大写
