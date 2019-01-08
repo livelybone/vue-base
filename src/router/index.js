@@ -61,10 +61,7 @@ export function createRouter(i18n, store) {
         pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
         Vue.prototype.snackBar.error('请先登录管理端！')
       })
-    } else {
-      pro.then(() => next())
-      console.log(next())
-    }
+    } else pro.then(() => next())
   })
 
   return router
