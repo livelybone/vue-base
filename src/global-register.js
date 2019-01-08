@@ -85,7 +85,11 @@ export default function () {
         }
       },
       switchLang(lang) {
-        return this.$lang.setLang(lang, this)
+        const l = lang && lang.toLowerCase()
+        const { path, params: { lang: language } } = this.$route
+        if (l !== language) {
+          this.$router.push({ ...this.$route, path: path.replace(language, lang) })
+        }
       },
     },
   })

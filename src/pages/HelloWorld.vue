@@ -77,7 +77,7 @@ export default {
         minute,
         second,
       } = this.timeConversion(new Date(this.convertTime).getTime())
-      return `${day}天${hour}时${minute}分${second}秒`
+      return `${day} ${this.$t('day')} ${hour} ${this.$t('hour')} ${minute} ${this.$t('minute')} ${second} ${this.$t('second')}`
     },
   },
   methods: {
