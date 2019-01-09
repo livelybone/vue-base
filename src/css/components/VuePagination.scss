@@ -1,30 +1,20 @@
-$main: #3491c3;
-$border: #ddd;
-$base-size: 10px;
-$font: #666;
-$font-light: #999;
-
-@function size($val:1) {
-  @return $val * $base-size
-}
-
-@mixin no-select() {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 .pagination {
-  font-size: size(1.4);
-  color: $font;
-  overflow: hidden;
+  $main: #3491c3;
+  $border: #ddd;
+  $font: #666;
+  $font-light: #999;
+
+  & {
+    font-size: size(1.4);
+    color: $font;
+    overflow: hidden;
+  }
 
   .label {
     float: left;
     height: size(2.8);
     line-height: size(2.8);
-    @include no-select();
+    user-select: none;
     color: $font-light;
   }
 
@@ -57,7 +47,7 @@ $font-light: #999;
     text-align: center;
     cursor: pointer;
     vertical-align: middle;
-    @include no-select();
+    user-select: none;
 
     &:hover {
       background: rgba($main, .3);

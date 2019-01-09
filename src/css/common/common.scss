@@ -1,4 +1,4 @@
-@import 'common-variable';
+@import 'common/common-variable';
 
 /* ==========================================================================
    定义整站的样式
@@ -158,5 +158,3 @@ table {
     text-transform: uppercase;
   }
 }
-
-@import "./pagination";

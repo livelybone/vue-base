@@ -28,6 +28,7 @@ module.exports = {
       pages: resolve('src/pages'),
       utils: resolve('src/utils'),
       assets: resolve('src/assets'),
+      css: resolve('src/css'),
       data: resolve('src/data'),
       config: resolve('config'),
       extensions: resolve('src/extensions'),

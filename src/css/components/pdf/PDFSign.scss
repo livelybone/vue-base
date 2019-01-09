@@ -1,0 +1,78 @@
+.pdf-sign-wrap {
+  @include flex-column(center, center);
+  width: 100%;
+
+  .tip {
+    display: block;
+    width: 100%;
+    line-height: .4rem;
+    text-align: center;
+  }
+
+  .pdf-wrap {
+    position: relative;
+    z-index: 1;
+
+    .pdf {
+      width: .78rem;
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+
+    .dot {
+      position: absolute;
+      left: .3rem;
+      bottom: .3rem;
+      z-index: 1;
+      width: .1rem;
+      height: .1rem;
+    }
+
+    .sign-wrap {
+      position: absolute;
+      left: .3rem;
+      right: .3rem;
+      top: .6rem;
+      bottom: .3rem;
+
+      img {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: .8rem;
+      }
+    }
+
+    .signature {
+      @include flex(center, center);
+      position: absolute;
+      right: .5rem;
+      top: .8rem;
+      z-index: 2;
+      width: 1rem;
+      height: 1rem;
+      background: rgba(#000, .2);
+
+      h2 {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 0 .1rem;
+        line-height: .24rem;
+        @extend .content-2;
+        color: #fff;
+        background: rgba(#000, .3);
+        pointer-events: none;
+      }
+
+      img {
+        position: relative;
+        width: .8rem;
+        cursor: pointer;
+      }
+    }
+  }
+}

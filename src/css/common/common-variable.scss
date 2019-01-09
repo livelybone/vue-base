@@ -1,6 +1,6 @@
-@import './color-variable.scss';
-@import './font-variable.scss';
-@import './size-variable.scss';
+@import 'color-variable';
+@import 'font-variable';
+@import 'size-variable';
 
 @mixin flex($h:flex-start,$v:center,$wrap:nowrap) {
   display: flex;
@@ -39,3 +39,6 @@
   margin: 0 auto;
 }
 
+@function size($val: 1){
+  @return  $val * .1rem
+}

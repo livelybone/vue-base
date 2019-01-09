@@ -11,25 +11,3 @@ export default {
   name: 'NotFound',
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, p {
-  text-align: center;
-}
-
-h1 {
-  margin: 1.25rem 0 .1rem;
-  font-size: .48rem;
-  font-weight: 400;
-  letter-spacing: .001rem;
-}
-
-.back {
-  width: 2rem;
-  height: .3rem;
-
-  margin: .5rem auto 0;
-  text-align: center;
-}
-</style>

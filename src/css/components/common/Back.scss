@@ -1,0 +1,5 @@
+.back-wrap {
+  @include flex(center, center);
+  min-width: .22rem;
+  min-height: .22rem;
+}

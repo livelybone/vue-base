@@ -4,6 +4,7 @@ import store from 'data/store'
 import { isBrowser } from 'utils/Utils'
 import Vue from 'vue'
 import App from './App'
+import 'css/App.scss'
 import register from './global-register'
 import { createRouter } from './router'
 

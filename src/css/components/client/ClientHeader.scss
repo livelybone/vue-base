@@ -1,0 +1,4 @@
+.client-header {
+  @include flex(space-between);
+  padding: 0 .2rem;
+}

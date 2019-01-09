@@ -19,13 +19,3 @@ export default {
   components: { SnackBar, ImageFullScreen },
 }
 </script>
-
-<style lang="scss">
-@import "./css/common.scss";
-@import '../node_modules/vue-slide-for-more/lib/css/index';
-
-#app {
-  text-align: center;
-  color: #2c3e50;
-}
-</style>

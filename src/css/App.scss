@@ -1,0 +1,35 @@
+@import 'common/common';
+@import '../../node_modules/vue-slide-for-more/lib/css/index';
+/*
+ Pages
+ */
+@import './pages/NotFound';
+@import './pages/client/Frame';
+@import './pages/client/Home';
+/*
+ Components
+ */
+@import 'components/VuePagination';
+@import 'components/VueSelect';
+// common
+@import 'components/common/Back';
+@import 'components/common/Download';
+@import 'components/common/LinkTo';
+@import 'components/common/NoResult';
+@import 'components/common/Overlay';
+@import 'components/common/OverlayConfirm';
+@import 'components/common/PageContainer';
+// form
+@import 'components/form/FileInput';
+@import 'components/form/MyFileInput';
+// img
+@import 'components/image/ImageFullScreen';
+// pdf
+//@import 'components/pdf/PDFPage';
+//@import 'components/pdf/PDFSign';
+//@import 'components/pdf/PDFViewer';
+
+#app {
+  text-align: center;
+  color: #2c3e50;
+}
