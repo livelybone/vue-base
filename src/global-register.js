@@ -58,11 +58,12 @@ export default function () {
   Vue.filter('datePipe', (time, { fmt }) => format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'))
   Vue.filter('amountPipe', (amount, { symbol, unit }) => (symbol || '') + amount + (unit || ''))
 
+  Vue.prototype.isMobile = isMobile
+
   Vue.mixin({
     data() {
       return {
         Langs,
-        isMobile,
       }
     },
     methods: {
