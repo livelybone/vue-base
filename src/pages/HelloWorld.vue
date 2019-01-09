@@ -1,5 +1,5 @@
 <template>
-  <page-container class="hello">
+  <page-container class="hello-world">
     <select :value="$i18n.locale" @change="switchLang($event.target.value)">
       <option v-for="op in Langs" :value="op.value" :key="op.value">{{op.name}}</option>
     </select>
