@@ -1,5 +1,5 @@
 <template>
-  <a :href="fileSrc" download="" target="download">
+  <a class="download-a" :href="fileSrc" download="" target="download">
     <!--download, target属性必需-->
     {{showName ? filename : ''}}
     <slot/>

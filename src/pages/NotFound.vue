@@ -1,5 +1,5 @@
 <template>
-  <page-container class="container" :title="404">
+  <page-container class="not-found" :title="404">
     <h1>404</h1>
     <p>{{$t('404.tip')}}</p>
     <div class="back btn btn-blue" @click="$router.back()">{{$t('back')}}</div>

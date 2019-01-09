@@ -1,5 +1,5 @@
 <template>
-  <label v-if="canEdit" class="file-input" :for="id">
+  <label v-if="canEdit" class="my-file-input" :for="id">
     <template v-if="!myValue">
       <img class="icon" :src="require('assets/icon-upload.png')" alt="">
       <span>{{$t('take-photo')}}</span>
