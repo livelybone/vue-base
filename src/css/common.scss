@@ -17,6 +17,10 @@ body {
   font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
   @extend .content-3;
   color: $font;
+  letter-spacing: .01rem;
+}
+
+body {
   background: $background;
   overflow-x: hidden;
 }
@@ -44,7 +48,7 @@ body {
 input, textarea, select, button, .btn {
   height: .34rem;
   padding: 0 .1rem;
-  color: $font;
+  color: inherit;
   font-size: inherit;
   font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
 
@@ -59,6 +63,7 @@ input, textarea, select, button, .btn {
 
 button, .btn {
   @include flex(center, center);
+  color: inherit;
   border-radius: .03rem;
   border: 1px solid $border;
   cursor: pointer;
@@ -77,7 +82,7 @@ button, .btn {
 
 a, .a {
   opacity: .8;
-  color: $font;
+  color: inherit;
   cursor: pointer;
 
   &:hover {

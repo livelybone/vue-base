@@ -5,14 +5,6 @@ $black: #666;
 $black-light: #999;
 $black-lighter: #ccc;
 
-$border-dark: #d2d2d2;
-$border: #ddd;
-$border-light: #eee;
-
-$background: #fafafa;
-$background-1: #f5f5f5;
-$background-dark: #ccc;
-
 $red: #FA4A61;
 $red-light: #fa7377;
 $red-dark: #cc0022;
@@ -32,10 +24,6 @@ $green-gray: #c5e3ec;
 $green-dark: #008236;
 $green-darker: #013640;
 
-$disabled: #ddd;
-
-$gradient: linear-gradient(to right, #074284, #3FB6F6);
-
 /* custom */
 $main: $green;
 $main-darker: $green-dark;
@@ -45,3 +33,15 @@ $font-dark: $black-dark;
 $font: $black;
 $font-light: $black-light;
 $font-lighter: $black-lighter;
+
+$border-dark: #d2d2d2;
+$border: #ddd;
+$border-light: #eee;
+
+$background: #fafafa;
+$background-1: #f5f5f5;
+$background-dark: #ccc;
+
+$disabled: #ddd;
+
+$gradient: linear-gradient(to right, #074284, #3FB6F6);
