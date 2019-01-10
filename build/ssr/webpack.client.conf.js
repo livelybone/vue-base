@@ -6,9 +6,17 @@ const baseConfig = require('./webpack.base.conf.js');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const config = require('../../config/index');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const utils = require('../utils')
 
 module.exports = merge(baseConfig, {
   entry: ['babel-polyfill', './src/entry-client.js'],
+  module: {
+    rules: utils.styleLoaders({
+      sourceMap: config.build.productionSourceMap,
+      extract: true,
+      usePostCSS: false,
+    }),
+  },
   plugins: [
     // 重要信息：这将 webpack 运行时分离到一个引导 chunk 中，
     // 以便可以在之后正确注入异步 chunk。
