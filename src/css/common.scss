@@ -24,6 +24,10 @@ body {
   overflow-x: hidden;
 }
 
+img {
+  border: none;
+}
+
 /* ==========================================================================
    定义一些容器的样式，规范布局
  ====== ====================================================================== */
@@ -47,9 +51,10 @@ body {
 input, textarea, select, button, .btn {
   height: .34rem;
   padding: 0 .1rem;
-  color: inherit;
+  font-family: inherit;
   font-size: inherit;
-  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
+  letter-spacing: inherit;
+  color: inherit;
 
   &:focus {
     border-color: $blue;
@@ -161,6 +166,10 @@ table {
   &:first-letter {
     text-transform: uppercase;
   }
+}
+
+p {
+  max-width: 100%;
 }
 
 [lang=en] h1,
