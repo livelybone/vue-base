@@ -2,7 +2,7 @@
 import { createApp } from '@/main'
 
 function redirect(url) {
-  if (url) {
+  if (url && url !== '/') {
     return url
   }
   return '/en'
