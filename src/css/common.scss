@@ -163,4 +163,19 @@ table {
   }
 }
 
+[lang=en] h1,
+[lang=en] h2,
+[lang=en] h3,
+[lang=en] h4,
+[lang=en] h5,
+[lang=en] h6,
+[lang=en] button,
+[lang=en] .btn {
+  @extend .capitalize;
+}
+
+[lang=en] p {
+  @extend .p-capitalize;
+}
+
 @import "./pagination";
