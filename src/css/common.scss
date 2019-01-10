@@ -17,8 +17,15 @@ body {
   font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
   @extend .content-3;
   color: $font;
+}
+
+body {
   background: $background;
   overflow-x: hidden;
+}
+
+img {
+  border: none;
 }
 
 /* ==========================================================================
@@ -44,9 +51,10 @@ body {
 input, textarea, select, button, .btn {
   height: .34rem;
   padding: 0 .1rem;
-  color: $font;
+  font-family: inherit;
   font-size: inherit;
-  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
+  letter-spacing: inherit;
+  color: inherit;
 
   &:focus {
     border-color: $blue;
@@ -59,6 +67,7 @@ input, textarea, select, button, .btn {
 
 button, .btn {
   @include flex(center, center);
+  color: inherit;
   border-radius: .03rem;
   border: 1px solid $border;
   cursor: pointer;
@@ -77,7 +86,7 @@ button, .btn {
 
 a, .a {
   opacity: .8;
-  color: $font;
+  color: inherit;
   cursor: pointer;
 
   &:hover {
@@ -157,6 +166,25 @@ table {
   &:first-letter {
     text-transform: uppercase;
   }
+}
+
+p {
+  max-width: 100%;
+}
+
+[lang=en] h1,
+[lang=en] h2,
+[lang=en] h3,
+[lang=en] h4,
+[lang=en] h5,
+[lang=en] h6,
+[lang=en] button,
+[lang=en] .btn {
+  @extend .capitalize;
+}
+
+[lang=en] p {
+  @extend .p-capitalize;
 }
 
 @import "./pagination";

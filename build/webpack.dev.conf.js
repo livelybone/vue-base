@@ -31,7 +31,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
           emitWarning: true,
         },
       },
-      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: false }),
+      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true }),
     ],
   },
   // cheap-module-eval-source-map is faster for development
