@@ -2,19 +2,46 @@
 const express = require('express')
 const App = express()
 const path = require('path')
+const fs = require('fs')
 const resolve = file => path.resolve(__dirname, file)
-const serverBundle = require('../../dist/vue-ssr-server-bundle.json')
-const clientManifest = require('../../dist/vue-ssr-client-manifest.json')
 const LRU = require('lru-cache')
-const renderer = require('vue-server-renderer').createBundleRenderer(serverBundle, {
-  runInNewContext: 'once',
-  template: require('fs').readFileSync('./index.html', 'utf-8'),
-  clientManifest,
-  cache: LRU({
-    max: 1000,
-    maxAge: 1000, // 1s
-  })
-})
+const serverRenderer = require('vue-server-renderer')
+const chokidar = require('chokidar')
+
+let renderer
+
+function readFile(url) {
+  return fs.readFileSync(resolve(url), 'utf-8')
+}
+
+function createRenderer() {
+  delete require.cache[require.resolve('../../dist/vue-ssr-server-bundle.json')]
+  delete require.cache[require.resolve('../../dist/vue-ssr-client-manifest.json')]
+
+  renderer = serverRenderer.createBundleRenderer(
+    require('../../dist/vue-ssr-server-bundle.json'),
+    {
+      runInNewContext: 'once',
+      template: readFile('../../index.html'),
+      clientManifest: require('../../dist/vue-ssr-client-manifest.json'),
+      cache: LRU({
+        max: 1000,
+        maxAge: 1000, // 1s
+      })
+    },
+  )
+  console.log(renderer)
+}
+
+const watcher = chokidar.watch([
+  resolve('../../dist/vue-ssr-server-bundle.json'),
+  resolve('../../dist/vue-ssr-client-manifest.json'),
+  resolve('./index.html'),
+])
+
+createRenderer()
+watcher.on('change', createRenderer)
+
 const port = process.env.PORT || 3000
 
 const serve = (path, cache) => express.static(resolve(path), {
