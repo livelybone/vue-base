@@ -30,7 +30,7 @@ function createRenderer() {
       })
     },
   )
-  console.log(renderer)
+  console.log('`renderer` changed \n\r\n\r')
 }
 
 const watcher = chokidar.watch([
