@@ -28,6 +28,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         options: {
           formatter: EslintFormatter,
           emitWarning: true,
+          fix: true,
         },
       },
       ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true }),
@@ -70,8 +71,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
-      inject: true,
+      template: utils.pathResolve('static/index.html'),
+      inject: 'head',
+      assetsPublicPath: config.build.assetsPublicPath.replace(/\/*$/, ''),
+      assetsSubDirectory: config.build.assetsSubDirectory.replace(/\/*$/, ''),
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
@@ -81,6 +84,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*'],
       },
     ]),
+    new webpack.DllReferencePlugin({
+      context: utils.pathResolve(''),
+      manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
+    }),
+    new webpack.DllReferencePlugin({
+      context: utils.pathResolve(''),
+      manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
+    }),
   ],
 })
 

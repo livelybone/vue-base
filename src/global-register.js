@@ -16,7 +16,10 @@ const Back = () => import('components/common/Back' /* webpackChunkName: "Back" *
 const ImgTag = () => import('vue-img-tag' /* webpackChunkName: "ImgTag" */)
 
 const Pagination = () => import('@livelybone/vue-pagination' /* webpackChunkName: "Pagination" */)
-const SlideForMore = () => import('vue-slide-for-more' /* webpackChunkName: "SlideForMore" */).then(module => module.SlideForMore)
+const SlideForMore = () =>
+  import('vue-slide-for-more' /* webpackChunkName: "SlideForMore" */).then(
+    module => module.SlideForMore,
+  )
 const NoResult = () => import('components/common/NoResult' /* webpackChunkName: "NoResult" */)
 
 const VueBtn = () => import('@livelybone/vue-button' /* webpackChunkName: "VueBtn" */)
@@ -24,15 +27,17 @@ const InputBase = () => import('@livelybone/vue-input' /* webpackChunkName: "Inp
 const FileInput = () => import('components/form/FileInput' /* webpackChunkName: "FileInput" */)
 
 const Overlay = () => import('components/common/Overlay' /* webpackChunkName: "Overlay" */)
-const OverlayConfirm = () => import('components/common/OverlayConfirm' /* webpackChunkName: "OverlayConfirm" */)
+const OverlayConfirm = () =>
+  import('components/common/OverlayConfirm' /* webpackChunkName: "OverlayConfirm" */)
 
-const PageContainer = () => import('components/common/PageContainer' /* webpackChunkName: "PageContainer" */)
+const PageContainer = () =>
+  import('components/common/PageContainer' /* webpackChunkName: "PageContainer" */)
 
 const Loading = () => import('@livelybone/vue-loading' /* webpackChunkName: "Loading" */)
 
 const isMobile = isBrowser && window.isMobile
 
-export default function () {
+export default function() {
   // 注册全局组件
   Vue.component('back', Back)
   Vue.component('img-tag', ImgTag)
@@ -89,7 +94,10 @@ export default function () {
       },
       switchLang(lang) {
         const l = lang && lang.toLowerCase()
-        const { path, params: { lang: language } } = this.$route
+        const {
+          path,
+          params: { lang: language },
+        } = this.$route
         if (l !== language) {
           this.$router.push({ ...this.$route, path: path.replace(language, lang) })
         }

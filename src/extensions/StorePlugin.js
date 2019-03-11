@@ -14,7 +14,7 @@ Store.state = data
 
 const StorePlugin = {}
 
-StorePlugin.install = (Vue) => {
+StorePlugin.install = Vue => {
   Vue.prototype.$store = Store
 }
 

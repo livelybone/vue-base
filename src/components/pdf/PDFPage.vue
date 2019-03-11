@@ -1,17 +1,19 @@
 <template>
   <div class="pdf-page-wrap">
     <div class="btn-group">
-      <span class="page">{{page}}/{{totalPage}}</span>
-      <button @click="toPrev()">{{$t('page.pre')}}</button>
-      <button @click="toNext()">{{$t('page.next')}}</button>
+      <span class="page">{{ page }}/{{ totalPage }}</span>
+      <button @click="toPrev()">{{ $t('page.pre') }}</button>
+      <button @click="toNext()">{{ $t('page.next') }}</button>
     </div>
-    <pdf class="pdf"
-         :src="pdfSrc"
-         :page="page"
-         @loaded="$emit('loaded')"
-         @page-loaded="$emit('page-loaded')"
-         @num-pages="totalPage=$event"
-         @error="snackBar.error($event)"/>
+    <pdf
+      class="pdf"
+      :src="pdfSrc"
+      :page="page"
+      @loaded="$emit('loaded')"
+      @page-loaded="$emit('page-loaded')"
+      @num-pages="totalPage = $event"
+      @error="snackBar.error($event)"
+    />
   </div>
 </template>
 
@@ -82,12 +84,12 @@ export default {
 .pdf-page-wrap {
   position: relative;
   width: 100%;
-  padding: .6rem .3rem .3rem;
+  padding: 0.6rem 0.3rem 0.3rem;
   background: #666;
 
   & .pdf {
     margin: 0 0 $margin;
-    box-shadow: 0 .05rem .1rem rgba(#000, .25);
+    box-shadow: 0 0.05rem 0.1rem rgba(#000, 0.25);
 
     &:last-of-type {
       margin: 0;
@@ -101,17 +103,17 @@ export default {
     left: 0;
     right: 0;
     top: 0;
-    padding: 0 .3rem;
-    height: .4rem;
-    background: rgba(#fff, .1);
+    padding: 0 0.3rem;
+    height: 0.4rem;
+    background: rgba(#fff, 0.1);
 
     & .page {
       color: #fff;
     }
 
     & button {
-      height: .24rem;
-      margin: 0 0 0 .2rem;
+      height: 0.24rem;
+      margin: 0 0 0 0.2rem;
       line-height: normal;
       @extend .content-2;
     }

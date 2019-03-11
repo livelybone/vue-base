@@ -1,16 +1,16 @@
 <template>
   <label v-if="canEdit" class="my-file-input" :for="id">
     <template v-if="!myValue">
-      <img class="icon" :src="require('assets/icon-upload.png')" alt="">
-      <span>{{$t('take-photo')}}</span>
+      <img class="icon" :src="require('assets/icon-upload.png')" alt="" />
+      <span>{{ $t('take-photo') }}</span>
     </template>
     <template v-else="">
-      <img-tag :src="myValue" alt="" @click="$emit('imgClick',myValue)"/>
-      <img :src="require('assets/icon-edit.png')" alt="" class="edit">
+      <img-tag :src="myValue" alt="" @click="$emit('imgClick', myValue)" />
+      <img :src="require('assets/icon-edit.png')" alt="" class="edit" />
     </template>
-    <file-input :id="id" @input="input"/>
+    <file-input :id="id" @input="input" />
   </label>
-  <img-tag class="img" v-else="" :src="myValue" @click="$emit('imgClick',myValue)"/>
+  <img-tag class="img" v-else="" :src="myValue" @click="$emit('imgClick', myValue)" />
 </template>
 
 <script>
@@ -57,9 +57,9 @@ export default {
   position: relative;
   width: 100%;
   height: 50vw;
-  margin: 0 0 .1rem;
+  margin: 0 0 0.1rem;
   border: 1px dashed $border;
-  border-radius: .05rem;
+  border-radius: 0.05rem;
   background: $background;
   cursor: pointer;
   overflow: hidden;
@@ -70,7 +70,7 @@ export default {
   }
 
   & span {
-    padding: .1rem 0 0;
+    padding: 0.1rem 0 0;
     color: $black-light;
   }
 
@@ -78,9 +78,9 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-    width: .3rem;
-    padding: .04rem;
-    background: rgba(#000, .5);
+    width: 0.3rem;
+    padding: 0.04rem;
+    background: rgba(#000, 0.5);
     cursor: pointer;
   }
 }
@@ -88,6 +88,6 @@ export default {
 .img {
   display: flex;
   width: 100%;
-  margin: 0 0 .1rem;
+  margin: 0 0 0.1rem;
 }
 </style>

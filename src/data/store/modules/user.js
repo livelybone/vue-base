@@ -21,11 +21,13 @@ const mutations = {
 const actions = {
   getUserInfo({ commit, _state }) {
     commit(USER.GET_USER_INFO, {})
-    return User.getUser().then(res => commit(USER.GET_USER_INFO, {
-      ..._state.info,
-      role: 'client',
-      ...res,
-    }))
+    return User.getUser().then(res =>
+      commit(USER.GET_USER_INFO, {
+        ..._state.info,
+        role: 'client',
+        ...res,
+      }),
+    )
   },
 }
 

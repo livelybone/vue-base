@@ -1,7 +1,7 @@
 // 事件总线
 
 const BusPlugin = {}
-BusPlugin.install = (Vue) => {
+BusPlugin.install = Vue => {
   const bus = new Vue()
 
   Vue.prototype.bus = bus
@@ -21,16 +21,16 @@ BusPlugin.install = (Vue) => {
     },
     listen(vm) {
       // vm: snackBar实例
-      bus.$on('snack-bar-open', (msg) => {
+      bus.$on('snack-bar-open', msg => {
         vm.open(msg)
       })
-      bus.$on('snack-bar-info', (msg) => {
+      bus.$on('snack-bar-info', msg => {
         vm.info(msg)
       })
-      bus.$on('snack-bar-error', (msg) => {
+      bus.$on('snack-bar-error', msg => {
         vm.error(msg)
       })
-      bus.$on('snack-bar-warn', (msg) => {
+      bus.$on('snack-bar-warn', msg => {
         vm.warn(msg)
       })
     },

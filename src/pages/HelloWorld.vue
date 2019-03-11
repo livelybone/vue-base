@@ -1,9 +1,9 @@
 <template>
   <page-container class="hello-world">
     <select :value="$i18n.locale" @change="switchLang($event.target.value)">
-      <option v-for="op in Langs" :value="op.value" :key="op.value">{{op.name}}</option>
+      <option v-for="op in Langs" :value="op.value" :key="op.value">{{ op.name }}</option>
     </select>
-    <img-tag :src="require('assets/logo.png')"/>
+    <img-tag :src="require('assets/logo.png')" />
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -11,9 +11,12 @@
       <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
       <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
       <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This
-        Template</a></li>
+      <br />
+      <li>
+        <a href="http://vuejs-templates.github.io/webpack/" target="_blank"
+          >Docs for This Template</a
+        >
+      </li>
     </ul>
     <h2>Ecosystem</h2>
     <ul>
@@ -22,23 +25,27 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
-    <div class="item">{{'2015-02-05T15:30:30' | datePipe({fmt:'YYYY-MM-DD HH:mm:ss.SSS'})}}</div>
-    <div class="btn btn-blue">aa</div>
-    <div @click="log('Div Click： ',$event.target)">
-      <img-tag :src="require('assets/icon-search.png')"/>
+    <div class="item">
+      {{ '2015-02-05T15:30:30' | datePipe({ fmt: 'YYYY-MM-DD HH:mm:ss.SSS' }) }}
     </div>
-    <div>{{$t('remain')}} {{time}}</div>
-    <input type="file" @change="input($event.target.files[0])">
-    <no-result/>
-    <pagination v-if="!isMobile" :config="pageConfig" @to="log('Pagination page： ',$event)"/>
-    <slide-for-more v-else=""
-                    class="slide-for-more"
-                    :isSearching="isSearching"
-                    contentMinHeight="100vh"
-                    tipHeight=".4rem"
-                    @slideUp="search"
-                    @slideDown="search">
-      <div v-for="(val,i) in elements" :key="i" class="element">Element{{val}}</div>
+    <div class="btn btn-blue">aa</div>
+    <div @click="log('Div Click： ', $event.target)">
+      <img-tag :src="require('assets/icon-search.png')" />
+    </div>
+    <div>{{ $t('remain') }} {{ time }}</div>
+    <input type="file" @change="input($event.target.files[0])" />
+    <no-result />
+    <pagination v-if="!isMobile" :config="pageConfig" @to="log('Pagination page： ', $event)" />
+    <slide-for-more
+      v-else=""
+      class="slide-for-more"
+      :isSearching="isSearching"
+      contentMinHeight="100vh"
+      tipHeight=".4rem"
+      @slideUp="search"
+      @slideDown="search"
+    >
+      <div v-for="(val, i) in elements" :key="i" class="element">Element{{ val }}</div>
     </slide-for-more>
   </page-container>
 </template>
@@ -49,13 +56,24 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'HelloWorld',
+  components: {},
   mounted() {
     setTimeout(() => this.snackBar.error('Hello World!'), 1000)
     console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }))
     this.getUserInfo({})
-      .then(() => console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info))))
-      .catch(e => this.snackBar.error(e))
-    console.log('全局 store.state.user.info :', JSON.parse(JSON.stringify(this.$store.state.user.info)))
+      .then(() =>
+        console.log(
+          '全局 store.state.user.info :',
+          JSON.parse(JSON.stringify(this.$store.state.user.info)),
+        ),
+      )
+      .catch(e => {
+        this.snackBar.error(e)
+      })
+    console.log(
+      '全局 store.state.user.info :',
+      JSON.parse(JSON.stringify(this.$store.state.user.info)),
+    )
   },
   data() {
     return {
@@ -73,13 +91,12 @@ export default {
   },
   computed: {
     time() {
-      const {
-        day,
-        hour,
-        minute,
-        second,
-      } = this.timeConversion(new Date(this.convertTime).getTime())
-      return `${day} ${this.$t('day')} ${hour} ${this.$t('hour')} ${minute} ${this.$t('minute')} ${second} ${this.$t('second')}`
+      const { day, hour, minute, second } = this.timeConversion(
+        new Date(this.convertTime).getTime(),
+      )
+      return `${day} ${this.$t('day')} ${hour} ${this.$t('hour')} ${minute} ${this.$t(
+        'minute',
+      )} ${second} ${this.$t('second')}`
     },
   },
   methods: {
@@ -96,7 +113,6 @@ export default {
       }, 1000)
     },
   },
-  components: {},
 }
 </script>
 
@@ -110,11 +126,12 @@ select {
 }
 
 img {
-  margin: .6rem 0 .4rem;
+  margin: 0.6rem 0 0.4rem;
 }
 
-h1, h2 {
-  margin: .1rem 0;
+h1,
+h2 {
+  margin: 0.1rem 0;
   @extend .title;
 }
 
@@ -125,7 +142,7 @@ ul {
 
 li {
   display: inline-block;
-  margin: 0 .1rem;
+  margin: 0 0.1rem;
 }
 
 a {

@@ -10,13 +10,16 @@ export class Cache {
       return Promise.resolve(val)
     }
     this.set(key, 'placeholder') // 防止多次请求
-    return Http.get(url, params).then((res) => {
-      this.set(key, res)
-      return res
-    }, (e) => {
-      this.cache.delete(key)
-      throw e
-    })
+    return Http.get(url, params).then(
+      res => {
+        this.set(key, res)
+        return res
+      },
+      e => {
+        this.cache.delete(key)
+        throw e
+      },
+    )
   }
 
   static getFile(url, params) {
@@ -26,13 +29,16 @@ export class Cache {
       return Promise.resolve(val)
     }
     this.set(key, 'placeholder') // 防止多次请求
-    return Http.getFile(key).then((res) => {
-      this.set(key, res)
-      return res
-    }, (e) => {
-      this.cache.delete(key)
-      throw e
-    })
+    return Http.getFile(key).then(
+      res => {
+        this.set(key, res)
+        return res
+      },
+      e => {
+        this.cache.delete(key)
+        throw e
+      },
+    )
   }
 
   static getByKey(key) {
@@ -47,7 +53,7 @@ export class Cache {
 Cache.cache = new Map()
 
 const CachePlugin = {}
-CachePlugin.install = (Vue) => {
+CachePlugin.install = Vue => {
   Vue.prototype.$cache = Cache
 }
 

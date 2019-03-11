@@ -1,8 +1,10 @@
 <template>
   <page-container class="not-found" :title="404">
     <h1>404</h1>
-    <p>{{$t('404.tip')}}</p>
-    <div class="back btn btn-blue" @click="$router.back()">{{$t('back')}}</div>
+    <p>{{ $t('404.tip') }}</p>
+    <div class="back btn btn-blue" @click="$router.back()">
+      {{ $t('back') }}
+    </div>
   </page-container>
 </template>
 
@@ -14,22 +16,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, p {
+h1,
+p {
   text-align: center;
 }
 
 h1 {
-  margin: 1.25rem 0 .1rem;
-  font-size: .48rem;
+  margin: 1.25rem 0 0.1rem;
+  font-size: 0.48rem;
   font-weight: 400;
-  letter-spacing: .001rem;
+  letter-spacing: 0.001rem;
 }
 
 .back {
   width: 2rem;
-  height: .3rem;
-
-  margin: .5rem auto 0;
+  height: 0.3rem;
+  margin: 0.5rem auto 0;
   text-align: center;
 }
 </style>

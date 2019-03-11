@@ -1,10 +1,22 @@
 <template>
-  <input v-if="needCapture" type="file" accept='image/*' capture="camera" :id="id"
-         @change="$emit('input',$event.target.files)" hidden
-         multiple/>
-  <input v-else="" type="file" accept='image/jpeg,image/gif,image/png' :id="id"
-         @change="$emit('input',$event.target.files)"
-         hidden/>
+  <input
+    v-if="needCapture"
+    type="file"
+    accept="image/*"
+    capture="camera"
+    :id="id"
+    @change="$emit('input', $event.target.files)"
+    hidden
+    multiple
+  />
+  <input
+    v-else=""
+    type="file"
+    accept="image/jpeg,image/gif,image/png"
+    :id="id"
+    @change="$emit('input', $event.target.files)"
+    hidden
+  />
 </template>
 
 <script>
@@ -27,5 +39,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '../../css/common-variable.scss';
-
 </style>

@@ -2,14 +2,14 @@
 @import './font-variable.scss';
 @import './size-variable.scss';
 
-@mixin flex($h:flex-start,$v:center,$wrap:nowrap) {
+@mixin flex($h: flex-start, $v: center, $wrap: nowrap) {
   display: flex;
   justify-content: $h;
   align-items: $v;
   flex-wrap: $wrap;
 }
 
-@mixin flex-column($h:flex-start,$v:flex-start) {
+@mixin flex-column($h: flex-start, $v: flex-start) {
   display: flex;
   flex-direction: column;
   justify-content: $h;
@@ -34,8 +34,7 @@
   background-color: $color;
 }
 
-@mixin total-width($width:1170px) {
+@mixin total-width($width: 1170px) {
   width: $width;
   margin: 0 auto;
 }
-

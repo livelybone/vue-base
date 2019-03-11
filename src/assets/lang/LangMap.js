@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export default {
   'zh-hans': {
     name: '简体中文',

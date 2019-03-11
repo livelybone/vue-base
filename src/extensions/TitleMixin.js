@@ -20,4 +20,5 @@ const clientTitleMixin = {
   },
 }
 
-export const TitleMixin = process && process.env.VUE_ENV === 'server' ? serverTitleMixin : clientTitleMixin
+export const TitleMixin =
+  process && process.env.VUE_ENV === 'server' ? serverTitleMixin : clientTitleMixin

@@ -62,8 +62,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: config.build.index,
-      template: 'index.html',
+      template: utils.pathResolve('static/index.html'),
       inject: 'head',
+      assetsPublicPath: config.build.assetsPublicPath.replace(/\/*$/, ''),
+      assetsSubDirectory: config.build.assetsSubDirectory.replace(/\/*$/, ''),
       minify: {
         removeComments: true,
         collapseWhitespace: false,
@@ -121,6 +123,14 @@ const webpackConfig = merge(baseWebpackConfig, {
       /moment[\/\\]locale$/,
       /zh-cn-sdfsf/,
     ),
+    new webpack.DllReferencePlugin({
+      context: utils.pathResolve(''),
+      manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
+    }),
+    new webpack.DllReferencePlugin({
+      context: utils.pathResolve(''),
+      manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
+    }),
   ],
 })
 

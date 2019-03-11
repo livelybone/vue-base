@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <snack-bar ref="snackBar" baseSize="1rem"/>
-    <image-full-screen ref="imgFull"/>
-    <router-view/>
+    <snack-bar ref="snackBar" baseSize="1rem" />
+    <image-full-screen ref="imgFull" />
+    <router-view />
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./css/common.scss";
+@import './css/common.scss';
 @import '../node_modules/vue-slide-for-more/lib/css/index';
 
 #app {
