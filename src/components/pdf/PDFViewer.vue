@@ -38,14 +38,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '../../css/common-variable.scss';
-
 .pdf-viewer-wrap {
   width: 100%;
   padding: 0.3rem;
   background: #666;
 
-  & .pdf {
+  .pdf {
     margin: 0 0 $margin;
     box-shadow: 0 0.05rem 0.1rem rgba(#000, 0.25);
 

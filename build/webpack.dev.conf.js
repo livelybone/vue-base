@@ -28,7 +28,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         options: {
           formatter: EslintFormatter,
           emitWarning: true,
-          fix: true,
         },
       },
       ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true }),
@@ -84,14 +83,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*'],
       },
     ]),
-    new webpack.DllReferencePlugin({
-      context: utils.pathResolve(''),
-      manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
-    }),
-    new webpack.DllReferencePlugin({
-      context: utils.pathResolve(''),
-      manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
-    }),
   ],
 })
 

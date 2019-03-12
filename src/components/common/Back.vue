@@ -21,8 +21,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '../../css/common-variable.scss';
-
 .back-wrap {
   @include flex(center, center);
   min-width: 0.22rem;

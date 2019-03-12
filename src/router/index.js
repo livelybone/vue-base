@@ -1,17 +1,18 @@
-import User from 'data/api/User'
-import { langKeys, LangStore } from 'extensions/Langs'
-import BaseRoot from 'pages/BaseRoot'
+import User from '@/data/api/User'
+import { langKeys, LangStore } from '@/extensions/Langs'
+import BaseRoot from '@/pages/BaseRoot'
+import NotFound from '@/pages/NotFound'
 import Vue from 'vue'
 import Router from 'vue-router'
 
 // 另一种方式：
 // commonjs
-// const NotFound = resolve => require.ensure([], require => require('pages/NotFound'), 'NotFound');
+// const NotFound = resolve => require.ensure([], require => require('@/pages/NotFound'), 'NotFound');
 // const NotFound =
-//       resolve => require.ensure([], require => resolve(require('pages/NotFound')), 'NotFound');
-// const NotFound = resolve => require(['pages/NotFound'], resolve); // AMD， 缺点：无法指定 chunkName
-const NotFound = () => import('pages/NotFound' /* webpackChunkName:"NotFound" */)
-const HelloWorld = () => import('pages/HelloWorld' /* webpackChunkName:"HelloWorld" */)
+//       resolve => require.ensure([], require => resolve(require('@/pages/NotFound')), 'NotFound');
+// const NotFound = resolve => require(['@/pages/NotFound'], resolve); // AMD， 缺点：无法指定 chunkName
+const HelloWorld = () =>
+  import('@/pages/HelloWorld' /* webpackChunkName:"HelloWorld" */)
 
 Vue.use(Router)
 
@@ -19,6 +20,7 @@ const routes = [
   {
     path: '/:lang',
     component: BaseRoot,
+    redirect: { path: '' },
     children: [
       { path: '', name: '', component: HelloWorld },
       { path: 'home', name: 'HelloWorld', component: HelloWorld },

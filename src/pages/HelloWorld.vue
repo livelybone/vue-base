@@ -1,15 +1,19 @@
 <template>
   <page-container class="hello-world">
     <select :value="$i18n.locale" @change="switchLang($event.target.value)">
-      <option v-for="op in Langs" :value="op.value" :key="op.value">{{ op.name }}</option>
+      <option v-for="op in Langs" :value="op.value" :key="op.value">
+        {{ op.name }}
+      </option>
     </select>
-    <img-tag :src="require('assets/logo.png')" />
+    <img-tag :src="require('@/assets/logo.png')" />
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
+      <li>
+        <a href="https://chat.vuejs.org" target="_blank">Community Chat</a>
+      </li>
       <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
       <br />
       <li>
@@ -22,20 +26,33 @@
     <ul>
       <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
       <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
+      <li>
+        <a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a>
+      </li>
+      <li>
+        <a href="https://github.com/vuejs/awesome-vue" target="_blank">
+          awesome-vue
+        </a>
+      </li>
     </ul>
     <div class="item">
       {{ '2015-02-05T15:30:30' | datePipe({ fmt: 'YYYY-MM-DD HH:mm:ss.SSS' }) }}
     </div>
     <div class="btn btn-blue">aa</div>
     <div @click="log('Div Click： ', $event.target)">
-      <img-tag :src="require('assets/icon-search.png')" />
+      <img-tag :src="require('@/assets/icon-search.png')" />
     </div>
     <div>{{ $t('remain') }} {{ time }}</div>
     <input type="file" @change="input($event.target.files[0])" />
     <no-result />
-    <pagination v-if="!isMobile" :config="pageConfig" @to="log('Pagination page： ', $event)" />
+    <pagination
+      v-if="!isMobile"
+      :config="pageConfig"
+      @to="
+        log('Pagination page： ', $event)
+        pageConfig.page = $event
+      "
+    />
     <slide-for-more
       v-else=""
       class="slide-for-more"
@@ -45,20 +62,28 @@
       @slideUp="search"
       @slideDown="search"
     >
-      <div v-for="(val, i) in elements" :key="i" class="element">Element{{ val }}</div>
+      <div v-for="(val, i) in elements" :key="i" class="element">
+        Element{{ val }}
+      </div>
     </slide-for-more>
   </page-container>
 </template>
 
 <script>
-import { getUrl } from 'utils/RequestInterceptor'
+import { getUrl } from '@/utils/RequestInterceptor'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'HelloWorld',
   components: {},
   mounted() {
-    setTimeout(() => this.snackBar.error('Hello World!'), 1000)
+    console.log(1)
+    setTimeout(() => {
+      this.snackBar.error('Hello World!')
+      this.confirmOverlay.show({ head: 'Hello World!' }).then(() => {
+        this.confirmOverlay.hide()
+      })
+    }, 1000)
     console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }))
     this.getUserInfo({})
       .then(() =>
@@ -94,9 +119,8 @@ export default {
       const { day, hour, minute, second } = this.timeConversion(
         new Date(this.convertTime).getTime(),
       )
-      return `${day} ${this.$t('day')} ${hour} ${this.$t('hour')} ${minute} ${this.$t(
-        'minute',
-      )} ${second} ${this.$t('second')}`
+      return `${day} ${this.$t('day')} ${hour} ${this.$t('hour')} ${minute}
+       ${this.$t('minute')} ${second} ${this.$t('second')}`
     },
   },
   methods: {
@@ -118,7 +142,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '../css/common-variable.scss';
+.page-container {
+  text-align: center;
+}
 
 select {
   display: block;
@@ -131,8 +157,8 @@ img {
 
 h1,
 h2 {
-  margin: 0.1rem 0;
   @extend .title;
+  margin: 0.1rem 0;
 }
 
 ul {

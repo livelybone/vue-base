@@ -1,5 +1,5 @@
 import isAndroid from 'is-android'
-import { isBrowser } from 'utils/Utils'
+import { isBrowser } from '@/utils/Utils'
 
 export function isWeiXin() {
   const ua = isBrowser ? navigator.userAgent : ''

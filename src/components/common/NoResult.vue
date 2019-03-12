@@ -1,5 +1,7 @@
 <template>
-  <div class="no-result" @click="$emit('click', $event)">{{ tipText || $t('result.no') }}</div>
+  <div class="no-result" @click="$emit('click', $event)">
+    {{ tipText || $t('result.no') }}
+  </div>
 </template>
 
 <script>
@@ -13,8 +15,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '../../css/common-variable.scss';
-
 .no-result {
   @include flex(center, center);
   width: 100%;

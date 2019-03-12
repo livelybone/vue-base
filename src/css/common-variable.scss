@@ -38,3 +38,20 @@
   width: $width;
   margin: 0 auto;
 }
+
+@mixin height($height, $lineHeight: 0) {
+  height: $height;
+
+  @if $lineHeight {
+    line-height: $lineHeight;
+  } @else {
+    line-height: $height;
+  }
+}
+
+@mixin borderHeight($height, $borderTop, $borderBottom) {
+  height: $height;
+  line-height: calc(#{$height} - #{$borderTop} - #{$borderBottom});
+  border-top-width: $borderTop !important;
+  border-bottom-width: $borderBottom !important;
+}

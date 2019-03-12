@@ -6,7 +6,7 @@ const data = {
 
 export class Store {
   static commit(key, val) {
-    this.state[key] = val
+    Store.state[key] = val
   }
 }
 

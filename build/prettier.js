@@ -35,7 +35,7 @@ function cssPrettier(file, parser = '') {
         },
       )
     })).then(() => {
-      console.log(chalk.green(`Formatted: ${file.replace(cmd, '.').replace(path.sep, '/')}`))
+      console.log(chalk.green(`Formatted: ${file.replace(cmd, '.').replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`))
     }).catch(err => {
       console.log(chalk.red(err))
       process.exit(1)

@@ -123,14 +123,6 @@ const webpackConfig = merge(baseWebpackConfig, {
       /moment[\/\\]locale$/,
       /zh-cn-sdfsf/,
     ),
-    new webpack.DllReferencePlugin({
-      context: utils.pathResolve(''),
-      manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
-    }),
-    new webpack.DllReferencePlugin({
-      context: utils.pathResolve(''),
-      manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
-    }),
   ],
 })
 

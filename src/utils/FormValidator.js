@@ -11,7 +11,9 @@ export function validateRealName(realName) {
 }
 
 export function validateUSCC(uscc) {
-  return uscc ? /^[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}$/.test(uscc.trim()) : true
+  return uscc
+    ? /^[0-9A-HJ-NPQRTUWXY]{2}\d{6}[0-9A-HJ-NPQRTUWXY]{10}$/.test(uscc.trim())
+    : true
 }
 
 export function validateIdCard(idCard) {
@@ -34,13 +36,14 @@ export function validateIdCard(idCard) {
 }
 
 export function validateEmail(email) {
-  return email ? /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(email) : true
+  return email
+    ? /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(email)
+    : true
 }
 
 export function validatePassword(password) {
-  return password
-    ? /(?=.*[0-9])(?=.*[a-zA-Z]).{6,18}$/.test(password) && password.indexOf(' ') <= -1
-    : true
+  const reg = /(?=.*[0-9])(?=.*[a-zA-Z]).{6,18}$/
+  return password ? reg.test(password) && password.indexOf(' ') <= -1 : true
 }
 
 export function validateVerifyCode(verifyCode) {
@@ -56,15 +59,13 @@ export function validatePostCode(postCode) {
 }
 
 export function validateUrl(url) {
-  return url
-    ? /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?/.test(url)
-    : true
+  const reg = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?/
+  return url ? reg.test(url) : true
 }
 
 export function validateMoney(money) {
-  return money
-    ? /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/.test(money)
-    : true
+  const reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/
+  return money ? reg.test(money) : true
 }
 
 export function validateCreditCard(value) {

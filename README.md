@@ -1,37 +1,56 @@
-# project
+# {project}
 
-> A Vue.js project
+## 注意事项
 
-> html 模板：每个文件的 HTML 尽可能的小，嵌套尽可能的少。相同的地方尽可能的抽出公共组件
+### 风格（非常重要）
 
-> style: 使用SASS预处理，全局使用 100px 作 1rem（移动端做相应1px解决方案），宽高尺寸尽量使用rem单位（PC 和 Mobile 共用的组件如果有样式则必须使用rem）
+> prettier: 代码风格统一。
+>> 提交代码之前务必使用 `npm run format` 格式化代码
 
-> style: 公共样式写在 common.scss，公共变量分别写在 font-variable.scss/size-variable.scss/color-variable.scss，@mixin函数写在 common-variable.scss
+> commitizen: 代码提交
+>> 使用了 `commitizen` 规范 commit message, 所以：<span style="color:red">使用 `npm run commit` 代替 `git commit`</span>
 
-> style: 同类型的属性值，最好抽出形成公共变量或者函数
+### 兼容
 
-> style: 如果所有 css 被 ExtractTextWebpackPlugin 抽取成一个 css 文件, 那么 css 文件最好不要有图片（比如 background: url('/assets/logo.png'), 原因： webpack url-loader 设置为 10kb 以下的文件会被转为base64嵌入到相应的母文件）
+> 如果要兼容 IE9，则不能使用 `transform` `flex` 等css，已有组件和页面中使用的 `flex 布局` 需要切换成兼容 IE9 的写法
 
-> style: 如果要兼容 IE9，则不能使用 `transform` `flex` 等css，已有组件和页面中使用的 `flex 布局` 需要切换成兼容 IE9 的写法
+### html 模板
 
-> js：es6 规范
+> 每个文件的 HTML 尽可能的小，嵌套尽可能的少。相同的地方尽可能的抽出公共组件
 
-> js: 全局状态管理使用 vuex，如果项目简单，可选择使用 extensions/StorePlugin.js
 
-> js: 工具类写在 utils 文件夹，插件写在 extensions 文件夹，组件共用变量或者模板写在 data/immutable-data 文件夹，ajax 相关的写在 data/api 文件夹，全局状态管理文件写在 data/store/modules 文件夹
+### Style
 
-> js: ajax 表单渲染数据格式推荐 `const items = [{name:'姓名', alias:'realName', value:'XXX'}]`，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（`DataDeal.dateDeal(items)`）（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
+> 使用SASS预处理，全局使用 100px 作 1rem（移动端做相应1px解决方案），宽高尺寸尽量使用rem单位（PC 和 Mobile 共用的组件如果有样式则必须使用rem）
 
-> 国际化: 使用i18n。
+> 公共样式写在 common.scss，公共变量分别写在 font-variable.scss/size-variable.scss/color-variable.scss，@mixin函数写在 common-variable.scss
 
-> 国际化(建议): 页面语句应当少使用词语拼接，因为不同的语言语法可能同，拼接可能会让最后得出的语句不伦不类
+> 同类型的属性值，最好抽出形成公共变量或者函数
+
+> 如果所有 css 被 ExtractTextWebpackPlugin 抽取成一个 css 文件, 那么 css 文件最好不要有图片（比如 background: url('/assets/logo.png'), 原因： webpack url-loader 设置为 10kb 以下的文件会被转为base64嵌入到相应的母文件）
+
+### JS
+> es6 规范
+
+> 全局状态管理使用 vuex，如果项目简单，可选择使用 extensions/StorePlugin.js
+
+> 工具类写在 utils 文件夹，插件写在 extensions 文件夹，组件共用变量或者模板写在 data/immutable-data 文件夹，ajax 相关的写在 data/api 文件夹，全局状态管理文件写在 data/store/modules 文件夹
+
+> ajax 表单渲染数据格式推荐 `const items = [{name:'姓名', alias:'realName', value:'XXX'}]`，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（`DataDeal.dateDeal(items)`）（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
+
+### 国际化
+
+> 使用 `vue-i18n`
+
+> 建议1: 页面语句应当少使用词语拼接，因为不同的语言语法可能同，拼接可能会让最后得出的语句不伦不类
 > 比如：
 >> ‘未选择任何文件’ 的英文翻译为 'No files were selected'，
->> 如果使用 `this.$t('unselected') + this.$t('any-file')`
->> 中文为 `'未选择' + '任何文件'`，
+>> 如果使用 `this.$t('unselected') + this.$t('any-file')`:
+>> 中文为 `'未选择' + '任何文件'`;
 >> 英文翻译为 `'unselected ' + 'any file '` => `'unselected any file'`，显得不伦不类了
 
-> 国际化(建议): 页面可能共用的语句写在 `common.js` 中，其它的词汇语句可按照业务功能做命名空间写在 `index.js`，或者使用单独的文件
+> 建议2: 页面可能共用的语句写在 `common.js` 中，其它的词汇语句可按照业务功能做命名空间写在 `index.js`，或者使用单独的文件
+
 
 ## Build Setup
 
@@ -69,7 +88,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 > [@livelybone/vue-loading](https://github.com/livelybone/vue-loading)([示例](https://livelybone.github.io/vue/vue-loading/))，加载动画
 
-> [@livelybone/vue-input](https://github.com/livelybone/vue-input)([示例](https://livelybone.github.io/vue/vue-input/))，input/textarea 标签的封装，实现 `pristine` `valid` 检查，解决双向绑定时中文输入在 safari 浏览器上的 bug
+> [@livelybone/vue-input](https://github.com/livelybone/vue-input)([示例](https://livelybone.github.io/vue/vue-input/))，input/textarea 标签的封装，实现 `pristine` `valid` 检查，解决双向绑定时中文输入在 safari 浏览器上的 bug，真正实现密码自动填充功能开关
 
 > [@livelybone/vue-datepicker](https://github.com/livelybone/vue-datepicker)([示例](https://livelybone.github.io/vue/vue-datepicker/))，datepicker, timepicker, datetimePicker
 

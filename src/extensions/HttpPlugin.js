@@ -1,7 +1,7 @@
 import { Storage } from '@livelybone/storage'
 import axios from 'axios'
-import config from 'config/config'
-import { convertToFormData, getUrl } from 'utils/RequestInterceptor'
+import config from '@/../config/config'
+import { convertToFormData, getUrl } from '@/utils/RequestInterceptor'
 
 /**
  * http: axios
@@ -18,7 +18,8 @@ function initialAxios() {
   // 如果你想在客户端app中获取自定义的 header 信息，需要在服务器端 header 中添加 Access-Control-Expose-Headers：
   // header('Access-Control-Expose-Headers:token,uid');
   // 处理服务器返回的错误信息
-  axios.defaults.validateStatus = status => (status >= 200 && status < 300) || status >= 400
+  axios.defaults.validateStatus = status =>
+    (status >= 200 && status < 300) || status >= 400
 }
 
 initialAxios()
@@ -26,7 +27,9 @@ initialAxios()
 export class Http {
   static getFile(url) {
     // 适用于需要登录的情况
-    return axios.get(setAuth(url), { responseType: 'blob' }).then(res => res.data)
+    return axios
+      .get(setAuth(url), { responseType: 'blob' })
+      .then(res => res.data)
   }
 
   static errorValidate(data) {
@@ -47,7 +50,9 @@ export class Http {
   static postForm(url, data) {
     const formData = convertToFormData(data)
     return this.responseDeal(
-      axios.post(setAuth(url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+      axios.post(setAuth(url), formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }),
     )
   }
 
@@ -62,7 +67,9 @@ export class Http {
   static putForm(url, data) {
     const formData = convertToFormData(data)
     return this.responseDeal(
-      axios.put(setAuth(url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+      axios.put(setAuth(url), formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }),
     )
   }
 

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { isAndroid, isWeiXin } from 'utils/UserAgent'
+import { isAndroid, isWeiXin } from '@/utils/UserAgent'
 
 export default {
   name: 'FileInput',
@@ -37,6 +37,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-@import '../../css/common-variable.scss';
-</style>
+<style lang="scss" scoped></style>

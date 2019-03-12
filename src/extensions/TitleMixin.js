@@ -2,7 +2,10 @@
 
 function getTitle(vm) {
   const { title } = vm
-  if (title) return (typeof title === 'function' ? title.call(vm) : title) || vm.$t('title')
+  if (title)
+    return (
+      (typeof title === 'function' ? title.call(vm) : title) || vm.$t('title')
+    )
   return vm.$t('title')
 }
 
@@ -21,4 +24,6 @@ const clientTitleMixin = {
 }
 
 export const TitleMixin =
-  process && process.env.VUE_ENV === 'server' ? serverTitleMixin : clientTitleMixin
+  process && process.env.VUE_ENV === 'server'
+    ? serverTitleMixin
+    : clientTitleMixin

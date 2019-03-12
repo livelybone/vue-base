@@ -27,7 +27,12 @@ export default {
   props: {
     src: {
       validator(val) {
-        return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
+        return (
+          !val ||
+          typeof val === 'string' ||
+          val instanceof Object ||
+          val instanceof FileList
+        )
       },
     },
     page: Number,
@@ -79,15 +84,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '../../css/common-variable.scss';
-
 .pdf-page-wrap {
   position: relative;
   width: 100%;
   padding: 0.6rem 0.3rem 0.3rem;
   background: #666;
 
-  & .pdf {
+  .pdf {
     margin: 0 0 $margin;
     box-shadow: 0 0.05rem 0.1rem rgba(#000, 0.25);
 
@@ -96,7 +99,7 @@ export default {
     }
   }
 
-  & .btn-group {
+  .btn-group {
     @include flex(center, center);
     justify-content: flex-end;
     position: absolute;
@@ -107,11 +110,11 @@ export default {
     height: 0.4rem;
     background: rgba(#fff, 0.1);
 
-    & .page {
+    .page {
       color: #fff;
     }
 
-    & button {
+    button {
       height: 0.24rem;
       margin: 0 0 0 0.2rem;
       line-height: normal;

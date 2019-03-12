@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const fs = require('fs')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
@@ -64,7 +65,8 @@ exports.cssLoaders = function (options) {
     postcss: generateLoaders(),
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
+    // common variable of scss
+    scss: generateLoaders('sass', { data: `$device: mobile; @import "${exports.pathResolve('src/css/common-variable.scss').replace(new RegExp(`\\${path.sep}`, 'g'), '/')}";` }),
     stylus: generateLoaders('stylus'),
   }
 }

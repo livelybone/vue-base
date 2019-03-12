@@ -1,16 +1,21 @@
 <template>
   <label v-if="canEdit" class="my-file-input" :for="id">
     <template v-if="!myValue">
-      <img class="icon" :src="require('assets/icon-upload.png')" alt="" />
+      <img class="icon" :src="require('@/assets/icon-upload.png')" alt="" />
       <span>{{ $t('take-photo') }}</span>
     </template>
     <template v-else="">
       <img-tag :src="myValue" alt="" @click="$emit('imgClick', myValue)" />
-      <img :src="require('assets/icon-edit.png')" alt="" class="edit" />
+      <img :src="require('@/assets/icon-edit.png')" alt="" class="edit" />
     </template>
     <file-input :id="id" @input="input" />
   </label>
-  <img-tag class="img" v-else="" :src="myValue" @click="$emit('imgClick', myValue)" />
+  <img-tag
+    class="img"
+    v-else=""
+    :src="myValue"
+    @click="$emit('imgClick', myValue)"
+  />
 </template>
 
 <script>
@@ -50,8 +55,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '../../css/common-variable.scss';
-
 .file-input {
   @include flex(center, center, column);
   position: relative;
@@ -64,17 +67,17 @@ export default {
   cursor: pointer;
   overflow: hidden;
 
-  & img.icon {
+  img.icon {
     max-width: 30%;
     max-height: 30%;
   }
 
-  & span {
+  span {
     padding: 0.1rem 0 0;
     color: $black-light;
   }
 
-  & .edit {
+  .edit {
     position: absolute;
     top: 0;
     right: 0;

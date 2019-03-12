@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { TitleMixin } from 'extensions/TitleMixin'
+import { TitleMixin } from '@/extensions/TitleMixin'
 
 export default {
   name: 'PageContainer',

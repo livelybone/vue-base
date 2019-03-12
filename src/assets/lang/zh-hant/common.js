@@ -28,6 +28,8 @@ export default {
   'operate': {
     'name': '操作',
     'confirm': '確定執行操作嗎？',
+    'ok': '確定',
+    'cancel': '取消',
   },
   'image': {
     'pre': '上一張',

@@ -1,9 +1,13 @@
-import AuthToken from 'data/api/AuthToken'
-import { Http } from 'extensions/HttpPlugin'
+import AuthToken from '@/data/api/AuthToken'
+import { Http } from '@/extensions/HttpPlugin'
 
 export default class User {
   static register({ phoneNumber, password, verifyCode }) {
-    return Http.postForm('/user/register', { phoneNumber, password, verifyCode })
+    return Http.postForm('/user/register', {
+      phoneNumber,
+      password,
+      verifyCode,
+    })
   }
 
   static getUser() {
@@ -29,7 +33,9 @@ export default class User {
   }
 
   static signIn({ phoneNumber, password }) {
-    return Http.post(`/login?phoneNumber=${phoneNumber}&password=${password}`).then(res => {
+    return Http.post(
+      `/login?phoneNumber=${phoneNumber}&password=${password}`,
+    ).then(res => {
       AuthToken.setToken(res)
       return res
     })

@@ -28,6 +28,8 @@ export default {
   'operate': {
     'name': 'operate',
     'confirm': 'Are you sure to perform the operation?',
+    'ok': 'OK',
+    'cancel': 'Cancel',
   },
   'image': {
     'pre': 'Pre',
