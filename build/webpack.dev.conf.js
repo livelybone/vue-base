@@ -18,6 +18,7 @@ function resolve(dir) {
 }
 
 const devWebpackConfig = merge(baseWebpackConfig, {
+  mode: 'development',
   module: {
     rules: [
       {

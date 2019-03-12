@@ -15,13 +15,13 @@ const dlls = {
     'axios',
   ],
   UIAndUtils: [
-    "@livelybone/rem-init",
-    "@livelybone/simple-observer",
-    "@livelybone/storage",
-    "@livelybone/vue-button",
-    "@livelybone/vue-input",
-    "@livelybone/vue-loading",
-    "@livelybone/vue-pagination",
+    '@livelybone/rem-init',
+    '@livelybone/simple-observer',
+    '@livelybone/storage',
+    '@livelybone/vue-button',
+    '@livelybone/vue-input',
+    '@livelybone/vue-loading',
+    '@livelybone/vue-pagination',
     'vue-img-tag',
     'vue-slide-for-more',
     'vuejs-snackbar',
@@ -29,6 +29,7 @@ const dlls = {
 }
 
 module.exports = {
+  mode: 'production',
   entry: dlls,
   output: {
     path: utils.pathResolve('static'),
@@ -36,17 +37,21 @@ module.exports = {
     publicPath: '<%= htmlWebpackPlugin.options.assetsPublicPath %>/<%= htmlWebpackPlugin.options.assetsSubDirectory %>',
     library: '[name]',
   },
-  plugins: [
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false,
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+          },
         },
-      },
-      sourceMap: config.build.productionSourceMap,
-      parallel: true,
-      cache: true,
-    }),
+        sourceMap: config.build.productionSourceMap,
+        parallel: true,
+        cache: true,
+      }),
+    ],
+  },
+  plugins: [
     new HtmlWebpackPlugin({
       filename: utils.pathResolve('/static/index.html'),
       template: 'index.html',
