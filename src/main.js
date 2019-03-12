@@ -1,11 +1,12 @@
+import App from '@/App'
+import store from '@/data/store'
 import { initialExtensions } from '@/extensions/Extensions'
+import register from '@/global-register'
+import { createRouter } from '@/router'
+import { isBrowser } from '@/utils/Utils'
 import RemInit from '@livelybone/rem-init'
-import store from 'data/store'
-import { isBrowser } from 'utils/Utils'
+import 'babel-polyfill'
 import Vue from 'vue'
-import App from './App'
-import register from './global-register'
-import { createRouter } from './router'
 
 if (isBrowser) {
   RemInit({

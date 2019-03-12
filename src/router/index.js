@@ -1,17 +1,18 @@
-import User from 'data/api/User'
-import { langKeys, LangStore } from 'extensions/Langs'
-import BaseRoot from 'pages/BaseRoot'
+import User from '@/data/api/User'
+import { langKeys, LangStore } from '@/extensions/Langs'
+import BaseRoot from '@/pages/BaseRoot'
+import NotFound from '@/pages/NotFound'
 import Vue from 'vue'
 import Router from 'vue-router'
 
 // 另一种方式：
 // commonjs
-// const NotFound = resolve => require.ensure([], require => require('pages/NotFound'), 'NotFound');
+// const NotFound = resolve => require.ensure([], require => require('@/pages/NotFound'), 'NotFound');
 // const NotFound =
-//       resolve => require.ensure([], require => resolve(require('pages/NotFound')), 'NotFound');
-// const NotFound = resolve => require(['pages/NotFound'], resolve); // AMD， 缺点：无法指定 chunkName
-const NotFound = () => import('pages/NotFound' /* webpackChunkName:"NotFound" */)
-const HelloWorld = () => import('pages/HelloWorld' /* webpackChunkName:"HelloWorld" */)
+//       resolve => require.ensure([], require => resolve(require('@/pages/NotFound')), 'NotFound');
+// const NotFound = resolve => require(['@/pages/NotFound'], resolve); // AMD， 缺点：无法指定 chunkName
+const HelloWorld = () =>
+  import('@/pages/HelloWorld' /* webpackChunkName:"HelloWorld" */)
 
 Vue.use(Router)
 
@@ -19,6 +20,7 @@ const routes = [
   {
     path: '/:lang',
     component: BaseRoot,
+    redirect: { path: '' },
     children: [
       { path: '', name: '', component: HelloWorld },
       { path: 'home', name: 'HelloWorld', component: HelloWorld },
@@ -39,29 +41,43 @@ export function createRouter(i18n, store) {
   })
 
   router.beforeEach((to, fr, next) => {
-    const { params: { lang } } = to
+    const {
+      params: { lang },
+    } = to
     const language = lang || ''
     if (!langKeys.includes(language)) {
       next({
-        path: language ? to.path.replace(language, language.toLowerCase()) : `/${i18n.locale}${to.path}`,
+        path: language
+          ? to.path.replace(language, language.toLowerCase())
+          : `/${i18n.locale}${to.path}`,
         replace: true,
       })
     } else {
       const pro = LangStore.setLang(to.params.lang, { $i18n: i18n })
-      if (to.matched.some(route => route.meta.requireAuth) && store.state.user.info.role !== 'client') {
-        User.getUser().then(() => {
-          pro.then(() => next())
-        }).catch(() => {
-          pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
-          Vue.prototype.snackBar.error('Please sign in!')
-        })
-      } else if (to.matched.some(route => route.meta.requireAdminAuth) && store.state.user.info.role !== 'admin') {
-        User.getAdminUser().then(() => {
-          pro.then(() => next())
-        }).catch(() => {
-          pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
-          Vue.prototype.snackBar.error('Please sign in the admin terminal!')
-        })
+      if (
+        to.matched.some(route => route.meta.requireAuth) &&
+        store.state.user.info.role !== 'client'
+      ) {
+        User.getUser()
+          .then(() => {
+            pro.then(() => next())
+          })
+          .catch(() => {
+            pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
+            Vue.prototype.snackBar.error('Please sign in!')
+          })
+      } else if (
+        to.matched.some(route => route.meta.requireAdminAuth) &&
+        store.state.user.info.role !== 'admin'
+      ) {
+        User.getAdminUser()
+          .then(() => {
+            pro.then(() => next())
+          })
+          .catch(() => {
+            pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
+            Vue.prototype.snackBar.error('Please sign in the admin terminal!')
+          })
       } else pro.then(() => next())
     }
   })

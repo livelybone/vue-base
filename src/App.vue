@@ -1,31 +1,30 @@
 <template>
   <div id="app">
-    <snack-bar ref="snackBar" baseSize="1rem"/>
-    <image-full-screen ref="imgFull"/>
-    <router-view/>
+    <snack-bar ref="snackBar" baseSize="1rem" />
+    <image-full-screen ref="imgFull" />
+    <overlay-confirm ref="confirmOverlay" />
+    <router-view />
   </div>
 </template>
 
 <script>
-import ImageFullScreen from 'components/image/ImageFullScreen'
+import OverlayConfirm from '@/components/common/OverlayConfirm'
+import ImageFullScreen from '@/components/image/ImageFullScreen'
+import Vue from 'vue'
 import SnackBar from 'vuejs-snackbar'
 
 export default {
   name: 'app',
+  components: { SnackBar, ImageFullScreen, OverlayConfirm },
   mounted() {
-    this.snackBar.listen(this.$refs.snackBar) // 监听bus=>snackBar事件
-    this.imgFullScreen.listen(this.$refs.imgFull) // 监听bus=>imgFullScreen事件
+    Vue.prototype.snackBar = this.$refs.snackBar
+    Vue.prototype.imgFullScreen = this.$refs.imgFull
+    Vue.prototype.confirmOverlay = this.$refs.confirmOverlay
   },
-  components: { SnackBar, ImageFullScreen },
 }
 </script>
 
 <style lang="scss">
-@import "./css/common.scss";
+@import './css/common.scss';
 @import '../node_modules/vue-slide-for-more/lib/css/index';
-
-#app {
-  text-align: center;
-  color: #2c3e50;
-}
 </style>

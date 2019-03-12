@@ -1,5 +1,3 @@
-@import 'common-variable';
-
 /* ==========================================================================
    定义整站的样式
  ====== ====================================================================== */
@@ -14,7 +12,8 @@
 }
 
 body {
-  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', Arial, sans-serif;
+  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica,
+    'Microsoft Yahei', Arial, sans-serif;
   @extend .content-3;
   color: $font;
 }
@@ -40,7 +39,7 @@ img {
 
 .content-card {
   width: 100%;
-  margin: 0 0 .1rem;
+  margin: 0 0 0.1rem;
   background: #fff;
 }
 
@@ -48,16 +47,20 @@ img {
    定义表单元素的样式
  ====== ====================================================================== */
 
-input, textarea, select, button, .btn {
-  height: .34rem;
-  padding: 0 .1rem;
+input,
+textarea,
+select,
+button,
+.btn {
+  height: 0.34rem;
+  padding: 0 0.1rem;
   font-family: inherit;
   font-size: inherit;
   letter-spacing: inherit;
   color: inherit;
 
   &:focus {
-    border-color: $blue;
+    border-color: $main;
   }
 
   &::placeholder {
@@ -65,14 +68,17 @@ input, textarea, select, button, .btn {
   }
 }
 
-button, .btn {
-  @include flex(center, center);
+button,
+.btn {
+  @include height(0.34rem, 0.32rem);
   color: inherit;
-  border-radius: .03rem;
+  text-align: center;
+  border-radius: 0.03rem;
   border: 1px solid $border;
   cursor: pointer;
 
-  &[disabled], &.disabled {
+  &[disabled],
+  &.disabled {
     border-color: $disabled !important;
     background: $disabled !important;
     color: $font-light !important;
@@ -84,8 +90,9 @@ button, .btn {
    定义a的样式
  ====== ====================================================================== */
 
-a, .a {
-  opacity: .8;
+a,
+.a {
+  opacity: 0.8;
   color: inherit;
   cursor: pointer;
 
@@ -112,17 +119,19 @@ table {
 }
 
 .transition {
-  transition: all .5s cubic-bezier(.4, 0, .2, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ==========================================================================
    定义通用的字体/按钮颜色类
  ====== ====================================================================== */
 
-@each $name, $color in (main, $main), (gray, $black-light), (green, $green), (red, $red), (blue, $blue) {
+@each $name, $color in (main, $main), (gray, $black-light), (green, $green),
+  (red, $red), (blue, $blue)
+{
   .btn-#{$name} {
     @include btn($color);
-    opacity: .8;
+    opacity: 0.8;
 
     &:hover {
       opacity: 1;
@@ -131,7 +140,7 @@ table {
 
   .btn-#{$name}-fill {
     @include btn-fill($color);
-    opacity: .8;
+    opacity: 0.8;
 
     &:hover {
       opacity: 1;
@@ -139,7 +148,16 @@ table {
   }
 }
 
-@each $name, $color in (main:$main, blue:$blue, light-blue:$blue-light, red:$red, green:$green) {
+@each $name,
+  $color
+    in (
+      main: $main,
+      blue: $blue,
+      light-blue: $blue-light,
+      red: $red,
+      green: $green
+    )
+{
   .font-#{$name} {
     color: $color;
   }
@@ -150,19 +168,18 @@ table {
  ====== ====================================================================== */
 // 单词首字母大写
 .capitalize {
-  text-transform: capitalize
+  text-transform: capitalize;
 }
 
 // 字母大写
 .uppercase {
-  text-transform: uppercase
+  text-transform: uppercase;
 }
 
 // 段落第一个单词首字母大写
 // 注意：:first-letter 仅作用于块元素
 // 内联元素要使用该伪对象，必须先设定元素的 height 或 width 属性，或者设定 position 属性为 absolute，或者设定 display 属性为 block。
 .p-capitalize {
-
   &:first-letter {
     text-transform: uppercase;
   }
@@ -172,19 +189,19 @@ p {
   max-width: 100%;
 }
 
-[lang=en] h1,
-[lang=en] h2,
-[lang=en] h3,
-[lang=en] h4,
-[lang=en] h5,
-[lang=en] h6,
-[lang=en] button,
-[lang=en] .btn {
+[lang='en'] h1,
+[lang='en'] h2,
+[lang='en'] h3,
+[lang='en'] h4,
+[lang='en'] h5,
+[lang='en'] h6,
+[lang='en'] button,
+[lang='en'] .btn {
   @extend .capitalize;
 }
 
-[lang=en] p {
+[lang='en'] p {
   @extend .p-capitalize;
 }
 
-@import "./pagination";
+@import './pagination';

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export default {
   'hello-world': '你好，世界！',
   'title': 'Vue 项目',
@@ -27,6 +28,8 @@ export default {
   'operate': {
     'name': '操作',
     'confirm': '确定执行操作吗？',
+    'ok': '确定',
+    'cancel': '取消',
   },
   'image': {
     'pre': '上一张',

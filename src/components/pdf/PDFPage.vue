@@ -1,17 +1,19 @@
 <template>
   <div class="pdf-page-wrap">
     <div class="btn-group">
-      <span class="page">{{page}}/{{totalPage}}</span>
-      <button @click="toPrev()">{{$t('page.pre')}}</button>
-      <button @click="toNext()">{{$t('page.next')}}</button>
+      <span class="page">{{ page }}/{{ totalPage }}</span>
+      <button @click="toPrev()">{{ $t('page.pre') }}</button>
+      <button @click="toNext()">{{ $t('page.next') }}</button>
     </div>
-    <pdf class="pdf"
-         :src="pdfSrc"
-         :page="page"
-         @loaded="$emit('loaded')"
-         @page-loaded="$emit('page-loaded')"
-         @num-pages="totalPage=$event"
-         @error="snackBar.error($event)"/>
+    <pdf
+      class="pdf"
+      :src="pdfSrc"
+      :page="page"
+      @loaded="$emit('loaded')"
+      @page-loaded="$emit('page-loaded')"
+      @num-pages="totalPage = $event"
+      @error="snackBar.error($event)"
+    />
   </div>
 </template>
 
@@ -25,7 +27,12 @@ export default {
   props: {
     src: {
       validator(val) {
-        return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
+        return (
+          !val ||
+          typeof val === 'string' ||
+          val instanceof Object ||
+          val instanceof FileList
+        )
       },
     },
     page: Number,
@@ -77,41 +84,39 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '../../css/common-variable.scss';
-
 .pdf-page-wrap {
   position: relative;
   width: 100%;
-  padding: .6rem .3rem .3rem;
+  padding: 0.6rem 0.3rem 0.3rem;
   background: #666;
 
-  & .pdf {
+  .pdf {
     margin: 0 0 $margin;
-    box-shadow: 0 .05rem .1rem rgba(#000, .25);
+    box-shadow: 0 0.05rem 0.1rem rgba(#000, 0.25);
 
     &:last-of-type {
       margin: 0;
     }
   }
 
-  & .btn-group {
+  .btn-group {
     @include flex(center, center);
     justify-content: flex-end;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
-    padding: 0 .3rem;
-    height: .4rem;
-    background: rgba(#fff, .1);
+    padding: 0 0.3rem;
+    height: 0.4rem;
+    background: rgba(#fff, 0.1);
 
-    & .page {
+    .page {
       color: #fff;
     }
 
-    & button {
-      height: .24rem;
-      margin: 0 0 0 .2rem;
+    button {
+      height: 0.24rem;
+      margin: 0 0 0 0.2rem;
       line-height: normal;
       @extend .content-2;
     }

@@ -18,6 +18,7 @@ function resolve(dir) {
 }
 
 const devWebpackConfig = merge(baseWebpackConfig, {
+  mode: 'development',
   module: {
     rules: [
       {
@@ -70,8 +71,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
-      inject: true,
+      template: utils.pathResolve('static/index.html'),
+      inject: 'head',
+      assetsPublicPath: config.build.assetsPublicPath.replace(/\/*$/, ''),
+      assetsSubDirectory: config.build.assetsSubDirectory.replace(/\/*$/, ''),
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
