@@ -20,8 +20,6 @@ Vue.config.productionTip = false
 const { i18n } = initialExtensions()
 register()
 
-/* eslint-disable no-new */
-
 export function createApp() {
   // 创建 router 和 store 实例
   const store = createStore()
