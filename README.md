@@ -25,7 +25,11 @@
 > 国际化: 使用i18n。
 
 > 国际化(建议): 页面语句应当少使用词语拼接，因为不同的语言语法可能同，拼接可能会让最后得出的语句不伦不类
-(比如：‘用户登录’ 的英文翻译为 'Login'，如果使用 `this.$t('user') + this.$t('login')` 中文为 `'用户' + '登录'`，英文翻译为 `'user' + 'login'` => `'user login'`)
+> 比如：
+>> ‘未选择任何文件’ 的英文翻译为 'No files were selected'，
+>> 如果使用 `this.$t('unselected') + this.$t('any-file')`
+>> 中文为 `'未选择' + '任何文件'`，
+>> 英文翻译为 `'unselected ' + 'any file '` => `'unselected any file'`，显得不伦不类了
 
 > 国际化(建议): 页面可能共用的语句写在 `common.js` 中，其它的词汇语句可按照业务功能做命名空间写在 `index.js`，或者使用单独的文件
 
@@ -41,7 +45,10 @@ cp config/config.js.sample config/config.js
 # serve with hot reload at localhost:8080
 npm start
 
-# build static file for production with minification
+# build dll file for production with minification, insure that running after the `dlls` in `webpack.dll.conf.js` changed
+npm run dll
+
+# build static file for production with minification, insure that dll js files exist before running, or it will throw an Error about DllReferencePlugin
 npm run build
 
 # build for production and view the bundle analyzer report
