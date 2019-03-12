@@ -1,8 +1,8 @@
 <template>
   <a class="download-a" :href="fileSrc" download="" target="download">
     <!--download, target属性必需-->
-    {{showName ? filename : ''}}
-    <slot/>
+    {{ showName ? filename : '' }}
+    <slot />
   </a>
 </template>
 
@@ -54,10 +54,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='scss' scoped>
-@import '../../css/common-variable.scss';
-
+<style lang="scss" scoped>
 a {
-  color: $blue
+  color: $main;
 }
 </style>

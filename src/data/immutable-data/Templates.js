@@ -6,7 +6,7 @@ export default class Templates {
   }
 
   static cannotEdit(key) {
-    return Templates.copy(key).map((item) => {
+    return Templates.copy(key).map(item => {
       item.canEdit = false
       return item
     })

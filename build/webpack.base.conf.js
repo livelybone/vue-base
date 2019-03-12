@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
@@ -10,7 +11,7 @@ function resolve(dir) {
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: ['babel-polyfill', './src/entry-client.js'],
+    app: ['./src/entry-client.js'],
   },
   output: {
     path: config.build.assetsRoot,
@@ -24,13 +25,6 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      components: resolve('src/components'),
-      pages: resolve('src/pages'),
-      utils: resolve('src/utils'),
-      assets: resolve('src/assets'),
-      data: resolve('src/data'),
-      config: resolve('config'),
-      extensions: resolve('src/extensions'),
       '@': resolve('src'),
     },
   },
@@ -84,4 +78,14 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty',
   },
+  plugins: [
+    new webpack.DllReferencePlugin({
+      context: utils.pathResolve(''),
+      manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
+    }),
+    new webpack.DllReferencePlugin({
+      context: utils.pathResolve(''),
+      manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
+    }),
+  ],
 }

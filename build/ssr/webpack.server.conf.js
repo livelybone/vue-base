@@ -9,7 +9,7 @@ const config = require('../../config/index')
 
 module.exports = merge(baseConfig, {
   // 将 entry 指向应用程序的 server entry 文件
-  entry: ['babel-polyfill', './src/entry-server.js'],
+  entry: ['./src/entry-server.js'],
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,

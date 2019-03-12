@@ -1,4 +1,4 @@
-import { user } from 'data/store/modules/user'
+import { user } from '@/data/store/modules/user'
 import Vue from 'vue'
 import Vuex from 'vuex'
 

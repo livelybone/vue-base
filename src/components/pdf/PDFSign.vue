@@ -1,27 +1,45 @@
 <template>
   <div class="pdf-sign-wrap">
-    <span class="tip">{{$t('signature.how-to-sign')}}</span>
+    <span class="tip">{{ $t('signature.how-to-sign') }}</span>
     <div class="pdf-wrap">
-      <pdf-page class="pdf" :src="src" :page="page" @page-loaded="getWrapSize()" @toPage="toPage"/>
-      <div class="sign-wrap" ref="wrap" @dragover="dragOver($event)" @drop="drop($event)">
-        <img-tag v-if="!isNew&&imgPosition&&page===position.page"
-                 :src="signature"
-                 :style="{left:imgPosition.left+'px',bottom:imgPosition.bottom+'px'}"
-                 @dragStart="dragStart($event)"/>
+      <pdf-page
+        class="pdf"
+        :src="src"
+        :page="page"
+        @page-loaded="getWrapSize()"
+        @toPage="toPage"
+      />
+      <div
+        class="sign-wrap"
+        ref="wrap"
+        @dragover="dragOver($event)"
+        @drop="drop($event)"
+      >
+        <img-tag
+          v-if="!isNew && imgPosition && page === position.page"
+          :src="signature"
+          :style="{
+            left: imgPosition.left + 'px',
+            bottom: imgPosition.bottom + 'px',
+          }"
+          @dragStart="dragStart($event)"
+        />
       </div>
       <div class="signature">
-        <h2>{{$t('signature.all')}}</h2>
-        <img-tag :src="signature"
-                 @load="getImgSize($event)"
-                 @dragStart="isNew = truedragStart($event)"
-                 @dragEnd="isNew = false"/>
+        <h2>{{ $t('signature.all') }}</h2>
+        <img-tag
+          :src="signature"
+          @load="getImgSize($event)"
+          @dragStart="isNew = truedragStart($event)"
+          @dragEnd="isNew = false"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import pdfPage from 'components/pdf/PDFPage'
+import pdfPage from '@/components/pdf/PDFPage'
 
 export default {
   name: 'PDFSign',
@@ -29,7 +47,12 @@ export default {
   props: {
     src: {
       validator(val) {
-        return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
+        return (
+          !val ||
+          typeof val === 'string' ||
+          val instanceof Object ||
+          val instanceof FileList
+        )
       },
     },
     signature: {
@@ -65,7 +88,10 @@ export default {
   },
   methods: {
     dragStart(ev) {
-      this.pointerPosition = { left: ev.layerX, bottom: this.imgSize.height - ev.layerY }
+      this.pointerPosition = {
+        left: ev.layerX,
+        bottom: this.imgSize.height - ev.layerY,
+      }
     },
     dragOver(ev) {
       ev.preventDefault()
@@ -80,8 +106,14 @@ export default {
     },
     getWrapSize() {
       if (this.wrapSize.width && this.wrapSize.height) return
-      this.wrapSize = { width: this.$refs.wrap.offsetWidth, height: this.$refs.wrap.offsetHeight }
-      if (typeof this.position.left === 'number' && typeof this.position.bottom === 'number') {
+      this.wrapSize = {
+        width: this.$refs.wrap.offsetWidth,
+        height: this.$refs.wrap.offsetHeight,
+      }
+      if (
+        typeof this.position.left === 'number' &&
+        typeof this.position.bottom === 'number'
+      ) {
         this.imgPosition = {
           left: this.wrapSize.width * this.position.left,
           bottom: this.wrapSize.height * this.position.bottom,
@@ -106,12 +138,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '../../css/common-variable.scss';
-
 .tip {
   display: block;
   width: 100%;
-  line-height: .4rem;
+  line-height: 0.4rem;
   text-align: center;
 }
 
@@ -119,68 +149,68 @@ export default {
   @include flex-column(center, center);
   width: 100%;
 
-  & .pdf-wrap {
+  .pdf-wrap {
     position: relative;
     z-index: 1;
 
-    & .pdf {
-      width: .78rem;
+    .pdf {
+      width: 0.78rem;
 
       &:last-of-type {
         margin: 0;
       }
     }
 
-    & .dot {
+    .dot {
       position: absolute;
-      left: .3rem;
-      bottom: .3rem;
+      left: 0.3rem;
+      bottom: 0.3rem;
       z-index: 1;
-      width: .1rem;
-      height: .1rem;
+      width: 0.1rem;
+      height: 0.1rem;
     }
 
-    & .sign-wrap {
+    .sign-wrap {
       position: absolute;
-      left: .3rem;
-      right: .3rem;
-      top: .6rem;
-      bottom: .3rem;
+      left: 0.3rem;
+      right: 0.3rem;
+      top: 0.6rem;
+      bottom: 0.3rem;
 
-      & img {
+      img {
         position: absolute;
         left: 0;
         bottom: 0;
-        width: .8rem;
+        width: 0.8rem;
       }
     }
 
-    & .signature {
+    .signature {
       @include flex(center, center);
       position: absolute;
-      right: .5rem;
-      top: .8rem;
+      right: 0.5rem;
+      top: 0.8rem;
       z-index: 2;
       width: 1rem;
       height: 1rem;
-      background: rgba(#000, .2);
+      background: rgba(#000, 0.2);
 
-      & h2 {
+      h2 {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
-        padding: 0 .1rem;
-        line-height: .24rem;
+        padding: 0 0.1rem;
+        line-height: 0.24rem;
         @extend .content-2;
         color: #fff;
-        background: rgba(#000, .3);
+        background: rgba(#000, 0.3);
         pointer-events: none;
       }
 
-      & img {
+      img {
         position: relative;
-        width: .8rem;
+        width: 0.8rem;
         cursor: pointer;
       }
     }

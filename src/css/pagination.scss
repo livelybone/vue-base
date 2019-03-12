@@ -4,8 +4,8 @@ $base-size: 10px;
 $font: #666;
 $font-light: #999;
 
-@function size($val:1) {
-  @return $val * $base-size
+@function size($val: 1) {
+  @return $val * $base-size;
 }
 
 @mixin no-select() {
@@ -35,7 +35,7 @@ $font-light: #999;
     padding: 0 size();
     margin: 0 size(2) 0 size();
     border: 1px solid $border;
-    border-radius: size(.3);
+    border-radius: size(0.3);
     line-height: size(2.6);
     color: $font;
     outline: none;
@@ -51,7 +51,7 @@ $font-light: #999;
     min-width: size(2.8);
     height: size(2.8);
     line-height: size(2.6);
-    padding: 0 size(.4);
+    padding: 0 size(0.4);
     margin: 0 0 0 size();
     border: 1px solid $border;
     text-align: center;
@@ -60,13 +60,13 @@ $font-light: #999;
     @include no-select();
 
     &:hover {
-      background: rgba($main, .3);
+      background: rgba($main, 0.3);
     }
 
     &.disabled {
       cursor: default;
-      background: rgba(#000, .1);
-      border-color: rgba($border, .1);
+      background: rgba(#000, 0.1);
+      border-color: rgba($border, 0.1);
     }
 
     &.active {

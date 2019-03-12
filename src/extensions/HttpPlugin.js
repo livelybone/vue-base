@@ -1,7 +1,7 @@
 import { Storage } from '@livelybone/storage'
 import axios from 'axios'
-import config from 'config/config'
-import { convertToFormData, getUrl } from 'utils/RequestInterceptor'
+import config from '@/../config/config'
+import { convertToFormData, getUrl } from '@/utils/RequestInterceptor'
 
 /**
  * http: axios
@@ -18,7 +18,8 @@ function initialAxios() {
   // 如果你想在客户端app中获取自定义的 header 信息，需要在服务器端 header 中添加 Access-Control-Expose-Headers：
   // header('Access-Control-Expose-Headers:token,uid');
   // 处理服务器返回的错误信息
-  axios.defaults.validateStatus = status => (status >= 200 && status < 300) || (status >= 400)
+  axios.defaults.validateStatus = status =>
+    (status >= 200 && status < 300) || status >= 400
 }
 
 initialAxios()
@@ -26,7 +27,9 @@ initialAxios()
 export class Http {
   static getFile(url) {
     // 适用于需要登录的情况
-    return axios.get(setAuth(url), { responseType: 'blob' }).then(res => res.data)
+    return axios
+      .get(setAuth(url), { responseType: 'blob' })
+      .then(res => res.data)
   }
 
   static errorValidate(data) {
@@ -46,7 +49,11 @@ export class Http {
 
   static postForm(url, data) {
     const formData = convertToFormData(data)
-    return this.responseDeal(axios.post(setAuth(url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }))
+    return this.responseDeal(
+      axios.post(setAuth(url), formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }),
+    )
   }
 
   static del(url) {
@@ -59,11 +66,15 @@ export class Http {
 
   static putForm(url, data) {
     const formData = convertToFormData(data)
-    return this.responseDeal(axios.put(setAuth(url), formData, { headers: { 'Content-Type': 'multipart/form-data' } }))
+    return this.responseDeal(
+      axios.put(setAuth(url), formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }),
+    )
   }
 
   static all(callback, ...reqs) {
-    const queue = reqs.map((req) => {
+    const queue = reqs.map(req => {
       if (req.method === 'GET') {
         return this.get(req.url, req.data)
       }
@@ -73,37 +84,42 @@ export class Http {
         data: req.data,
       })
     })
-    return axios.all(queue).then(axios.spread((acct, perms) => {
-      callback(acct, perms)
-    }))
+    return axios.all(queue).then(
+      axios.spread((acct, perms) => {
+        callback(acct, perms)
+      }),
+    )
   }
 
   static responseDeal(promise) {
-    return promise.then((res) => {
-      // 去除config, request, status, statusText...等一些其他字段，关注data
-      const { data, status } = res
-      const { message, msg, code, result } = data || {}
-      if (data) {
-        if (Http.errorValidate(data)) {
-          const error = new Error(message || msg)
-          error.statusCode = status
-          error.resCode = code
-          throw error
-        } else {
-          return result
+    return promise.then(
+      res => {
+        // 去除config, request, status, statusText...等一些其他字段，关注data
+        const { data, status } = res
+        const { message, msg, code, result } = data || {}
+        if (data) {
+          if (Http.errorValidate(data)) {
+            const error = new Error(message || msg)
+            error.statusCode = status
+            error.resCode = code
+            throw error
+          } else {
+            return result
+          }
         }
-      }
-      return res
-    }, (e) => {
-      // setImmediate(() => Vue.prototype.snackBar.error(e));
-      throw e
-    })
+        return res
+      },
+      e => {
+        // setImmediate(() => Vue.prototype.snackBar.error(e));
+        throw e
+      },
+    )
   }
 }
 
 const HttpPlugin = {}
 
-HttpPlugin.install = (Vue) => {
+HttpPlugin.install = Vue => {
   Vue.prototype.$http = Http
 }
 

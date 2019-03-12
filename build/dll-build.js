@@ -1,25 +1,23 @@
-'use strict'
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
 
 const rm = require('rimraf')
-const path = require('path')
 const chalk = require('chalk')
-const config = require('../config')
-const webpackConfig = require('./webpack.prod.conf')
+const path = require('path')
+const utils = require('./utils')
 const buildUtil = require('./build-util')
+const dllWebpackConfig = require('./webpack.dll.conf')
 
-rm(path.join(config.build.assetsRoot), err => {
+rm(utils.pathResolve('static/dll'), err => {
   if (err) throw err
 
-  buildUtil.spinner.start('Main: start building ...')
-  buildUtil.chunkDeal('Main', webpackConfig)
+  buildUtil.spinner.start('Dll: start building ...')
+  buildUtil.chunkDeal('Dll', dllWebpackConfig)
     .then(() => {
       buildUtil.printCompiledArr()
       console.log(chalk.yellow(
-        '  Tip: built files are meant to be served over an HTTP server.\n' +
-        '  Opening index.html over file:// won\'t work.\n',
+        '  Tip: Now, you can use the dll file via DllReferencePlugin\n',
       ))
     })
     .catch((err) => {

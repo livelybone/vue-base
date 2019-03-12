@@ -1,10 +1,11 @@
 import App from '@/App'
+import { createStore } from '@/data/store'
 import { initialExtensions } from '@/extensions/Extensions'
 import register from '@/global-register'
 import { createRouter } from '@/router'
+import { isBrowser } from '@/utils/Utils'
 import RemInit from '@livelybone/rem-init'
-import { createStore } from 'data/store'
-import { isBrowser } from 'utils/Utils'
+import 'babel-polyfill'
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 

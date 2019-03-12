@@ -19,11 +19,12 @@ AuthToken.key = 'AUTH_TOKEN'
 
 let next = null
 
-AuthToken.tokenChange = new Observer((n) => {
+AuthToken.tokenChange = new Observer(n => {
   next = n
 })
 
-AuthToken.storage = typeof window !== 'undefined' ? new Storage(true) : { addHandler: () => '' }
+AuthToken.storage =
+  typeof window !== 'undefined' ? new Storage(true) : { addHandler: () => '' }
 
 AuthToken.storage.addHandler(next)
 

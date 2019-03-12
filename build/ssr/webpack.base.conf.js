@@ -1,18 +1,19 @@
-'use strict';
-const path = require('path');
-const webpack = require('webpack');
-const utils = require('../utils');
-const config = require('../../config/index');
-const vueLoaderConfig = require('../vue-loader.conf');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const env = require('../../config/prod.env');
+'use strict'
+const path = require('path')
+const webpack = require('webpack')
+const utils = require('../utils')
+const config = require('../../config/index')
+const vueLoaderConfig = require('../vue-loader.conf')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const env = require('../../config/prod.env')
 
 function resolve(dir) {
   return path.join(__dirname, '../../', dir)
 }
 
 module.exports = {
+  mode: 'production',
   context: path.resolve(__dirname, '../../'),
   devtool: false,
   output: {
@@ -25,13 +26,6 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'components': resolve('src/components'),
-      'pages': resolve('src/pages'),
-      'utils': resolve('src/utils'),
-      'assets': resolve('src/assets'),
-      'data': resolve('src/data'),
-      'config': resolve('config'),
-      'extensions': resolve('src/extensions'),
       '@': resolve('src'),
     }
   },
@@ -73,6 +67,56 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    // Use when multiple entries exist
+    // runtimeChunk: {
+    //   name: 'manifest'
+    // },
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+          },
+        },
+        sourceMap: config.build.productionSourceMap,
+        parallel: true,
+        cache: true,
+      }),
+      // Compress extracted CSS. We are using this plugin so that possible
+      // duplicated CSS from different pages can be deduped.
+      new OptimizeCSSPlugin({
+        cssProcessorOptions: config.build.productionSourceMap
+          ? { safe: true, map: { inline: false } }
+          : { safe: true },
+      }),
+    ],
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      name: false,
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'initial',
+          priority: -10,
+          reuseExistingChunk: false,
+          test: /node_modules\/(.*)\.js/
+        },
+        styles: {
+          name: 'styles',
+          test: /\.(scss|css)$/,
+          chunks: 'all',
+          minChunks: 1,
+          reuseExistingChunk: true,
+          enforce: true
+        },
+      },
+    },
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': env,
@@ -86,16 +130,13 @@ module.exports = {
       sourceMap: config.build.productionSourceMap,
       parallel: true
     }),
-    new ExtractTextPlugin({
+    // extract css into its own file
+    new MiniCssExtractPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css'),
-      // Setting the following option to `false` will not extract CSS from codesplit chunks.
-      // Their CSS will instead be inserted dynamically with style-loader when the codesplit chunk has been loaded by webpack.
-      // It's currently set to `true` because we are seeing that sourcemaps are included in the codesplit bundle as well when it's `false`,
-      // increasing file size: https://github.com/vuejs-templates/webpack/issues/1110
-      allChunks: true,
+      chunkFilename: utils.assetsPath('css/[name]-[contenthash].chunk.css'),
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {warnings: false}
+      compress: { warnings: false }
     }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
@@ -112,4 +153,4 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty'
   }
-};
+}

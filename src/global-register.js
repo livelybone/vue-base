@@ -1,3 +1,9 @@
+import VueBtn from '@livelybone/vue-button'
+import InputBase from '@livelybone/vue-input'
+import Loading from '@livelybone/vue-loading'
+import Pagination from '@livelybone/vue-pagination'
+import Back from '@/components/common/Back'
+import NoResult from '@/components/common/NoResult'
 import {
   differenceInDays,
   differenceInHours,
@@ -6,33 +12,24 @@ import {
   format,
   parse,
 } from 'date-fns'
-import { Langs } from 'extensions/Langs'
-import { isBrowser } from 'utils/Utils'
+import { Langs } from '@/extensions/Langs'
+import { isBrowser } from '@/utils/Utils'
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import ImgTag from 'vue-img-tag'
+import { SlideForMore } from 'vue-slide-for-more'
 
-const Back = () => import('components/common/Back' /* webpackChunkName: "Back" */)
-const ImgTag = () => import('vue-img-tag' /* webpackChunkName: "ImgTag" */)
+const FileInput = () =>
+  import('@/components/form/FileInput' /* webpackChunkName: "FileInput" */)
+const Overlay = () =>
+  import('@/components/common/Overlay' /* webpackChunkName: "Overlay" */)
+const PageContainer = () =>
+  import('@/components/common/PageContainer' /* webpackChunkName: "PageContainer" */)
 
-const Pagination = () => import('@livelybone/vue-pagination' /* webpackChunkName: "Pagination" */)
-const SlideForMore = () => import('vue-slide-for-more' /* webpackChunkName: "SlideForMore" */).then(module => module.SlideForMore)
-const NoResult = () => import('components/common/NoResult' /* webpackChunkName: "NoResult" */)
+export default function() {
+  const isMobile = isBrowser && window.isMobile
 
-const VueBtn = () => import('@livelybone/vue-button' /* webpackChunkName: "VueBtn" */)
-const InputBase = () => import('@livelybone/vue-input' /* webpackChunkName: "InputBase" */)
-const FileInput = () => import('components/form/FileInput' /* webpackChunkName: "FileInput" */)
-
-const Overlay = () => import('components/common/Overlay' /* webpackChunkName: "Overlay" */)
-const OverlayConfirm = () => import('components/common/OverlayConfirm' /* webpackChunkName: "OverlayConfirm" */)
-
-const PageContainer = () => import('components/common/PageContainer' /* webpackChunkName: "PageContainer" */)
-
-const Loading = () => import('@livelybone/vue-loading' /* webpackChunkName: "Loading" */)
-
-const isMobile = isBrowser && window.isMobile
-
-export default function () {
   // 注册全局组件
   Vue.component('back', Back)
   Vue.component('img-tag', ImgTag)
@@ -44,7 +41,6 @@ export default function () {
   Vue.component('file-input', FileInput)
 
   Vue.component('overlay', Overlay)
-  Vue.component('overlay-confirm', OverlayConfirm)
 
   Vue.component('page-container', PageContainer)
   Vue.component('loading', Loading)
@@ -55,8 +51,13 @@ export default function () {
     Vue.component('pagination', Pagination)
   }
 
-  Vue.filter('datePipe', (time, { fmt }) => format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'))
-  Vue.filter('amountPipe', (amount, { symbol, unit }) => (symbol || '') + amount + (unit || ''))
+  Vue.filter('datePipe', (time, { fmt }) =>
+    format(parse(time), fmt || 'YYYY-MM-DD HH:mm:ss'),
+  )
+  Vue.filter(
+    'amountPipe',
+    (amount, { symbol, unit }) => (symbol || '') + amount + (unit || ''),
+  )
 
   Vue.prototype.isMobile = isMobile
 
@@ -89,9 +90,15 @@ export default function () {
       },
       switchLang(lang) {
         const l = lang && lang.toLowerCase()
-        const { path, params: { lang: language } } = this.$route
+        const {
+          path,
+          params: { lang: language },
+        } = this.$route
         if (l !== language) {
-          this.$router.push({ ...this.$route, path: path.replace(language, lang) })
+          this.$router.push({
+            ...this.$route,
+            path: path.replace(language, lang),
+          })
         }
       },
     },

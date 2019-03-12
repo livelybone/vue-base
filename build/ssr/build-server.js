@@ -1,69 +1,35 @@
-'use strict';
-require('../check-versions')();
+'use strict'
+require('../check-versions')()
 
-process.env.NODE_ENV = 'production';
-process.env.VUE_ENV = 'server';
+process.env.NODE_ENV = 'production'
+process.env.VUE_ENV = 'server'
 
-const ora = require('ora');
-const rm = require('rimraf');
-const path = require('path');
-const chalk = require('chalk');
-const webpack = require('webpack');
-const config = require('../../config/index');
-const webpackConfig = require('./webpack.client.conf');
-const webpackServerConfig = require('./webpack.server.conf');
+const rm = require('rimraf')
+const path = require('path')
+const chalk = require('chalk')
+const webpack = require('webpack')
+const config = require('../../config/index')
+const webpackConfig = require('./webpack.client.conf')
+const webpackServerConfig = require('./webpack.server.conf')
+const buildUtil = require('../build-util')
 
-const spinner = ora('server building for production...');
-spinner.start();
 
 rm(path.join(config.build.assetsRoot, '..'), err => {
-  if (err) throw err;
-  const task = [];
-  task.push(new Promise((resolve, reject) => {
-    webpack(webpackConfig, (err, stats) => {
-      spinner.stop();
-      if (err) reject(err);
-      process.stdout.write(stats.toString({
-        colors: true,
-        modules: false,
-        children: false, // If you are using ts-loader, setting this to true will make TypeScript errors show up during build.
-        chunks: false,
-        chunkModules: false
-      }) + '\n\n');
+  if (err) throw err
 
-      if (stats.hasErrors()) {
-        console.log(chalk.red('  Client build failed with errors.\n'));
-        process.exit(1)
-      }
-
-      console.log(chalk.cyan('  Client build complete.\n'));
-      resolve();
+  buildUtil.spinner.start('Client: start building ...')
+  buildUtil.chunkDeal('Client', webpackConfig)
+    .then(() => {
+      buildUtil.spinner.start('Server: start building ...')
+      return buildUtil.chunkDeal('Server', webpackServerConfig)
     })
-  }));
-
-  task.push(new Promise((resolve, reject) => {
-    webpack(webpackServerConfig, (err, stats) => {
-      spinner.stop();
-      if (err) reject(err);
-      process.stdout.write(stats.toString({
-        colors: true,
-        modules: false,
-        children: false, // If you are using ts-loader, setting this to true will make TypeScript errors show up during build.
-        chunks: false,
-        chunkModules: false
-      }) + '\n\n');
-
-      if (stats.hasErrors()) {
-        console.log(chalk.red('  Server build failed with errors.\n'));
-        process.exit(1)
-      }
-
-      console.log(chalk.cyan('  Server build complete.\n'));
-      resolve();
+    .then(() => {
+      buildUtil.printCompiledArr()
+      console.log(chalk.cyan('  Server build complete.\n'))
     })
-  }));
-
-  Promise.all(task).then(() => {
-    console.log(chalk.cyan('  All build complete.\n'));
-  })
-});
+    .catch((err) => {
+      buildUtil.printCompiledArr()
+      if (err) console.log(chalk.red(`${err.type || err.name || 'Error'}: ${err.message}`))
+      process.exit(1)
+    })
+})
