@@ -30,6 +30,7 @@
 > 如果所有 css 被 ExtractTextWebpackPlugin 抽取成一个 css 文件, 那么 css 文件最好不要有图片（比如 background: url('/assets/logo.png'), 原因： webpack url-loader 设置为 10kb 以下的文件会被转为base64嵌入到相应的母文件）
 
 ### JS
+
 > es6 规范
 
 > 全局状态管理使用 vuex，如果项目简单，可选择使用 extensions/StorePlugin.js
@@ -51,13 +52,18 @@
 
 > 建议2: 页面可能共用的语句写在 `common.js` 中，其它的词汇语句可按照业务功能做命名空间写在 `index.js`，或者使用单独的文件
 
-### SEO
+### SEO 方案
 
-> SEO 优化使用 SSR，生产环境使用 Node，需要登录验证的页面请避免做 ssr (这些页面本身就不允许被抓取)，只做需要被搜索引擎抓取的页面，如果这种页面数量很少，可以转用 prerender 预渲染
+> PrerenderSpaPlugin (git 分支 pre-render): 预渲染，生成静态 html 文件，再用 Nginx 配置路由即可。
 
-> ssr组件缓存: 使用 lru-cache，在需要使用缓存的的组件中使用 serverCacheKey 和 name(必须是唯一的) 定义组件的 id
+> 服务端渲染(SSR) (git 分支 ssr): 如果是构建社交类或是新闻类网站，有很多类似博客或是新闻的页面（公开的，数量巨大的，都能被搜索到的），还请使用 SSR，预渲染不适合做如此庞大的操作
 
-> ssr数据预取: 通过 asyncData 函数在服务器预先取得数据，然后自动嵌入最终的 html 中，在客户端通过 `window.__INITIAL_STATE__` 获取数据，因此，不要二次获取数据！先判断该数据存不存在，如果不存在，则再次获取
+> 服务端渲染(SSR): SEO 优化使用 SSR，生产环境使用 Node，需要登录验证的页面请避免做 ssr (这些页面本身就不允许被抓取)，只做需要被搜索引擎抓取的页面，如果这种页面数量很少，可以转用 prerender 预渲染
+
+> 服务端渲染(SSR): ssr组件缓存: 使用 lru-cache，在需要使用缓存的的组件中使用 serverCacheKey 和 name(必须是唯一的) 定义组件的 id
+
+> 服务端渲染(SSR): ssr数据预取: 通过 asyncData 函数在服务器预先取得数据，然后自动嵌入最终的 html 中，在客户端通过 `window.__INITIAL_STATE__` 获取数据，因此，不要二次获取数据！先判断该数据存不存在，如果不存在，则再次获取
+
 
 ## Build Setup
 
@@ -75,7 +81,9 @@ npm start
 npm run dll
 
 # build static file for production with minification(with no ssr), insure that dll js files exist before running, or it will throw an Error about DllReferencePlugin
-npm run build:static
+# HappyPack for build will be enabled when USE_HAPPYPACK set to non-null
+# Happypack is not recommended for smaller projects
+cross-env USE_HAPPYPACK=[value] npm run build:ssr
 
 # build for production and view the bundle analyzer report
 npm run build:static --report

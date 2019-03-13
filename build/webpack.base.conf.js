@@ -2,14 +2,20 @@ const path = require('path')
 const webpack = require('webpack')
 const utils = require('./utils')
 const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
+const happypackConf = require('./happypack')
 
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
+const VueReference = new webpack.DllReferencePlugin({
+  context: utils.pathResolve(''),
+  manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
+})
+
+const UIAndUtils = new webpack.DllReferencePlugin({
+  context: utils.pathResolve(''),
+  manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
+})
 
 module.exports = {
-  context: path.resolve(__dirname, '../'),
+  context: utils.pathResolve(),
   entry: {
     app: ['./src/entry-client.js'],
   },
@@ -24,22 +30,15 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      vue$: 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': utils.pathResolve('src'),
+      'config': utils.pathResolve('config'),
     },
   },
   module: {
     rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig,
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
-      },
+      happypackConf.rules.vue(),
+      happypackConf.rules.js(),
+      ...happypackConf.rules.css.map(rule => rule()),
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
@@ -79,13 +78,10 @@ module.exports = {
     child_process: 'empty',
   },
   plugins: [
-    new webpack.DllReferencePlugin({
-      context: utils.pathResolve(''),
-      manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
-    }),
-    new webpack.DllReferencePlugin({
-      context: utils.pathResolve(''),
-      manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
-    }),
+    VueReference,
+    UIAndUtils,
+    ...happypackConf.plugins.vue,
+    ...happypackConf.plugins.js,
+    ...happypackConf.plugins.css,
   ],
 }

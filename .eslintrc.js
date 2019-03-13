@@ -7,14 +7,14 @@ module.exports = {
     'browser': true,
   },
   'plugins': [
-    'prettier',
     'vue',
+    'prettier',
   ],
   // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
   // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
   'extends': [
-    'plugin:vue/essential',
     'airbnb-base',
+    'plugin:vue/essential',
     'plugin:prettier/recommended',
   ],
   // check if imports actually resolve
