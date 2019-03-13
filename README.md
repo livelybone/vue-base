@@ -30,6 +30,7 @@
 > 如果所有 css 被 ExtractTextWebpackPlugin 抽取成一个 css 文件, 那么 css 文件最好不要有图片（比如 background: url('/assets/logo.png'), 原因： webpack url-loader 设置为 10kb 以下的文件会被转为base64嵌入到相应的母文件）
 
 ### JS
+
 > es6 规范
 
 > 全局状态管理使用 vuex，如果项目简单，可选择使用 extensions/StorePlugin.js
@@ -37,8 +38,6 @@
 > 工具类写在 utils 文件夹，插件写在 extensions 文件夹，组件共用变量或者模板写在 data/immutable-data 文件夹，ajax 相关的写在 data/api 文件夹，全局状态管理文件写在 data/store/modules 文件夹
 
 > ajax 表单渲染数据格式推荐 `const items = [{name:'姓名', alias:'realName', value:'XXX'}]`，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（`DataDeal.dateDeal(items)`）（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
-
-> SEO 优化使用预渲染 PrerenderSpaPlugin 代替 服务端渲染（SSR），生成静态 html 文件，再用 Nginx 配置路由即可，如果是构建社交类或是新闻类网站，有很多类似博客或是新闻的页面（公开的，数量巨大的，都能被搜索到的），还请使用 SSR，预渲染不适合做如此庞大的操作
 
 ### 国际化
 
@@ -53,6 +52,11 @@
 
 > 建议2: 页面可能共用的语句写在 `common.js` 中，其它的词汇语句可按照业务功能做命名空间写在 `index.js`，或者使用单独的文件
 
+### SEO 方案
+
+> PrerenderSpaPlugin (git 分支 pre-render)，预渲染，生成静态 html 文件，再用 Nginx 配置路由即可。
+
+> 服务端渲染(SSR) (git 分支 ssr): 如果是构建社交类或是新闻类网站，有很多类似博客或是新闻的页面（公开的，数量巨大的，都能被搜索到的），还请使用 SSR，预渲染不适合做如此庞大的操作
 
 ## Build Setup
 
@@ -70,7 +74,9 @@ npm start
 npm run dll
 
 # build static file for production with minification, insure that dll js files exist before running, or it will throw an Error about DllReferencePlugin
-npm run build
+# HappyPack for build will be enabled when USE_HAPPYPACK set to non-null
+# Happypack is not recommended for smaller projects
+cross-env USE_HAPPYPACK=[value] npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
