@@ -58,12 +58,12 @@ exports.cssLoaders = function (options) {
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
-    postcss: generateLoaders(),
-    less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
+    // postcss: generateLoaders(),
+    // less: generateLoaders('less'),
+    // sass: generateLoaders('sass', { indentedSyntax: true }),
     // common variable of scss
     scss: generateLoaders('sass', { data: `$device: mobile; @import "${exports.pathResolve('src/css/common-variable.scss').replace(new RegExp(`\\${path.sep}`, 'g'), '/')}";` }),
-    stylus: generateLoaders('stylus'),
+    // stylus: generateLoaders('stylus'),
   }
 }
 

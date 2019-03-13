@@ -13,10 +13,6 @@ const EslintFormatter = require('eslint-friendly-formatter')
 const { HOST } = process.env
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
-
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   module: {
@@ -25,14 +21,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [resolve('src')],
+        include: [utils.pathResolve('src')],
         options: {
           formatter: EslintFormatter,
           emitWarning: true,
+          fix: true,
         },
       },
-      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true }),
     ],
+  },
+  resolve: {
+    alias: {
+      vue$: 'vue/dist/vue.esm.js',
+    },
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -73,13 +74,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: utils.pathResolve('static/index.html'),
       inject: 'head',
-      assetsPublicPath: config.build.assetsPublicPath.replace(/\/*$/, ''),
-      assetsSubDirectory: config.build.assetsSubDirectory.replace(/\/*$/, ''),
+      assetsPublicPath: config.dev.assetsPublicPath.replace(/\/*$/, ''),
+      assetsSubDirectory: config.dev.assetsSubDirectory.replace(/\/*$/, ''),
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
+        from: utils.pathResolve('static'),
         to: config.dev.assetsSubDirectory,
         ignore: ['.*'],
       },

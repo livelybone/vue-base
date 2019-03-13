@@ -17,13 +17,7 @@ const env = require('../config/prod.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
-  module: {
-    rules: utils.styleLoaders({
-      sourceMap: config.build.productionSourceMap,
-      extract: true,
-      usePostCSS: true,
-    }),
-  },
+  module: {},
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsRoot,
@@ -115,16 +109,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
+        from: utils.pathResolve('static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*'],
       },
     ]),
     new PrerenderSpaPlugin(prerenderConfig),
-    new webpack.ContextReplacementPlugin( // 如果使用moment.js，需要用到这个减小大小，不推荐使用moment.js
-      /moment[/\\]locale$/,
-      /zh-cn-sdfsf/,
-    ),
   ],
 })
 

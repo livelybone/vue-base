@@ -1,6 +1,6 @@
 import { Storage } from '@livelybone/storage'
 import axios from 'axios'
-import config from '@/../config/config'
+import config from 'config/config'
 import { convertToFormData, getUrl } from '@/utils/RequestInterceptor'
 
 /**
