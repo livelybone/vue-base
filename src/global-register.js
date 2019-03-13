@@ -24,8 +24,6 @@ const FileInput = () =>
   import('@/components/form/FileInput' /* webpackChunkName: "FileInput" */)
 const Overlay = () =>
   import('@/components/common/Overlay' /* webpackChunkName: "Overlay" */)
-const PageContainer = () =>
-  import('@/components/common/PageContainer' /* webpackChunkName: "PageContainer" */)
 
 export default function() {
   const isMobile = isBrowser && window.isMobile
@@ -42,7 +40,6 @@ export default function() {
 
   Vue.component('overlay', Overlay)
 
-  Vue.component('page-container', PageContainer)
   Vue.component('loading', Loading)
 
   if (isMobile) {

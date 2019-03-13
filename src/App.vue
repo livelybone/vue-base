@@ -15,6 +15,14 @@ import SnackBar from 'vuejs-snackbar'
 
 export default {
   name: 'app',
+  metaInfo() {
+    return {
+      titleTemplate(val) {
+        return val ? `${val} - ${this.$t('title')}` : this.$t('title')
+      },
+      link: [{ type: 'shortcut icon', href: 'sfsdfsdfsdf' }],
+    }
+  },
   components: { SnackBar, ImageFullScreen, OverlayConfirm },
   mounted() {
     Vue.prototype.snackBar = this.$refs.snackBar
