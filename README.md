@@ -54,7 +54,7 @@
 
 ### SEO 方案
 
-> PrerenderSpaPlugin (git 分支 pre-render)，预渲染，生成静态 html 文件，再用 Nginx 配置路由即可。
+> PrerenderSpaPlugin (git 分支 pre-render): 预渲染，生成静态 html 文件，再用 Nginx 配置路由即可。
 
 > 服务端渲染(SSR) (git 分支 ssr): 如果是构建社交类或是新闻类网站，有很多类似博客或是新闻的页面（公开的，数量巨大的，都能被搜索到的），还请使用 SSR，预渲染不适合做如此庞大的操作
 
