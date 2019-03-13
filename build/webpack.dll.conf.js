@@ -12,6 +12,7 @@ const dlls = {
     'vuex',
     'vue-router',
     'vue-i18n',
+    'vue-meta',
     'axios',
   ],
   UIAndUtils: [

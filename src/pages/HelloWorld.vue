@@ -1,5 +1,5 @@
 <template>
-  <page-container class="hello-world">
+  <div class="hello-world">
     <select :value="$i18n.locale" @change="switchLang($event.target.value)">
       <option v-for="op in Langs" :value="op.value" :key="op.value">
         {{ op.name }}
@@ -66,7 +66,7 @@
         Element{{ val }}
       </div>
     </slide-for-more>
-  </page-container>
+  </div>
 </template>
 
 <script>
@@ -142,7 +142,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.page-container {
+.hello-world {
   text-align: center;
 }
 
