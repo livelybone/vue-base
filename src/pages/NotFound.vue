@@ -1,16 +1,19 @@
 <template>
-  <page-container class="not-found" :title="404">
+  <div class="not-found">
     <h1>404</h1>
     <p>{{ $t('404.tip') }}</p>
     <div class="back btn btn-blue" @click="$router.back()">
       {{ $t('back') }}
     </div>
-  </page-container>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'NotFound',
+  metaInfo: {
+    title: '404',
+  },
 }
 </script>
 
