@@ -83,7 +83,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       defaultAttribute: 'defer',
     }),
     new PreloadWebpackPlugin({
-      rel: 'preload',
+      rel: 'prefetch',
     }),
     // copy custom static assets
     new CopyWebpackPlugin([

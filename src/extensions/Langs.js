@@ -4,7 +4,7 @@
 /* eslint-disable no-param-reassign */
 import { Storage } from '@livelybone/storage'
 import LangMap from '@/assets/lang/LangMap'
-import { isBrowser } from '@/utils/Utils'
+import { isBrowser } from '@/utils/UserAgent'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
