@@ -82,7 +82,6 @@ export default {
   },
   components: {},
   mounted() {
-    console.log(1)
     setTimeout(() => {
       this.snackBar.error('Hello World!')
       this.confirmOverlay.show({ head: 'Hello World!' }).then(() => {

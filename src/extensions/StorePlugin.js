@@ -2,24 +2,23 @@
 import Vue from 'vue'
 
 const data = {
-  user: {},
+  user: { name: 'a' },
   admin: {},
 }
 
-export class Store {
-  static commit(key, val) {
-    Vue.set(Store.state, key, val)
-  }
+export const Store = {
+  state: data,
+  commit(key, val) {
+    Vue.set(data, key, val)
+  },
 }
-
-Store.state = data
 
 const StorePlugin = {
   install(V) {
     V.mixin({
       data() {
         return {
-          $store: Store,
+          store: Store,
         }
       },
     })
