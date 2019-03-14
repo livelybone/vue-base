@@ -4,7 +4,6 @@ process.env.NODE_ENV = 'production'
 
 const rm = require('rimraf')
 const chalk = require('chalk')
-const path = require('path')
 const utils = require('./utils')
 const buildUtil = require('./build-util')
 const dllWebpackConfig = require('./webpack.dll.conf')

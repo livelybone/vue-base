@@ -4,13 +4,12 @@ require('./check-versions')()
 process.env.NODE_ENV = 'production'
 
 const rm = require('rimraf')
-const path = require('path')
+const utils = require('./utils')
 const chalk = require('chalk')
-const config = require('../config')
 const webpackConfig = require('./webpack.prod.conf')
 const buildUtil = require('./build-util')
 
-rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
+rm(utils.pathResolve('dist'), err => {
   if (err) throw err
 
   buildUtil.spinner.start('Main: start building ...')

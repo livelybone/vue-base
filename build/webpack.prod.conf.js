@@ -1,9 +1,10 @@
 'use strict'
-const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -103,6 +104,12 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer',
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'prefetch',
     }),
     // keep module.id stable when vendor modules does not change
     new webpack.HashedModuleIdsPlugin(),

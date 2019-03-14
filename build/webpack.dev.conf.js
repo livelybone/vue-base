@@ -2,6 +2,8 @@ const path = require('path')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const portfinder = require('portfinder')
@@ -76,6 +78,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       inject: 'head',
       assetsPublicPath: config.dev.assetsPublicPath.replace(/\/*$/, ''),
       assetsSubDirectory: config.dev.assetsSubDirectory.replace(/\/*$/, ''),
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer',
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
