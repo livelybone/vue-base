@@ -2,7 +2,7 @@ import User from '@/data/api/User'
 import { langKeys, LangStore } from '@/extensions/Langs'
 import BaseRoot from '@/pages/BaseRoot'
 import NotFound from '@/pages/NotFound'
-import { isBrowser } from '@/utils/Utils'
+import { isBrowser } from '@/utils/UserAgent'
 import Vue from 'vue'
 import Router from 'vue-router'
 
