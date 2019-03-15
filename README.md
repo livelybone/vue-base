@@ -10,6 +10,12 @@
 > commitizen: 代码提交
 >> 使用了 `commitizen` 规范 commit message, 所以：<span style="color:red">使用 `npm run commit` 代替 `git commit`</span>
 
+> 注释规范
+>> 1.As short as possible （如无必要，勿增注释）。尽量提高代码本身的清晰性、可读性。<br>
+   2.As long as necessary （如有必要，尽量详尽）。合理的注释、空行排版等，可以让代码更易阅读、更具美感。<br>
+   3.接口，项目通用函数使用 [JSDoc](http://usejsdoc.org/index.html) 注释<br>
+   4.其他地方的注释能将 why 解释清楚就行
+
 ### 兼容
 
 > 如果要兼容 IE9，则不能使用 `transform` `flex` 等css，已有组件和页面中使用的 `flex 布局` 需要切换成兼容 IE9 的写法
@@ -45,9 +51,9 @@
 
 > 建议1: 页面语句应当少使用词语拼接，因为不同的语言语法可能同，拼接可能会让最后得出的语句不伦不类
 > 比如：
->> ‘未选择任何文件’ 的英文翻译为 'No files were selected'，
->> 如果使用 `this.$t('unselected') + this.$t('any-file')`:
->> 中文为 `'未选择' + '任何文件'`;
+>> ‘未选择任何文件’ 的英文翻译为 'No files were selected'，<br>
+>> 如果使用 `this.$t('unselected') + this.$t('any-file')`:<br>
+>> 中文为 `'未选择' + '任何文件'`;<br>
 >> 英文翻译为 `'unselected ' + 'any file '` => `'unselected any file'`，显得不伦不类了
 
 > 建议2: 页面可能共用的语句写在 `common.js` 中，其它的词汇语句可按照业务功能做命名空间写在 `index.js`，或者使用单独的文件
