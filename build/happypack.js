@@ -2,8 +2,6 @@
 const config = require('../config')
 const HappyPack = require('happypack')
 const utils = require('./utils')
-const isProduction = process.env.NODE_ENV === 'production'
-const useHappypack = process.env.USE_HAPPYPACK
 const vueLoaderConfig = require('./vue-loader.conf')
 
 const plugins = { css: [], js: [], vue: [] }
@@ -22,7 +20,7 @@ const createHappyPack = (() => {
 })()
 
 function loadersDeal(id, loaders) {
-  if (isProduction && useHappypack) {
+  if (utils.isProduction && utils.useHappypack) {
     const h = createHappyPack(id, loaders)
     if (id === 'js') {
       plugins[id] = [h.plugin]
@@ -60,7 +58,7 @@ const cssLoader = (extension, loaders) => () => ({
   include: utils.pathResolve('src/css'),
 })
 
-const cssLoaders = utils.cssLoaders(isProduction ? {
+const cssLoaders = utils.cssLoaders(utils.isProduction ? {
   sourceMap: config.build.productionSourceMap,
   usePostCSS: true,
   extract: true,

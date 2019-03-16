@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ManifestPlugin = require('webpack-manifest-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const utils = require('./utils')
@@ -19,7 +20,6 @@ const webpackConfig = merge(baseWebpackConfig, {
   module: {},
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
-    path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[name]-[chunkhash].chunk.js'),
   },
@@ -60,7 +60,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           chunks: 'initial',
           priority: -10,
           reuseExistingChunk: false,
-          test: /node_modules\/(.*)\.js/
+          test: /node_modules\/(.*)\.js/,
         },
         styles: {
           name: 'styles',
@@ -68,12 +68,15 @@ const webpackConfig = merge(baseWebpackConfig, {
           chunks: 'all',
           minChunks: 1,
           reuseExistingChunk: true,
-          enforce: true
+          enforce: true,
         },
       },
     },
   },
   plugins: [
+    new ManifestPlugin({
+      fileName: utils.assetsPath('manifest.json'),
+    }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env,
@@ -87,8 +90,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: config.build.index,
-      template: utils.pathResolve('static/index.html'),
+      filename: utils.pathResolve(config.build.index),
+      template: utils.pathResolve(config.build.indexTemplate),
       inject: 'head',
       assetsPublicPath: config.build.assetsPublicPath.replace(/\/*$/, ''),
       assetsSubDirectory: config.build.assetsSubDirectory.replace(/\/*$/, ''),
@@ -114,8 +117,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: utils.pathResolve('static'),
-        to: config.build.assetsSubDirectory,
+        from: utils.pathResolve('static/dll'),
+        to: utils.pathResolve(config.build.assetsRoot, config.build.assetsSubDirectory, 'dll'),
         ignore: ['.*'],
       },
     ]),

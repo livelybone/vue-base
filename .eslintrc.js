@@ -1,7 +1,9 @@
+const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = {
   'root': true,
   'parserOptions': {
-    'parser': 'babel-eslint'
+    'parser': 'babel-eslint',
   },
   'env': {
     'browser': true,
@@ -21,16 +23,16 @@ module.exports = {
   'settings': {
     'import/resolver': {
       'webpack': {
-        'config': 'build/webpack.base.conf.js'
-      }
-    }
+        'config': 'build/webpack.base.conf.js',
+      },
+    },
   },
   'rules': {
     'prettier/prettier': 'error',
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       'js': 'never',
-      'vue': 'never'
+      'vue': 'never',
     }],
     // disallow reassignment of function parameters
     // disallow parameter object manipulation except for specific exclusions
@@ -42,18 +44,18 @@ module.exports = {
         'e', // for e.returnvalue
         'item', // for item.returnvalue
         'Vue', // for item.returnvalue
-      ]
+      ],
     }],
     // allow optionalDependencies
     'import/no-extraneous-dependencies': ['error', {
-      'optionalDependencies': ['test/unit/index.js']
+      'optionalDependencies': ['test/unit/index.js'],
     }],
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': isProduction ? 'error' : 'off',
     'quote-props': [2, 'consistent'],
     'import/prefer-default-export': [0],
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-alert': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': isProduction ? 'error' : 'off',
+    'no-alert': isProduction ? 'error' : 'off',
     'linebreak-style': 'off',
     'global-require': 'off',
     'object-shorthand': [2, 'always', { 'avoidQuotes': false }],

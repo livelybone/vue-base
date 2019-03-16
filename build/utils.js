@@ -1,16 +1,19 @@
 'use strict'
 const path = require('path')
-const fs = require('fs')
 const config = require('../config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const packageConfig = require('../package.json')
 
-exports.pathResolve = function (src = '') {
-  return path.join(__dirname, '..', src)
+exports.isProduction = process.env.NODE_ENV === 'production'
+
+exports.useHappypack = !!process.env.USE_HAPPYPACK
+
+exports.pathResolve = function (...args) {
+  return path.join(__dirname, '..', ...args)
 }
 
 exports.assetsPath = function (_path) {
-  const assetsSubDirectory = process.env.NODE_ENV === 'production'
+  const assetsSubDirectory = exports.isProduction
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
 

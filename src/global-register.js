@@ -19,11 +19,10 @@ import { isBrowser } from '@/utils/UserAgent'
 import Vue from 'vue'
 import ImgTag from 'vue-img-tag'
 import { SlideForMore } from 'vue-slide-for-more'
+import Overlay from '@/components/common/Overlay'
 
 const FileInput = () =>
   import('@/components/form/FileInput' /* webpackChunkName: "FileInput" */)
-const Overlay = () =>
-  import('@/components/common/Overlay' /* webpackChunkName: "Overlay" */)
 
 export default function() {
   const isMobile = isBrowser && window.isMobile
