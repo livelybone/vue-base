@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-export default {
+export const LangMap = {
   'zh-hans': {
     name: '简体中文',
     module: () => import('@/assets/lang/zh-hans/index.js' /* webpackChunkName: "Lang-zh-hans" */),
@@ -13,3 +13,10 @@ export default {
     module: () => import('@/assets/lang/zh-hant/index.js' /* webpackChunkName: "Lang-zh-hant" */),
   },
 }
+
+export const langKeys = Object.keys(LangMap)
+
+export const Langs = langKeys.map(key => ({
+  name: LangMap[key].name,
+  value: key,
+}))

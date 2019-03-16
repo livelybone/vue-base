@@ -1,5 +1,5 @@
 import User from '@/data/api/User'
-import { langKeys, LangStore } from '@/extensions/Langs'
+import { LangStore } from '@/extensions/Langs'
 import BaseRoot from '@/pages/BaseRoot'
 import NotFound from '@/pages/NotFound'
 import Vue from 'vue'
@@ -45,7 +45,7 @@ export function createRouter(i18n, store) {
       params: { lang },
     } = to
     const language = lang || ''
-    if (!langKeys.includes(language)) {
+    if (!LangStore.langKeys.includes(language)) {
       next({
         path: language
           ? to.path.replace(language, language.toLowerCase())

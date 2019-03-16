@@ -12,7 +12,6 @@ import {
   format,
   parse,
 } from 'date-fns'
-import { Langs } from '@/extensions/Langs'
 import { isBrowser } from '@/utils/UserAgent'
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -58,11 +57,6 @@ export default function() {
   Vue.prototype.isMobile = isMobile
 
   Vue.mixin({
-    data() {
-      return {
-        Langs,
-      }
-    },
     methods: {
       log(...args) {
         console.log(...args)
