@@ -3,13 +3,14 @@ const utils = require('./utils')
 const config = require('../config')
 const happypackConf = require('./happypack')
 
+const context = utils.pathResolve('')
 const VueReference = new webpack.DllReferencePlugin({
-  context: utils.pathResolve(''),
+  context,
   manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
 })
 
 const UIAndUtils = new webpack.DllReferencePlugin({
-  context: utils.pathResolve(''),
+  context,
   manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
 })
 
@@ -19,9 +20,9 @@ module.exports = {
     app: ['./src/entry-client.js'],
   },
   output: {
-    path: config.build.assetsRoot,
+    path: utils.pathResolve(config.build.assetsRoot),
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
+    publicPath: utils.isProduction
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath,
     chunkFilename: '[name].chunk.js',

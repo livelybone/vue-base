@@ -8,8 +8,9 @@ const utils = require('./utils')
 const chalk = require('chalk')
 const webpackConfig = require('./webpack.prod.conf')
 const buildUtil = require('./build-util')
+const config = require('../config')
 
-rm(utils.pathResolve('dist'), err => {
+rm(utils.pathResolve(config.build.assetsRoot), err => {
   if (err) throw err
 
   buildUtil.spinner.start('Main: start building ...')
