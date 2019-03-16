@@ -58,14 +58,7 @@ module.exports = {
       filename: utils.pathResolve('/static/index.html'),
       template: 'index.html',
       inject: 'head',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: false,
-        collapseInlineTagWhitespace: false,
-        removeAttributeQuotes: true,
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
+      minify: false,
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
     }),
