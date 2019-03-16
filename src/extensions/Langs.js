@@ -2,17 +2,11 @@
  * 语言国际化
  * */
 /* eslint-disable no-param-reassign */
-import { Storage } from '@livelybone/storage'
-import LangMap from '@/assets/lang/LangMap'
+import { langKeys, LangMap, Langs } from '@/assets/lang/LangMap'
 import { isBrowser } from '@/utils/UserAgent'
+import { Storage } from '@livelybone/storage'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-
-export const langKeys = Object.keys(LangMap)
-export const Langs = langKeys.map(key => ({
-  name: LangMap[key].name,
-  value: key,
-}))
 
 function setI18nLanguage(i18n, lang) {
   i18n.locale = lang
@@ -65,6 +59,8 @@ export class LangStore {
 LangStore.localStorage = new Storage()
 
 LangStore.key = 'lang'
+LangStore.langOptions = Langs
+LangStore.langKeys = langKeys
 
 export function initialI18n(lang) {
   Vue.use(VueI18n)

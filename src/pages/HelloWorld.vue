@@ -1,7 +1,7 @@
 <template>
   <div class="hello-world">
     <select :value="$i18n.locale" @change="switchLang($event.target.value)">
-      <option v-for="op in Langs" :value="op.value" :key="op.value">
+      <option v-for="op in $lang.langOptions" :value="op.value" :key="op.value">
         {{ op.name }}
       </option>
     </select>
