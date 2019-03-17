@@ -5,16 +5,14 @@ process.env.NODE_ENV = 'production'
 process.env.VUE_ENV = 'server'
 
 const rm = require('rimraf')
-const path = require('path')
 const chalk = require('chalk')
-const webpack = require('webpack')
 const config = require('../../config/index')
 const webpackConfig = require('./webpack.client.conf')
 const webpackServerConfig = require('./webpack.server.conf')
 const buildUtil = require('../build-util')
+const utils = require('../utils')
 
-
-rm(path.join(config.build.assetsRoot, '..'), err => {
+rm(utils.pathResolve(config.build.assetsRoot), err => {
   if (err) throw err
 
   buildUtil.spinner.start('Client: start building ...')

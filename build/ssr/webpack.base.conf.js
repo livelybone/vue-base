@@ -1,71 +1,70 @@
 'use strict'
-const path = require('path')
 const webpack = require('webpack')
-const utils = require('../utils')
 const config = require('../../config/index')
-const vueLoaderConfig = require('../vue-loader.conf')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const env = require('../../config/prod.env')
+const happypackConf = require('../happypack')
+const utils = require('../utils')
 
-function resolve(dir) {
-  return path.join(__dirname, '../../', dir)
-}
+const context = utils.pathResolve('')
+const VueReference = new webpack.DllReferencePlugin({
+  context,
+  manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
+})
+
+const UIAndUtils = new webpack.DllReferencePlugin({
+  context,
+  manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
+})
 
 module.exports = {
   mode: 'production',
-  context: path.resolve(__dirname, '../../'),
+  context: utils.pathResolve(''),
   devtool: false,
   output: {
-    path: config.build.assetsRoot,
-    filename: '[name].[chunkhash].js',
+    path: utils.pathResolve(config.build.assetsRoot),
+    filename: utils.assetsPath('js/[name].[chunkhash].js'),
     publicPath: config.build.assetsPublicPath,
-    chunkFilename: '[name]-[chunkhash].chunk.js',
+    chunkFilename: utils.assetsPath('js/[name]-[chunkhash].chunk.js'),
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
-    }
+      '@': utils.pathResolve('src'),
+      'config': utils.pathResolve('config'),
+    },
   },
   module: {
     rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
-      },
+      happypackConf.rules.vue(),
+      happypackConf.rules.js(),
+      ...happypackConf.rules.css.map(rule => rule()),
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
-        }
+          name: utils.assetsPath('img/[name].[hash:7].[ext]'),
+        },
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('media/[name].[hash:7].[ext]')
-        }
+          name: utils.assetsPath('media/[name].[hash:7].[ext]'),
+        },
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-        }
-      }
-    ]
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),
+        },
+      },
+    ],
   },
   optimization: {
     // Use when multiple entries exist
@@ -104,7 +103,7 @@ module.exports = {
           chunks: 'initial',
           priority: -10,
           reuseExistingChunk: false,
-          test: /node_modules\/(.*)\.js/
+          test: /node_modules\/(.*)\.js/,
         },
         styles: {
           name: 'styles',
@@ -112,7 +111,7 @@ module.exports = {
           chunks: 'all',
           minChunks: 1,
           reuseExistingChunk: true,
-          enforce: true
+          enforce: true,
         },
       },
     },
@@ -121,25 +120,18 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': env,
     }),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings: false
-        }
-      },
-      sourceMap: config.build.productionSourceMap,
-      parallel: true
-    }),
     // extract css into its own file
-    new MiniCssExtractPlugin({
-      filename: utils.assetsPath('css/[name].[contenthash].css'),
-      chunkFilename: utils.assetsPath('css/[name]-[contenthash].chunk.css'),
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: utils.assetsPath('css/[name].[contenthash].css'),
+    //   chunkFilename: utils.assetsPath('css/[name]-[contenthash].chunk.css'),
+    // }),
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    VueReference,
+    UIAndUtils,
+    ...happypackConf.plugins.vue,
+    ...happypackConf.plugins.js,
+    ...happypackConf.plugins.css,
   ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
@@ -151,6 +143,6 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    child_process: 'empty'
-  }
+    child_process: 'empty',
+  },
 }

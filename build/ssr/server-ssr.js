@@ -1,20 +1,20 @@
 'use strict'
 const express = require('express')
 const App = express()
-const path = require('path')
 const fs = require('fs')
-const resolve = file => path.resolve(__dirname, file)
+const chalk = require('chalk')
 const LRU = require('lru-cache')
 const serverRenderer = require('vue-server-renderer')
 const chokidar = require('chokidar')
+const utils = require('../utils')
 
 let renderer
 
 function readFile(url) {
-  return fs.readFileSync(resolve(url), 'utf-8')
+  return fs.readFileSync(utils.pathResolve(url), 'utf-8')
 }
 
-function createRenderer() {
+function createRenderer(log) {
   delete require.cache[require.resolve('../../dist/vue-ssr-server-bundle.json')]
   delete require.cache[require.resolve('../../dist/vue-ssr-client-manifest.json')]
 
@@ -22,34 +22,34 @@ function createRenderer() {
     require('../../dist/vue-ssr-server-bundle.json'),
     {
       runInNewContext: 'once',
-      template: readFile('../../index.html'),
+      template: readFile('index.html'),
       clientManifest: require('../../dist/vue-ssr-client-manifest.json'),
       cache: LRU({
         max: 1000,
         maxAge: 1000, // 1s
-      })
+      }),
     },
   )
-  console.log('`renderer` changed \n\r\n\r')
+  if (log !== false) console.log('`renderer` changed \n\r\n\r')
 }
 
 const watcher = chokidar.watch([
-  resolve('../../dist/vue-ssr-server-bundle.json'),
-  resolve('../../dist/vue-ssr-client-manifest.json'),
-  resolve('./index.html'),
+  utils.pathResolve('dist/vue-ssr-server-bundle.json'),
+  utils.pathResolve('dist/vue-ssr-client-manifest.json'),
+  utils.pathResolve('index.html'),
 ])
 
-createRenderer()
+createRenderer(false)
 watcher.on('change', createRenderer)
 
 const port = process.env.PORT || 3000
 
-const serve = (path, cache) => express.static(resolve(path), {
-  maxAge: cache && 1000 * 60 * 60 * 24 * 30
+const serve = (path, cache) => express.static(utils.pathResolve(path), {
+  maxAge: cache && 1000 * 60 * 60 * 24 * 30,
 })
 
-App.use('/dist', serve(resolve('../../dist/js'), true))
-App.use('/static', serve(resolve('../../dist/static'), true))
+App.use('/dist', serve('dist/js', true))
+App.use('/static', serve('dist/static', true))
 
 App.get('*', (req, res) => {
   const context = { url: req.url }
@@ -57,6 +57,7 @@ App.get('*', (req, res) => {
   // 现在我们的服务器与应用程序已经解耦！
   renderer.renderToString(context, (e, html) => {
     if (e) {
+      console.log(chalk.red(e))
       if (e.code === 404) res.status(404).end('Page not found')
       else res.status(500).end('Internal Server Error')
     } else res.end(html)
@@ -64,6 +65,6 @@ App.get('*', (req, res) => {
 })
 
 App.listen(port, e => {
-  if (e) console.error(e)
+  if (e) console.error(chalk.red(e))
   else console.log('==> Listening on port %s. Open up http://yourip:%s/ in your browser.', port, port)
 })

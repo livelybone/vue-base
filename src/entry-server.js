@@ -1,17 +1,19 @@
 /* eslint-disable no-param-reassign */
+import { LangStore } from '@/extensions/Langs'
 import { createApp } from '@/main'
 
 function redirect(url) {
   if (url && url !== '/') {
-    return url
+    const arr = url.split('/')
+    if (LangStore.langKeys.includes(arr[0])) return url
+    return `/en/${url.replace(/^\/*/, '')}`
   }
   return '/en'
 }
 
 /**
  * 因为有可能会是异步路由钩子函数或组件，所以我们将返回一个 Promise，
- * 以便服务器能够等待所有的内容在渲染前，
- * 就已经准备就绪。
+ * 以便服务器能够等待所有的内容在渲染前，就已经准备就绪。
  * */
 export default context =>
   new Promise((resolve, reject) => {
@@ -20,12 +22,12 @@ export default context =>
     // 设置服务器端 router 的位置
     if (route.matched.some(r => r.meta.requireAuth)) {
       // 如果页面需要登录，则直接返回登录页面
-      router.push('/sign-in')
+      router.replace('/sign-in')
     } else if (route.matched.some(r => r.meta.requireAdminAuth)) {
       // 如果页面需要管理员权限，则直接返回管理员登录页面
-      router.push('/admin-sign-in')
+      router.replace('/admin-sign-in')
     } else {
-      router.push(redirect(context.url))
+      router.replace(redirect(context.url))
     }
     // 等到 router 将可能的异步组件和钩子函数解析完
     router.onReady(() => {

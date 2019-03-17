@@ -76,8 +76,7 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'HelloWorld',
-  asyncData({ store }) {
-    store.commit('setToken', 'sdfsdf')
+  asyncData() {
     return Promise.resolve({})
   },
   components: {},

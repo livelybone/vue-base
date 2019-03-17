@@ -5,7 +5,7 @@
 }
 
 @mixin title-xl() {
-  @include font-style(0.48rem)
+  @include font-style(0.48rem);
 }
 
 @mixin title-lg() {
