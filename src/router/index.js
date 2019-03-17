@@ -44,16 +44,13 @@ export function createRouter(i18n, store) {
     const {
       params: { lang },
     } = to
-    const language = lang || ''
+    const language = (lang || '').toLowerCase()
     if (!LangStore.langKeys.includes(language)) {
       next({
-        path: language
-          ? to.path.replace(language, language.toLowerCase())
-          : `/${i18n.locale}${to.path}`,
-        replace: true,
+        path: `/${i18n.locale}${to.path}`,
       })
     } else {
-      const pro = LangStore.setLang(to.params.lang, { $i18n: i18n })
+      const pro = LangStore.setLang(language, { $i18n: i18n })
       if (
         to.matched.some(route => route.meta.requireAuth) &&
         store.state.user.info.role !== 'client'
