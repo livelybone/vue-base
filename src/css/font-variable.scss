@@ -1,71 +1,33 @@
-.title-xl {
-  font-size: 0.48rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
+@mixin font-style($size: 0.14rem, $weight: 400, $spacing: 0.01rem) {
+  font-size: $size;
+  font-weight: $weight;
+  letter-spacing: $spacing;
 }
 
-.title-lg {
-  font-size: 0.34rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
+@mixin title-xl() {
+  @include font-style(0.48rem);
 }
 
-.title {
-  font-size: 0.24rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
+@mixin title-lg() {
+  @include font-style(0.34rem);
 }
 
-.head {
-  font-size: 0.2rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
+@mixin title() {
+  @include font-style(0.24rem);
 }
 
-.subhead {
-  font-size: 0.15rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
+@mixin head() {
+  @include font-style(0.2rem);
 }
 
-.content-1 {
-  font-size: 0.1rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
+@mixin subhead() {
+  @include font-style(0.16rem);
 }
 
-.content-2 {
-  font-size: 0.12rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
+@mixin content() {
+  @include font-style();
 }
 
-.content-3 {
-  font-size: 0.14rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
-}
-
-.content-4 {
-  font-size: 0.16rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
-}
-
-.content-5 {
-  font-size: 0.18rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
-}
-
-.content-6 {
-  font-size: 0.11rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
-}
-
-.content-7 {
-  font-size: 0.13rem;
-  font-weight: 400;
-  letter-spacing: 0.01rem;
+@mixin sub-content() {
+  @include font-style(0.12rem);
 }

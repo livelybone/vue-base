@@ -80,7 +80,7 @@ export default {
   overflow: hidden;
 
   h2 {
-    @extend .content-5;
+    @include subhead();
     width: 100%;
     padding: 0 0 0.05rem;
     line-height: 0.26rem;
@@ -91,7 +91,6 @@ export default {
     padding: 0.05rem 0 $margin;
 
     p {
-      @extend .content-4;
       line-height: normal;
     }
   }

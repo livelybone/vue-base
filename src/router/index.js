@@ -1,6 +1,5 @@
 import User from '@/data/api/User'
-import { langKeys, LangStore } from '@/extensions/Langs'
-import BaseRoot from '@/pages/BaseRoot'
+import { LangStore } from '@/extensions/Langs'
 import NotFound from '@/pages/NotFound'
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -16,10 +15,16 @@ const HelloWorld = () =>
 
 Vue.use(Router)
 
+const RouterView = {
+  render() {
+    return <router-view />
+  },
+}
+
 const routes = [
   {
     path: '/:lang',
-    component: BaseRoot,
+    component: RouterView,
     redirect: { path: '' },
     children: [
       { path: '', name: '', component: HelloWorld },
@@ -44,16 +49,13 @@ export function createRouter(i18n, store) {
     const {
       params: { lang },
     } = to
-    const language = lang || ''
-    if (!langKeys.includes(language)) {
+    const language = (lang || '').toLowerCase()
+    if (!LangStore.langKeys.includes(language)) {
       next({
-        path: language
-          ? to.path.replace(language, language.toLowerCase())
-          : `/${i18n.locale}${to.path}`,
-        replace: true,
+        path: `/${i18n.locale}${to.path}`,
       })
     } else {
-      const pro = LangStore.setLang(to.params.lang, { $i18n: i18n })
+      const pro = LangStore.setLang(language, { $i18n: i18n })
       if (
         to.matched.some(route => route.meta.requireAuth) &&
         store.state.user.info.role !== 'client'

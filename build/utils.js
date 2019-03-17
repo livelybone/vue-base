@@ -8,6 +8,8 @@ exports.isProduction = process.env.NODE_ENV === 'production'
 
 exports.useHappypack = !!process.env.USE_HAPPYPACK
 
+exports.isServer = process.env.VUE_ENV === 'server'
+
 exports.pathResolve = function (...args) {
   return path.join(__dirname, '..', ...args)
 }

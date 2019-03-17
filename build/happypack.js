@@ -61,7 +61,7 @@ const cssLoader = (extension, loaders) => () => ({
 const cssLoaders = utils.cssLoaders(utils.isProduction ? {
   sourceMap: config.build.productionSourceMap,
   usePostCSS: true,
-  extract: true,
+  extract: !utils.isServer,
 } : {
   sourceMap: config.dev.cssSourceMap,
   usePostCSS: true,

@@ -20,6 +20,10 @@
 
 > 如果要兼容 IE9，则不能使用 `transform` `flex` 等css，已有组件和页面中使用的 `flex 布局` 需要切换成兼容 IE9 的写法
 
+> 可一次性引入 `babel-polyfill` 做 IE 兼容。或者，可以为项目引入具体的 polyfills 完成 IE 兼容
+
+> 有兴趣可以尝试改写成 [现代模式](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/)
+
 ### html 模板
 
 > 每个文件的 HTML 尽可能的小，嵌套尽可能的少。相同的地方尽可能的抽出公共组件
