@@ -3,17 +3,6 @@ const utils = require('./utils')
 const config = require('../config')
 const happypackConf = require('./happypack')
 
-const context = utils.pathResolve('')
-const VueReference = new webpack.DllReferencePlugin({
-  context,
-  manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
-})
-
-const UIAndUtils = new webpack.DllReferencePlugin({
-  context,
-  manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
-})
-
 module.exports = {
   context: utils.pathResolve(),
   entry: {
@@ -78,8 +67,6 @@ module.exports = {
     child_process: 'empty',
   },
   plugins: [
-    VueReference,
-    UIAndUtils,
     ...happypackConf.plugins.vue,
     ...happypackConf.plugins.js,
     ...happypackConf.plugins.css,

@@ -15,6 +15,17 @@ const baseWebpackConfig = require('./webpack.base.conf')
 
 const env = require('../config/prod.env')
 
+const context = utils.pathResolve('')
+const VueReference = new webpack.DllReferencePlugin({
+  context,
+  manifest: utils.pathResolve('/static/dll/VueReference-manifest.json'),
+})
+
+const UIAndUtils = new webpack.DllReferencePlugin({
+  context,
+  manifest: utils.pathResolve('/static/dll/UIAndUtils-manifest.json'),
+})
+
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   module: {},
@@ -117,11 +128,13 @@ const webpackConfig = merge(baseWebpackConfig, {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: utils.pathResolve('static/dll'),
-        to: utils.pathResolve(config.build.assetsRoot, config.build.assetsSubDirectory, 'dll'),
+        from: utils.pathResolve('static'),
+        to: utils.pathResolve(config.build.assetsRoot, config.build.assetsSubDirectory),
         ignore: ['.*'],
       },
     ]),
+    VueReference,
+    UIAndUtils,
   ],
 })
 

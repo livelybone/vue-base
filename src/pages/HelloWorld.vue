@@ -36,7 +36,7 @@
       </li>
     </ul>
     <div class="item">
-      {{ '2015-02-05T15:30:30' | datePipe({ fmt: 'YYYY-MM-DD HH:mm:ss.SSS' }) }}
+      {{ '2015-02-05T15:30:30' | datePipe('YYYY-MM-DD HH:mm:ss.SSS') }}
     </div>
     <div class="btn btn-blue">aa</div>
     <div @click="log('Div Click： ', $event.target)">
@@ -45,7 +45,7 @@
     <div>{{ $t('remain') }} {{ time }}</div>
     <input type="file" @change="input($event.target.files[0])" />
     <no-result />
-    <router-link :to="'/a'">to</router-link>
+    <router-link to="/a">to</router-link>
     <pagination
       v-if="!isMobile"
       :config="pageConfig"
