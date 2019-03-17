@@ -1,3 +1,4 @@
+'use strict'
 const path = require('path')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
