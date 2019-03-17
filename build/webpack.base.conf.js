@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+'use strict'
 const utils = require('./utils')
 const config = require('../config')
 const happypackConf = require('./happypack')

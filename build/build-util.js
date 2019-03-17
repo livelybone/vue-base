@@ -1,3 +1,4 @@
+'use strict'
 const ora = require('ora')
 const chalk = require('chalk')
 const webpack = require('webpack')
