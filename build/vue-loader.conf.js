@@ -8,7 +8,7 @@ const sourceMapEnabled = utils.isProduction
 module.exports = {
   loaders: utils.cssLoaders({
     sourceMap: sourceMapEnabled,
-    extract: utils.isProduction,
+    extract: utils.isProduction && !utils.isServer,
   }),
   cssSourceMap: sourceMapEnabled,
   cacheBusting: config.dev.cacheBusting,

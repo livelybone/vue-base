@@ -118,7 +118,6 @@ export default {
       height: 0.24rem;
       margin: 0 0 0 0.2rem;
       line-height: normal;
-      @extend .content-2;
     }
   }
 }

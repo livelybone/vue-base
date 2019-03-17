@@ -202,7 +202,6 @@ export default {
         width: 100%;
         padding: 0 0.1rem;
         line-height: 0.24rem;
-        @extend .content-2;
         color: #fff;
         background: rgba(#000, 0.3);
         pointer-events: none;
