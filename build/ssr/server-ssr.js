@@ -17,7 +17,7 @@ function createRenderer(log) {
     JSON.parse(ssrUtils.readFile('dist', config.server.serverBundle)),
     {
       runInNewContext: 'once',
-      template: ssrUtils.readFile('index.html'),
+      template: ssrUtils.readFile('index-ssr.template').replace(/[\n\r]/g, ''),
       clientManifest: JSON.parse(ssrUtils.readFile('dist', config.server.clientManifest)),
       cache: LRU({
         max: 1000,
@@ -31,7 +31,7 @@ function createRenderer(log) {
 const watcher = chokidar.watch([
   utils.pathResolve('dist', config.server.serverBundle),
   utils.pathResolve('dist', config.server.clientManifest),
-  utils.pathResolve('index.html'),
+  utils.pathResolve('index-ssr.template'),
 ])
 
 createRenderer(false)
@@ -64,7 +64,9 @@ App.get('*', (req, res) => {
       console.log(chalk.red(e))
       if (e.code === 404) res.status(404).end('Page not found')
       else res.status(500).end('Internal Server Error')
-    } else res.end(html)
+    } else {
+      res.end(html)
+    }
   })
 })
 

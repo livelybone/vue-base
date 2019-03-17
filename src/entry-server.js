@@ -30,6 +30,7 @@ export default context =>
     } else {
       router.replace(redirect(url))
     }
+
     // 等到 router 将可能的异步组件和钩子函数解析完
     router.onReady(() => {
       const matches = router.getMatchedComponents()
@@ -56,6 +57,7 @@ export default context =>
           // 并且 `template` 选项用于 renderer 时，
           // 状态将自动序列化为 `window.__INITIAL_STATE__`，并注入 HTML。
           context.state = store.state
+          context.meta = app.$meta()
           // Promise 应该 resolve 应用程序实例，以便它可以渲染
           resolve(app)
         })
