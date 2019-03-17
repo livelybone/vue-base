@@ -5,9 +5,10 @@ import register from '@/global-register'
 import { createRouter } from '@/router'
 import { isBrowser } from '@/utils/UserAgent'
 import RemInit from '@livelybone/rem-init'
-import 'babel-polyfill'
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
+// use babel-polyfill
+// import 'babel-polyfill'
 
 if (isBrowser) {
   RemInit({

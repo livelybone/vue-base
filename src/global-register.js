@@ -48,7 +48,7 @@ export default function() {
       log: console.log,
       error: console.error,
       warn: console.warn,
-      alert,
+      alert: isBrowser ? alert : console.log,
       dateFormatter,
       timeConversion,
       switchLang(lang) {
