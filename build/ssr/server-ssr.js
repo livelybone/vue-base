@@ -7,23 +7,18 @@ const LRU = require('lru-cache')
 const serverRenderer = require('vue-server-renderer')
 const chokidar = require('chokidar')
 const utils = require('../utils')
+const ssrUtils = require('./ssr-utils')
+const config = require('../../config/index')
 
 let renderer
 
-function readFile(url) {
-  return fs.readFileSync(utils.pathResolve(url), 'utf-8')
-}
-
 function createRenderer(log) {
-  delete require.cache[require.resolve('../../dist/vue-ssr-server-bundle.json')]
-  delete require.cache[require.resolve('../../dist/vue-ssr-client-manifest.json')]
-
   renderer = serverRenderer.createBundleRenderer(
-    require('../../dist/vue-ssr-server-bundle.json'),
+    JSON.parse(ssrUtils.readFile('dist', config.server.serverBundle)),
     {
       runInNewContext: 'once',
-      template: readFile('index.html'),
-      clientManifest: require('../../dist/vue-ssr-client-manifest.json'),
+      template: ssrUtils.readFile('index.html'),
+      clientManifest: JSON.parse(ssrUtils.readFile('dist', config.server.clientManifest)),
       cache: LRU({
         max: 1000,
         maxAge: 1000, // 1s
@@ -34,8 +29,8 @@ function createRenderer(log) {
 }
 
 const watcher = chokidar.watch([
-  utils.pathResolve('dist/vue-ssr-server-bundle.json'),
-  utils.pathResolve('dist/vue-ssr-client-manifest.json'),
+  utils.pathResolve('dist', config.server.serverBundle),
+  utils.pathResolve('dist', config.server.clientManifest),
   utils.pathResolve('index.html'),
 ])
 
@@ -50,6 +45,15 @@ const serve = (path, cache) => express.static(utils.pathResolve(path), {
 
 App.use('/dist', serve('dist/js', true))
 App.use('/static', serve('dist/static', true))
+
+App.get('/favicon.ico', (req, res) => {
+  const path = utils.pathResolve('dist/static/favicon.ico')
+  if (fs.existsSync(path)) {
+    res.end(ssrUtils.readFile(path))
+  } else {
+    res.status(404).end('Not found')
+  }
+})
 
 App.get('*', (req, res) => {
   const context = { url: req.url }

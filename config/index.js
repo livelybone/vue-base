@@ -68,4 +68,9 @@ module.exports = {
     // Set to `true` or `false` to always turn it on or off
     bundleAnalyzerReport: process.env.npm_config_report,
   },
+
+  server: {
+    clientManifest: './vue-ssr-client-manifest.json',
+    serverBundle: './vue-ssr-server-bundle.json',
+  },
 }

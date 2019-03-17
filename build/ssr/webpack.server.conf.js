@@ -2,8 +2,9 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
-const baseConfig = require('./webpack.base.conf.js')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+const baseConfig = require('./webpack.base.conf.js')
+const config = require('../../config/index')
 
 module.exports = merge(baseConfig, {
   // 将 entry 指向应用程序的 server entry 文件
@@ -37,6 +38,6 @@ module.exports = merge(baseConfig, {
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"server"',
     }),
-    new VueSSRServerPlugin({ filename: './vue-ssr-server-bundle.json' }),
+    new VueSSRServerPlugin({ filename: config.server.serverBundle }),
   ],
 })

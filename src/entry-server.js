@@ -4,11 +4,11 @@ import { createApp } from '@/main'
 
 function redirect(url) {
   if (url && url !== '/') {
-    const arr = url.split('/')
+    const arr = url.split('/').filter(val => val)
     if (LangStore.langKeys.includes(arr[0])) return url
-    return `/en/${url.replace(/^\/*/, '')}`
+    return `/zh-hans/${url.replace(/^\/*/, '')}`
   }
-  return '/en'
+  return '/zh-hans'
 }
 
 /**
@@ -17,8 +17,9 @@ function redirect(url) {
  * */
 export default context =>
   new Promise((resolve, reject) => {
+    const { url } = context
     const { app, router, store } = createApp()
-    const { route } = router.resolve(context.url)
+    const { route } = router.resolve(url)
     // 设置服务器端 router 的位置
     if (route.matched.some(r => r.meta.requireAuth)) {
       // 如果页面需要登录，则直接返回登录页面
@@ -27,7 +28,7 @@ export default context =>
       // 如果页面需要管理员权限，则直接返回管理员登录页面
       router.replace('/admin-sign-in')
     } else {
-      router.replace(redirect(context.url))
+      router.replace(redirect(url))
     }
     // 等到 router 将可能的异步组件和钩子函数解析完
     router.onReady(() => {
@@ -54,10 +55,7 @@ export default context =>
           // 当我们将状态附加到上下文，
           // 并且 `template` 选项用于 renderer 时，
           // 状态将自动序列化为 `window.__INITIAL_STATE__`，并注入 HTML。
-          context.state = {
-            ...store.state,
-            route: {}, // route 置空，防止浏览器重定向
-          }
+          context.state = store.state
           // Promise 应该 resolve 应用程序实例，以便它可以渲染
           resolve(app)
         })
