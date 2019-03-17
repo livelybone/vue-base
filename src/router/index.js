@@ -1,6 +1,5 @@
 import User from '@/data/api/User'
 import { LangStore } from '@/extensions/Langs'
-import BaseRoot from '@/pages/BaseRoot'
 import NotFound from '@/pages/NotFound'
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -16,10 +15,16 @@ const HelloWorld = () =>
 
 Vue.use(Router)
 
+const RouterView = {
+  render() {
+    return <router-view />
+  },
+}
+
 const routes = [
   {
     path: '/:lang',
-    component: BaseRoot,
+    component: RouterView,
     redirect: { path: '' },
     children: [
       { path: '', name: '', component: HelloWorld },

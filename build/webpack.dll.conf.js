@@ -8,7 +8,8 @@ const utils = require('./utils')
 
 const dlls = {
   VueReference: [
-    'babel-polyfill',
+    // use babel-polyfill
+    // 'babel-polyfill',
     'vue',
     'vuex',
     'vue-router',

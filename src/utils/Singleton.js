@@ -5,7 +5,7 @@ export default class Singleton {
    * @return Promise
    * */
   static promise(proFn, key = '') {
-    const k = key || proFn
+    const k = key ? `promise-${key}` : proFn
     if (!Singleton.keys.has(k)) {
       Singleton.keys.set(
         k,
@@ -24,7 +24,7 @@ export default class Singleton {
    * @return Promise
    * */
   static promiseForever(proFn, key = '') {
-    const k = key || proFn
+    const k = key ? `promise-forever-${key}` : proFn
     if (!Singleton.keys.has(k)) {
       Singleton.keys.set(k, proFn())
     }
@@ -37,7 +37,7 @@ export default class Singleton {
    * @return Object
    * */
   static obj(key, defaultValue) {
-    const k = key || 'default'
+    const k = `object-${key || 'default'}`
     if (!Singleton.keys.has(k)) {
       Singleton.keys.set(k, defaultValue || {})
     }
@@ -50,7 +50,7 @@ export default class Singleton {
    * @return Object
    * */
   static onceRun(fn, key = '') {
-    const k = key || fn
+    const k = key ? `once-run-${key}` : fn
     if (!Singleton.keys.has(k)) {
       Singleton.keys.set(k, fn())
     }
