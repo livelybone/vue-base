@@ -64,7 +64,6 @@ export default {
   width: 0.6rem;
   height: 0.6rem;
   border-radius: 0.04rem;
-  @extend .content-5;
   background: rgba(#fff, 0.75);
   cursor: pointer;
 

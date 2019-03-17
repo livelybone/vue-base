@@ -14,7 +14,7 @@
 body {
   font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica,
     'Microsoft Yahei', Arial, sans-serif;
-  @extend .content-3;
+  @include content();
   color: $font;
 }
 

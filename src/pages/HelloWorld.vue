@@ -161,7 +161,7 @@ img {
 
 h1,
 h2 {
-  @extend .title;
+  @include title();
   margin: 0.1rem 0;
 }
 
@@ -176,7 +176,6 @@ li {
 }
 
 a {
-  @extend .content-4;
   color: #42b983;
 }
 
