@@ -1,8 +1,8 @@
 # vue-base ([英文版](./README.md))
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-![pre-render](https://img.shields.io/badge/pre-render-blue.svg "pre-render")
-![SSR](https://img.shields.io/badge/SSR-blue.svg "SSR")
-![webpack4](https://img.shields.io/badge/webpack4-blue.svg "webpack4")
+![pre-render](https://img.shields.io/badge/realized-pre--render-blue.svg "pre-render")
+![SSR](https://img.shields.io/badge/realized-SSR-blue.svg "SSR")
+![webpack4](https://img.shields.io/badge/pack-webpack4-blue.svg "webpack4")
 
 一个 Vue.js 通用框架，实现预渲染和 SSR，集成 vue-i18n, eslint + prettier，vuex。打包工具是 webpack4，使用缓存、并行、happypack 进行优化
 
@@ -71,7 +71,7 @@
 
 > PrerenderSpaPlugin (git 分支 `pre-render`): 预渲染，生成静态 html 文件，再用 Nginx 配置路由即可。
 
-> 服务端渲染(SSR) (git 分支 `ssr`): 如果是构建社交类或是新闻类网站，有很多类似博客或是新闻的页面（公开的，数量巨大的，都能被搜索到的），还请使用 SSR，预渲染不适合做如此庞大的操作
+> 服务端渲染([SSR](https://ssr.vuejs.org/zh/)) (git 分支 `ssr`): 如果是构建社交类或是新闻类网站，有很多类似博客或是新闻的页面（公开的，数量巨大的，都能被搜索到的），还请使用 SSR，预渲染不适合做如此庞大的操作
 
 ## Build Setup
 

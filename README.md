@@ -1,8 +1,8 @@
 # vue-base ([中文版](./README-ZH.md))
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-![pre-render](https://img.shields.io/badge/pre-render-blue.svg "pre-render")
-![SSR](https://img.shields.io/badge/SSR-blue.svg "SSR")
-![webpack4](https://img.shields.io/badge/webpack4-blue.svg "webpack4")
+![pre-render](https://img.shields.io/badge/realized-pre--render-blue.svg "pre-render")
+![SSR](https://img.shields.io/badge/realized-SSR-blue.svg "SSR")
+![webpack4](https://img.shields.io/badge/pack-webpack4-blue.svg "webpack4")
 
 A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, eslint + prettier, vuex. The packaging tool is webpack4, optimized with cache, parallel, happypack
 
@@ -30,7 +30,7 @@ A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, e
 
 > If you are interested, you can rewrite the compilation of project as [modern mode](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/)
 
-### html 模板
+### html
 
 > The HTML in each file is as small as possible, with as little nesting as possible. Extract the common components to reduce code
 
@@ -67,11 +67,11 @@ A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, e
 
 > Rule 2: Statements shared in many pages written in `common.js`, other words written in the `index.js` by namespace, or written in a separate file
 
-### SEO 方案
+### SEO
 
 > PrerenderSpaPlugin (git branch `pre-render`): Generate the static HTML file with details, then configure the routing with Nginx。
 
-> SSR (git branch `ssr`): If you're building a social or news site that has a lot of blogs or news pages (public, huge, searchable), use SSR. Pre-rendering is not suitable for such a large operation
+> [SSR](https://ssr.vuejs.org/) (git branch `ssr`): If you're building a social or news site that has a lot of blogs or news pages (public, huge, searchable), use SSR. Pre-rendering is not suitable for such a large operation
 
 ## Build Setup
 
