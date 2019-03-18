@@ -1,10 +1,12 @@
-# vue-base ([英文版](./README.md))
+# vue-base
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![pre-render](https://img.shields.io/badge/realized-pre--render-blue.svg "pre-render")
 ![SSR](https://img.shields.io/badge/realized-SSR-blue.svg "SSR")
 ![webpack4](https://img.shields.io/badge/pack-webpack4-blue.svg "webpack4")
 
 一个 Vue.js 通用框架，实现预渲染和 SSR，集成 vue-i18n, eslint + prettier，vuex。打包工具是 webpack4，使用缓存、并行、happypack 进行优化
+
+[English Document](./README.md)
 
 ## 注意事项
 
