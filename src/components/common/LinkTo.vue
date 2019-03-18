@@ -1,6 +1,6 @@
 <template>
   <router-link class="link-to" v-bind="$attrs" :to="_to">
-    <slot/>
+    <slot />
   </router-link>
 </template>
 
@@ -18,7 +18,9 @@ export default {
   },
   computed: {
     _to() {
-      return this.to.startsWith('/') ? `/${this.$i18n.locale}${this.to}` : this.to
+      return this.to.startsWith('/')
+        ? `/${this.$i18n.locale}${this.to}`
+        : this.to
     },
   },
 }

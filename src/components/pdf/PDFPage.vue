@@ -1,17 +1,19 @@
 <template>
   <div class="pdf-page-wrap">
     <div class="btn-group">
-      <span class="page">{{page}}/{{totalPage}}</span>
-      <button @click="toPrev()">{{$t('page.pre')}}</button>
-      <button @click="toNext()">{{$t('page.next')}}</button>
+      <span class="page">{{ page }}/{{ totalPage }}</span>
+      <button @click="toPrev()">{{ $t('page.pre') }}</button>
+      <button @click="toNext()">{{ $t('page.next') }}</button>
     </div>
-    <pdf class="pdf"
-         :src="pdfSrc"
-         :page="page"
-         @loaded="$emit('loaded')"
-         @page-loaded="$emit('page-loaded')"
-         @num-pages="totalPage=$event"
-         @error="snackBar.error($event)"/>
+    <pdf
+      class="pdf"
+      :src="pdfSrc"
+      :page="page"
+      @loaded="$emit('loaded')"
+      @page-loaded="$emit('page-loaded')"
+      @num-pages="totalPage = $event"
+      @error="snackBar.error($event)"
+    />
   </div>
 </template>
 
@@ -25,7 +27,12 @@ export default {
   props: {
     src: {
       validator(val) {
-        return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
+        return (
+          !val ||
+          typeof val === 'string' ||
+          val instanceof Object ||
+          val instanceof FileList
+        )
       },
     },
     page: Number,

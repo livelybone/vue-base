@@ -1,27 +1,45 @@
 <template>
   <div class="pdf-sign-wrap">
-    <span class="tip">{{$t('signature.how-to-sign')}}</span>
+    <span class="tip">{{ $t('signature.how-to-sign') }}</span>
     <div class="pdf-wrap">
-      <pdf-page class="pdf" :src="src" :page="page" @page-loaded="getWrapSize()" @toPage="toPage"/>
-      <div class="sign-wrap" ref="wrap" @dragover="dragOver($event)" @drop="drop($event)">
-        <img-tag v-if="!isNew&&imgPosition&&page===position.page"
-                 :src="signature"
-                 :style="{left:imgPosition.left+'px',bottom:imgPosition.bottom+'px'}"
-                 @dragStart="dragStart($event)"/>
+      <pdf-page
+        class="pdf"
+        :src="src"
+        :page="page"
+        @page-loaded="getWrapSize()"
+        @toPage="toPage"
+      />
+      <div
+        class="sign-wrap"
+        ref="wrap"
+        @dragover="dragOver($event)"
+        @drop="drop($event)"
+      >
+        <img-tag
+          v-if="!isNew && imgPosition && page === position.page"
+          :src="signature"
+          :style="{
+            left: imgPosition.left + 'px',
+            bottom: imgPosition.bottom + 'px',
+          }"
+          @dragStart="dragStart($event)"
+        />
       </div>
       <div class="signature">
-        <h2>{{$t('signature.all')}}</h2>
-        <img-tag :src="signature"
-                 @load="getImgSize($event)"
-                 @dragStart="isNew = truedragStart($event)"
-                 @dragEnd="isNew = false"/>
+        <h2>{{ $t('signature.all') }}</h2>
+        <img-tag
+          :src="signature"
+          @load="getImgSize($event)"
+          @dragStart="isNew = truedragStart($event)"
+          @dragEnd="isNew = false"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import pdfPage from 'components/pdf/PDFPage'
+import pdfPage from '@/components/pdf/PDFPage'
 
 export default {
   name: 'PDFSign',
@@ -29,7 +47,12 @@ export default {
   props: {
     src: {
       validator(val) {
-        return !val || typeof val === 'string' || val instanceof Object || val instanceof FileList
+        return (
+          !val ||
+          typeof val === 'string' ||
+          val instanceof Object ||
+          val instanceof FileList
+        )
       },
     },
     signature: {
@@ -65,7 +88,10 @@ export default {
   },
   methods: {
     dragStart(ev) {
-      this.pointerPosition = { left: ev.layerX, bottom: this.imgSize.height - ev.layerY }
+      this.pointerPosition = {
+        left: ev.layerX,
+        bottom: this.imgSize.height - ev.layerY,
+      }
     },
     dragOver(ev) {
       ev.preventDefault()
@@ -80,8 +106,14 @@ export default {
     },
     getWrapSize() {
       if (this.wrapSize.width && this.wrapSize.height) return
-      this.wrapSize = { width: this.$refs.wrap.offsetWidth, height: this.$refs.wrap.offsetHeight }
-      if (typeof this.position.left === 'number' && typeof this.position.bottom === 'number') {
+      this.wrapSize = {
+        width: this.$refs.wrap.offsetWidth,
+        height: this.$refs.wrap.offsetHeight,
+      }
+      if (
+        typeof this.position.left === 'number' &&
+        typeof this.position.bottom === 'number'
+      ) {
         this.imgPosition = {
           left: this.wrapSize.width * this.position.left,
           bottom: this.wrapSize.height * this.position.bottom,

@@ -1,17 +1,17 @@
 .hello-world {
-
   select {
     display: block;
     margin: 0 auto;
   }
 
   img {
-    margin: .6rem 0 .4rem;
+    margin: 0.6rem 0 0.4rem;
   }
 
-  h1, h2 {
-    margin: .1rem 0;
-    @extend .title;
+  h1,
+  h2 {
+    margin: 0.1rem 0;
+    @include title();
   }
 
   ul {
@@ -21,11 +21,11 @@
 
   li {
     display: inline-block;
-    margin: 0 .1rem;
+    margin: 0 0.1rem;
   }
 
   a {
-    @extend .content-4;
+    @include font-style(0.16rem);
     color: #42b983;
   }
 

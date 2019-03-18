@@ -1,4 +1,7 @@
-.select-base, .select-multi, .cascader, .cascader-multi {
+.select-base,
+.select-multi,
+.cascader,
+.cascader-multi {
   $main: #30b386;
   $border: #c2ccdc;
   $font: #666;
@@ -6,13 +9,13 @@
   $select: #fff;
   $input-bg: #fff;
   $option-hover-bg: lighten($main, 50%);
-  $shadow: rgba(0, 0, 0, .1);
+  $shadow: rgba(0, 0, 0, 0.1);
   $multi-value-color: #eee;
 
   $option-height: size(3);
   $multi-value-height: size(2.4);
   $scrollbar-wrap-min-width: size(16);
-  $option-padding: size(.4);
+  $option-padding: size(0.4);
 
   @mixin middleLine($color) {
     content: '';
@@ -29,10 +32,10 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    width: size(.6);
-    height: size(.6);
-    margin: size(-.3) 0 0 size(-.3);
-    border-radius: size(.3);
+    width: size(0.6);
+    height: size(0.6);
+    margin: size(-0.3) 0 0 size(-0.3);
+    border-radius: size(0.3);
     background: $color;
   }
 
@@ -44,13 +47,13 @@
     overflow: hidden;
 
     &:hover .scrollbar {
-      display: block
+      display: block;
     }
 
     .scrollbar-content {
       position: relative;
       width: 100%;
-      height: auto
+      height: auto;
     }
 
     .scrollbar {
@@ -61,15 +64,15 @@
       border-radius: 2px;
       background: #eee;
       box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-      cursor: default !important
+      cursor: default !important;
     }
   }
 
   /* popper css */
   $bg: $input-bg;
-  $pseudoSize: size(.6);
+  $pseudoSize: size(0.6);
 
-  @mixin pseudo($bg:$border, $direction: top, $borderWidth: $pseudoSize) {
+  @mixin pseudo($bg: $border, $direction: top, $borderWidth: $pseudoSize) {
     position: absolute;
     #{$direction}: -$pseudoSize;
     width: 0;
@@ -92,16 +95,18 @@
   }
 
   .vue-popper {
-    border: 1px solid rgba($border, .5);
-    border-radius: size(.3);
+    border: 1px solid rgba($border, 0.5);
+    border-radius: size(0.3);
     background: $bg;
 
-    @each $placement, $pos, $pseudoPos in (top, bottom, left), (bottom, top, left), (left, right, top), (right, left, top) {
-      &[x-placement^=#{$placement}] {
+    @each $placement, $pos, $pseudoPos in (top, bottom, left),
+      (bottom, top, left), (left, right, top), (right, left, top)
+    {
+      &[x-placement^='#{$placement}'] {
         margin-#{$pos}: size(1);
 
         .arrow {
-          @include pseudo(rgba($border, .5), $pos);
+          @include pseudo(rgba($border, 0.5), $pos);
 
           &:before {
             content: '';
@@ -122,15 +127,15 @@
     position: relative;
     padding: 0 size(1);
     border: 1px solid $border;
-    border-radius: size(.3);
+    border-radius: size(0.3);
     background: transparent;
     cursor: pointer;
   }
 
-  &.select-multi, &.cascader, &.cascader-multi {
-
+  &.select-multi,
+  &.cascader,
+  &.cascader-multi {
     .options .option {
-
       &.selected {
         color: $main !important;
         background: transparent !important;
@@ -164,27 +169,27 @@
         display: block;
         float: right;
         position: relative;
-        top: calc((#{$option-height} - #{size(.5)}) / 2);
+        top: calc((#{$option-height} - #{size(0.5)}) / 2);
         width: size(1);
-        height: size(.5);
+        height: size(0.5);
 
         &:before {
           content: '';
-          @include pseudo($font, right, size(.5));
+          @include pseudo($font, right, size(0.5));
           right: 0;
         }
 
         &:after {
           content: '';
-          @include pseudo($input-bg, right, size(.5));
+          @include pseudo($input-bg, right, size(0.5));
           right: 1px;
         }
       }
     }
   }
 
-  &.cascader, &.cascader-multi {
-
+  &.cascader,
+  &.cascader-multi {
     .options {
       display: -webkit-box;
       display: -webkit-flex;
@@ -199,7 +204,6 @@
       }
 
       .option {
-
         &.selected {
           font-weight: 500;
         }
@@ -209,7 +213,7 @@
         float: left;
         width: 1px;
         margin: -$option-padding 0;
-        background: rgba($border, .5);
+        background: rgba($border, 0.5);
       }
     }
   }
@@ -221,7 +225,8 @@
     outline: none !important;
   }
 
-  .value, .input {
+  .value,
+  .input {
     width: 100%;
     height: $option-height;
     line-height: $option-height;
@@ -240,7 +245,7 @@
     outline: none !important;
 
     &::placeholder {
-      color: $placeholder
+      color: $placeholder;
     }
   }
 
@@ -255,21 +260,22 @@
     width: auto;
     height: $multi-value-height;
     line-height: $multi-value-height;
-    padding: 0 size(.6);
+    padding: 0 size(0.6);
     margin: ($option-height - $multi-value-height)/2;
     margin-left: 0;
-    border-radius: size(.2);
+    border-radius: size(0.2);
     background: $multi-value-color;
     white-space: nowrap;
     vertical-align: top;
 
-    &.input, &.placeholder {
+    &.input,
+    &.placeholder {
       background: transparent;
     }
 
     .v {
       float: left;
-      font-size: size(1.2)
+      font-size: size(1.2);
     }
 
     .icon-del {
@@ -280,12 +286,14 @@
       height: 100%;
 
       &:hover {
-        &:before, &:after {
+        &:before,
+        &:after {
           background: darken($font, 20%);
         }
       }
 
-      &:before, &:after {
+      &:before,
+      &:after {
         @include middleLine($font);
         transform: rotate(45deg);
       }
@@ -298,22 +306,22 @@
   .icon-arrow {
     display: block;
     position: absolute;
-    right: size(.4);
+    right: size(0.4);
     top: 50%;
     width: size(1);
-    height: size(.5);
+    height: size(0.5);
     margin: size(-0.25) 0 0;
-    transition: transform .3s ease;
+    transition: transform 0.3s ease;
 
     &:before {
       content: '';
-      @include pseudo($font, bottom, size(.5));
+      @include pseudo($font, bottom, size(0.5));
       bottom: 0;
     }
 
     &:after {
       content: '';
-      @include pseudo($input-bg, bottom, size(.5));
+      @include pseudo($input-bg, bottom, size(0.5));
       bottom: 1px;
     }
 

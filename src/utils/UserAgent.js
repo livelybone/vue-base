@@ -1,5 +1,11 @@
 import isAndroid from 'is-android'
-import { isBrowser } from 'utils/Utils'
+
+export const isBrowser =
+  typeof window !== 'undefined' &&
+  typeof Window !== 'undefined' &&
+  window &&
+  Window &&
+  window instanceof Window
 
 export function isWeiXin() {
   const ua = isBrowser ? navigator.userAgent : ''

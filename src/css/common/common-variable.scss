@@ -2,14 +2,14 @@
 @import 'font-variable';
 @import 'size-variable';
 
-@mixin flex($h:flex-start,$v:center,$wrap:nowrap) {
+@mixin flex($h: flex-start, $v: center, $wrap: nowrap) {
   display: flex;
   justify-content: $h;
   align-items: $v;
   flex-wrap: $wrap;
 }
 
-@mixin flex-column($h:flex-start,$v:flex-start) {
+@mixin flex-column($h: flex-start, $v: flex-start) {
   display: flex;
   flex-direction: column;
   justify-content: $h;
@@ -34,11 +34,28 @@
   background-color: $color;
 }
 
-@mixin total-width($width:1170px) {
+@mixin total-width($width: 1170px) {
   width: $width;
   margin: 0 auto;
 }
 
-@function size($val: 1){
-  @return  $val * .1rem
+@mixin height($height, $lineHeight: 0) {
+  height: $height;
+
+  @if $lineHeight {
+    line-height: $lineHeight;
+  } @else {
+    line-height: $height;
+  }
+}
+
+@mixin borderHeight($height, $borderTop, $borderBottom) {
+  height: $height;
+  line-height: calc(#{$height} - #{$borderTop} - #{$borderBottom});
+  border-top-width: $borderTop !important;
+  border-bottom-width: $borderBottom !important;
+}
+
+@function size($val: 1) {
+  @return $val * 0.1rem;
 }

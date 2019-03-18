@@ -1,11 +1,21 @@
 'use strict'
 const path = require('path')
 const config = require('../config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const packageConfig = require('../package.json')
 
+exports.isProduction = process.env.NODE_ENV === 'production'
+
+exports.useHappypack = !!process.env.USE_HAPPYPACK
+
+exports.isServer = process.env.VUE_ENV === 'server'
+
+exports.pathResolve = function (...args) {
+  return path.join(__dirname, '..', ...args)
+}
+
 exports.assetsPath = function (_path) {
-  const assetsSubDirectory = process.env.NODE_ENV === 'production'
+  const assetsSubDirectory = exports.isProduction
     ? config.build.assetsSubDirectory
     : config.dev.assetsSubDirectory
 
@@ -45,23 +55,20 @@ exports.cssLoaders = function (options) {
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (options.extract) {
-      return ExtractTextPlugin.extract({
-        use: loaders,
-        fallback: 'vue-style-loader',
-      })
-    } else {
-      return ['vue-style-loader'].concat(loaders)
+      loaders.unshift(MiniCssExtractPlugin.loader)
     }
+    return ['vue-style-loader'].concat(loaders)
   }
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
     css: generateLoaders(),
-    postcss: generateLoaders(),
-    less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
-    stylus: generateLoaders('stylus'),
+    // postcss: generateLoaders(),
+    // less: generateLoaders('less'),
+    // sass: generateLoaders('sass', { indentedSyntax: true }),
+    // common variable of scss
+    scss: generateLoaders('sass', { data: `$device: mobile; @import "${exports.pathResolve('src/css/common/common-variable.scss').replace(new RegExp(`\\${path.sep}`, 'g'), '/')}";` }),
+    // stylus: generateLoaders('stylus'),
   }
 }
 

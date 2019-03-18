@@ -1,21 +1,33 @@
 <template>
   <div id="app">
-    <snack-bar ref="snackBar" baseSize="1rem"/>
-    <image-full-screen ref="imgFull"/>
-    <router-view/>
+    <snack-bar ref="snackBar" baseSize="1rem" />
+    <image-full-screen ref="imgFull" />
+    <overlay-confirm ref="confirmOverlay" />
+    <router-view />
   </div>
 </template>
 
 <script>
-import ImageFullScreen from 'components/image/ImageFullScreen'
+import OverlayConfirm from '@/components/common/OverlayConfirm'
+import ImageFullScreen from '@/components/image/ImageFullScreen'
+import Vue from 'vue'
 import SnackBar from 'vuejs-snackbar'
 
 export default {
   name: 'app',
-  mounted() {
-    this.snackBar.listen(this.$refs.snackBar) // 监听bus=>snackBar事件
-    this.imgFullScreen.listen(this.$refs.imgFull) // 监听bus=>imgFullScreen事件
+  metaInfo() {
+    return {
+      titleTemplate(val) {
+        return val ? `${val} - ${this.$t('title')}` : this.$t('title')
+      },
+      link: [{ type: 'shortcut icon', href: 'sfsdfsdfsdf' }],
+    }
   },
-  components: { SnackBar, ImageFullScreen },
+  components: { SnackBar, ImageFullScreen, OverlayConfirm },
+  mounted() {
+    Vue.prototype.snackBar = this.$refs.snackBar
+    Vue.prototype.imgFullScreen = this.$refs.imgFull
+    Vue.prototype.confirmOverlay = this.$refs.confirmOverlay
+  },
 }
 </script>

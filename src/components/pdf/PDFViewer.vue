@@ -1,6 +1,6 @@
 <template>
   <div class="pdf-viewer-wrap">
-    <pdf v-for="i in numPages" class="pdf" :key="i" :src="pdfSrc" :page="i"/>
+    <pdf v-for="i in numPages" class="pdf" :key="i" :src="pdfSrc" :page="i" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     getTotalPages() {
-      this.pdfSrc.then((pdfObj) => {
+      this.pdfSrc.then(pdfObj => {
         this.numPages = pdfObj.numPages
       })
     },

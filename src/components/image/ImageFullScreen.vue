@@ -1,10 +1,10 @@
 <template>
-  <overlay class="image-full-screen" v-if="!closed" @click="close">
+  <overlay v-show="!closed" class="image-full-screen" @click="close">
     <span class="btn-close" @click="close">X</span>
-    <img-tag class="full-img" :src="img.value" alt=""/>
-    <div v-if="imgs.length>1" class="operator">
-      <div class="prev" @click="toPrev">{{$t('image.pre')}}</div>
-      <div class="next" @click="toNext">{{$t('image.next')}}</div>
+    <img-tag :src="img.value" alt="" />
+    <div v-show="imgs.length > 1" class="operator">
+      <div class="prev" @click="toPrev">{{ texts.pre }}</div>
+      <div class="next" @click="toNext">{{ texts.next }}</div>
     </div>
   </overlay>
 </template>
@@ -17,11 +17,12 @@ export default {
       imgs: [],
       index: 0,
       closed: true,
+      texts: {},
     }
   },
   computed: {
     img() {
-      return this.imgs[this.index]
+      return this.imgs[this.index] || {}
     },
   },
   methods: {
@@ -33,7 +34,11 @@ export default {
       this.index += 1
       if (this.index >= this.imgs.length) this.index = this.imgs.length - 1
     },
-    open({ imgs, index }) {
+    open({ imgs, index }, ...rest) {
+      ;[
+        this.texts.pre = this.$t('image.pre'),
+        this.texts.next = this.$t('image.next'),
+      ] = rest
       this.closed = false
       this.imgs = imgs
       this.index = index

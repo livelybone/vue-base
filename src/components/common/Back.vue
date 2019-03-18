@@ -1,6 +1,6 @@
 <template>
   <button class="back-wrap" @click="Back">
-    <slot/>
+    <slot />
   </button>
 </template>
 
@@ -10,8 +10,7 @@ export default {
   data() {
     return {}
   },
-  beforeDestroy() {
-  },
+  beforeDestroy() {},
   methods: {
     back() {
       this.$router.back()

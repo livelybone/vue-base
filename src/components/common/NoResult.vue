@@ -1,5 +1,7 @@
 <template>
-  <div class="no-result" @click="$emit('click',$event)">{{tipText || $t('result.no')}}</div>
+  <div class="no-result" @click="$emit('click', $event)">
+    {{ tipText || $t('result.no') }}
+  </div>
 </template>
 
 <script>

@@ -1,21 +1,17 @@
-const path = require('path')
+'use strict'
 const utils = require('./utils')
 const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
-
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
+const happypackConf = require('./happypack')
 
 module.exports = {
-  context: path.resolve(__dirname, '../'),
+  context: utils.pathResolve(),
   entry: {
-    app: ['babel-polyfill', './src/main.js'],
+    app: ['./src/entry-client.js'],
   },
   output: {
-    path: config.build.assetsRoot,
+    path: utils.pathResolve(config.build.assetsRoot),
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
+    publicPath: utils.isProduction
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath,
     chunkFilename: '[name].chunk.js',
@@ -23,30 +19,15 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      vue$: 'vue/dist/vue.esm.js',
-      components: resolve('src/components'),
-      pages: resolve('src/pages'),
-      utils: resolve('src/utils'),
-      assets: resolve('src/assets'),
-      css: resolve('src/css'),
-      data: resolve('src/data'),
-      config: resolve('config'),
-      extensions: resolve('src/extensions'),
-      '@': resolve('src'),
+      '@': utils.pathResolve('src'),
+      'config': utils.pathResolve('config'),
     },
   },
   module: {
     rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: vueLoaderConfig,
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')],
-      },
+      happypackConf.rules.vue(),
+      happypackConf.rules.js(),
+      ...happypackConf.rules.css.map(rule => rule()),
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
@@ -85,4 +66,9 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty',
   },
+  plugins: [
+    ...happypackConf.plugins.vue,
+    ...happypackConf.plugins.js,
+    ...happypackConf.plugins.css,
+  ],
 }

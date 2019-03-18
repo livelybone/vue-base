@@ -1,7 +1,9 @@
+'use strict'
 const path = require('path')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const portfinder = require('portfinder')
@@ -13,25 +15,27 @@ const EslintFormatter = require('eslint-friendly-formatter')
 const { HOST } = process.env
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
-
 const devWebpackConfig = merge(baseWebpackConfig, {
+  mode: 'development',
   module: {
     rules: [
       {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [resolve('src')],
+        include: [utils.pathResolve('src')],
         options: {
           formatter: EslintFormatter,
           emitWarning: true,
+          fix: true,
         },
       },
-      ...utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: false }),
     ],
+  },
+  resolve: {
+    alias: {
+      vue$: 'vue/dist/vue.esm.js',
+    },
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -41,7 +45,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+        {
+          from: /.*/,
+          to: path.posix.join(config.dev.assetsPublicPath, 'index.html'),
+        },
       ],
     },
     hot: true,
@@ -70,13 +77,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
-      inject: true,
+      template: utils.pathResolve('index.html'),
+      inject: 'head',
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer',
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
+        from: utils.pathResolve('static'),
         to: config.dev.assetsSubDirectory,
         ignore: ['.*'],
       },

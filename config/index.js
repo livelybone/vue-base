@@ -2,7 +2,7 @@
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
-const path = require('path')
+const assetsRoot = 'dist'
 
 module.exports = {
   dev: {
@@ -37,11 +37,13 @@ module.exports = {
   },
 
   build: {
+    // Filename for index.html
+    index: `${assetsRoot}/index.html`,
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    indexTemplate: 'static/index.html',
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 

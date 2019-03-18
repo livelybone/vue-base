@@ -1,16 +1,21 @@
 <template>
   <label v-if="canEdit" class="my-file-input" :for="id">
     <template v-if="!myValue">
-      <img class="icon" :src="require('assets/icon-upload.png')" alt="">
-      <span>{{$t('take-photo')}}</span>
+      <img class="icon" :src="require('@/assets/icon-upload.png')" alt="" />
+      <span>{{ $t('take-photo') }}</span>
     </template>
     <template v-else="">
-      <img-tag :src="myValue" alt="" @click="$emit('imgClick',myValue)"/>
-      <img :src="require('assets/icon-edit.png')" alt="" class="edit">
+      <img-tag :src="myValue" alt="" @click="$emit('imgClick', myValue)" />
+      <img :src="require('@/assets/icon-edit.png')" alt="" class="edit" />
     </template>
-    <file-input :id="id" @input="input"/>
+    <file-input :id="id" @input="input" />
   </label>
-  <img-tag class="img" v-else="" :src="myValue" @click="$emit('imgClick',myValue)"/>
+  <img-tag
+    class="img"
+    v-else=""
+    :src="myValue"
+    @click="$emit('imgClick', myValue)"
+  />
 </template>
 
 <script>
