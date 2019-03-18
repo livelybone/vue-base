@@ -7,7 +7,7 @@ import { isBrowser } from '@/utils/UserAgent'
 import RemInit from '@livelybone/rem-init'
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
-// use babel-polyfill
+/** use babel-polyfill */
 // import 'babel-polyfill'
 
 if (isBrowser) {
@@ -22,12 +22,12 @@ const { i18n } = initialExtensions()
 register()
 
 export function createApp() {
-  // 创建 router 和 store 实例
+  // Create the router and store instances
   const store = createStore()
   const router = createRouter(i18n, store)
-  // 同步路由状态(route state)到 store
+  // Synchronize route state to store
   sync(store, router)
-  // 创建应用程序实例，将 router 和 store 注入
+  // Create an application instance, injecting router and store
   const app = new Vue({
     router,
     store,

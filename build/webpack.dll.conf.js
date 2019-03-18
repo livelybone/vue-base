@@ -8,7 +8,7 @@ const utils = require('./utils')
 
 const dlls = {
   VueReference: [
-    // use babel-polyfill
+    /** use babel-polyfill */
     // 'babel-polyfill',
     'vue',
     'vuex',
@@ -18,6 +18,7 @@ const dlls = {
     'axios',
   ],
   UIAndUtils: [
+    '@livelybone/copy',
     '@livelybone/rem-init',
     '@livelybone/simple-observer',
     '@livelybone/storage',

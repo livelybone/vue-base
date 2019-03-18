@@ -57,8 +57,8 @@ App.get('/favicon.ico', (req, res) => {
 
 App.get('*', (req, res) => {
   const context = { url: req.url }
-  // 这里无需传入一个应用程序，因为在执行 bundle 时已经自动创建过。
-  // 现在我们的服务器与应用程序已经解耦！
+  // You don't need to pass in an application here because the bundle is automatically created when you execute it.
+  // Now our servers and applications are decoupled!
   renderer.renderToString(context, (e, html) => {
     if (e) {
       console.log(chalk.red(e))
