@@ -30,7 +30,7 @@ A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, e
 
 > If you are interested, you can rewrite the compilation of project as [modern mode](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/)
 
-### html 模板
+### html
 
 > The HTML in each file is as small as possible, with as little nesting as possible. Extract the common components to reduce code
 
@@ -67,7 +67,7 @@ A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, e
 
 > Rule 2: Statements shared in many pages written in `common.js`, other words written in the `index.js` by namespace, or written in a separate file
 
-### SEO 方案
+### SEO
 
 > PrerenderSpaPlugin (git branch `pre-render`): Generate the static HTML file with details, then configure the routing with Nginx。
 
