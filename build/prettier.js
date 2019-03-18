@@ -13,7 +13,7 @@ const cmd = utils.pathResolve()
 function cssPrettier(file, parser = '') {
   const reg = /\.(scss|css|less|sass|pcss)$/
   if (reg.test(file)) {
-    new Promise((res, rej) => {
+    return new Promise((res, rej) => {
       fs.readFile(
         file,
         { encoding: 'utf-8' },
@@ -42,6 +42,7 @@ function cssPrettier(file, parser = '') {
       process.exit(1)
     })
   }
+  return Promise.resolve()
 }
 
 let start = Date.now()
@@ -59,10 +60,17 @@ start = Date.now()
  * CSS
  * */
 console.log(chalk.cyan('CSS prettier start...\n'))
+let pro = Promise.resolve()
 klaw('./src')
-  .on('data', item => !item.stats.isDirectory() && cssPrettier(item.path))
+  .on('data', item => {
+    if (!item.stats.isDirectory()) {
+      pro = pro.then(() => cssPrettier(item.path))
+    }
+  })
   .on('error', err => {
     console.log(chalk.red(err))
     process.exit(1)
   })
-  .on('end', () => console.log(chalk.cyan(`\nCSS prettier end in ${Date.now() - start}ms`)))
+  .on('end', () => pro.then(() => {
+    console.log(chalk.cyan(`\nCSS prettier end in ${Date.now() - start}ms`))
+  }))
