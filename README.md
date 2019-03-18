@@ -1,71 +1,77 @@
-# {project}
+# vue-base ([中文版](./README-ZH.md))
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![pre-render](https://img.shields.io/badge/pre-render-blue.svg "pre-render")
+![SSR](https://img.shields.io/badge/SSR-blue.svg "SSR")
+![webpack4](https://img.shields.io/badge/webpack4-blue.svg "webpack4")
 
-## 注意事项
+A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, eslint + prettier, vuex. The packaging tool is webpack4, optimized with cache, parallel, happypack
 
-### 风格（非常重要）
+## NOTES
 
-> prettier: 代码风格统一。
->> 提交代码之前务必使用 `npm run format` 格式化代码
+### Style of Coding (important)
 
-> commitizen: 代码提交
->> 使用了 `commitizen` 规范 commit message, 所以：<span style="color:red">使用 `npm run commit` 代替 `git commit`</span>
+> prettier: About style of code
+>> Be sure to format code by running command ` npm run format ` before submit
 
-> 注释规范
->> 1.As short as possible （如无必要，勿增注释）。尽量提高代码本身的清晰性、可读性。<br>
-   2.As long as necessary （如有必要，尽量详尽）。合理的注释、空行排版等，可以让代码更易阅读、更具美感。<br>
-   3.接口，项目通用函数使用 [JSDoc](http://usejsdoc.org/index.html) 注释<br>
-   4.其他地方的注释能将 why 解释清楚就行
+> commitizen: About `git commit`
+>> Standardize the commit message, <span color=red>use command `npm run commit` instead of command `git commit`</span>
 
-### 兼容
+> Annotation
+>> 1.As short as possible. Try to improve the clarity and readability of the code.<br>
+   2.As long as necessary. Make the code more readable and aesthetic by reasonable comments, blank lines, etc.<br>
+   3.Annotation of interfaces, general functions use [JSDoc](http://usejsdoc.org/index.html) <br>
+   4.Annotation in other place need to be able to explain why
 
-> 如果要兼容 IE9，则不能使用 `transform` `flex` 等css，已有组件和页面中使用的 `flex 布局` 需要切换成兼容 IE9 的写法
+### Compatibility
 
-> 可一次性引入 `babel-polyfill` 做 IE 兼容。或者，可以为项目引入具体的 polyfills 完成 IE 兼容
+> If you want your project be compatible with IE9, do not use CSS properties such as `transform`, `flex`, etc.
 
-> 有兴趣可以尝试改写成 [现代模式](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/)
+> You can inject the `Babel-polyfill` or some specific polyfills  to deal compatibility of IE
+
+> If you are interested, you can rewrite the compilation of project as [modern mode](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/)
 
 ### html 模板
 
-> 每个文件的 HTML 尽可能的小，嵌套尽可能的少。相同的地方尽可能的抽出公共组件
+> The HTML in each file is as small as possible, with as little nesting as possible. Extract the common components to reduce code
 
 ### Style
 
-> 使用SASS预处理，全局使用 100px 作 1rem（移动端做相应1px解决方案），宽高尺寸尽量使用rem单位（PC 和 Mobile 共用的组件如果有样式则必须使用rem）
+> SASS is used for pre-processing. `1rem` is equal to `100px` globally (Mobile 1px solution), and use `rem` for width and height as far as possible (Styles of components shared by both PC and Mobile must use `rem`).
 
-> 公共样式写在 common.scss，公共变量分别写在 font-variable.scss/size-variable.scss/color-variable.scss，@mixin函数写在 common-variable.scss
+> Common styles are written in `common.scss`, and public variables are written in `font-variable.scss`, `size-variable.scss`, `color-variable.scss`, and @mixin functions are written in `common-variable.scss`
 
-> 同类型的属性值，最好抽出形成公共变量或者函数
+> Attribute values of the same type should be extracted to a public variable or function
 
-> 如果所有 css 被 ExtractTextWebpackPlugin 抽取成一个 css 文件, 那么 css 文件最好不要有图片（比如 background: url('/assets/logo.png'), 原因： webpack url-loader 设置为 10kb 以下的文件会被转为base64嵌入到相应的母文件）
+> If all CSS files are extracted into a single CSS file, the CSS file should not use images (such as background: url('/assets/logo.png'), reason: Files under 10kb in size will be convert into base64 and embedded into the corresponding parent file by webpack `url-loader`).
 
 ### JS
 
-> es6 规范
+> [ES6 document](http://es6.ruanyifeng.com/)
 
-> 全局状态管理使用 vuex，如果项目简单，可选择使用 extensions/StorePlugin.js
+> Using `vuex` to manage the global state. If the project is simple, you can use `extensions/StorePlugin.js` instead
 
-> 工具类写在 utils 文件夹，插件写在 extensions 文件夹，组件共用变量或者模板写在 data/immutable-data 文件夹，ajax 相关的写在 data/api 文件夹，全局状态管理文件写在 data/store/modules 文件夹
+> Utils function written in `utils` folder, plugins for project written in `extensions` folder, Shared variables or components form template template written in `data/immutable-data` folder, ajax relevant written in `data/api` folder, global state management files written in ` data/store/modules ` folder
 
-> ajax 表单渲染数据格式推荐 `const items = [{name:'姓名', alias:'realName', value:'XXX'}]`，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（`DataDeal.dateDeal(items)`）（复杂情况可以特殊处理），name 为表单项的渲染名称（在页面显示的名称），alias 为表单项与后台接口对应的字段，value 为表单项的值 
+> It is recommended to use the data like `const items = [{label:'姓名', name:'realName', value:'XXX'}]` to render the form items. `label` is the name of the form item show in the page, `name` is the form name which will be submitted to backend, `value` is the value of the item. You can use `DataDeal. DateDeal(items)` to deal the data when submitting the form (complex situations can be special treatment)
 
-### 国际化
+### Internationalization
 
-> 使用 `vue-i18n`
+> Use `vue-i18n`
 
-> 建议1: 页面语句应当少使用词语拼接，因为不同的语言语法可能同，拼接可能会让最后得出的语句不伦不类
-> 比如：
->> ‘未选择任何文件’ 的英文翻译为 'No files were selected'，<br>
->> 如果使用 `this.$t('unselected') + this.$t('any-file')`:<br>
->> 中文为 `'未选择' + '任何文件'`;<br>
->> 英文翻译为 `'unselected ' + 'any file '` => `'unselected any file'`，显得不伦不类了
+> Rule 1: Page statements should not use word concatenation. Due to the syntax of different language is different, concatenation may make the final statement strange
+> Example：
+>> Translation of '未选择任何文件' is 'No files were selected',<br>
+>> it's word concatenation is `this.$t('unselected') + this.$t('any-file')`:<br>
+>> Chinese is `'未选择' + '任何文件'`,<br>
+>> English is `'unselected ' + 'any file '` => `'unselected any file'`, this gonna be very strange
 
-> 建议2: 页面可能共用的语句写在 `common.js` 中，其它的词汇语句可按照业务功能做命名空间写在 `index.js`，或者使用单独的文件
+> Rule 2: Statements shared in many pages written in `common.js`, other words written in the `index.js` by namespace, or written in a separate file
 
 ### SEO 方案
 
-> PrerenderSpaPlugin (git 分支 pre-render): 预渲染，生成静态 html 文件，再用 Nginx 配置路由即可。
+> PrerenderSpaPlugin (git branch `pre-render`): Generate the static HTML file with details, then configure the routing with Nginx。
 
-> 服务端渲染(SSR) (git 分支 ssr): 如果是构建社交类或是新闻类网站，有很多类似博客或是新闻的页面（公开的，数量巨大的，都能被搜索到的），还请使用 SSR，预渲染不适合做如此庞大的操作
+> SSR (git branch `ssr`): If you're building a social or news site that has a lot of blogs or news pages (public, huge, searchable), use SSR. Pre-rendering is not suitable for such a large operation
 
 ## Build Setup
 
@@ -88,61 +94,61 @@ npm run dll
 cross-env USE_HAPPYPACK=[value] npm run build
 
 # build for production and view the bundle analyzer report
-npm run build --report
+cross-env USE_HAPPYPACK=[value] npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/), [docs for vue-loader](http://vuejs.github.io/vue-loader), and the webpack config files.
 
 ## Components
 
-> [vue-img-tag](https://github.com/livelybone/vue-img-tag)([示例](https://livelybone.github.io/vue/vue-img-tag/))，图片组件，支持懒加载，支持图片文件的预览，图片可传：`[String, File, FileList, Promise<Blob, String>]`
+> [vue-img-tag](https://github.com/livelybone/vue-img-tag)([Example](https://livelybone.github.io/vue/vue-img-tag/)), image component, support lazy-load, support preview of image files, `src` type options: `[String, File, FileList, Promise<Blob, String>]`
 
-> [vue-scrollbar-live](https://github.com/livelybone/vue-scrollbar-live)([示例](https://livelybone.github.io/vue/vue-scrollbar-live/))，自定义滚动条，移动端建议使用原生滚动条
+> [vue-scrollbar-live](https://github.com/livelybone/vue-scrollbar-live)([Example](https://livelybone.github.io/vue/vue-scrollbar-live/)), custom scroll bar
 
-> [vue-slide-for-more](https://github.com/livelybone/vue-slide-for-more)([示例](https://livelybone.github.io/vue/vue-slide-for-more/))，实现 mobile 端上滑刷新，下滑加载更多功能
+> [vue-slide-for-more](https://github.com/livelybone/vue-slide-for-more)([Example](https://livelybone.github.io/vue/vue-slide-for-more/)), implemented feature: slide up for refreshing, slide down for load more
 
-> [vuejs-snackbar](https://github.com/livelybone/vuejs-snackbar)([示例](https://livelybone.github.io/vue/vuejs-snackbar/))，自定义 snackbar（提示框）插件
+> [vuejs-snackbar](https://github.com/livelybone/vuejs-snackbar)([Example](https://livelybone.github.io/vue/vuejs-snackbar/)), snackbar
 
-> [@livelybone/vue-loading](https://github.com/livelybone/vue-loading)([示例](https://livelybone.github.io/vue/vue-loading/))，加载动画
+> [@livelybone/vue-loading](https://github.com/livelybone/vue-loading)([Example](https://livelybone.github.io/vue/vue-loading/)), loading svg
 
-> [@livelybone/vue-input](https://github.com/livelybone/vue-input)([示例](https://livelybone.github.io/vue/vue-input/))，input/textarea 标签的封装，实现 `pristine` `valid` 检查，解决双向绑定时中文输入在 safari 浏览器上的 bug，真正实现密码自动填充功能开关
+> [@livelybone/vue-input](https://github.com/livelybone/vue-input)([Example](https://livelybone.github.io/vue/vue-input/)), wrapper of input/textarea, implemented the `pristine`/`valid` check of input, solved the bug of Chinese input in safari when bidirectional binding, Truly realize the control of automatic password filling
 
-> [@livelybone/vue-datepicker](https://github.com/livelybone/vue-datepicker)([示例](https://livelybone.github.io/vue/vue-datepicker/))，datepicker, timepicker, datetimePicker
+> [@livelybone/vue-datepicker](https://github.com/livelybone/vue-datepicker)([Example](https://livelybone.github.io/vue/vue-datepicker/)), datepicker, timepicker, datetimePicker
 
-> [@livelybone/vue-select](https://github.com/livelybone/vue-select)([示例](https://livelybone.github.io/vue/vue-select/))，自定义 select，包括 cascader，实现多选
+> [@livelybone/vue-select](https://github.com/livelybone/vue-select)([Example](https://livelybone.github.io/vue/vue-select/)), custom select, cascader, realized multi select
 
-> [@livelybone/vue-popper](https://github.com/livelybone/vue-popper)([示例](https://livelybone.github.io/vue/vue-popper/))，[popper.js](https://popper.js.org) 的封装，并扩展实现了对箭头位置的控制
+> [@livelybone/vue-popper](https://github.com/livelybone/vue-popper)([Example](https://livelybone.github.io/vue/vue-popper/)), wrapper of [popper.js](https://popper.js.org) in Vue, and realized the control to the arrow position
 
-> [@livelybone/vue-table](https://github.com/livelybone/vue-table)([示例](https://livelybone.github.io/vue/vue-table/))，table 标签的封装，实现单元格宽度拖拽修改
+> [@livelybone/vue-table](https://github.com/livelybone/vue-table)([Example](https://livelybone.github.io/vue/vue-table/)), wrapper of table, implemented drag and drop changes to cell width
 
-> [@livelybone/vue-button](https://github.com/livelybone/vue-button)([示例](https://livelybone.github.io/vue/vue-button/))，button 标签的封装，实现防抖功能，实现中间状态自定义
+> [@livelybone/vue-button](https://github.com/livelybone/vue-button)([Example](https://livelybone.github.io/vue/vue-button/)), wrapper of button, realized anti-shake, realized custom the middle state
 
-> [@livelybone/vue-pagination](https://github.com/livelybone/vue-pagination)([示例](https://livelybone.github.io/vue/vue-pagination/))，pagination，分页，实现输入页数跳转，实现不知道总页数情况的分页
+> [@livelybone/vue-pagination](https://github.com/livelybone/vue-pagination)([Example](https://livelybone.github.io/vue/vue-pagination/)), pagination
 
-> [pretty-checkbox-vue](https://github.com/hamed-ehtesham/pretty-checkbox-vue)([示例](https://hamed-ehtesham.github.io/pretty-checkbox-vue/))，checkbox，radio，单选多选
+> [pretty-checkbox-vue](https://github.com/hamed-ehtesham/pretty-checkbox-vue)([Example](https://hamed-ehtesham.github.io/pretty-checkbox-vue/)), checkbox, radio
 
 
 ## Tools
 
-> [@livelybone/mouse-wheel](https://github.com/livelybone/mouse-wheel)，封装好的 mouse wheel 事件，移动增量统一
+> [@livelybone/mouse-wheel](https://github.com/livelybone/mouse-wheel), wrapper of mouse wheel event, make the delta of each wheel event the same
 
-> [@livelybone/copy](https://github.com/livelybone/copy)([示例](https://livelybone.github.io/tool/copy/))，复制到剪切板 `copyDom` `copyText`，对象复制 `objectDeepCopy` `objectSimpleCopy`，对象深度合并 `objectDeepMerge`
+> [@livelybone/copy](https://github.com/livelybone/copy)([Example](https://livelybone.github.io/tool/copy/)), copy to clipboard: `copyDom` `copyText`, copy object: `objectDeepCopy` `objectSimpleCopy`, merge object: `objectDeepMerge`
 
-> [@livelybone/meta-scale](https://github.com/livelybone/meta-scale)，获取页面 viewport 的缩放比例
+> [@livelybone/meta-scale](https://github.com/livelybone/meta-scale), get the initial-scale value of the page viewport
 
-> [@livelybone/simple-observer](https://github.com/livelybone/simple-observer)，简单 Observer（发布/订阅模式） 实现
+> [@livelybone/simple-observer](https://github.com/livelybone/simple-observer), simple implementation of Observer (Publish/subscribe mode)
 
-> [@livelybone/touch](https://github.com/livelybone/touch)，touch 封装， 实现事件：pan, pinch, tap, press, swipe, rotate
+> [@livelybone/touch](https://github.com/livelybone/touch), wrapper of touch, implemented events：pan, pinch, tap, press, swipe, rotate
 
-> [@livelybone/scroll-get](https://github.com/livelybone/scroll-get)([示例](https://livelybone.github.io/tool/scroll-get/))，获取元素相对于页面/窗口的位置
+> [@livelybone/scroll-get](https://github.com/livelybone/scroll-get)([Example](https://livelybone.github.io/tool/scroll-get/)), get the position of the element relative to the page/client
 
-> [@livelybone/storage](https://github.com/livelybone/storage)([示例](https://livelybone.github.io/tool/storage/))，localStorage 的封装，不能使用时降级到 Cookie 或 Map
+> [@livelybone/storage](https://github.com/livelybone/storage)([Example](https://livelybone.github.io/tool/storage/)), wrapper of localStorage, when not available, it is degraded to use cookie or Map
 
-> [img-about](https://github.com/livelybone/img-about)([示例](https://livelybone.github.io/tool/img-about/))，图片在浏览器压缩, 获取图片原始大小
+> [img-about](https://github.com/livelybone/img-about)([Example](https://livelybone.github.io/tool/img-about/)), implemented compression in the browser and get the original size of the image
 
-> [base64-blob](https://github.com/livelybone/base64-blob)，base64 与 Blob 互相转换
+> [base64-blob](https://github.com/livelybone/base64-blob), implemented the conversion between base64 and Blob
 
-> [date-generator](https://github.com/livelybone/date-generator)([示例](https://livelybone.github.io/tool/date-generator/))，用于生成日历数据，对开发日历组件有很大的帮助
+> [date-generator](https://github.com/livelybone/date-generator)([Example](https://livelybone.github.io/tool/date-generator/)), Used to generate calendar data, a great help for the development of calendar components
 
-> [@livelybone/rem-init](https://github.com/livelybone/rem-init)，手机端 1px 解决方案，将 html 的 font-size 设置成 625%(100px) 的倍数，不兼容 IE8
+> [@livelybone/rem-init](https://github.com/livelybone/rem-init), Mobile 1px solution, set HTML font-size to 625%(100px) multiples, but not compatible with IE8
 
