@@ -71,7 +71,7 @@ A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, e
 
 > PrerenderSpaPlugin (git branch `pre-render`): Generate the static HTML file with details, then configure the routing with Nginx。
 
-> SSR (git branch `ssr`): If you're building a social or news site that has a lot of blogs or news pages (public, huge, searchable), use SSR. Pre-rendering is not suitable for such a large operation
+> [SSR](https://ssr.vuejs.org/) (git branch `ssr`): If you're building a social or news site that has a lot of blogs or news pages (public, huge, searchable), use SSR. Pre-rendering is not suitable for such a large operation
 
 ## Build Setup
 
