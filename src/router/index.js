@@ -30,9 +30,7 @@ const routes = [
       { path: '', name: '', component: HelloWorld },
       { path: 'home', name: 'HelloWorld', component: HelloWorld },
       { path: 'sign-in', name: 'SignIn', component: HelloWorld },
-      { path: 'admin-sign-in', name: 'AdminSignIn', component: HelloWorld },
-      { path: 'client', meta: { requireAuth: true }, children: [] },
-      { path: 'admin', meta: { requireAdminAuth: true }, children: [] },
+      { path: 'user-center', meta: { requireAuth: true }, children: [] },
       { path: 'not-found', component: NotFound },
       { path: '*', component: NotFound },
     ],
@@ -51,11 +49,12 @@ export function createRouter(i18n, store) {
     } = to
     const language = (lang || '').toLowerCase()
     if (!LangStore.langKeys.includes(language)) {
-      next({
-        path: `/${i18n.locale}${to.path}`,
-      })
+      /** Redirect */
+      next({ path: `/${i18n.locale}${to.path}` })
     } else {
       const pro = LangStore.setLang(language, { $i18n: i18n })
+
+      /** Auth */
       if (
         to.matched.some(route => route.meta.requireAuth) &&
         store.state.user.info.role !== 'client'
@@ -68,19 +67,10 @@ export function createRouter(i18n, store) {
             pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
             Vue.prototype.snackBar.error('Please sign in!')
           })
-      } else if (
-        to.matched.some(route => route.meta.requireAdminAuth) &&
-        store.state.user.info.role !== 'admin'
-      ) {
-        User.getAdminUser()
-          .then(() => {
-            pro.then(() => next())
-          })
-          .catch(() => {
-            pro.then(() => next({ name: 'AdminSignIn', redirect: to.fullPath }))
-            Vue.prototype.snackBar.error('Please sign in the admin terminal!')
-          })
-      } else pro.then(() => next())
+      } else {
+        /** Go through */
+        pro.then(() => next())
+      }
     }
   })
 

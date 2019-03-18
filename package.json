@@ -1,7 +1,7 @@
 {
   "name": "vue-base",
   "version": "1.0.0",
-  "description": "A Vue.js general framework",
+  "description": "A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, eslint + prettier, vuex. The packaging tool is webpack4, optimized with cache, parallel, happypack",
   "author": "livelybone <2631541504@qq.com>",
   "private": true,
   "scripts": {
@@ -13,11 +13,12 @@
     "commit": "npx git-cz"
   },
   "devDependencies": {
+    "@livelybone/copy": "^2.5.4",
     "@livelybone/rem-init": "^3.1.1",
     "@livelybone/simple-observer": "^2.1.0",
     "@livelybone/storage": "^1.3.1",
     "@livelybone/vue-button": "^1.3.0",
-    "@livelybone/vue-input": "^3.4.2",
+    "@livelybone/vue-input": "^3.4.3",
     "@livelybone/vue-loading": "^3.3.1",
     "@livelybone/vue-pagination": "^1.5.1",
     "autoprefixer": "^7.1.2",
@@ -72,7 +73,7 @@
     "url-loader": "^0.5.8",
     "vue": "^2.5.16",
     "vue-i18n": "^7.7.0",
-    "vue-img-tag": "^3.5.0",
+    "vue-img-tag": "^3.6.0",
     "vue-loader": "^14.2.2",
     "vue-meta": "^1.5.8",
     "vue-pdf": "^3.2.2",
