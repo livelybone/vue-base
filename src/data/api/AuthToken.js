@@ -1,6 +1,8 @@
 import { Observer } from '@livelybone/simple-observer'
 import { Storage } from '@livelybone/storage'
 
+let next = null
+
 /**
  * auth_token
  */
@@ -17,8 +19,7 @@ class AuthToken {
 
 AuthToken.key = 'AUTH_TOKEN'
 
-let next = null
-
+// Token change caused by other windows of the browser
 AuthToken.tokenChange = new Observer(n => {
   next = n
 })
@@ -26,6 +27,12 @@ AuthToken.tokenChange = new Observer(n => {
 AuthToken.storage =
   typeof window !== 'undefined' ? new Storage(true) : { addHandler: () => '' }
 
-AuthToken.storage.addHandler(next)
+// Storage Event
+AuthToken.storage.addHandler(({ key }) => {
+  if (key === AuthToken.key) {
+    const token = AuthToken.getToken()
+    next(token)
+  }
+})
 
 export default AuthToken
