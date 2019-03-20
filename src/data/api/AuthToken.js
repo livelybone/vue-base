@@ -1,5 +1,6 @@
 import { Observer } from '@livelybone/simple-observer'
 import { Storage } from '@livelybone/storage'
+import config from 'config/config'
 
 let next = null
 
@@ -16,7 +17,7 @@ class AuthToken {
   }
 }
 
-AuthToken.key = 'AUTH_TOKEN'
+AuthToken.key = config.tokenKeyForStorage
 
 // Token change caused by other windows of the browser
 AuthToken.tokenChange = new Observer(n => {

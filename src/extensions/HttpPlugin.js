@@ -1,13 +1,13 @@
-import { Storage } from '@livelybone/storage'
+import AuthToken from '@/data/api/AuthToken'
+import { convertToFormData, getUrl } from '@/utils/RequestInterceptor'
 import axios from 'axios'
 import config from 'config/config'
-import { convertToFormData, getUrl } from '@/utils/RequestInterceptor'
 
 /**
  * http: axios
  */
 function setAuth(url) {
-  axios.defaults.headers['x-auth-token'] = new Storage().get('AUTH_TOKEN')
+  axios.defaults.headers['x-auth-token'] = AuthToken.getToken()
   return url
 }
 
