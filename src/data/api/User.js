@@ -2,17 +2,17 @@ import AuthToken from '@/data/api/AuthToken'
 import { Http } from '@/extensions/HttpPlugin'
 
 export default class User {
-  static register({ phoneNumber, password, verifyCode }) {
+  static register({ username, password, verifyCode }) {
     return Http.postForm('/user/register', {
-      phoneNumber,
+      username,
       password,
       verifyCode,
     })
   }
 
   static getUser() {
-    // 获取用户信息
-    return Http.get('/user/myUserInfo').then(
+    // get infos of user
+    return Http.get('/user/info').then(
       user => user,
       e => {
         AuthToken.setToken('')
@@ -21,21 +21,8 @@ export default class User {
     )
   }
 
-  static getAdminUser() {
-    // 获取用户信息
-    return Http.get('/user/admin/myUserInfo').then(
-      user => user,
-      e => {
-        AuthToken.setToken('')
-        throw e
-      },
-    )
-  }
-
-  static signIn({ phoneNumber, password }) {
-    return Http.post(
-      `/login?phoneNumber=${phoneNumber}&password=${password}`,
-    ).then(res => {
+  static signIn({ username, password }) {
+    return Http.post('/login', { username, password }).then(res => {
       AuthToken.setToken(res)
       return res
     })

@@ -4,7 +4,7 @@
 /* eslint-disable no-param-reassign */
 import { langKeys, LangMap, Langs } from '@/assets/lang/LangMap'
 import { isBrowser } from '@/utils/UserAgent'
-import { Storage } from '@livelybone/storage'
+import { Cookie } from '@livelybone/storage'
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
@@ -44,19 +44,20 @@ export function loadLanguageAsync(i18n, lang) {
 
 export class LangStore {
   static getLang() {
-    return this.localStorage.get(this.key)
+    return this.storage.get(this.key)
   }
 
   static setLang(val, vm = null) {
     return vm
       ? loadLanguageAsync(vm.$i18n, val).then(lang => {
-          this.localStorage.set(this.key, lang)
+          this.storage.set(this.key, lang)
         })
       : Promise.reject(new Error('Param vm is null'))
   }
 }
 
-LangStore.localStorage = new Storage()
+// use cookie instead of localStorage to make sending lang to server possible
+LangStore.storage = isBrowser ? new Cookie() : new Map()
 
 LangStore.key = 'lang'
 LangStore.langOptions = Langs
