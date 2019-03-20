@@ -57,7 +57,7 @@ export class LangStore {
 }
 
 // use cookie instead of localStorage to make sending lang to server possible
-LangStore.storage = isBrowser ? new Cookie() : new Map()
+LangStore.storage = isBrowser ? Cookie : new Map()
 
 LangStore.key = 'lang'
 LangStore.langOptions = Langs
