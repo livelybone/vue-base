@@ -83,7 +83,7 @@
     "vue-meta": "^1.5.8",
     "vue-pdf": "^3.2.2",
     "vue-router": "^3.0.2",
-    "vue-server-renderer": "^2.5.16",
+    "vue-server-renderer": "2.6.9",
     "vue-slide-for-more": "^4.1.1",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.6.9",
@@ -111,5 +111,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4"
   }
 }

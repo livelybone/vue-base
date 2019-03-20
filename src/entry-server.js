@@ -2,44 +2,43 @@
 import { LangStore } from '@/extensions/Langs'
 import { createApp } from '@/main'
 
-function redirect(url) {
+function resolvePath(url, lang) {
+  const $lang = LangStore.langKeys.includes(lang) ? lang : 'zh-hans'
   if (url && url !== '/') {
     const arr = url.split('/').filter(val => val)
     if (LangStore.langKeys.includes(arr[0])) return url
-    return `/zh-hans/${url.replace(/^\/*/, '')}`
+    return `/${$lang}/${url.replace(/^\/*/, '')}`
   }
-  return '/zh-hans'
+  return `/${$lang}`
 }
 
 /**
- * 因为有可能会是异步路由钩子函数或组件，所以我们将返回一个 Promise，
- * 以便服务器能够等待所有的内容在渲染前，就已经准备就绪。
+ * @return Promise  Because of the existing of asynchronous routing hook functions or components, we return an instance of Promise,
+ *                  so that the server can rendering after everything is ready.
  * */
 export default context =>
   new Promise((resolve, reject) => {
-    const { url } = context
+    const { url, lang } = context
     const { app, router, store } = createApp()
     const { route } = router.resolve(url)
-    // 设置服务器端 router 的位置
+    // resolve the route
     if (route.matched.some(r => r.meta.requireAuth)) {
-      // 如果页面需要登录，则直接返回登录页面
-      router.replace('/sign-in')
-    } else if (route.matched.some(r => r.meta.requireAdminAuth)) {
-      // 如果页面需要管理员权限，则直接返回管理员登录页面
-      router.replace('/admin-sign-in')
+      // If the route need auth, redirect to `/sign-in` page
+      router.replace(resolvePath('/sign-in', lang))
     } else {
-      router.replace(redirect(url))
+      router.replace(resolvePath(url, lang))
     }
 
-    // 等到 router 将可能的异步组件和钩子函数解析完
+    // Wait until router has finished parsing
+    // all asynchronous components and hook functions that may be exist
     router.onReady(() => {
       const matches = router.getMatchedComponents()
-      // 匹配不到的路由，执行 reject 函数，并返回 404
+      // If route do not match, execute the reject function, and return 404
       if (!matches.length) {
         // eslint-disable-next-line prefer-promise-reject-errors
         return reject({ code: 404 })
       }
-      // 对所有匹配的路由组件调用 `asyncData()`
+      // Call function `asyncData` in all matched components
       return Promise.all(
         matches.map(
           component =>
@@ -51,14 +50,12 @@ export default context =>
         ),
       )
         .then(() => {
-          // 在所有预取钩子(preFetch hook) resolve 后，
-          // 我们的 store 现在已经填充入渲染应用程序所需的状态。
-          // 当我们将状态附加到上下文，
-          // 并且 `template` 选项用于 renderer 时，
-          // 状态将自动序列化为 `window.__INITIAL_STATE__`，并注入 HTML。
+          // Store has been filled with state after Promise resolved.
+          // When set to `context.state`,
+          // the state will automatically serialized as `window.__INITIAL_STATE__`,
+          // and inject into the HTML.
           context.state = store.state
           context.meta = app.$meta()
-          // Promise 应该 resolve 应用程序实例，以便它可以渲染
           resolve(app)
         })
         .catch(reject)

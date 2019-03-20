@@ -13,7 +13,6 @@ exports.rewriteClientManifest = function () {
   const clientManifest = JSON.parse(exports.readFile('dist', config.server.clientManifest))
   const dllJs = []
   const reg = new RegExp(`(^|\/)(${dllNames.reduce((pre, name) => (pre ? `${pre}|${name}` : name), '')})`)
-  console.log(reg)
   clientManifest.async = clientManifest.async.filter(fileName => {
     if (reg.test(fileName)) {
       dllJs.push(fileName)

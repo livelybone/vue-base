@@ -18,7 +18,7 @@ Vue.use(Router)
 
 const RouterView = {
   render() {
-    return <router-view/>
+    return <router-view />
   },
 }
 
