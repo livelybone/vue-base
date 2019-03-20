@@ -60,17 +60,17 @@ start = Date.now()
  * CSS
  * */
 console.log(chalk.cyan('CSS prettier start...\n'))
-let pro = Promise.resolve()
+let pro = []
 klaw('./src')
   .on('data', item => {
     if (!item.stats.isDirectory()) {
-      pro = pro.then(() => cssPrettier(item.path))
+      pro.push(cssPrettier(item.path))
     }
   })
   .on('error', err => {
     console.log(chalk.red(err))
     process.exit(1)
   })
-  .on('end', () => pro.then(() => {
+  .on('end', () => Promise.all(pro).then(() => {
     console.log(chalk.cyan(`\nCSS prettier end in ${Date.now() - start}ms`))
   }))
