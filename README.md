@@ -13,10 +13,10 @@ A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, e
 ### Style of Coding (important)
 
 > prettier: About style of code
->> Be sure to format code by running command ` npm run format ` before submit
+>> Be sure to format code by running command ` yarn run format ` before submit
 
 > commitizen: About `git commit`
->> Standardize the commit message, <span color=red>use command `npm run commit` instead of command `git commit`</span>
+>> Standardize the commit message, <span color=red>use command `yarn run commit` instead of command `git commit`</span>
 
 > Annotation
 >> 1.As short as possible. Try to improve the clarity and readability of the code.<br>
@@ -79,33 +79,33 @@ A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, e
 
 ``` bash
 # install dependencies
-npm install
+yarn install
 
 # build config
 cp config/config.js.sample config/config.js
 
 # serve with hot reload at localhost:8080 (with no ssr)
-npm start
+yarn start
 
 # build dll file for production with minification, insure that running after the `dlls` in `webpack.dll.conf.js` changed
-npm run dll
+yarn run dll
 
 # build static file for production with minification(with no ssr), insure that dll js files exist before running, or it will throw an Error about DllReferencePlugin
 # HappyPack for build will be enabled when USE_HAPPYPACK set to non-null
 # Happypack is not recommended for smaller projects
-cross-env USE_HAPPYPACK=[value] npm run build:ssr
+cross-env USE_HAPPYPACK=[value] yarn run build:ssr
 
 # build for production and view the bundle analyzer report
-cross-env USE_HAPPYPACK=[value] npm run build:static --report
+cross-env USE_HAPPYPACK=[value] yarn run build:static --report
 
 # build for production with minification(with ssr), insure that dll js files exist before running, or it will throw an Error about DllReferencePlugin
-cross-env USE_HAPPYPACK=[value] npm run build:ssr
+cross-env USE_HAPPYPACK=[value] yarn run build:ssr
 
 # start in production environment(with ssr)
-cross-env USE_HAPPYPACK=[value] npm start:ssr
+cross-env USE_HAPPYPACK=[value] yarn start:ssr
 
 # build and start in production environment(with ssr)
-cross-env USE_HAPPYPACK=[value] npm run server
+cross-env USE_HAPPYPACK=[value] yarn run server
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/), [docs for vue-loader](http://vuejs.github.io/vue-loader), and the webpack config files.

@@ -5,14 +5,15 @@
   "author": "livelybone <2631541504@qq.com>",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --inline --progress --host 0.0.0.0 --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --config build/webpack.dev.conf.js",
+    "start": "yarn dev",
     "start:ssr": "node build/ssr/server-ssr.js",
     "build:ssr": "node build/ssr/build-server.js",
     "build:static": "node build/build.js",
     "server": "npm run build:ssr && npm run start:ssr",
     "dll": "node build/dll-build.js",
     "format": "node build/prettier.js",
-    "commit": "npx git-cz"
+    "commit": "git-cz"
   },
   "devDependencies": {
     "@livelybone/copy": "^2.5.4",
