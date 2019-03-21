@@ -6,11 +6,11 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
+    "start": "yarn dev",
     "build": "node build/build.js",
     "dll": "node build/dll-build.js",
     "format": "node build/prettier.js",
-    "commit": "npx git-cz"
+    "commit": "git-cz"
   },
   "devDependencies": {
     "@livelybone/copy": "^2.5.4",

@@ -15,5 +15,4 @@ yarn-error.log*
 
 /config/config.js
 /package-lock.json
-yarn.lock
 
