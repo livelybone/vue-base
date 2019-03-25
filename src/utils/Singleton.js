@@ -34,7 +34,7 @@ export default class Singleton {
   /**
    * @param {String|Number} key
    * @param {Object} defaultValue
-   * @return Object
+   * @return any
    * */
   static obj(key, defaultValue) {
     const k = `object-${key || 'default'}`
@@ -47,7 +47,6 @@ export default class Singleton {
   /**
    * @param {Function} fn
    * @param {String|Number} key
-   * @return Object
    * */
   static onceRun(fn, key = '') {
     const k = key ? `once-run-${key}` : fn
