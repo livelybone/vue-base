@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <snack-bar ref="snackBar" baseSize="1rem" />
+    <snack-bar ref="snackBar" baseSize="1rem" position="top-right" />
     <image-full-screen ref="imgFull" />
     <overlay-confirm ref="confirmOverlay" />
     <router-view />

@@ -42,7 +42,7 @@
 @mixin height($height, $lineHeight: 0) {
   height: $height;
 
-  @if $lineHeight {
+  @if $lineHeight != 0 {
     line-height: $lineHeight;
   } @else {
     line-height: $height;
