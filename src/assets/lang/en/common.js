@@ -15,33 +15,19 @@ export default {
   '404': '404',
   '404.tip': 'Page not found!',
 
-  'login': {
-    'up': 'sign in',
-    'in': 'sign up',
-    'need.sign-in': 'Please sign in!',
-    'need.sign-in.admin': 'Please sign in the admin terminal!',
-  },
-  'verify-code': {
-    'name': 'verify code',
-    'get': 'get code',
-  },
-  'operate': {
-    'name': 'operate',
-    'confirm': 'Are you sure to perform the operation?',
-    'ok': 'OK',
-    'cancel': 'Cancel',
-  },
-  'image': {
-    'pre': 'Pre',
-    'next': 'Next',
-  },
-  'page': {
-    'pre': 'Pre',
-    'next': 'Next',
-  },
-  'signature': {
-    'name': 'signature',
-    'all': 'signatures',
-    'how-to-sign': 'Drag the signature to the corresponding position of the award, and then click the "OK" button to complete the signature!',
-  },
+  'login.up': 'sign in',
+  'login.in': 'sign up',
+  'login.need.sign-in': 'Please sign in!',
+  'login.need.sign-in.admin': 'Please sign in the admin terminal!',
+  'verify-code.name': 'verify code',
+  'verify-code.get': 'get code',
+  'operate.name': 'operate',
+  'operate.confirm': 'Are you sure to perform the operation?',
+  'image.pre': 'Pre',
+  'image.next': 'Next',
+  'page.pre': 'Pre',
+  'page.next': 'Next',
+  'signature.name': 'signature',
+  'signature.all': 'signatures',
+  'signature.how-to-sign': 'Drag the signature to the corresponding position of the award, and then click the "OK" button to complete the signature!',
 }

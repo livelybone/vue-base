@@ -6,10 +6,11 @@ import Router from 'vue-router'
 
 // 另一种方式：
 // commonjs
-// const NotFound = resolve => require.ensure([], require => require('@/pages/NotFound'), 'NotFound');
+// const NotFound = resolve => require.ensure([], require => require('@/pages/NotFound'), 'NotFound')
 // const NotFound =
-//       resolve => require.ensure([], require => resolve(require('@/pages/NotFound')), 'NotFound');
-// const NotFound = resolve => require(['@/pages/NotFound'], resolve); // AMD， 缺点：无法指定 chunkName
+//       resolve => require.ensure([], require => resolve(require('@/pages/NotFound')), 'NotFound')
+// const NotFound = resolve => require(['@/pages/NotFound'], resolve)
+// The package name cannot be specified in this way
 const HelloWorld = () =>
   import('@/pages/HelloWorld' /* webpackChunkName:"HelloWorld" */)
 
