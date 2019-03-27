@@ -14,3 +14,22 @@ export function isWeiXin() {
 }
 
 export { isAndroid }
+
+if (!isBrowser) {
+  /** Server render */
+  global.window = { document: {} }
+}
+
+const compatibleArr = ['File', 'FileList']
+
+compatibleArr.forEach(key => {
+  if (isBrowser) {
+    /** IE9 */
+    if (!window[key]) {
+      window[key] = Object
+    }
+  } else if (!global[key]) {
+    /** Node */
+    global[key] = Object
+  }
+})
