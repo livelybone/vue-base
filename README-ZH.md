@@ -44,8 +44,6 @@
 
 > 同类型的属性值，最好抽出形成公共变量或者函数
 
-> 如果所有 css 被抽取成一个 css 文件, 那么 css 文件最好不要有图片（比如 background: url('/assets/logo.png'), 原因： webpack 的 `url-loader` 设置为 10kb 以下的文件会被转为base64嵌入到相应的母文件）
-
 ### JS
 
 > [ES6 规范](http://es6.ruanyifeng.com/)

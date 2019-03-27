@@ -5,7 +5,7 @@
         {{ op.name }}
       </option>
     </select>
-    <img-tag :src="require('@/assets/logo.png')" />
+    <img-tag :src="require('@/assets/images/logo.png')" />
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -40,7 +40,7 @@
     </div>
     <div class="btn btn-blue">aa</div>
     <div @click="log('Div Click： ', $event.target)">
-      <img-tag :src="require('@/assets/icon-search.png')" />
+      <img-tag :src="require('@/assets/images/icon-search.png')" />
     </div>
     <div>{{ $t('remain') }} {{ time }}</div>
     <input type="file" @change="input($event.target.files[0])" />
@@ -80,29 +80,6 @@ export default {
     return Promise.resolve({})
   },
   components: {},
-  mounted() {
-    setTimeout(() => {
-      this.snackBar.error('Hello World!')
-      this.confirmOverlay.show({ head: 'Hello World!' }).then(() => {
-        this.confirmOverlay.hide()
-      })
-    }, 1000)
-    console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }))
-    if (this.$store.state.user.info.id) {
-      this.getUserInfo({})
-        .then(() =>
-          console.log(
-            '全局 store.state.user.info :',
-            JSON.parse(JSON.stringify(this.$store.state.user.info)),
-          ),
-        )
-        .catch(e => this.snackBar.error(e))
-    }
-    console.log(
-      '全局 store.state.user.info :',
-      JSON.parse(JSON.stringify(this.$store.state.user.info)),
-    )
-  },
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
@@ -139,6 +116,29 @@ export default {
         this.isSearching = false
       }, 1000)
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.snackBar.error('Hello World!')
+      this.confirmOverlay.show({ head: 'Hello World!' }).then(() => {
+        this.confirmOverlay.hide()
+      })
+    }, 1000)
+    console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }))
+    if (this.$store.state.user.info.id) {
+      this.getUserInfo({})
+        .then(() =>
+          console.log(
+            '全局 store.state.user.info :',
+            JSON.parse(JSON.stringify(this.$store.state.user.info)),
+          ),
+        )
+        .catch(e => this.snackBar.error(e))
+    }
+    console.log(
+      '全局 store.state.user.info :',
+      JSON.parse(JSON.stringify(this.$store.state.user.info)),
+    )
   },
 }
 </script>

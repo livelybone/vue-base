@@ -44,8 +44,6 @@ A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, e
 
 > Attribute values of the same type should be extracted to a public variable or function
 
-> If all CSS files are extracted into a single CSS file, the CSS file should not use images (such as background: url('/assets/logo.png'), reason: Files under 10kb in size will be convert into base64 and embedded into the corresponding parent file by webpack `url-loader`).
-
 ### JS
 
 > [ES6 document](http://es6.ruanyifeng.com/)
