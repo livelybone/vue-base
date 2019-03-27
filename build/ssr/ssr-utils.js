@@ -23,3 +23,20 @@ exports.rewriteClientManifest = function () {
   clientManifest.initial.unshift(...dllJs)
   fs.writeFileSync(utils.pathResolve('dist', config.server.clientManifest), JSON.stringify(clientManifest), { encoding: 'utf-8' })
 }
+
+exports.pingFile = function (path, next) {
+  if (fs.existsSync(path)) {
+    next()
+    return true
+  }
+}
+
+exports.untilFileExist = function (path) {
+  return new Promise(res => {
+    if (!exports.pingFile(path, res)) {
+      const timer = setInterval(() => {
+        if (exports.pingFile(path, res)) clearInterval(timer)
+      }, 1000)
+    }
+  })
+}
