@@ -35,10 +35,10 @@ export default {
       if (this.index >= this.imgs.length) this.index = this.imgs.length - 1
     },
     open({ imgs, index }, ...rest) {
-      ;[
+      ([
         this.texts.pre = this.$t('image.pre'),
         this.texts.next = this.$t('image.next'),
-      ] = rest
+      ]) = rest
       this.closed = false
       this.imgs = imgs
       this.index = index

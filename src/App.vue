@@ -20,7 +20,6 @@ export default {
       titleTemplate(val) {
         return val ? `${val} - ${this.$t('title')}` : this.$t('title')
       },
-      link: [{ type: 'shortcut icon', href: 'sfsdfsdfsdf' }],
     }
   },
   components: { SnackBar, ImageFullScreen, OverlayConfirm },
