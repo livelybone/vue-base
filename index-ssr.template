@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html {{{ meta.inject().htmlAttrs.text() }}}>
+<html {{{ meta.inject().htmlAttrs.text() }}} style="font-size: 625%;">
 <head {{{ meta.inject().headAttrs.text() }}}>
   <meta charset="utf-8">
   {{{ meta.inject().meta.text() }}}
