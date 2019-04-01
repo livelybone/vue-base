@@ -1,6 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Back from '@/components/common/Back'
+import LinkTo from '@/components/common/LinkTo'
 import NoResult from '@/components/common/NoResult'
 import Overlay from '@/components/common/Overlay'
 import { dateFormatter, timeConversion } from '@/utils/TimeAbout'
@@ -20,7 +20,7 @@ export default function() {
   const isMobile = isBrowser && window.isMobile
 
   // Register global components
-  Vue.component('back', Back)
+  Vue.component('link-to', LinkTo)
   Vue.component('img-tag', ImgTag)
 
   Vue.component('no-result', NoResult)

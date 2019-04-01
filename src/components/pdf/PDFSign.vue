@@ -137,17 +137,17 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-.tip {
-  display: block;
-  width: 100%;
-  line-height: 0.4rem;
-  text-align: center;
-}
-
+<style lang="scss">
 .pdf-sign-wrap {
   @include flex-column(center, center);
   width: 100%;
+
+  .tip {
+    display: block;
+    width: 100%;
+    line-height: 0.4rem;
+    text-align: center;
+  }
 
   .pdf-wrap {
     position: relative;

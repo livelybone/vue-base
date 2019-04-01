@@ -29,6 +29,7 @@ const dlls = {
     'vue-img-tag',
     'vue-slide-for-more',
     'vuejs-snackbar',
+    'base64-blob',
   ],
 }
 

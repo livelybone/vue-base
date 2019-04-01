@@ -1,10 +1,10 @@
 <template>
   <overlay v-show="!closed" class="image-full-screen" @click="close">
-    <span class="btn-close" @click="close">X</span>
-    <img-tag :src="img.value" alt="" />
+    <button class="btn btn-close" @click="close">X</button>
+    <img-tag :src="img.value" />
     <div v-show="imgs.length > 1" class="operator">
-      <div class="prev" @click="toPrev">{{ texts.pre }}</div>
-      <div class="next" @click="toNext">{{ texts.next }}</div>
+      <button class="btn prev" @click="toPrev">{{ texts.pre }}</button>
+      <button class="btn next" @click="toNext">{{ texts.next }}</button>
     </div>
   </overlay>
 </template>
@@ -35,13 +35,13 @@ export default {
       if (this.index >= this.imgs.length) this.index = this.imgs.length - 1
     },
     open({ imgs, index }, ...rest) {
-      ;[
-        this.texts.pre = this.$t('image.pre'),
-        this.texts.next = this.$t('image.next'),
-      ] = rest
+      this.texts = {
+        pre: rest[0] || this.$t('image.pre'),
+        next: rest[1] || this.$t('image.next'),
+      }
       this.closed = false
       this.imgs = imgs
-      this.index = index
+      this.index = index || 0
     },
     close() {
       this.closed = true
@@ -51,52 +51,52 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-.hide {
-  display: none;
-}
+<style lang="scss">
+.image-full-screen {
+  .btn-close {
+    @include subhead();
+    position: fixed;
+    right: 0.4rem;
+    top: 0.4rem;
+    width: 0.44rem;
+    height: 0.44rem;
+    color: rgba(#fff, 0.7);
+    border: none;
+    border-radius: 0.04rem;
+    background: rgba(#000, 0.5);
+    cursor: pointer;
 
-.btn-close {
-  @include flex(center, center);
-  position: fixed;
-  right: 0.4rem;
-  top: 0.4rem;
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 0.04rem;
-  background: rgba(#fff, 0.75);
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(#fff, 0.85);
-    color: $black-dark;
+    &:hover {
+      color: rgba(#fff, 0.8);
+      background: rgba(#000, 0.85);
+    }
   }
-}
 
-img {
-  max-width: 90% !important;
-  max-height: 90% !important;
-}
-
-.prev,
-.next {
-  @include flex(center, center);
-  position: fixed;
-  left: 0;
-  top: 50%;
-  width: 0.6rem;
-  height: 0.8rem;
-  background: rgba(#fff, 0.75);
-  cursor: pointer;
-
-  &:hover {
-    background: rgba(#fff, 0.85);
-    color: $black-dark;
+  img {
+    max-width: 90% !important;
+    max-height: 90% !important;
   }
-}
 
-.next {
-  left: auto;
-  right: 0;
+  .prev,
+  .next {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.6rem;
+    border: none;
+    color: $black-dark;
+    background: rgba(#fff, 0.5);
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(#fff, 0.6);
+    }
+  }
+
+  .next {
+    left: auto;
+    right: 0;
+  }
 }
 </style>
