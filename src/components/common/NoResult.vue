@@ -14,11 +14,10 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+<style lang="scss">
 .no-result {
-  @include flex(center, center);
+  @include height(0.5rem);
   width: 100%;
-  height: 0.5rem;
   color: $black-light;
   text-align: center;
   text-decoration: underline;

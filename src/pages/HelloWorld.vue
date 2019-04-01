@@ -141,53 +141,52 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+<style lang="scss">
 .hello-world {
   text-align: center;
-}
 
-select {
-  display: block;
-  margin: 0 auto;
-}
+  select {
+    display: block;
+    margin: 0 auto;
+  }
 
-img {
-  margin: 0.6rem 0 0.4rem;
-}
+  img {
+    margin: 0.6rem 0 0.4rem;
+  }
 
-h1,
-h2 {
-  @include title();
-  margin: 0.1rem 0;
-}
+  h1,
+  h2 {
+    @include title();
+    margin: 0.1rem 0;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 0.1rem;
-}
+  li {
+    display: inline-block;
+    margin: 0 0.1rem;
+  }
 
-a {
-  color: #42b983;
-}
+  a {
+    color: #42b983;
+  }
 
-.item {
-  margin: 20px 0;
-}
+  .item {
+    margin: 20px 0;
+  }
 
-.element {
-  @include flex(center);
-  width: 100%;
-  height: 1rem;
-  background: #fff;
+  .element {
+    @include height(1rem);
+    width: 100%;
+    background: #fff;
 
-  &:nth-child(2n) {
-    color: #fff;
-    background: $green;
+    &:nth-child(2n) {
+      color: #fff;
+      background: $green;
+    }
   }
 }
 </style>

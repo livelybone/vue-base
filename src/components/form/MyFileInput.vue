@@ -9,14 +9,14 @@
       <span>{{ $t('take-photo') }}</span>
     </template>
     <template v-else="">
-      <img-tag :src="myValue" alt="" @click="$emit('imgClick', myValue)" />
+      <img-tag :src="myValue" alt="" @click="$emit('imgClick', myValue)"/>
       <img
         :src="require('@/assets/images/icon-edit.png')"
         alt=""
         class="edit"
       />
     </template>
-    <file-input :id="id" @input="input" />
+    <file-input :id="id" @input="input"/>
   </label>
   <img-tag
     class="img"
@@ -62,43 +62,44 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-.file-input {
-  @include flex(center, center, column);
-  position: relative;
-  width: 100%;
-  height: 50vw;
-  margin: 0 0 0.1rem;
-  border: 1px dashed $border;
-  border-radius: 0.05rem;
-  background: $background;
-  cursor: pointer;
-  overflow: hidden;
-
-  img.icon {
-    max-width: 30%;
-    max-height: 30%;
-  }
-
-  span {
-    padding: 0.1rem 0 0;
-    color: $black-light;
-  }
-
-  .edit {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0.3rem;
-    padding: 0.04rem;
-    background: rgba(#000, 0.5);
+<style lang="scss">
+.my-file-input {
+  .file-input {
+    position: relative;
+    width: 100%;
+    height: 50vw;
+    margin: 0 0 0.1rem;
+    text-align: center;
+    border: 1px dashed $border;
+    border-radius: 0.05rem;
+    background: $background;
     cursor: pointer;
-  }
-}
+    overflow: hidden;
 
-.img {
-  display: flex;
-  width: 100%;
-  margin: 0 0 0.1rem;
+    .icon {
+      max-width: 30%;
+      max-height: 30%;
+    }
+
+    span {
+      padding: 0.1rem 0 0;
+      color: $black-light;
+    }
+
+    .edit {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0.3rem;
+      padding: 0.04rem;
+      background: rgba(#000, 0.5);
+      cursor: pointer;
+    }
+  }
+
+  .img {
+    width: 100%;
+    margin: 0 0 0.1rem;
+  }
 }
 </style>

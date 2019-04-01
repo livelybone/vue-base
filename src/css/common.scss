@@ -15,9 +15,9 @@ html {
 }
 
 body {
+  @include content();
   font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica,
     'Microsoft Yahei', Arial, sans-serif;
-  @include content();
   color: $font;
 }
 
@@ -123,6 +123,10 @@ table {
 
 .transition {
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hide {
+  display: none;
 }
 
 /* ==========================================================================
