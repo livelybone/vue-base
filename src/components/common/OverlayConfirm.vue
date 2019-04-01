@@ -1,5 +1,5 @@
 <template>
-  <overlay v-show="resolve" @click="hide">
+  <overlay v-show="resolve" class="overlay-confirm" @click="hide">
     <div class="float-win" :style="{ width: winWidthC + 'px' }">
       <h2 v-show="headC">{{ headC }}</h2>
       <div class="overlay-content">
@@ -7,8 +7,10 @@
         <slot />
       </div>
       <div class="btn-group">
-        <div class="btn btn-confirm" @click="resolve">{{ confirmTextC }}</div>
-        <div class="btn btn-cancel" @click="hide">{{ cancelTextC }}</div>
+        <button class="btn btn-confirm" @click="resolve">
+          {{ confirmTextC }}
+        </button>
+        <button class="btn btn-cancel" @click="hide">{{ cancelTextC }}</button>
       </div>
     </div>
   </overlay>
@@ -53,8 +55,8 @@ export default {
       return new Promise(res => {
         const {
           tipText = this.$t('operate.confirm'),
-          confirmText = this.$t('operate.ok'),
-          cancelText = this.$t('operate.cancel'),
+          confirmText = this.$t('ok'),
+          cancelText = this.$t('cancel'),
         } = options
         this.init({ ...options, tipText, confirmText, cancelText })
         this.resolve = res
@@ -68,53 +70,56 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
-.float-win {
-  width: 3.6rem;
-  max-width: calc(100vw - #{$margin} * 2);
-  padding: $margin;
-  text-align: left;
-  border-radius: 0.03rem;
-  box-shadow: 0 0.1rem 0.4rem rgba(#000, 0.5);
-  background: #fff;
-  overflow: hidden;
+<style lang="scss">
+.overlay-confirm {
+  .float-win {
+    width: 3.6rem;
+    max-width: calc(100vw - #{$margin} * 2);
+    padding: $margin;
+    text-align: left;
+    border-radius: 0.03rem;
+    box-shadow: 0 0.1rem 0.4rem rgba(#000, 0.5);
+    background: #fff;
+    overflow: hidden;
 
-  h2 {
-    @include subhead();
-    width: 100%;
-    padding: 0 0 0.05rem;
-    line-height: 0.26rem;
-    color: $font-dark;
-  }
-
-  .overlay-content {
-    padding: 0.05rem 0 $margin;
-
-    p {
-      line-height: normal;
+    h2 {
+      @include subhead();
+      width: 100%;
+      padding: 0 0 0.05rem;
+      line-height: 0.26rem;
+      color: $font-dark;
     }
-  }
 
-  .btn-group {
-    @include flex(flex-end, center);
-    margin: 0 -0.1rem -0.05rem 0;
+    .overlay-content {
+      padding: 0.05rem 0 $margin;
 
-    .btn-cancel,
-    .btn-confirm {
-      @include flex(center, center);
-      height: 0.3rem;
-      padding: 0 0.2rem;
-      border-radius: 0;
-      border: none;
-      color: $main;
-
-      &:hover {
-        background: $background !important;
+      p {
+        line-height: normal;
       }
     }
 
-    .btn-cancel {
-      color: $red;
+    .btn-group {
+      margin: 0 -0.1rem -0.05rem 0;
+      overflow: hidden;
+
+      .btn-cancel,
+      .btn-confirm {
+        float: right;
+        height: 0.3rem;
+        padding: 0 0.2rem;
+        border-radius: 0;
+        border: none;
+        color: $main;
+        background: transparent;
+
+        &:hover {
+          background: $background !important;
+        }
+      }
+
+      .btn-cancel {
+        color: $red;
+      }
     }
   }
 }

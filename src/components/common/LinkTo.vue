@@ -1,5 +1,5 @@
 <template>
-  <router-link class="l-link" :to="$_to">
+  <router-link class="link-to" :to="$_to">
     <slot />
   </router-link>
 </template>
@@ -9,7 +9,7 @@
  * Deal the link url in project
  * */
 export default {
-  name: 'LLink',
+  name: 'LinkTo',
   props: {
     to: String,
   },

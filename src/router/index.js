@@ -1,6 +1,7 @@
 import User from '@/data/api/User'
 import { LangStore } from '@/extensions/Langs'
 import NotFound from '@/pages/NotFound'
+import ProgressBar from '@/utils/ProgressBar'
 import { isBrowser } from '@/utils/UserAgent'
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -47,6 +48,7 @@ export function createRouter(i18n, store) {
 
   if (isBrowser) {
     router.beforeEach((to, fr, next) => {
+      ProgressBar.start()
       const {
         params: { lang },
       } = to
@@ -82,5 +84,10 @@ export function createRouter(i18n, store) {
       pro.then(() => next())
     })
   }
+
+  router.afterEach(() => {
+    ProgressBar.end()
+  })
+
   return router
 }

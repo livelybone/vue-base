@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --config build/webpack.dev.conf.js",
-    "start": "yarn dev",
+    "start": "npm run dev",
     "start:ssr": "node build/ssr/server-ssr.js",
     "build:ssr": "node build/ssr/build-server.js",
     "build:static": "node build/build.js",
