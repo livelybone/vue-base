@@ -4,7 +4,7 @@
 ![SSR](https://img.shields.io/badge/realized-SSR-blue.svg "SSR")
 ![webpack4](https://img.shields.io/badge/pack-webpack4-blue.svg "webpack4")
 
-A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, eslint + prettier, vuex. The packaging tool is webpack4, optimized with cache, parallel, happypack
+[vue-base](https://github.com/livelybone/vue-base): A Vue.js general framework, implement pre-render and SSR, integrated vue-i18n, eslint + prettier, vuex. The packaging tool is webpack4, optimized with cache, parallel, happypack
 
 [中文版](./README-ZH.md)
 
