@@ -4,7 +4,7 @@
 ![SSR](https://img.shields.io/badge/realized-SSR-blue.svg "SSR")
 ![webpack4](https://img.shields.io/badge/pack-webpack4-blue.svg "webpack4")
 
-一个 Vue.js 通用框架，实现预渲染和 SSR，集成 vue-i18n, eslint + prettier，vuex。打包工具是 webpack4，使用缓存、并行、happypack 进行优化
+[vue-base](https://github.com/livelybone/vue-base): 一个 Vue.js 通用框架，实现预渲染和 SSR，集成 vue-i18n, eslint + prettier，vuex。打包工具是 webpack4，使用缓存、并行、happypack 进行优化
 
 [English Document](./README.md)
 
