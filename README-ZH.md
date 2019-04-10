@@ -91,19 +91,19 @@ npm run dll
 # 打包成生产环境可用的静态文件资源，确保 `**.dll.js` 存在
 # 当 `USE_HAPPYPACK` 不为空时，happypack 将被启用
 # 小项目不推荐使用 happypack，打包速度没有明显的优化
-cross-env USE_HAPPYPACK=[value] npm run build:static
+cross-env USE_HAPPYPACK=[useHappypack: Boolean] npm run build:static
 
 # 打包成生产环境可用的静态文件资源，并且生成图表
-cross-env USE_HAPPYPACK=[value] npm run build:static --report
+cross-env USE_HAPPYPACK=[useHappypack: Boolean] npm run build:static --report
 
 # SSR 打包，确保 `**.dll.js` 存在
-cross-env USE_HAPPYPACK=[value] npm run build:ssr
+cross-env USE_HAPPYPACK=[useHappypack: Boolean] npm run build:ssr
 
 # 启动 SSR 服务
-cross-env USE_HAPPYPACK=[value] PORT=[port] npm start:ssr
+cross-env USE_HAPPYPACK=[useHappypack: Boolean] PORT=[port: Number] npm start:ssr
 
 # SSR 打包，并启动 SSR 服务，确保 `**.dll.js` 存在
-cross-env USE_HAPPYPACK=[value] npm run server
+cross-env USE_HAPPYPACK=[useHappypack: Boolean] npm run server
 ```
 
 工作原理请看 [指南](http://vuejs-templates.github.io/webpack/), [vue-loader 文档](http://vuejs.github.io/vue-loader) 和 webpack 配置文件.
