@@ -73,7 +73,7 @@
     "url-loader": "^0.5.8",
     "vue": "^2.6.9",
     "vue-i18n": "^7.7.0",
-    "vue-img-tag": "^3.6.0",
+    "vue-img-tag": "^3.7.0",
     "vue-loader": "^14.2.2",
     "vue-meta": "^1.5.8",
     "vue-pdf": "^3.2.2",
