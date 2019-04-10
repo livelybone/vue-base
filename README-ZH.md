@@ -13,10 +13,10 @@
 ### 风格（非常重要）
 
 > prettier: 代码风格统一。
->> 提交代码之前务必使用 `yarn run format` 格式化代码
+>> 提交代码之前务必使用 `npm run format` 格式化代码
 
 > commitizen: 代码提交
->> 规范 commit message, <span style="color:red">使用 `yarn run commit` 代替 `git commit`</span>
+>> 规范 commit message, <span style="color:red">使用 `npm run commit` 代替 `git commit`</span>
 
 > 注释规范
 >> 1.As short as possible （如无必要，勿增注释）。尽量提高代码本身的清晰性、可读性。<br>
@@ -77,33 +77,33 @@
 
 ``` bash
 # 安装依赖
-yarn install
+npm install
 
 # 配置文件
 cp config/config.js.sample config/config.js
 
 # HMR 开发
-yarn start
+npm start
 
 # 将一些项目中常用的，固定的，不常更换的第三方库打包成 `**.dll.js`，使用 DllPlugin，确保在这些库发生变化之后重新打包
-yarn run dll
+npm run dll
 
 # 打包成生产环境可用的静态文件资源，确保 `**.dll.js` 存在
 # 当 `USE_HAPPYPACK` 不为空时，happypack 将被启用
 # 小项目不推荐使用 happypack，打包速度没有明显的优化
-cross-env USE_HAPPYPACK=[value] yarn run build:static
+cross-env USE_HAPPYPACK=[value] npm run build:static
 
 # 打包成生产环境可用的静态文件资源，并且生成图表
-cross-env USE_HAPPYPACK=[value] yarn run build:static --report
+cross-env USE_HAPPYPACK=[value] npm run build:static --report
 
 # SSR 打包，确保 `**.dll.js` 存在
-cross-env USE_HAPPYPACK=[value] yarn run build:ssr
+cross-env USE_HAPPYPACK=[value] npm run build:ssr
 
 # 启动 SSR 服务
-cross-env USE_HAPPYPACK=[value] yarn start:ssr
+cross-env USE_HAPPYPACK=[value] PORT=[port] npm start:ssr
 
 # SSR 打包，并启动 SSR 服务，确保 `**.dll.js` 存在
-cross-env USE_HAPPYPACK=[value] yarn run server
+cross-env USE_HAPPYPACK=[value] npm run server
 ```
 
 工作原理请看 [指南](http://vuejs-templates.github.io/webpack/), [vue-loader 文档](http://vuejs.github.io/vue-loader) 和 webpack 配置文件.
