@@ -91,10 +91,10 @@ npm run dll
 # 打包成生产环境可用的静态文件资源，确保 `**.dll.js` 存在
 # 当 `USE_HAPPYPACK` 不为空时，happypack 将被启用
 # 小项目不推荐使用 happypack，打包速度没有明显的优化
-cross-env USE_HAPPYPACK=[value] npm run build
+cross-env [USE_HAPPYPACK=Boolean] npm run build
 
 # 打包成生产环境可用的静态文件资源，并且生成图表
-cross-env USE_HAPPYPACK=[value] npm run build --report
+cross-env [USE_HAPPYPACK=Boolean] npm run build --report
 ```
 
 工作原理请看 [指南](http://vuejs-templates.github.io/webpack/), [vue-loader 文档](http://vuejs.github.io/vue-loader) 和 webpack 配置文件.
