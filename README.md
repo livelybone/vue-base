@@ -91,19 +91,19 @@ npm run dll
 # build static file for production with minification(with no ssr), insure that dll js files exist before running, or it will throw an Error about DllReferencePlugin
 # HappyPack for build will be enabled when USE_HAPPYPACK set to non-null
 # Happypack is not recommended for smaller projects
-cross-env USE_HAPPYPACK=[useHappypack: Boolean] npm run build:ssr
+cross-env [USE_HAPPYPACK=Boolean] npm run build:ssr
 
 # build for production and view the bundle analyzer report
-cross-env USE_HAPPYPACK=[useHappypack: Boolean] npm run build:static --report
+cross-env [USE_HAPPYPACK=Boolean] npm run build:static --report
 
 # build for production with minification(with ssr), insure that dll js files exist before running, or it will throw an Error about DllReferencePlugin
-cross-env USE_HAPPYPACK=[useHappypack: Boolean] npm run build:ssr
+cross-env [USE_HAPPYPACK=Boolean] npm run build:ssr
 
 # start in production environment(with ssr)
-cross-env USE_HAPPYPACK=[useHappypack: Boolean] PORT=[port: Number] npm start:ssr
+cross-env [USE_HAPPYPACK=Boolean] [PORT=Number] npm start:ssr
 
 # build and start in production environment(with ssr)
-cross-env USE_HAPPYPACK=[useHappypack: Boolean] npm run server
+cross-env [USE_HAPPYPACK=Boolean] npm run server
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/), [docs for vue-loader](http://vuejs.github.io/vue-loader), and the webpack config files.
