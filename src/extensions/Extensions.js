@@ -1,10 +1,12 @@
 import CachePlugin from '@/extensions/CachePlugin'
 import HttpPlugin from '@/extensions/HttpPlugin'
 import { initialI18n } from '@/extensions/Langs'
+import SingletonCompsRegisterPlugin from '@/extensions/SingtonCompsRegisterPlugin'
 import Vue from 'vue'
 import Meta from 'vue-meta'
 
 export function initialExtensions() {
+  Vue.use(SingletonCompsRegisterPlugin)
   Vue.use(HttpPlugin)
   Vue.use(CachePlugin)
   Vue.use(Meta)

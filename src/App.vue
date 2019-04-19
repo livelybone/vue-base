@@ -26,11 +26,11 @@ export default {
   },
   components: { RouteProgressBar, SnackBar, ImageFullScreen, OverlayConfirm },
   mounted() {
-    Vue.prototype.progressBar = this.$refs.progressBar
-    Vue.prototype.snackBar = this.$refs.snackBar
-    Vue.prototype.imgFullScreen = this.$refs.imgFull
-    Vue.prototype.confirmOverlay = this.$refs.confirmOverlay
-    Vue.prototype.imgFullScreen.open({
+    this.progressBar.listen(this.$refs.progressBar)
+    this.snackbar.listen(this.$refs.snackbar)
+    this.imgFullScreen.listen(this.$refs.imgFull)
+    this.confirmOverlay.listen(this.$refs.confirmOverlay)
+    this.imgFullScreen.open({
       imgs: [
         { value: require('@/assets/images/logo.png') },
         { value: require('@/assets/images/logo.png') },

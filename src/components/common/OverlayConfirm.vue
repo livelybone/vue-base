@@ -1,5 +1,5 @@
 <template>
-  <overlay v-show="resolve" class="overlay-confirm" @click="hide">
+  <overlay v-show="resolve" class="overlay-confirm" @click="close">
     <div class="float-win" :style="{ width: winWidthC + 'px' }">
       <h2 v-show="headC">{{ headC }}</h2>
       <div class="overlay-content">
@@ -10,7 +10,7 @@
         <button class="btn btn-confirm" @click="resolve">
           {{ confirmTextC }}
         </button>
-        <button class="btn btn-cancel" @click="hide">{{ cancelTextC }}</button>
+        <button class="btn btn-cancel" @click="close">{{ cancelTextC }}</button>
       </div>
     </div>
   </overlay>
@@ -51,7 +51,8 @@ export default {
         this[`${k}C`] = options[k] || ''
       })
     },
-    show(options) {
+    open(options) {
+      // return a promise that resolved when click the confirm button
       return new Promise(res => {
         const {
           tipText = this.$t('operate.confirm'),
@@ -62,7 +63,7 @@ export default {
         this.resolve = res
       })
     },
-    hide() {
+    close() {
       this.resolve = false
     },
   },
