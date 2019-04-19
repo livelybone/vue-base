@@ -134,8 +134,6 @@ cross-env [USE_HAPPYPACK=Boolean] npm run server
 
 > [@livelybone/vue-pagination](https://github.com/livelybone/vue-pagination)([示例](https://livelybone.github.io/vue/vue-pagination/))，pagination，分页，实现输入页数跳转，实现不知道总页数情况的分页
 
-> [pretty-checkbox-vue](https://github.com/hamed-ehtesham/pretty-checkbox-vue)([示例](https://hamed-ehtesham.github.io/pretty-checkbox-vue/))，checkbox，radio，单选多选
-
 
 ## Tools
 

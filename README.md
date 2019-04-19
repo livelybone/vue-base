@@ -134,8 +134,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 > [@livelybone/vue-pagination](https://github.com/livelybone/vue-pagination)([Example](https://livelybone.github.io/vue/vue-pagination/)), pagination
 
-> [pretty-checkbox-vue](https://github.com/hamed-ehtesham/pretty-checkbox-vue)([Example](https://hamed-ehtesham.github.io/pretty-checkbox-vue/)), checkbox, radio
-
 
 ## Tools
 
