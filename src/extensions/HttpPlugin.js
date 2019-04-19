@@ -14,10 +14,10 @@ function setAuth(url) {
 function initialAxios() {
   axios.defaults.baseURL = config.backendUrl
   axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8'
-  axios.defaults.withCredentials = true // 允许 AJAX 跨域请求带 Cookie 设置
-  // 如果你想在客户端app中获取自定义的 header 信息，需要在服务器端 header 中添加 Access-Control-Expose-Headers：
-  // header('Access-Control-Expose-Headers:token,uid');
-  // 处理服务器返回的错误信息
+  // Custom headers
+  // axios.defaults.header['Access-Control-Expose-Headers'] = 'token, uid';
+  // Enable operate cookie
+  // axios.defaults.withCredentials = true
   axios.defaults.validateStatus = status =>
     (status >= 200 && status < 300) || status >= 400
 }
@@ -26,15 +26,13 @@ initialAxios()
 
 export class Http {
   static getFile(url) {
-    // 适用于需要登录的情况
+    // Get file by XHR when the file need authorization
     return axios
       .get(setAuth(url), { responseType: 'blob' })
       .then(res => res.data)
   }
 
   static errorValidate(data) {
-    // 与后台约定的错误验证方式
-    // 现假设约定， 对于返回的数据的字段code，0表示成功，1表示出错
     return data.code !== 0
   }
 
@@ -94,7 +92,6 @@ export class Http {
   static responseDeal(promise) {
     return promise.then(
       res => {
-        // 去除config, request, status, statusText...等一些其他字段，关注data
         const { data, status } = res
         const { message, msg, code, result } = data || {}
         if (data) {
@@ -110,7 +107,6 @@ export class Http {
         return res
       },
       e => {
-        // setImmediate(() => Vue.prototype.snackBar.error(e));
         throw e
       },
     )
