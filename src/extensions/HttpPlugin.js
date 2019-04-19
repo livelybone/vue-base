@@ -18,8 +18,6 @@ function initialAxios() {
   // axios.defaults.header['Access-Control-Expose-Headers'] = 'token, uid';
   // Enable operate cookie
   // axios.defaults.withCredentials = true
-  axios.defaults.validateStatus = status =>
-    (status >= 200 && status < 300) || status >= 400
 }
 
 initialAxios()
@@ -89,27 +87,21 @@ export class Http {
     )
   }
 
+  /**
+   * Suppose the structure of response data is { msg, code, result }
+   * */
   static responseDeal(promise) {
-    return promise.then(
-      res => {
-        const { data, status } = res
-        const { message, msg, code, result } = data || {}
-        if (data) {
-          if (Http.errorValidate(data)) {
-            const error = new Error(message || msg)
-            error.statusCode = status
-            error.resCode = code
-            throw error
-          } else {
-            return result
-          }
-        }
-        return res
-      },
-      e => {
-        throw e
-      },
-    )
+    return promise.then(res => {
+      const { data = {}, status } = res
+      const { msg, code, result } = data
+      if (Http.errorValidate(data)) {
+        const error = new Error(msg)
+        error.statusCode = status
+        error.resCode = code
+        throw error
+      }
+      return result
+    })
   }
 }
 
