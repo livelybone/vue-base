@@ -32,7 +32,7 @@ const actions = {
 }
 
 export const user = {
-  namespaced: true, // 增加命名空间，外部使用时需要指明命名空间（如果没有外部冲突，可以去掉）
+  namespaced: true,
   state,
   getters,
   mutations,
