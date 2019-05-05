@@ -3,7 +3,6 @@
     <h2 v-show="options.head">{{ options.head }}</h2>
     <div class="modal-content">
       <p v-show="!options.hideTip">{{ options.tipText }}</p>
-      <slot />
     </div>
     <div class="btn-group">
       <button
@@ -22,7 +21,7 @@
 
 <script>
 /**
- * @typedef Options
+ * @typedef  { Object }     Options
  * @property { String }     head
  * @property { Boolean }    hideTip
  * @property { String }     tipText
@@ -32,7 +31,7 @@
  * @property { String }     cancelText
  * */
 export default {
-  name: 'ModalConfirm',
+  name: 'OverlayConfirm',
   data() {
     return {
       show: false,
@@ -40,6 +39,9 @@ export default {
     }
   },
   methods: {
+    /**
+     * @param { Options } options
+     * */
     open(options) {
       const {
         tipText = this.$t('operate.confirm'),
@@ -50,11 +52,11 @@ export default {
       this.show = true
     },
     close(ev) {
-      if (this.option.cancelFn instanceof Function) this.option.cancelFn(ev)
+      if (this.options.cancelFn instanceof Function) this.options.cancelFn(ev)
       this.show = false
     },
     confirm(ev) {
-      if (this.option.confirmFn instanceof Function) this.option.confirmFn(ev)
+      if (this.options.confirmFn instanceof Function) this.options.confirmFn(ev)
     },
   },
 }
@@ -72,45 +74,45 @@ export default {
     box-shadow: 0 0.1rem 0.4rem rgba(#000, 0.5);
     background: #fff;
     overflow: hidden;
+  }
 
-    h2 {
-      @include subhead();
-      width: 100%;
-      padding: 0 0 0.05rem;
-      line-height: 0.26rem;
-      color: $font-dark;
+  h2 {
+    @include subhead();
+    width: 100%;
+    padding: 0 0 0.05rem;
+    line-height: 0.26rem;
+    color: $font-dark;
+  }
+
+  .modal-content {
+    padding: 0.05rem 0 $margin;
+
+    p {
+      line-height: normal;
+    }
+  }
+
+  .btn-group {
+    margin: 0 -0.1rem -0.05rem 0;
+    overflow: hidden;
+
+    .btn-cancel,
+    .btn-confirm {
+      float: right;
+      height: 0.3rem;
+      padding: 0 0.2rem;
+      border-radius: 0;
+      border: none;
+      color: $main;
+      background: transparent;
+
+      &:hover {
+        background: $bg !important;
+      }
     }
 
-    .modal-content {
-      padding: 0.05rem 0 $margin;
-
-      p {
-        line-height: normal;
-      }
-    }
-
-    .btn-group {
-      margin: 0 -0.1rem -0.05rem 0;
-      overflow: hidden;
-
-      .btn-cancel,
-      .btn-confirm {
-        float: right;
-        height: 0.3rem;
-        padding: 0 0.2rem;
-        border-radius: 0;
-        border: none;
-        color: $main;
-        background: transparent;
-
-        &:hover {
-          background: $bg !important;
-        }
-      }
-
-      .btn-cancel {
-        color: $red;
-      }
+    .btn-cancel {
+      color: $red;
     }
   }
 }
