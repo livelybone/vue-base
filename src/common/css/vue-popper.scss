@@ -1,0 +1,48 @@
+@mixin pseudo($bg: $border, $direction: top, $borderWidth: size(.6)) {
+  position: absolute;
+  #{$direction}: -$borderWidth;
+  width: 0;
+  height: 0;
+  border: $borderWidth solid transparent;
+
+  @if ($direction==top) {
+    border-top: 0;
+    border-bottom-color: $bg;
+  } @else if ($direction==bottom) {
+    border-bottom: 0;
+    border-top-color: $bg;
+  } @else if ($direction==left) {
+    border-left: 0;
+    border-right-color: $bg;
+  } @else if ($direction==right) {
+    border-right: 0;
+    border-left-color: $bg;
+  }
+}
+
+@mixin VuePopper($border-color: $border, $bg: $input-bg, $pseudoSize: size(.6)) {
+
+  .vue-popper {
+    border: 1px solid rgba($border-color, .5);
+    border-radius: size(.3);
+    background: $bg;
+    box-shadow: 0 1px size(1) $shadow;
+
+    @each $placement, $pos, $pseudoPos in (top, bottom, left), (bottom, top, left), (left, right, top), (right, left, top) {
+      &[x-placement^=#{$placement}] {
+        margin-#{$pos}: size(1);
+
+        .arrow {
+          @include pseudo(rgba($border-color, .5), $pos, $pseudoSize);
+
+          &:before {
+            content: '';
+            @include pseudo($bg, $pos);
+            #{$pseudoPos}: -$pseudoSize;
+            #{$pos}: 1px;
+          }
+        }
+      }
+    }
+  }
+}

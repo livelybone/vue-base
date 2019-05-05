@@ -67,7 +67,7 @@ exports.cssLoaders = function (options) {
     // less: generateLoaders('less'),
     // sass: generateLoaders('sass', { indentedSyntax: true }),
     // common variable of scss
-    scss: generateLoaders('sass', { data: `$device: mobile; @import "${exports.pathResolve('src/css/common-variable.scss').replace(new RegExp(`\\${path.sep}`, 'g'), '/')}";` }),
+    scss: generateLoaders('sass', { data: `$device: mobile; @import "${exports.pathResolve('src/common/css/common-variable.scss').replace(new RegExp(`\\${path.sep}`, 'g'), '/')}";` }),
     // stylus: generateLoaders('stylus'),
   }
 }

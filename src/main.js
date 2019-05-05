@@ -1,9 +1,9 @@
 import App from '@/App'
-import { createStore } from '@/data/store'
-import { initialExtensions } from '@/extensions/Extensions'
+import { createStore } from '@/api/store'
+import { initialExtensions } from '@/common/extensions/Extensions'
 import register from '@/global-register'
 import { createRouter } from '@/router'
-import { isBrowser } from '@/utils/UserAgent'
+import { isBrowser } from '@/common/utils/UserAgent'
 import RemInit from '@livelybone/rem-init'
 import Vue from 'vue'
 /** use babel-polyfill */
