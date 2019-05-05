@@ -41,5 +41,4 @@ export default {
 
 <style lang="scss">
 @import 'common/css/common';
-@import '../node_modules/vue-slide-for-more/lib/css/index';
 </style>

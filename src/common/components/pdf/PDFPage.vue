@@ -12,7 +12,7 @@
       @loaded="$emit('loaded')"
       @page-loaded="$emit('page-loaded')"
       @num-pages="totalPage = $event"
-      @error="snackBar.error($event)"
+      @error="snackbar.error($event)"
     />
   </div>
 </template>
