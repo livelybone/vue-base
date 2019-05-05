@@ -1,10 +1,11 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import LinkTo from '@/components/common/LinkTo'
-import NoResult from '@/components/common/NoResult'
-import Overlay from '@/components/common/Overlay'
-import { dateFormatter, timeConversion } from '@/utils/TimeAbout'
-import { isBrowser } from '@/utils/UserAgent'
+import LinkTo from '@/common/components/LinkTo'
+import Modal from '@/common/components/Modal'
+import NoResult from '@/common/components/NoResult'
+import Overlay from '@/common/components/Overlay'
+import { dateFormatter, timeConversion } from '@/common/utils/TimeAbout'
+import { isBrowser } from '@/common/utils/UserAgent'
 import VueBtn from '@livelybone/vue-button'
 import InputBase from '@livelybone/vue-input'
 import Loading from '@livelybone/vue-loading'
@@ -14,7 +15,7 @@ import ImgTag from 'vue-img-tag'
 import { SlideForMore } from 'vue-slide-for-more'
 
 const FileInput = () =>
-  import('@/components/form/FileInput' /* webpackChunkName: "FileInput" */)
+  import('@/common/components/form/FileInput' /* webpackChunkName: "FileInput" */)
 
 export default function() {
   const isMobile = isBrowser && window.isMobile
@@ -30,6 +31,7 @@ export default function() {
   Vue.component('file-input', FileInput)
 
   Vue.component('overlay', Overlay)
+  Vue.component('modal', Modal)
 
   Vue.component('loading', Loading)
 

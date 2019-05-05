@@ -1,19 +1,24 @@
 <template>
   <div id="app">
     <route-progress-bar ref="progressBar" />
-    <snack-bar ref="snackBar" baseSize="1rem" position="top-right" />
+    <snackbar ref="snackbar" baseSize="1rem" />
     <image-full-screen ref="imgFull" />
-    <overlay-confirm ref="confirmOverlay" />
+    <modal-confirm ref="confirmModal" />
     <router-view />
   </div>
 </template>
 
 <script>
-import OverlayConfirm from '@/components/common/OverlayConfirm'
-import RouteProgressBar from '@/components/common/RouteProgressBar'
-import ImageFullScreen from '@/components/image/ImageFullScreen'
-import Vue from 'vue'
-import SnackBar from 'vuejs-snackbar'
+import ImageFullScreen from '@/common/components/image/ImageFullScreen'
+import ModalConfirm from '@/common/components/ModalConfirm'
+import RouteProgressBar from '@/common/components/RouteProgressBar'
+import {
+  ConfirmModalRegister,
+  ImgFullScreenRegister,
+  ProgressbarRegister,
+  SnackbarRegister,
+} from '@/common/utils/SingtonCompsRegister'
+import Snackbar from 'vuejs-snackbar'
 
 export default {
   name: 'app',
@@ -24,23 +29,17 @@ export default {
       },
     }
   },
-  components: { RouteProgressBar, SnackBar, ImageFullScreen, OverlayConfirm },
-  mounted() {
-    this.progressBar.listen(this.$refs.progressBar)
-    this.snackbar.listen(this.$refs.snackbar)
-    this.imgFullScreen.listen(this.$refs.imgFull)
-    this.confirmOverlay.listen(this.$refs.confirmOverlay)
-    this.imgFullScreen.open({
-      imgs: [
-        { value: require('@/assets/images/logo.png') },
-        { value: require('@/assets/images/logo.png') },
-      ],
-    })
+  components: { RouteProgressBar, Snackbar, ImageFullScreen, ModalConfirm },
+  created() {
+    ProgressbarRegister(this, 'progressBar')
+    SnackbarRegister(this, 'snackbar')
+    ImgFullScreenRegister(this, 'imgFull')
+    ConfirmModalRegister(this, 'confirmModal')
   },
 }
 </script>
 
 <style lang="scss">
-@import './css/common.scss';
+@import 'common/css/common';
 @import '../node_modules/vue-slide-for-more/lib/css/index';
 </style>

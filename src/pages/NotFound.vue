@@ -19,22 +19,24 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-h1,
-p {
-  text-align: center;
-}
+.not-found {
+  h1,
+  p {
+    text-align: center;
+  }
 
-h1 {
-  margin: 1.25rem 0 0.1rem;
-  font-size: 0.48rem;
-  font-weight: 400;
-  letter-spacing: 0.001rem;
-}
+  h1 {
+    margin: 1.25rem 0 0.1rem;
+    font-size: 0.48rem;
+    font-weight: 400;
+    letter-spacing: 0.001rem;
+  }
 
-.back {
-  width: 2rem;
-  height: 0.3rem;
-  margin: 0.5rem auto 0;
-  text-align: center;
+  .back {
+    width: 2rem;
+    height: 0.3rem;
+    margin: 0.5rem auto 0;
+    text-align: center;
+  }
 }
 </style>

@@ -22,6 +22,7 @@
     "@livelybone/vue-loading": "^3.3.1",
     "@livelybone/vue-pagination": "^1.5.1",
     "@livelybone/vue-select": "^2.4.4",
+    "@livelybone/vue-table": "^2.0.0",
     "autoprefixer": "^7.1.2",
     "axios": "^0.18.0",
     "babel-core": "^6.22.1",
