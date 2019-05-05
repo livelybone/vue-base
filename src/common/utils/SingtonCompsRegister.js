@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const snackBarInterceptor = msg => msg
+const snackbarInterceptor = msg => msg
 
 /**
  * @param { VueComponent }      app   instance of App.vue
@@ -9,7 +9,7 @@ const snackBarInterceptor = msg => msg
 export function SnackbarRegister(app, ref) {
   Vue.prototype.snackbar = {
     async open(msg) {
-      await (snackBarInterceptor(msg) &&
+      await (snackbarInterceptor(msg) &&
         new Promise(res => {
           Vue.nextTick(() => {
             res(app.$refs[ref].open(msg))
@@ -17,7 +17,7 @@ export function SnackbarRegister(app, ref) {
         }))
     },
     async info(msg) {
-      await (snackBarInterceptor(msg) &&
+      await (snackbarInterceptor(msg) &&
         new Promise(res => {
           Vue.nextTick(() => {
             res(app.$refs[ref].info(msg))
@@ -25,7 +25,7 @@ export function SnackbarRegister(app, ref) {
         }))
     },
     async error(msg) {
-      await (snackBarInterceptor(msg) &&
+      await (snackbarInterceptor(msg) &&
         new Promise(res => {
           Vue.nextTick(() => {
             res(app.$refs[ref].error(msg))
@@ -33,7 +33,7 @@ export function SnackbarRegister(app, ref) {
         }))
     },
     async warn(msg) {
-      await (snackBarInterceptor(msg) &&
+      await (snackbarInterceptor(msg) &&
         new Promise(res => {
           Vue.nextTick(() => {
             res(app.$refs[ref].warn(msg))

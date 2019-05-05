@@ -119,9 +119,9 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      this.snackBar.error('Hello World!')
-      this.confirmOverlay.show({ head: 'Hello World!' }).then(() => {
-        this.confirmOverlay.hide()
+      this.snackbar.error('Hello World!')
+      this.confirmModal.open({ head: 'Hello World!' }).then(() => {
+        this.confirmModal.hide()
       })
     }, 1000)
     console.log('getUrl 工具： ', getUrl('/user?user?', { p: 1, a: 11 }))
@@ -133,7 +133,7 @@ export default {
             JSON.parse(JSON.stringify(this.$store.state.user.info)),
           ),
         )
-        .catch(e => this.snackBar.error(e))
+        .catch(e => this.snackbar.error(e))
     }
     console.log(
       '全局 store.state.user.info :',

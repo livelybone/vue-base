@@ -55,7 +55,7 @@ export function createRouter(i18n, store) {
       const language = (lang || '').toLowerCase()
       if (!LangStore.langKeys.includes(language)) {
         /** Redirect */
-        next({ path: `/${i18n.locale}${to.path}`, replace: true })
+        next({ path: `/${i18n.locale}${to.path}` })
       } else {
         const pro = LangStore.setLang(language, { $i18n: i18n })
 
@@ -70,7 +70,7 @@ export function createRouter(i18n, store) {
             })
             .catch(() => {
               pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
-              Vue.prototype.snackBar.error('Please sign in!')
+              Vue.prototype.snackbar.error('Please sign in!')
             })
         } else {
           /** Go ahead */

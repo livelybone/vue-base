@@ -25,12 +25,12 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: $z-index-top;
   background: rgba(#000, 0.85);
   text-align: center;
   line-height: 100vh;
 
-  .overlay {
+  .window {
     display: inline-block;
     position: relative;
     max-width: 100%;
