@@ -40,7 +40,7 @@
 
 > SASS is used for pre-processing. `1rem` is equal to `100px` globally (Mobile 1px solution), and use `rem` for width and height as far as possible (Styles of components shared by both PC and Mobile must use `rem`).
 
-> Common styles are written in `common.scss`, and public variables are written in `font-variable.scss`, `size-variable.scss`, `color-variable.scss`, and @mixin functions are written in `common-variable.scss`
+> Common styles are written in `common/css/common.scss`, and public variables are written in `common/css/font-variable.scss`, `common/css/size-variable.scss`, `common/css/color-variable.scss`, and @mixin functions are written in `common/css/common-variable.scss`
 
 > Attribute values of the same type should be extracted to a public variable or function
 
@@ -48,9 +48,9 @@
 
 > [ES6 document](http://es6.ruanyifeng.com/)
 
-> Using `vuex` to manage the global state. If the project is simple, you can use `extensions/StorePlugin.js` instead
+> Using `vuex` to manage the global state. If the project is simple, you can use `common/extensions/StorePlugin.js` instead
 
-> Utils function written in `utils` folder, plugins for project written in `extensions` folder, Shared variables or components form template template written in `data/immutable-data` folder, ajax relevant written in `data/api` folder, global state management files written in ` data/store/modules ` folder
+> Utils function written in `common/utils` folder, plugins for project written in `common/extensions` folder, Shared variables or components form template template written in `common/immutable-data` folder, ajax relevant written in `api` folder, global state management files written in ` data/store/modules ` folder
 
 > It is recommended to use the data like `const items = [{label:'姓名', name:'realName', value:'XXX'}]` to render the form items. `label` is the name of the form item show in the page, `name` is the form name which will be submitted to backend, `value` is the value of the item. You can use `DataDeal. DateDeal(items)` to deal the data when submitting the form (complex situations can be special treatment)
 
@@ -65,7 +65,7 @@
 >> Chinese is `'未选择' + '任何文件'`,<br>
 >> English is `'unselected ' + 'any file '` => `'unselected any file'`, this gonna be very strange
 
-> Rule 2: Statements shared in many pages written in `common.js`, other words written in the `index.js` by namespace, or written in a separate file
+> Rule 2: Language packs should be separated by page or even component
 
 ### SEO
 
@@ -134,7 +134,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 > [@livelybone/vue-pagination](https://github.com/livelybone/vue-pagination)([Example](https://livelybone.github.io/vue/vue-pagination/)), pagination
 
-
 ## Tools
 
 > [@livelybone/mouse-wheel](https://github.com/livelybone/mouse-wheel), wrapper of mouse wheel event, make the delta of each wheel event the same
@@ -158,4 +157,3 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 > [date-generator](https://github.com/livelybone/date-generator)([Example](https://livelybone.github.io/tool/date-generator/)), Used to generate calendar data, a great help for the development of calendar components
 
 > [@livelybone/rem-init](https://github.com/livelybone/rem-init), Mobile 1px solution, set HTML font-size to 625%(100px) multiples, but not compatible with IE8
-

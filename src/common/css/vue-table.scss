@@ -1,0 +1,132 @@
+.vue-table {
+  $thColor: $font-light;
+  $tdColor: $font;
+  $border: $border-light;
+  $borderWidth: 1px;
+  $thHeight: size(6);
+  $tdHeight: size(6);
+  $font-size: size(1.4);
+
+  width: 100%;
+
+  .tr {
+    border-bottom: $borderWidth solid $border;
+  }
+
+  .th, .td {
+    position: relative;
+    font-size: size(1.4);
+    text-align: left;
+    padding: 0 size(1);
+  }
+
+  .thead {
+
+    tr {
+      line-height: $thHeight;
+    }
+
+    .tr {
+      min-height: $thHeight;
+
+      .th {
+        @include sub-content();
+        height: 100%;
+        color: $thColor;
+      }
+    }
+  }
+
+  .tbody {
+
+    tr {
+      line-height: $tdHeight;
+    }
+
+    .tr {
+      min-height: $tdHeight;
+
+      &:first-child {
+        border-top: 0;
+      }
+
+      .td {
+        height: 100%;
+        color: $tdColor;
+
+        .td-value {
+          display: inline-block;
+          max-width: 100%;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  .th,
+  .td {
+    white-space: nowrap;
+
+    .td-value {
+      white-space: nowrap;
+    }
+  }
+
+  .btn-group {
+    display: inline-block;
+
+    .btn {
+      @include height(0.3rem);
+      @include sub-content();
+      padding: 0 0 0 0.1rem;
+      border: none;
+    }
+
+    .btn-main {
+      background: transparent;
+    }
+  }
+
+  &.table-extend {
+
+    .tr {
+      white-space: nowrap;
+    }
+
+    .th, .td {
+      display: inline-block;
+      position: relative;
+      min-height: $thHeight;
+      line-height: $thHeight;
+      vertical-align: middle;
+      user-select: none;
+
+      .column-resize {
+        position: absolute;
+        right: size(-.5);
+        top: 50%;
+        max-width: 100%;
+        width: size(1);
+        height: $thHeight;
+        margin: -$thHeight/2 0 0;
+        cursor: col-resize;
+      }
+    }
+
+    .td {
+      min-height: $tdHeight;
+      line-height: $tdHeight;
+
+      img {
+        max-width: 100%;
+      }
+
+      .td-value {
+        display: inline-block;
+        max-width: 100%;
+        min-height: $tdHeight;
+        vertical-align: middle;
+      }
+    }
+  }
+}

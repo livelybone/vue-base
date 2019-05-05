@@ -40,7 +40,7 @@
 
 > 使用SASS预处理。全局使用 100px 作 1rem（移动端1px解决方案），宽高尺寸尽量使用rem单位（PC 和 Mobile 共用的组件如果有样式则必须使用rem）
 
-> 公共样式写在 `common.scss`，公共变量分别写在 `font-variable.scss`, `size-variable.scss`, `color-variable.scss`，@mixin函数写在 `common-variable.scss`
+> 公共样式写在 `common/css/common.scss`，公共变量分别写在 `common/css/font-variable.scss`, `common/css/size-variable.scss`, `common/css/color-variable.scss`，@mixin函数写在 `common/css/common-variable.scss`
 
 > 同类型的属性值，最好抽出形成公共变量或者函数
 
@@ -48,9 +48,9 @@
 
 > [ES6 规范](http://es6.ruanyifeng.com/)
 
-> 全局状态管理使用 `vuex`，如果项目简单，可选择使用 `extensions/StorePlugin.js`
+> 全局状态管理使用 `vuex`，如果项目简单，可选择使用 `common/extensions/StorePlugin.js`
 
-> 工具类写在 `utils` 文件夹，插件写在 `extensions` 文件夹，组件共用变量或者表单模板模板写在 `data/immutable-data` 文件夹，ajax 相关的写在 `data/api` 文件夹，全局状态管理文件写在 `data/store/modules` 文件夹
+> 工具类写在 `common/utils` 文件夹，插件写在 `common/extensions` 文件夹，组件共用变量或者表单模板模板写在 `common/immutable-data` 文件夹，ajax 相关的写在 `api` 文件夹，全局状态管理文件写在 `api/store/modules` 文件夹
 
 > 推荐使用 `const items = [{label:'姓名', name:'realName', value:'XXX'}]` 这种数据格式去渲染表单项，`label` 为表单项的渲染名称（在页面显示的名称），`name` 为表单项与后台接口对应的字段（域），`value` 为表单项的值，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（`DataDeal.dateDeal(items)`）（复杂情况可以特殊处理）
 
@@ -65,7 +65,7 @@
 >> 中文为 `'未选择' + '任何文件'`;<br>
 >> 英文翻译为 `'unselected ' + 'any file '` => `'unselected any file'`，显得不伦不类了
 
-> 建议2: 页面可能共用的语句写在 `common.js` 中，其它的词汇语句可按照业务功能做命名空间写在 `index.js`，或者使用单独的文件
+> 建议2: 语言包按页面甚至组件做分割
 
 ### SEO 方案
 
@@ -134,7 +134,6 @@ cross-env [USE_HAPPYPACK=Boolean] npm run server
 
 > [@livelybone/vue-pagination](https://github.com/livelybone/vue-pagination)([示例](https://livelybone.github.io/vue/vue-pagination/))，pagination，分页，实现输入页数跳转，实现不知道总页数情况的分页
 
-
 ## Tools
 
 > [@livelybone/mouse-wheel](https://github.com/livelybone/mouse-wheel)，封装好的 mouse wheel 事件，移动增量统一
@@ -158,4 +157,3 @@ cross-env [USE_HAPPYPACK=Boolean] npm run server
 > [date-generator](https://github.com/livelybone/date-generator)([示例](https://livelybone.github.io/tool/date-generator/))，用于生成日历数据，对开发日历组件有很大的帮助
 
 > [@livelybone/rem-init](https://github.com/livelybone/rem-init)，手机端 1px 解决方案，将 html 的 font-size 设置成 625%(100px) 的倍数，不兼容 IE8
-

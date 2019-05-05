@@ -1,8 +1,8 @@
-import User from '@/data/api/User'
-import { LangStore } from '@/extensions/Langs'
+import User from '@/api/User'
+import { LangStore } from '@/common/extensions/Langs'
 import NotFound from '@/pages/NotFound'
-import ProgressBar from '@/utils/ProgressBar'
-import { isBrowser } from '@/utils/UserAgent'
+import ProgressBar from '@/common/utils/ProgressBar'
+import { isBrowser } from '@/common/utils/UserAgent'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -55,7 +55,7 @@ export function createRouter(i18n, store) {
       const language = (lang || '').toLowerCase()
       if (!LangStore.langKeys.includes(language)) {
         /** Redirect */
-        next({ path: `/${i18n.locale}${to.path}` })
+        next({ path: `/${i18n.locale}${to.path}`, replace: true })
       } else {
         const pro = LangStore.setLang(language, { $i18n: i18n })
 
@@ -73,7 +73,7 @@ export function createRouter(i18n, store) {
               Vue.prototype.snackBar.error('Please sign in!')
             })
         } else {
-          /** Go through */
+          /** Go ahead */
           pro.then(() => next())
         }
       }

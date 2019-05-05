@@ -5,7 +5,7 @@
         {{ op.name }}
       </option>
     </select>
-    <img-tag :src="require('@/assets/images/logo.png')" />
+    <img-tag :src="require('@/common/images/logo.png')" />
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -40,7 +40,7 @@
     </div>
     <div class="btn btn-blue">aa</div>
     <div @click="log('Div Click： ', $event.target)">
-      <img-tag :src="require('@/assets/images/icon-search.png')" />
+      <img-tag :src="require('@/common/images/icon-search.png')" />
     </div>
     <div>{{ $t('remain') }} {{ time }}</div>
     <input type="file" @change="input($event.target.files[0])" />
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { getUrl } from '@/utils/RequestInterceptor'
+import { getUrl } from '@/common/utils/RequestInterceptor'
 import { mapActions } from 'vuex'
 
 export default {

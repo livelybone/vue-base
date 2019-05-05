@@ -1,0 +1,216 @@
+/* ==========================================================================
+   Global
+ ====== ====================================================================== */
+html {
+  font-size: 625%;
+}
+
+* {
+  flex: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+}
+
+body {
+  @include content();
+  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica,
+    'Microsoft Yahei', Arial, sans-serif;
+  color: $font;
+}
+
+body {
+  background: $bg;
+  overflow-x: hidden;
+}
+
+img {
+  border: none;
+}
+
+/* ==========================================================================
+   Containers
+ ====== ====================================================================== */
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.content-card {
+  width: 100%;
+  margin: 0 0 0.1rem;
+  background: #fff;
+}
+
+/* ==========================================================================
+   Form element
+ ====== ====================================================================== */
+
+input,
+textarea,
+select,
+button,
+.btn {
+  height: 0.34rem;
+  padding: 0 0.1rem;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+
+  &:focus {
+    border-color: $main;
+  }
+
+  &::placeholder {
+    color: $font-lighter;
+  }
+}
+
+button,
+.btn {
+  @include height(0.34rem, 0.32rem);
+  color: inherit;
+  text-align: center;
+  border-radius: 0.03rem;
+  border: 1px solid $border;
+  cursor: pointer;
+
+  &[disabled],
+  &.disabled {
+    border-color: $disabled !important;
+    background: $disabled !important;
+    color: $font-light !important;
+    cursor: default !important;
+  }
+}
+
+/* ==========================================================================
+   Tag for route link
+ ====== ====================================================================== */
+
+a,
+.a {
+  opacity: 0.8;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1 !important;
+  }
+}
+
+/* ==========================================================================
+   Table
+ ====== ====================================================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ==========================================================================
+   Common
+ ====== ====================================================================== */
+
+.transparent {
+  opacity: 0;
+}
+
+.transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hide {
+  display: none;
+}
+
+/* ==========================================================================
+   Font about
+ ====== ====================================================================== */
+
+@each $name, $color in (main, $main), (gray, $black-light), (green, $green),
+  (red, $red), (blue, $blue)
+{
+  .btn-#{$name} {
+    @include btn($color);
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .btn-#{$name}-fill {
+    @include btn-fill($color);
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+@each $name,
+  $color
+    in (
+      main: $main,
+      blue: $blue,
+      light-blue: $blue-light,
+      red: $red,
+      green: $green
+    )
+{
+  .font-#{$name} {
+    color: $color;
+  }
+}
+
+/* ==========================================================================
+   Capitalize
+ ====== ====================================================================== */
+.capitalize {
+  text-transform: capitalize;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+// Capitalize for paragraph
+// Attention: :first-letter only work on block element or inline-block element that has been set the width or height
+.p-capitalize {
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+p {
+  max-width: 100%;
+}
+
+[lang='en'] h1,
+[lang='en'] h2,
+[lang='en'] h3,
+[lang='en'] h4,
+[lang='en'] h5,
+[lang='en'] h6,
+[lang='en'] button,
+[lang='en'] .btn {
+  @extend .capitalize;
+}
+
+[lang='en'] p {
+  @extend .p-capitalize;
+}
+
+@import 'vue-pagination';
+//@import 'vue-popper';
+//@import 'vue-scrollbar';
+//@import 'vue-select';
+//@import 'vue-slide-for-more';
+//@import 'vue-table';
