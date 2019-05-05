@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { LangStore } from '@/extensions/Langs'
+import { LangStore } from '@/common/extensions/Langs'
 import { createApp } from '@/main'
 
 function resolvePath(url, lang) {
