@@ -124,7 +124,7 @@ function createApp() {
     if (renderer) {
       renderer.renderToString(context, (e, html) => {
         if (e) {
-          console.log(chalk.red(e))
+          console.log(chalk.red(e.stack || e.message || JSON.stringify(e)))
           if (e.code === 404) res.status(404).end('Page not found')
           else res.status(500).end('Internal Server Error')
         } else {
@@ -140,7 +140,7 @@ function createApp() {
   })
 
   App.listen(port, e => {
-    if (e) console.error(chalk.red(e))
+    if (e) console.error(chalk.red(e.stack || e.message || JSON.stringify(e)))
     else {
       console.log(
         chalk.cyan(

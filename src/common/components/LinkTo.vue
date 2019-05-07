@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { baseUrl } from 'config/config'
+
 /**
  * Deal the link url in project
  * */
@@ -15,7 +17,7 @@ export default {
   },
   computed: {
     $_to() {
-      if (!this.to) return `/${this.$i18n.locale}`
+      if (!this.to) return `${baseUrl}/${this.$i18n.locale}`
 
       const url = this.to.toString()
 
@@ -27,7 +29,7 @@ export default {
       const [lang = ''] = url.split('/').filter(v => v)
       return this.$lang.langKeys.includes(lang.toLowerCase())
         ? url
-        : `/${this.$i18n.locale}${url.replace(/^\/*/, '/')}`
+        : `${baseUrl}/${this.$i18n.locale}${url.replace(/^\/*/, '/')}`
     },
   },
 }

@@ -1,11 +1,15 @@
 /* eslint-disable no-param-reassign */
 import { LangStore } from '@/common/extensions/Langs'
 import { createApp } from '@/main'
+import { baseUrl } from 'config/config'
 
 function resolvePath(url, lang) {
   const $lang = LangStore.langKeys.includes(lang) ? lang : 'zh-hans'
   if (url && url !== '/') {
-    const arr = url.split('/').filter(val => val)
+    const arr = url
+      .replace(baseUrl, '')
+      .split('/')
+      .filter(val => val)
     if (LangStore.langKeys.includes(arr[0])) return url
     return `/${$lang}/${url.replace(/^\/*/, '')}`
   }

@@ -3,6 +3,7 @@ import { LangStore } from '@/common/extensions/Langs'
 import NotFound from '@/pages/NotFound'
 import ProgressBar from '@/common/utils/ProgressBar'
 import { isBrowser } from '@/common/utils/UserAgent'
+import { baseUrl } from 'config/config'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -26,7 +27,7 @@ const RouterView = {
 
 const routes = [
   {
-    path: '/:lang',
+    path: `${baseUrl}/:lang`,
     component: RouterView,
     redirect: { path: '' },
     children: [
@@ -55,7 +56,7 @@ export function createRouter(i18n, store) {
       const language = (lang || '').toLowerCase()
       if (!LangStore.langKeys.includes(language)) {
         /** Redirect */
-        next({ path: `/${i18n.locale}${to.path}` })
+        next({ path: `${baseUrl}/${i18n.locale}${to.path}` })
       } else {
         const pro = LangStore.setLang(language, { $i18n: i18n })
 
