@@ -37,8 +37,8 @@ function cssPrettier(file, parser = '') {
       )
     })).then(() => {
       console.log(chalk.green(`Formatted: ${file.replace(cmd, '.').replace(new RegExp(`\\${path.sep}`, 'g'), '/')}`))
-    }).catch(err => {
-      console.log(chalk.red(err))
+    }).catch(e => {
+      console.log(chalk.red(e.stack || e.message || JSON.stringify(e)))
       process.exit(1)
     })
   }
@@ -67,8 +67,8 @@ klaw('./src')
       pro.push(cssPrettier(item.path))
     }
   })
-  .on('error', err => {
-    console.log(chalk.red(err))
+  .on('error', e => {
+    console.log(chalk.red(e.stack || e.message || JSON.stringify(e)))
     process.exit(1)
   })
   .on('end', () => Promise.all(pro).then(() => {
