@@ -1,3 +1,10 @@
+export function pathJoin(...urls) {
+  return urls.reduce(
+    (pre, url) => `${pre.replace(/\/*$/, '')}/${url.replace(/^\/*/, '')}`,
+    '/',
+  )
+}
+
 export function queryString(query, encode) {
   let str = ''
   Object.keys(query).forEach(i => {
