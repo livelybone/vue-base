@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { pathJoin } from '@/common/utils/RequestInterceptor'
 import { baseUrl } from 'config/config'
 
 /**
@@ -17,7 +18,7 @@ export default {
   },
   computed: {
     $_to() {
-      if (!this.to) return `${baseUrl}/${this.$i18n.locale}`
+      if (!this.to) return pathJoin(baseUrl, this.$i18n.locale)
 
       const url = this.to.toString()
 
@@ -29,7 +30,7 @@ export default {
       const [lang = ''] = url.split('/').filter(v => v)
       return this.$lang.langKeys.includes(lang.toLowerCase())
         ? url
-        : `${baseUrl}/${this.$i18n.locale}${url.replace(/^\/*/, '/')}`
+        : pathJoin(baseUrl, this.$i18n.locale, url)
     },
   },
 }
