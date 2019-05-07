@@ -2,19 +2,19 @@
 import { LangStore } from '@/common/extensions/Langs'
 import { pathJoin } from '@/common/utils/RequestInterceptor'
 import { createApp } from '@/main'
-import { baseUrl } from 'config/config'
+import { rootUrl } from 'config/config'
 
 function resolvePath(url, lang) {
   const $lang = LangStore.langKeys.includes(lang) ? lang : 'zh-hans'
-  if (url && url !== '/' && url.startsWith(baseUrl)) {
+  if (url && url !== '/' && url.startsWith(rootUrl)) {
     const arr = url
-      .replace(baseUrl, '')
+      .replace(rootUrl, '')
       .split('/')
       .filter(val => val)
     if (LangStore.langKeys.includes(arr[0])) return url
-    return pathJoin(baseUrl, $lang, url)
+    return pathJoin(rootUrl, $lang, url)
   }
-  return pathJoin(baseUrl, $lang, url)
+  return pathJoin(rootUrl, $lang, url)
 }
 
 /**
