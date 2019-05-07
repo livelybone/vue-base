@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-const snackbarInterceptor = msg => msg
+const snackBarInterceptor = msg => (typeof msg === 'object' ? msg.message : msg)
 
 /**
  * @param { VueComponent }      app   instance of App.vue
@@ -9,34 +9,34 @@ const snackbarInterceptor = msg => msg
 export function SnackbarRegister(app, ref) {
   Vue.prototype.snackbar = {
     async open(msg) {
-      await (snackbarInterceptor(msg) &&
+      await (snackBarInterceptor(msg) &&
         new Promise(res => {
           Vue.nextTick(() => {
-            res(app.$refs[ref].open(msg))
+            if (app.$refs[ref]) res(app.$refs[ref].open(msg))
           })
         }))
     },
     async info(msg) {
-      await (snackbarInterceptor(msg) &&
+      await (snackBarInterceptor(msg) &&
         new Promise(res => {
           Vue.nextTick(() => {
-            res(app.$refs[ref].info(msg))
+            if (app.$refs[ref]) res(app.$refs[ref].info(msg))
           })
         }))
     },
     async error(msg) {
-      await (snackbarInterceptor(msg) &&
+      await (snackBarInterceptor(msg) &&
         new Promise(res => {
           Vue.nextTick(() => {
-            res(app.$refs[ref].error(msg))
+            if (app.$refs[ref]) res(app.$refs[ref].error(msg))
           })
         }))
     },
     async warn(msg) {
-      await (snackbarInterceptor(msg) &&
+      await (snackBarInterceptor(msg) &&
         new Promise(res => {
           Vue.nextTick(() => {
-            res(app.$refs[ref].warn(msg))
+            if (app.$refs[ref]) res(app.$refs[ref].warn(msg))
           })
         }))
     },
@@ -51,12 +51,12 @@ export function ImgFullScreenRegister(app, ref) {
   Vue.prototype.imgFullScreen = {
     open({ imgs, index, texts }) {
       Vue.nextTick(() => {
-        app.$refs[ref].open({ imgs, index, texts })
+        if (app.$refs[ref]) app.$refs[ref].open({ imgs, index, texts })
       })
     },
     close() {
       Vue.nextTick(() => {
-        app.$refs[ref].close()
+        if (app.$refs[ref]) app.$refs[ref].close()
       })
     },
   }
@@ -70,12 +70,12 @@ export function ProgressbarRegister(app, ref) {
   Vue.prototype.progressBar = {
     start() {
       Vue.nextTick(() => {
-        app.$refs[ref].start()
+        if (app.$refs[ref]) app.$refs[ref].start()
       })
     },
     end() {
       Vue.nextTick(() => {
-        app.$refs[ref].end()
+        if (app.$refs[ref]) app.$refs[ref].end()
       })
     },
   }
@@ -87,14 +87,14 @@ export function ProgressbarRegister(app, ref) {
  * */
 export function ConfirmModalRegister(app, ref) {
   Vue.prototype.confirmModal = {
-    open(options) {
+    open(options = {}) {
       Vue.nextTick(() => {
-        app.$refs[ref].open(options)
+        if (app.$refs[ref]) app.$refs[ref].open(options)
       })
     },
     close() {
       Vue.nextTick(() => {
-        app.$refs[ref].close()
+        if (app.$refs[ref]) app.$refs[ref].close()
       })
     },
   }
