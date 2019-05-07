@@ -6,13 +6,12 @@ import { baseUrl } from 'config/config'
 
 function resolvePath(url, lang) {
   const $lang = LangStore.langKeys.includes(lang) ? lang : 'zh-hans'
-  if (url && url !== '/') {
+  if (url && url !== '/' && url.startsWith(baseUrl)) {
     const arr = url
       .replace(baseUrl, '')
       .split('/')
       .filter(val => val)
-    const language = arr[0] || arr[1]
-    if (LangStore.langKeys.includes(language)) return url
+    if (LangStore.langKeys.includes(arr[0])) return url
     return pathJoin(baseUrl, $lang, url)
   }
   return pathJoin(baseUrl, $lang, url)
