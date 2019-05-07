@@ -4,7 +4,7 @@ import { pathJoin } from '@/common/utils/RequestInterceptor'
 import NotFound from '@/pages/NotFound'
 import ProgressBar from '@/common/utils/ProgressBar'
 import { isBrowser } from '@/common/utils/UserAgent'
-import { baseUrl } from 'config/config'
+import { rootUrl } from 'config/config'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -28,7 +28,7 @@ const RouterView = {
 
 const routes = [
   {
-    path: pathJoin(baseUrl, ':lang'),
+    path: pathJoin(rootUrl, ':lang'),
     component: RouterView,
     children: [
       { path: '', name: '', component: HelloWorld },
@@ -56,7 +56,7 @@ export function createRouter(i18n, store) {
       const language = (lang || '').toLowerCase()
       if (!LangStore.langKeys.includes(language)) {
         /** Redirect */
-        next({ path: pathJoin(baseUrl, i18n.locale, to.path) })
+        next({ path: pathJoin(rootUrl, i18n.locale, to.path) })
       } else {
         const pro = LangStore.setLang(language, { $i18n: i18n })
 

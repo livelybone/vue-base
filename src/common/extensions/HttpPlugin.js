@@ -12,7 +12,7 @@ function setAuth(url) {
 }
 
 function initialAxios() {
-  axios.defaults.baseURL = config.backendUrl
+  axios.defaults.rootUrl = config.backendUrl
   axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8'
   // Custom headers
   // axios.defaults.header['Access-Control-Expose-Headers'] = 'token, uid';
@@ -112,9 +112,9 @@ export class Http {
 
   static errorDeal(e) {
     const {
-      config: { baseURL = '', url = '' },
+      config: { rootUrl = '', url = '' },
     } = e
-    e.message = `Api \`${url.replace(baseURL, '').split('?')[0]}\`: ${
+    e.message = `Api \`${url.replace(rootUrl, '').split('?')[0]}\`: ${
       e.message
     }`
     return e
