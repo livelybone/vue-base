@@ -12,7 +12,7 @@ function setAuth(url) {
 }
 
 function initialAxios() {
-  axios.defaults.rootUrl = config.backendUrl
+  axios.defaults.rootUrl = process.env.BACKEND_URL || config.backendUrl
   axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8'
   // Custom headers
   // axios.defaults.header['Access-Control-Expose-Headers'] = 'token, uid';
