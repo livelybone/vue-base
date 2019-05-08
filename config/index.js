@@ -1,16 +1,23 @@
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
+const { backendUrl, assetsSubDirectory, assetsPublicPath } = require('./config')
 
 const assetsRoot = 'dist'
+
+const [origin = ''] = backendUrl.match(/^https?:\/{2}[^\/]+/) || []
+const path = backendUrl.replace(origin, '')
 
 module.exports = {
   dev: {
 
     // Paths
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
-    proxyTable: {},
+    assetsSubDirectory,
+    assetsPublicPath,
+    proxyTable: {
+      ...(path ? { [path]: origin } : {}),
+    },
+    backendUrl: path,
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -44,8 +51,8 @@ module.exports = {
 
     // Paths
     assetsRoot,
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsSubDirectory,
+    assetsPublicPath,
 
     /**
      * Source Maps

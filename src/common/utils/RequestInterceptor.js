@@ -1,8 +1,18 @@
+import { rootUrl } from 'config/config'
+
+export function divRootUrl(url) {
+  return url.replace(rootUrl.replace(/\/$/, ''), '')
+}
+
 export function pathJoin(...urls) {
   return urls.reduce(
     (pre, url) => `${pre.replace(/\/*$/, '')}/${url.replace(/^\/*/, '')}`,
     '/',
   )
+}
+
+export function joinWithRootUrl(...urls) {
+  return pathJoin(rootUrl, ...urls)
 }
 
 export function queryString(query, encode) {
