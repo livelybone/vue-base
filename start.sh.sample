@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+kill -9 $(netstat -nlp | grep :3000 | awk '{print $7}' | awk -F"/" '{ print $1 }')
+nohup cross-env PORT=3000 npm run server >> [log path](e.g. /var/log/otc-web/client.log) 2>&1 &

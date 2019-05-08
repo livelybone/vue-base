@@ -1,20 +1,18 @@
 /* eslint-disable no-param-reassign */
 import { LangStore } from '@/common/extensions/Langs'
-import { pathJoin } from '@/common/utils/RequestInterceptor'
+import { divRootUrl, joinWithRootUrl } from '@/common/utils/RequestInterceptor'
 import { createApp } from '@/main'
 import { rootUrl } from 'config/config'
 
 function resolvePath(url, lang) {
   const $lang = LangStore.langKeys.includes(lang) ? lang : 'zh-hans'
+  const divUrl = divRootUrl(url)
   if (url && url !== '/' && url.startsWith(rootUrl)) {
-    const arr = url
-      .replace(rootUrl, '')
-      .split('/')
-      .filter(val => val)
+    const arr = divUrl.split('/').filter(val => val)
     if (LangStore.langKeys.includes(arr[0])) return url
-    return pathJoin(rootUrl, $lang, url)
+    return joinWithRootUrl($lang, divUrl)
   }
-  return pathJoin(rootUrl, $lang, url)
+  return joinWithRootUrl($lang, divUrl)
 }
 
 /**

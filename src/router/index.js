@@ -1,10 +1,9 @@
 import User from '@/api/User'
 import { LangStore } from '@/common/extensions/Langs'
-import { pathJoin } from '@/common/utils/RequestInterceptor'
-import NotFound from '@/pages/NotFound'
 import ProgressBar from '@/common/utils/ProgressBar'
 import { isBrowser } from '@/common/utils/UserAgent'
-import { rootUrl } from 'config/config'
+import { divRootUrl, joinWithRootUrl } from '@/common/utils/RequestInterceptor'
+import NotFound from '@/pages/NotFound'
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -28,7 +27,7 @@ const RouterView = {
 
 const routes = [
   {
-    path: pathJoin(rootUrl, ':lang'),
+    path: joinWithRootUrl(':lang'),
     component: RouterView,
     children: [
       { path: '', name: '', component: HelloWorld },
@@ -56,7 +55,7 @@ export function createRouter(i18n, store) {
       const language = (lang || '').toLowerCase()
       if (!LangStore.langKeys.includes(language)) {
         /** Redirect */
-        next({ path: pathJoin(rootUrl, i18n.locale, to.path) })
+        next({ path: joinWithRootUrl(i18n.locale, divRootUrl(to.path)) })
       } else {
         const pro = LangStore.setLang(language, { $i18n: i18n })
 
