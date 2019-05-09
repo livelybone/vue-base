@@ -46,7 +46,6 @@ export function createRouter(i18n, store) {
   })
 
   router.beforeEach((to, fr, next) => {
-    ProgressBar.start()
     const {
       params: { lang },
     } = to
@@ -55,6 +54,8 @@ export function createRouter(i18n, store) {
       /** Redirect */
       next({ path: joinWithRootUrl(i18n.locale, divRootUrl(to.path)) })
     } else {
+      ProgressBar.start()
+
       const pro = LangStore.setLang(language, { $i18n: i18n })
 
       /** Auth */
