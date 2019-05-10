@@ -1,6 +1,7 @@
 import User from '@/api/User'
 import { LangStore } from '@/common/extensions/Langs'
 import ProgressBar from '@/common/utils/ProgressBar'
+import { isBrowser } from '@/common/utils/UserAgent'
 import { divRootUrl, joinWithRootUrl } from '@/common/utils/RequestInterceptor'
 import NotFound from '@/pages/NotFound'
 import Vue from 'vue'
@@ -45,38 +46,45 @@ export function createRouter(i18n, store) {
     routes,
   })
 
-  router.beforeEach((to, fr, next) => {
-    const {
-      params: { lang },
-    } = to
-    const language = (lang || '').toLowerCase()
-    if (!LangStore.langKeys.includes(language)) {
-      /** Redirect */
-      next({ path: joinWithRootUrl(i18n.locale, divRootUrl(to.path)) })
-    } else {
-      ProgressBar.start()
-
-      const pro = LangStore.setLang(language, { $i18n: i18n })
-
-      /** Auth */
-      if (
-        to.matched.some(route => route.meta.requireAuth) &&
-        store.state.user.info.role !== 'client'
-      ) {
-        User.getUser()
-          .then(() => {
-            pro.then(() => next())
-          })
-          .catch(() => {
-            pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
-            Vue.prototype.snackbar.error('Please sign in!')
-          })
+  if (isBrowser) {
+    router.beforeEach((to, fr, next) => {
+      const {
+        params: { lang },
+      } = to
+      const language = (lang || '').toLowerCase()
+      if (!LangStore.langKeys.includes(language)) {
+        /** Redirect */
+        next({ path: joinWithRootUrl(i18n.locale, divRootUrl(to.path)) })
       } else {
-        /** Go ahead */
-        pro.then(() => next())
+        ProgressBar.start()
+
+        const pro = LangStore.setLang(language, { $i18n: i18n })
+
+        /** Auth */
+        if (
+          to.matched.some(route => route.meta.requireAuth) &&
+          store.state.user.info.role !== 'client'
+        ) {
+          User.getUser()
+            .then(() => {
+              pro.then(() => next())
+            })
+            .catch(() => {
+              pro.then(() => next({ name: 'SignIn', redirect: to.fullPath }))
+              Vue.prototype.snackbar.error('Please sign in!')
+            })
+        } else {
+          /** Go ahead */
+          pro.then(() => next())
+        }
       }
-    }
-  })
+    })
+  } else {
+    router.beforeEach((to, fr, next) => {
+      const pro = LangStore.setLang(to.params.lang, { $i18n: i18n })
+      pro.then(() => next())
+    })
+  }
 
   router.afterEach(() => {
     ProgressBar.end()
