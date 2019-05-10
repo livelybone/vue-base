@@ -9,10 +9,16 @@ export default class Singleton {
     if (!Singleton.keys.has(k)) {
       Singleton.keys.set(
         k,
-        proFn().finally(res => {
-          Singleton.keys.delete(k)
-          return res
-        }),
+        proFn().then(
+          res => {
+            Singleton.keys.delete(k)
+            return res
+          },
+          e => {
+            Singleton.keys.delete(k)
+            throw e
+          },
+        ),
       )
     }
     return Singleton.keys.get(k)
