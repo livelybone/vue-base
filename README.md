@@ -52,7 +52,7 @@
 
 > Utils function written in `common/utils` folder, plugins for project written in `common/extensions` folder, Shared variables or components form template template written in `common/immutable-data` folder, ajax relevant written in `api` folder, global state management files written in ` data/store/modules ` folder
 
-> It is recommended to use the data like `const items = [{label:'姓名', name:'realName', value:'XXX'}]` to render the form items. `label` is the name of the form item show in the page, `name` is the form name which will be submitted to backend, `value` is the value of the item. You can use `DataDeal. DateDeal(items)` to deal the data when submitting the form (complex situations can be special treatment)
+> It is recommended to use the data like `const items = [{label:'姓名', name:'realName', value:'XXX'}]` to render the form items. `label` is the name of the form item show in the page, `name` is the form name which will be submitted to backend, `value` is the value of the item. You can use `FormItemsConvert.toData(items)` to deal the data when submitting the form (complex situations can be special treatment)
 
 ### Internationalization
 
