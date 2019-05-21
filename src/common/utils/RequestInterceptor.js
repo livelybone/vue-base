@@ -38,6 +38,7 @@ export function convertToFormData(obj) {
       (obj[i] instanceof Array && obj[i].some(f => f instanceof File))
     ) {
       // 多张图片
+      // Multiple images
       Array.prototype.forEach.call(obj[i], file => data.append(i, file))
     } else if (typeof obj[i] === 'object' && !(obj[i] instanceof File)) {
       data.append(i, JSON.stringify(obj[i]))

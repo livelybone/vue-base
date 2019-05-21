@@ -52,7 +52,7 @@
 
 > 工具类写在 `common/utils` 文件夹，插件写在 `common/extensions` 文件夹，组件共用变量或者表单模板模板写在 `common/immutable-data` 文件夹，ajax 相关的写在 `api` 文件夹，全局状态管理文件写在 `api/store/modules` 文件夹
 
-> 推荐使用 `const items = [{label:'姓名', name:'realName', value:'XXX'}]` 这种数据格式去渲染表单项，`label` 为表单项的渲染名称（在页面显示的名称），`name` 为表单项与后台接口对应的字段（域），`value` 为表单项的值，表单提交时可以使用 DataDeal 类的 dataDeal 方法处理（`DataDeal.dateDeal(items)`）（复杂情况可以特殊处理）
+> 推荐使用 `const items = [{label:'姓名', name:'realName', value:'XXX'}]` 这种数据格式去渲染表单项，`label` 为表单项的渲染名称（在页面显示的名称），`name` 为表单项与后台接口对应的字段（域），`value` 为表单项的值，表单提交时可以使用 FormItemsConvert 类的 FormItemsConvert 方法处理（`FormItemsConvert.toData(items)`）（复杂情况可以特殊处理）
 
 ### 国际化
 
