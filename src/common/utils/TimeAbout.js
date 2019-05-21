@@ -12,7 +12,6 @@ export function dateFormatter(time, fmt) {
 }
 
 export function timeConversion(time) {
-  // time 毫秒数
   const d = parse(time)
   const now = new Date()
   return {
