@@ -6,6 +6,10 @@ $z-index-top: 10000000;
 $z-index-middle: 100;
 $z-index-bottom: 10;
 
+@function size($val: 1) {
+  @return $val * 0.1rem
+}
+
 @mixin flex($h: flex-start, $v: center, $wrap: nowrap) {
   display: flex;
   justify-content: $h;
@@ -51,15 +55,4 @@ $z-index-bottom: 10;
   } @else {
     line-height: $height;
   }
-}
-
-@mixin borderHeight($height, $borderTop, $borderBottom) {
-  height: $height;
-  line-height: calc(#{$height} - #{$borderTop} - #{$borderBottom});
-  border-top-width: $borderTop !important;
-  border-bottom-width: $borderBottom !important;
-}
-
-@function size($val: 1) {
-  @return $val * 0.1rem
 }
