@@ -49,6 +49,8 @@ const jsLoader = (id, loaders) => () => ({
     utils.pathResolve('src'),
     utils.pathResolve('test'),
     utils.pathResolve('node_modules/webpack-dev-server/client'),
+    utils.pathResolve('node_modules/webpack-dev-server/client/clients'),
+    utils.pathResolve('node_modules/webpack-dev-server/client/utils'),
   ],
 })
 

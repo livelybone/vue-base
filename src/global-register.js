@@ -15,7 +15,9 @@ import ImgTag from 'vue-img-tag'
 import { SlideForMore } from 'vue-slide-for-more'
 
 const FileInput = () =>
-  import('@/common/components/form/FileInput' /* webpackChunkName: "FileInput" */)
+  import(
+    '@/common/components/form/FileInput' /* webpackChunkName: "FileInput" */
+  )
 
 export default function() {
   const isMobile = isBrowser && window.isMobile
